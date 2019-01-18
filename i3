@@ -1,1 +1,0 @@
-/home/simon/.dotfiles/.config/i3
