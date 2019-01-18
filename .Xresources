@@ -1,7 +1,7 @@
 URxvt.termName: rxvt
-URxvt.font: xft:Monospace:size=22
+URxvt.font: xft:SourceCodePro:size=21
 URxvt.borderLess: false 
-URxvt.letterSpace: -2 
+URxvt.letterSpace: 0 
 URxvt.transparent: true
 URxvt.shading: 30 
 URxvt.scrollBar: false

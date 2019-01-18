@@ -1,6 +1,6 @@
 ##--Basic Definitions---##
 set $mod Mod4
-set $term exec --no-startup-id urxvt256c
+set $term exec --no-startup-id urxvt
 set $TERMINAL $term
 set $lock exec i3lock --color 475263
 set $amod Mod1
@@ -184,7 +184,7 @@ for_window [class="^.*"] border pixel 1
 
 # bar settings
 bar {
-        status_command python ~/.config/i3/status.py
+        status_command /home/simon/.pyenv/versions/utils/bin/python ~/.config/i3/status.py
         position top        
         workspace_buttons yes
         colors {
@@ -257,7 +257,7 @@ bindsym XF86MonBrightnessDown $bright_down
 
 
 # Start Applications
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec dmenu_run
 bindsym $mod+F1 exec firefox
 bindsym $mod+Shift+F1 exec firefox --private-window
 bindsym $mod+i $term -e htop
@@ -276,3 +276,5 @@ bindsym $mod+$amod+c exec --no-startup-id ddspawn calcurse
 ##---Startup---##
 exec --no-startup-id compton -f
 exec --no-startup-id feh --bg-scale '/home/simon/Pictures/background/jupiter.-wallpaper_.jpg' 
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id redshift -t 3500:2800

@@ -8,7 +8,8 @@ from i3pystatus import Status
 from i3pystatus.updates import pacman, cower
 
 
-status = Status()
+status = Status(logfile='$LOG/i3pystatus.log')
+#status = Status()
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
@@ -17,6 +18,7 @@ status = Status()
 status.register("updates",
     format = "Updates: {count}",
     format_no_updates = "",
+    interval=3600,
     on_leftclick="termite --geometry=1200x600 --title=updates -e 'pacaur --needed --noconfirm --noedit -Syu'",
     backends = [pacman.Pacman(), cower.Cower()])
 
@@ -31,7 +33,6 @@ status.register("clock",
     color='#61AEEE',
     interval=10,
     on_leftclick="ddspawn calcurse",)
-
 
 status.register("pulseaudio",
     color_unmuted='#98C379',
@@ -48,10 +49,12 @@ status.register("pulseaudio",
 #    format_down="",)
 
 status.register("network",
-    interface="wlo1",
+    interface="wlp4s0",
     color_up="#8AE234",
     color_down="#EF2929",
-    format_up="  {essid}  {kbs} kbs",
+    interval=1,
+    #format_up="  {essid}  {kbs} kbs",
+    format_up="",
     format_down="",)
 
 #status.register("backlight",
@@ -76,22 +79,35 @@ status.register("network",
 #        "FULL": "   ",
 #},)
 
-status.register("temp",
-    color='#78EAF2',
-    on_leftclick="ddspawn htop",
-                )
+#status.register("temp",
+#    color='#78EAF2',
+#    on_leftclick="ddspawn htop",
+#                )
 
 #status.register("cpu_usage",
 #    on_leftclick="termite --title=htop -e 'htop'",
 #    format="  {usage}",)
 
+#status.register("cpu_usage",
+#    format="{usage_all}",
+#    exclude_average=True,
+#    color="#999999",
+#    log_level=20,
+#    on_leftclick="ddspawn htop",)
+
 status.register("mem",
-    color="#999999",
+    color="#C0C000",
     warn_color="#E5E500",
     alert_color="#FF1919",
     format=" {avail_mem}/{total_mem} GB",
+    interval=10,
     divisor=1073741824,
     on_leftclick="ddspawn htop",)
+
+status.register("uptime",
+    format=" {hours}:{mins}",
+    color="#E58200",
+    interval=30,)
 
 #status.register("disk",
 #    color='#56B6C2',
@@ -119,22 +135,23 @@ status.register("keyboard_locks",
     caps_off='',
     num_on='Num On',
     num_off='',
+    interval=5,
     color='#e60053',
     )
 
-status.register("mpd",
-    host='localhost',
-    port='6600',
-    format="{status}",
-    on_leftclick="switch_playpause",
-    on_rightclick=["mpd_command", "stop"],
-    on_middleclick=["mpd_command", "shuffle"],
-    on_upscroll=["mpd_command", "next_song"],
-    on_downscroll=["mpd_command", "previous_song"],
-    status={
-        "pause": " ",
-        "play": " ",
-        "stop": " ",
-    },)
+#status.register("mpd",
+#    host='localhost',
+#    port='6600',
+#    format="{status}",
+#    on_leftclick="switch_playpause",
+#    on_rightclick=["mpd_command", "stop"],
+#    on_middleclick=["mpd_command", "shuffle"],
+#    on_upscroll=["mpd_command", "next_song"],
+#    on_downscroll=["mpd_command", "previous_song"],
+#    status={
+#        "pause": " ",
+#        "play": " ",
+#        "stop": " ",
+#    },)
 
 status.run()
