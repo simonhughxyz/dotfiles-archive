@@ -80,7 +80,6 @@ set cindent
 " }}}
 " Folder Tree {{{
 " NERDTree
-nnoremap <F2> :NERDTreeToggle<Enter>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -103,14 +102,16 @@ nmap <F3> :call OpenNetrw()<cr>
 
 " }}}
 " UI Layout {{{
-set relativenumber      " show line numbers
-set showcmd     " show command in bottom bar
-set cursorline  " highlight current line
-set wildmenu
-set lazyredraw
-set showmatch   " higlight matching parenthesis
-set ruler       " show row and column in footer
+set number  relativenumber      " show line numbers
+set showcmd                     " show command in bottom bar
+set cursorline                  " highlight current line
+set wildmenu                    " show wildmenu on tab
+set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
+set lazyredraw                  " Vim will only redraw when needed
+set showmatch                   " higlight matching parenthesis
+set ruler                       " show row and column in footer
 set fillchars+=vert:┃
+set splitbelow splitright       "Splits open at the bottom and right
 " }}}
 " Searching {{{
 set ignorecase          " ignore case when searching
@@ -148,9 +149,31 @@ augroup END
 
 augroup html
     autocmd!
-    autocmd FileType python set tabstop=2
-    autocmd FileType python set softtabstop=2
-    autocmd FileType python set shiftwidth=2 
+    autocmd FileType html set tabstop=2
+    autocmd FileType html set softtabstop=2
+    autocmd FileType html set shiftwidth=2 
+    autocmd FileType html inoremap &<space> &amp;<space>
+	autocmd FileType html inoremap ? &aacute;
+	autocmd FileType html inoremap ? &eacute;
+	autocmd FileType html inoremap ? &iacute;
+	autocmd FileType html inoremap ? &oacute;
+	autocmd FileType html inoremap ? &uacute;
+	autocmd FileType html inoremap ? &auml;
+	autocmd FileType html inoremap ? &euml;
+	autocmd FileType html inoremap ? &iuml;
+	autocmd FileType html inoremap ? &ouml;
+	autocmd FileType html inoremap ? &uuml;
+	autocmd FileType html inoremap ? &atilde;
+	autocmd FileType html inoremap ? &etilde;
+	autocmd FileType html inoremap ? &itilde;
+	autocmd FileType html inoremap ? &otilde;
+	autocmd FileType html inoremap ? &utilde;
+	autocmd FileType html inoremap ? &ntilde;
+	autocmd FileType html inoremap ? &agrave;
+	autocmd FileType html inoremap ? &egrave;
+	autocmd FileType html inoremap ? &igrave;
+	autocmd FileType html inoremap ? &ograve;
+    autocmd FileType html inoremap ? &ugrave;
 augroup END
 " }}}
 " ClipBoard {{{
@@ -187,21 +210,28 @@ nnoremap <Leader>s :so $MYVIMRC<CR>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <silent> <leader>n :bn<cr>
 nnoremap <silent> <leader>p :bp<cr>
+" spellcheck
+nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 " switch to dark mode
 nnoremap <silent> <leader>bd :set background=dark<CR>
 " switch to light mode
 nnoremap <silent> <leader>bl :set background=light<CR>
-" Register to Clipboard
+" Register to Clipboard (requires gvim/nvim/vim-x11 installed): 
 nnoremap <silent> <Leader>y :RegToClip "<CR>
 nnoremap <Leader>Y :RegToClip<space>  
+" Paste from Clipboard
+nnoremap <silent><Leader>p "+p
+nnoremap <silent><Leader>P "+P
 " Search
 nnoremap <silent> <Leader>h :noh<CR>
 " Show empty chars
-nnoremap <silent><Leader>t :set invlist<CR> 
+nnoremap <silent><Leader>a :set invlist<CR> 
 " Show cursor line
 nnoremap <silent><Leader>cl :set invcursorline<CR>
 " Show cursor colum
 nnoremap <silent><Leader>cc :set invcursorcolumn<CR>
+" NERD tree toggle
+nnoremap <silent><Leader>t :NERDTreeToggle<Enter>
 " }}}

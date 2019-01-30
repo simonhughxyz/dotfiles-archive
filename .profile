@@ -1,17 +1,22 @@
-export PATH="$PATH:/home/simon/.bin"
+export HOME="/home/simon"
+export PATH="$PATH:$HOME/.scripts"
 export EDITOR="vim"
 export TERMINAL="urxvt"
 export BROWSER="firefox"
 export READER="zathura"
 export FILE="ranger"
-export LANG=en_UK.UTF-8
+export LANG="en_GB.UTF-8"
 export TERM=rxvt-unicode-256color
-
+export STARDICT_DATA_DIR="$HOME/.dic"
+export XDG_CONFIG_HOME="$HOME/.config"
+  
 ##---PATHS---##
-export HOME="/home/simon"
 export LOG="$HOME/.log"
 export DIV="$HOME/.div"
-export DOWNLOADS="$HOME/downloads"
 export CONFIG="$HOME/.config"
 export LOCALBIN="$HOME/.bin"
 export DOTFILES="$HOME/.dotfiles"
+export DOWNLOADS="$HOME/Downloads"
+export DOCUMENTS="$HOME/Documents"
+export PICTURES="$HOME/Pictures"
+export DEV="$HOME/dev"

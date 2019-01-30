@@ -209,8 +209,8 @@ for_window [instance="dropdown_*"] resize set 1600 600
 for_window [instance="dropdown_htop"] resize set 1500 900
 for_window [instance="dropdown_htop"] border pixel 2
 
-for_window [instance="dropdown_ranger"] resize set 1500 900
-for_window [instance="dropdown_ranger"] border pixel 2
+for_window [instance="dropdown_nnn"] resize set 1000 500
+for_window [instance="dropdown_nnn"] border pixel 2
 
 for_window [instance="dropdown_pycalc"] resize set 800 400
 for_window [instance="dropdown_pycalc"] border pixel 2
@@ -267,13 +267,15 @@ bindsym $mod+i $term -e htop
 bindsym $mod+Shift+BackSpace move scratchpad
 bindsym $mod+backslash scratchpad show
 bindsym $mod+$amod+h exec --no-startup-id ddspawn htop
-bindsym $mod+$amod+Return exec --no-startup-id ddspawn ranger
+bindsym $mod+$amod+Return exec --no-startup-id ddspawn nnn -i
 bindsym $mod+$amod+m exec --no-startup-id ddspawn pycalc
 bindsym $mod+$amod+p exec --no-startup-id appspawn pavucontrol
 bindsym $mod+$amod+c exec --no-startup-id ddspawn calcurse
 
+# Dmenu
+bindsym $mod+u exec --no-startup-id dmenuunicode
 
-##---Startup---##
+##--Startup---##
 exec --no-startup-id compton -f
 exec --no-startup-id feh --bg-scale '/home/simon/Pictures/background/jupiter.-wallpaper_.jpg' 
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent

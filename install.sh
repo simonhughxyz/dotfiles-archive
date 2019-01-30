@@ -11,6 +11,7 @@ rm $HOME/.vimrc
 rm $HOME/.Xresources
 rm $HOME/.cookiecutterrc
 rm $HOME/.tmux.conf
+rm $HOME/.emoji
 
 # create symlink for all dotfiles
 ln -s $DOTFILES/.bashrc $HOME/.bashrc
@@ -20,3 +21,4 @@ ln -s $DOTFILES/.vimrc $HOME/.vimrc
 ln -s $DOTFILES/.Xresources $HOME/.Xresources
 ln -s $DOTFILES/.cookiecutterrc $HOME/.cookiecutterrc
 ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
+ln -s $DOTFILES/.emoji $HOME/.emoji

@@ -35,6 +35,8 @@ alias cd...='cd ../../'
 alias cd....='cd ../../../'
 alias cddev="cd $DEV"
 alias cddl="cd $DOWNLOADS"
+alias cddoc="cd $DOCUMENTS"
+alias cdpic="cd $PICTURES"
 alias cddot="cd $DOTFILES"
 alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
@@ -42,10 +44,26 @@ alias cdconf="cd $CONFIG"
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 # grep
 alias grep='grep --color=auto'
+alias gv='grep -v'
+alias gi='grep -i'
+alias giv='gi -v'
 # diff
 alias diff='diff --color=auto'
 # vim
 alias vi='vim'
+# git
+alias ga='git add .'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+# stardict
+alias def='sdcv --color'
+alias defen='def -u "dictd_www.dict.org_gcide"'
+alias defel='def -u "dictd_www.dict.org_elements"'
+alias defcomp='def -u "Free On-Line Dictionary of Computing"'
+alias defde='def -u "German - English" -u "English - German"'
+# wallpaper
+alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

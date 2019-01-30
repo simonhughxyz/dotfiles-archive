@@ -18,7 +18,7 @@ status = Status(logfile='$LOG/i3pystatus.log')
 status.register("updates",
     format = "Updates: {count}",
     format_no_updates = "",
-    interval=3600,
+    interval=60,
     on_leftclick="termite --geometry=1200x600 --title=updates -e 'pacaur --needed --noconfirm --noedit -Syu'",
     backends = [pacman.Pacman(), cower.Cower()])
 
