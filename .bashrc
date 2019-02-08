@@ -54,6 +54,9 @@ alias diff='diff --color=auto'
 # vim
 alias vi='vim'
 # git
+alias gs='git status'
+alias gb='git branch'
+alias gch='git checkout'
 alias ga='git add .'
 alias gc='git commit'
 alias gcm='git commit -m'
