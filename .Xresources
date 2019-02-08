@@ -6,8 +6,8 @@ URxvt.transparent: true
 URxvt.shading: 30 
 URxvt.scrollBar: false
 URxvt.urlLauncher: firefox
-! Colour scheme
-*background:#1a1a1a
+!! Colour scheme
+*background:#0e0e0e
 *foreground:#fff
 *highlightColor:#444
 !! The default colors are "Gruvbox":

@@ -100,7 +100,8 @@ status.register("mem",
     warn_color="#E5E500",
     alert_color="#FF1919",
     format=" {avail_mem}/{total_mem} GB",
-    interval=10,
+    round_size=2,
+    interval=3,
     divisor=1073741824,
     on_leftclick="ddspawn htop",)
 

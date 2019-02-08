@@ -5,6 +5,8 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Activate vi mode
+set -o vi
 
 # PS1 Prompt
 PS1_HOST="\[\e[33m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]>\[\e[36m\]\w\[\e[m\]\\$ "

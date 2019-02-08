@@ -40,6 +40,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
+Plug 'ap/vim-css-color'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
