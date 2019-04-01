@@ -1,7 +1,8 @@
 ##--Basic Definitions---##
 # Needed for i3-gaps
 for_window [class="^.*"] border pixel 2
-gaps inner 0
+smart_gaps on
+gaps inner 10
 gaps outer 0
 set $mod Mod4
 set $term exec --no-startup-id st
@@ -10,16 +11,10 @@ set $lock exec i3lock --color 475263
 set $amod Mod1
 
 # font definitions
-set $font_size_small 12
-set $font_size_normal 15
-set $font_size_large 18
+set $font_size_small 8
+set $font_size_normal 10
+set $font_size_large 12
 set $font System San Francisco Display 
-
-# direction key defintions (vim like key bindings)
-set $d_left h
-set $d_down j
-set $d_up k
-set $d_right l
 
 # color definitions
 set $bg-color 	         #2f343f
@@ -42,6 +37,10 @@ set $bright_down exec xbacklight -dec 20
 
 
 ##---MISC---##
+floating_modifier $mod
+bindsym $mod+Return $term
+bindsym $mod+q kill
+bindsym $mod+x $lock
 bindsym $mod+$amod+r reload
 bindsym $mod+Shift+r restart
 
@@ -49,25 +48,21 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 font pango:$font+$font_size_normal
-floating_modifier $mod
-bindsym $mod+Return $term
-bindsym $mod+q kill
-bindsym $mod+x $lock
 
 
 ##---WINDOW MANIPULATIONS---##
 
 # change focus
-bindsym $mod+$d_left focus left
-bindsym $mod+$d_right focus right
-bindsym $mod+$d_up focus up
-bindsym $mod+$d_down focus down
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
 
 # move focus
-bindsym $mod+Shift+$d_left move left
-bindsym $mod+Shift+$d_right move right
-bindsym $mod+Shift+$d_up move up
-bindsym $mod+Shift+$d_down move down
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
 
 # arrow keys change focus 
 bindsym $mod+Left focus left
@@ -82,7 +77,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+b split h
+bindsym $mod+space split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -99,7 +94,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 
 
 
@@ -268,13 +263,20 @@ bindsym XF86MonBrightnessDown $bright_down
 # Screenshots & Recording
 
 
-# Start Applications
-bindsym $mod+d exec dmenu_run -fn "mono-19" -bg $bg-color
-bindsym $mod+c exec clipmenu -fn "mono-19"
-bindsym $mod+p exec pdfmenu
+# Dmenu
+bindsym $mod+a exec dmenu_run
+bindsym $mod+Shift+q exec quitmenu
+bindsym $mod+c exec clipmenu
 bindsym $mod+Shift+c exec clipdel -d ".*"
-bindsym $mod+F1 exec firefox
-bindsym $mod+Shift+F1 exec firefox --private-window
+bindsym $mod+p exec pdfmenu
+bindsym $mod+d exec downloadmenu
+bindsym $mod+numbersign exec bukustarmenu
+bindsym $mod+Shift+numbersign exec bukumenu
+bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
+
+# Start Applications
+bindsym $mod+b exec firefox
+bindsym $mod+Shift+b exec firefox --private-window
 bindsym $mod+i $term -e htop
 #bindsym $mod+s redshift
 
@@ -293,6 +295,3 @@ bindsym $mod+u exec --no-startup-id dmenuunicode
 
 ##--Startup---##
 exec --no-startup-id compton -f
-exec --no-startup-id feh --bg-scale '/home/simon/Pictures/background/jupiter.-wallpaper_.jpg' 
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id redshift -t 3500:2800

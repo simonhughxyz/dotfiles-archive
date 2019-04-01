@@ -42,6 +42,7 @@ alias cdpic="cd $PICTURES"
 alias cddot="cd $DOTFILES"
 alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
+alias cdscr="cd $SCRIPTS"
 # mkdir
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 # grep
@@ -67,6 +68,9 @@ alias defen='def -u "dictd_www.dict.org_gcide"'
 alias defel='def -u "dictd_www.dict.org_elements"'
 alias defcomp='def -u "Free On-Line Dictionary of Computing"'
 alias defde='def -u "German - English" -u "English - German"'
+# media
+alias vid='mpv'
+alias img='feh'
 # wallpaper
 alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
 

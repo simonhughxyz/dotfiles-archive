@@ -4,6 +4,7 @@ syntax on
 set encoding=utf-8
 scriptencoding utf-8
 filetype plugin indent on
+set history=500
 " NO ANOYING BELL!!!
 set noerrorbells
 set vb t_vb=
@@ -16,6 +17,9 @@ let g:python_host_prog = '/home/simonhugh/.pyenv/versions/2.7.15/envs/apps2/bin/
 let g:python3_host_prog = '/home/simonhugh/.pyenv/versions/3.7.1/envs/apps3/bin/python3'
 set modelines=0
 set nomodeline
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 " }}}
 " Plugin Manager {{{
 " Install Vim-Plug if not found
@@ -195,13 +199,15 @@ nnoremap <C-J> <C-W><C-J>  " Move down one pane in split sceen
 nnoremap <C-K> <C-W><C-K>    " Move up one pane in split screen
 nnoremap <C-H> <C-W><C-H>  " Move to the left pane in split screen
 nnoremap <C-L> <C-W><C-L> " Move to the right pane in split screen
-nnoremap j gj   " Move down one displayed line
-nnoremap k gk   " Move up one displayed line
+" nnoremap j gj   " Move down one displayed line
+" nnoremap k gk   " Move up one displayed line
 nnoremap <C-x> :Files<cr>   " Open FZF search
 " FOLDING
 nnoremap z\ za  " Toggle Folding
 nnoremap z[ zR  " Open all Folds
 nnoremap z] zM  " Close all folds
+" Serch visually selected text
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " }}}
 " Leader Shortcuts {{{
 let mapleader=" "
