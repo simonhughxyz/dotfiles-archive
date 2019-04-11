@@ -56,7 +56,7 @@ alias cdpic="cd $PICTURES"
 alias cddot="cd $DOTFILES"
 alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
-alias cdscr="cd $SCRIPTS"
+alias cdsc="cd $SCRIPTS"
 # mkdir
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 # grep
@@ -68,6 +68,7 @@ alias giv='gi -v'
 alias diff='diff --color=auto'
 # vim
 alias vi='vim'
+alias v='vim'
 # git
 alias gs='git status'
 alias gb='git branch'
@@ -89,6 +90,10 @@ alias img='feh'
 alias b='buku --suggest'
 # wallpaper
 alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
+
+## Functions ##
+# make a directory and cd into it
+mcd() { mkdir "$1"; cd "$1";} 
 
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
