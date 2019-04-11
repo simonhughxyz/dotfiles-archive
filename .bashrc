@@ -26,11 +26,25 @@ alias c='clear'
 alias mux='tmuxinator'
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
+
 # ls
 alias ls='ls --color=auto --group-directories-first'
-alias la='ls -a --color=auto'
-alias l.='ls -d .* --color=auto'
-alias ll='ls -al --color=auto'
+alias l='ls'
+alias l.='ls -d .*'
+alias l,='ls -a'
+# ls only directories
+alias ld='ls -d */'
+alias ld.='ls -d .*/'
+alias ld,='ls -d */ .*/'
+# ls in list format
+alias ll='ls -lh'
+alias ll.='ll -d .*'
+alias ll,='ll -a'
+# ls directories in list format
+alias lld='ll -d */'
+alias lld.='ll -d .*/'
+alias lld,='ll -d */ .*/'
+
 # cd
 alias cd..='cd ..'
 alias cd...='cd ../../'
@@ -71,10 +85,12 @@ alias defde='def -u "German - English" -u "English - German"'
 # media
 alias vid='mpv'
 alias img='feh'
+# buku
+alias b='buku --suggest'
 # wallpaper
 alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #PyEnv
 export PATH="/home/simon/.pyenv/bin:$PATH"

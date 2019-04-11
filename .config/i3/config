@@ -272,10 +272,13 @@ bindsym $mod+p exec pdfmenu
 bindsym $mod+d exec downloadmenu
 bindsym $mod+numbersign exec bukustarmenu
 bindsym $mod+Shift+numbersign exec bukumenu
+bindsym $mod+period exec bukuaddmenu
+bindsym $mod+Shift+period exec bukuaddtitlemenu
 bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
 
 # Start Applications
 bindsym $mod+b exec firefox
+bindsym $mod+f1 exec steam
 bindsym $mod+Shift+b exec firefox --private-window
 bindsym $mod+i $term -e htop
 #bindsym $mod+s redshift
