@@ -1,0 +1,21 @@
+set from = "simon.h.moore94@gmail.com"
+set realname = "Simon H Moore"
+
+set imap_user=simon.h.moore94@gmail.com
+set imap_pass=dusuxprwxvfnceaa
+
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "imaps://imap.gmail.com/INBOX"
+set postponed ="+[Gmail]/Drafts"
+
+set sendmail="/usr/bin/msmtp"
+
+set edit_headers=yes
+set folder=~/mail
+set mbox=+mbox
+set spoolfile=+inbox
+set record=+sent
+set postponed=+drafts
+set mbox_type=Maildir
+
+mailboxes +inbox
