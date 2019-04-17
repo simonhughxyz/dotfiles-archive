@@ -1,19 +1,14 @@
 ##--Basic Definitions---##
-set $mod Mod4
-set $amod Mod1
-set $term exec --no-startup-id $TERM
-#set $TERMINAL $term
-set $lock exec i3lock --color 475263
-
-# border / titlebar
+# Needed for i3-gaps
 for_window [class="^.*"] border pixel 2
 smart_gaps on
 gaps inner 10
 gaps outer 0
-new_window normal
-smart_borders on
-hide_edge_borders both
-bindsym Control+Shift+b [class="^.*"] border toggle
+set $mod Mod4
+set $term exec --no-startup-id st
+set $TERMINAL $term
+set $lock exec i3lock --color 475263
+set $amod Mod1
 
 # font definitions
 set $font_size_small 8
@@ -22,12 +17,12 @@ set $font_size_large 12
 set $font System San Francisco Display 
 
 # color definitions
-set $focused-color          #0f8706
-set $bg-color               #2f343f
-set $text-color             #f3f4f5
-set $urgent-color           #E53935
-set $inactive-text-color    #676E7D
-
+set $focused-color #0f8706
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
 
 # Audio Definitions
 set $audio exec --no-startup-id amixer -q sset Master
@@ -174,13 +169,18 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 ##---DECOTATIONS---##
 
 # window colors
-# class                 border              backgr. text        indicator            child_border
-client.focused          $focused-color      $focused-color      $focused-color       $focused-color
-client.unfocused        $bg-color           $bg-color           $bg-color            $bg-color
-client.focused_inactive $focused-color      $focused-color      $focused-color       $focused-color
-client.urgent           $urgent-color       $urgent-color       $urgent-color        $urgent-color
+client.focused          $focused-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 
+# border / titlebar
+new_window 1pixel
+smart_borders on
+hide_edge_borders both
+bindsym Control+Shift+b [class="^.*"] border toggle
+for_window [class="^.*"] border pixel 2
 
 
 # bar settings
@@ -191,10 +191,10 @@ bar {
         colors {
                 background $bg-color
                     separator #757575
-                #                  border               background          text
-                focused_workspace  $bg-color            $bg-color           $text-color
-                inactive_workspace $bg-color            $bg-color           $inactive-text-color
-                urgent_workspace   $urgent-color        $urgent-color       $text-color
+                #                  border             background         text
+                focused_workspace  $bg-color          $bg-color          $text-color
+                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
         }
 }
 
@@ -300,8 +300,4 @@ bindsym $mod+$amod+n exec --no-startup-id ddspawn newsboat
 bindsym $mod+u exec --no-startup-id dmenuunicode
 
 ##--Startup---##
-exec --no-startup-id compton
-# Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter -f
-# Redshift will adjust color temp and brightness throughout the day
-exec --no-startup-id redshift
+exec --no-startup-id compton -f
