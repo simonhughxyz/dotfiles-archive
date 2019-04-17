@@ -34,7 +34,7 @@ alias paste='xclip -o'
 alias ls='ls --color=auto --group-directories-first'
 alias l='ls'
 alias l.='ls -d .*'
-alias l,='ls -a'
+alias l,='ls -A'
 # ls only directories
 alias ld='ls -d */'
 alias ld.='ls -d .*/'
@@ -42,7 +42,7 @@ alias ld,='ls -d */ .*/'
 # ls in list format
 alias ll='ls -lh'
 alias ll.='ll -d .*'
-alias ll,='ll -a'
+alias ll,='ll -A'
 # ls directories in list format
 alias lld='ll -d */'
 alias lld.='ll -d .*/'

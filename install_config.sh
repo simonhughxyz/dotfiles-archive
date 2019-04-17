@@ -1,18 +1,21 @@
-#!/bin/bash
+#!/bin/sh
 
-# source .profile for ENV variables
-source .profile
+# This install script will create a symlink for every file and directory
+# in the local .config dir to the path associated with $CONFIG in the local
+# .profile file. 
+# WARNING! All equivilant files in $CONFIG will be permenantly removed
 
-# define dotfiles/.config and home/.config
+# source .profile for CONFIG path variables
+source ./.profile
 
-homeconfig="$HOME/.config"
-dotconfig="$PWD/.config"
+# create symlink for all files and dirs in .config
+for f in "$PWD"/.config/*; do
+    newpath="$CONFIG/$(basename $f)"
 
-# create symlink for all files in .config
-
-for f in $dotconfig/*; do
-    newpath="$homeconfig/$(basename $f)"
-    echo "$f to $newpath"
+    echo "removing $newpath..."
     rm -rf $newpath
+
+    echo "creating symlink from $f to $newpath..."
     ln -s $f $newpath;
+    echo ""
 done

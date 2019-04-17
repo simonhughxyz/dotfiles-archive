@@ -1,24 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-# source local .profile to get ENV variables
-source .profile
+# This script will create a symlink for every local dotfile 
+# to the $HOME directory
+# WARNING! All equivilant dot files in $HOME will be permanently removed
 
-# remove all old files
-rm $HOME/.bashrc
-rm $HOME/.profile
-rm $HOME/.bash_profile
-rm $HOME/.vimrc
-rm $HOME/.Xresources
-rm $HOME/.cookiecutterrc
-rm $HOME/.tmux.conf
-rm $HOME/.emoji
 
-# create symlink for all dotfiles
-ln -s $DOTFILES/.bashrc $HOME/.bashrc
-ln -s $DOTFILES/.profile $HOME/.profile
-ln -s $DOTFILES/.bash_profile $HOME/.bash_profile
-ln -s $DOTFILES/.vimrc $HOME/.vimrc
-ln -s $DOTFILES/.Xresources $HOME/.Xresources
-ln -s $DOTFILES/.cookiecutterrc $HOME/.cookiecutterrc
-ln -s $DOTFILES/.tmux.conf $HOME/.tmux.conf
-ln -s $DOTFILES/.emoji $HOME/.emoji
+# create symlink for all local dot files.
+for f in "$PWD"/.*; do
+    if [ -f "$f" ]; then
+        newpath="$HOME/$(basename $f)"
+
+        echo "removing $newpath..."
+        rm -rf $newpath
+
+        echo "creating symlink from $f to $newpath..."
+        ln -s $f $newpath;
+        echo ""
+    fi
+done
