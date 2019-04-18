@@ -29,6 +29,7 @@ alias p='pacman'
 alias mux='tmuxinator'
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
+alias mail='neomutt'
 
 # ls
 alias ls='ls --color=auto --group-directories-first'
@@ -168,6 +169,23 @@ function fawk {
     last="}'"
     cmd="${first}\$${1}${last}"
     eval $cmd
+}
+
+function escape {
+    [ "$2" ] && local i=$2 || local i=$(cat -)
+    a=$(echo "$i" | sed -e 's/\([[\/.*]\|\]\)/\\&/g')
+    echo "$a"
+}
+
+function sedeasy {
+  sed -i "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
+}
+
+# Insert to beginning of file
+function beg {
+    [ "$2" ] && local i=$2 || local i=$(cat -)
+    echo "$i"
+    awk '{print "cool" $0}' $1
 }
 
 # FZF
