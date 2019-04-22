@@ -1,14 +1,15 @@
+set charset = "utf-8"
+
 set from = "simon.h.moore94@gmail.com"
 set realname = "Simon H Moore"
 
 set imap_user=simon.h.moore94@gmail.com
-set imap_pass=dusuxprwxvfnceaa
 
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "imaps://imap.gmail.com/INBOX"
+set folder = "~/.mail/gmail_simonhmoore94"
+set spoolfile = "+INBOX"
 set postponed ="+[Gmail]/Drafts"
 
-set sendmail="/usr/bin/msmtp"
+set sendmail  = "/usr/bin/msmtp -a gmail_simonhmoore94"
 
 set edit_headers=yes
 set mbox=+mbox

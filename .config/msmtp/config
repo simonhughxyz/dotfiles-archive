@@ -1,0 +1,19 @@
+# vim:filetype=msmtp
+# Set default values for all following accounts.
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.log/msmtp.log
+
+# Gmail
+account        gmail_simonhmoore94
+host           smtp.gmail.com
+port           587
+from           simon.h.moore94@gmail.com
+user           simon.h.moore94@gmail.com
+password       iqyyirwjmiybyvvv
+
+# Set a default account
+account default : gmail_simonhmoore94
+

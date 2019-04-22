@@ -123,6 +123,7 @@ alias myip='curl ifconfig.me/ip; echo'
 # misc
 alias hist?='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
+alias weather="curl wttr.in"
 
 ## Functions ##
 # make a directory and cd into it

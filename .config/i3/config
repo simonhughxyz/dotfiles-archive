@@ -17,8 +17,8 @@ bindsym Control+Shift+b [class="^.*"] border toggle
 
 # font definitions
 set $font_size_small 8
-set $font_size_normal 10
-set $font_size_large 12
+set $font_size_normal 12
+set $font_size_large 14
 set $font System San Francisco Display 
 
 # color definitions
@@ -93,7 +93,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+#bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -145,6 +145,8 @@ set $workspace7 "7"
 set $workspace8 "8"
 set $workspace9 "9"
 set $workspace10 "10"
+# application worspace
+set $workspaceP "P"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -157,6 +159,10 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
+
+bindsym $mod+Shift+n workspace prev
+bindsym $mod+Shift+m workspace next
+bindsym $mod+Tab workspace back_and_forth
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -185,7 +191,8 @@ client.urgent           $urgent-color       $urgent-color       $urgent-color   
 
 # bar settings
 bar {
-        status_command /home/simon/.pyenv/versions/utils/bin/python ~/.config/i3/status.py
+#status_command /home/simon/.pyenv/versions/utils/bin/python ~/.config/i3/status.py
+        status_command i3blocks 
         position top        
         workspace_buttons yes
         colors {
@@ -280,7 +287,10 @@ bindsym $mod+Shift+period exec bukuaddtitlemenu
 bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
 
 # Start Applications
-bindsym $mod+b exec firefox
+bindsym $mod+w exec $BROWSER
+bindsym $mod+Shift+p exec $BROWSER --private-window
+
+
 bindsym $mod+f1 exec steam
 bindsym $mod+Shift+b exec firefox --private-window
 bindsym $mod+i $term -e htop

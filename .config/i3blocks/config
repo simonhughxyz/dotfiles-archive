@@ -1,0 +1,15 @@
+separator_block_width=15
+markup=pango
+
+
+[date]
+command=echo $(date '+%a %d %B %Y')
+label= 
+interval=60 
+color=#F79494
+
+[time]
+command=echo $(date '+%H:%M')
+label= 
+interval=1
+color=#61AEEE
