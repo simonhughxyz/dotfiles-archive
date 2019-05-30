@@ -1,4 +1,5 @@
 ##---PATHS---##
+##---PATHS---##
 export HOME="/home/simon"
 export SCRIPTS="$HOME/.scripts"
 export DMENU="$SCRIPTS/dmenu"

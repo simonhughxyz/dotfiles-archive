@@ -20,8 +20,12 @@ super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
     selsearchmenu
-super + {_,shift +} numbersign
-    bukumenu {-t - x,-p}
+super + numbersign
+    bukumenu -t star
+super + slash
+    bukumenu -t - star,x,porn
+super + shift + slash
+    bukumenu -t x,porn - star
 super + z
     bukumenu -p
 super + e
