@@ -64,6 +64,7 @@ alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
 alias cdsc="cd $SCRIPTS"
 alias cdpdfs="cd $PDFS"
+b(){ cd "$(bk -L | fzf)"; }
 
 # mkdir
 alias mkdir='mkdir -pv'     # Add parent dir on demand
@@ -81,6 +82,7 @@ alias diff='diff --color=auto'
 # vim
 alias vi='vim'
 alias v='vim'
+alias vg='gvim'
 
 # git
 alias gs='git status'
@@ -100,10 +102,10 @@ alias defde='def -u "German - English" -u "English - German"'
 
 # media
 alias vid='mpv'
-alias img='feh'
+alias img='sxiv -a'
 
 # buku
-alias b='buku --suggest'
+alias bu='buku --suggest'
 
 # wallpaper
 alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
@@ -124,6 +126,8 @@ alias myip='curl ifconfig.me/ip; echo'
 alias hist?='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias weather="curl wttr.in"
+alias s="du -sh ./* | sort -h"
+alias sd="du -sh ./*/ | sort -h"
 
 ## Functions ##
 # make a directory and cd into it
@@ -225,7 +229,7 @@ cdf() {
 writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
 
 fhe() {
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+    ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | tr '\n' ' ' | sed -re 's/^\s*[0-9]+\s*//;s/[[:blank:]]*$//' | xsel
 }
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

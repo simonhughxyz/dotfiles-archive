@@ -5,12 +5,9 @@
 # .profile file. 
 # WARNING! All equivilant files in $CONFIG will be permenantly removed
 
-# source .profile for CONFIG path variables
-source ./.profile
-
 # create symlink for all files and dirs in .config
 for f in "$PWD"/.config/*; do
-    newpath="$CONFIG/$(basename $f)"
+    newpath="$XDG_CONFIG_HOME/$(basename $f)"
 
     echo "removing $newpath..."
     rm -rf $newpath

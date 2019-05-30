@@ -21,40 +21,6 @@ set modeline
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 " }}}
-" Plugin Manager {{{
-" Install Vim-Plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" Load Plugins
-" let plugin_path='~/.vim/bundle'
-call plug#begin()
-Plug 'morhetz/gruvbox'
-Plug 'juanedi/predawn.vim'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'itchyny/lightline.vim'
-Plug 'sjl/gundo.vim'
-Plug 'tmhedberg/SimpylFold'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
-Plug 'ap/vim-css-color'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-call plug#end()
-" }}}
 " Plugin Settings {{{
 let g:vimwiki_list = [{'path': '~/.wiki/'}]
 set rtp+=~/.fzf
@@ -72,8 +38,7 @@ set t_Co=256
 syntax enable           " enable syntax processing
 colorscheme gruvbox
 " Make background transparent
-" hi Normal guibg=NONE ctermbg=NONE
-hi Normal ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4           " 4 space tab

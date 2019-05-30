@@ -1,15 +1,56 @@
-separator_block_width=15
+command=~/.scripts/statusbar/$BLOCK_NAME
+separator_block_width=20
 markup=pango
 
+#[window]
+#interval=1
+
+[keystate]
+interval=once
+signal=1
+color=#e82e1e
+
+#[net]
+#interval=600
+
+[weather]
+interval=10800
+signal=5
+color=#cd76fc
+
+[uptime]
+interval=60
+label=
+color=#c98a1e
+
+#[cpu]
+#interval=10
+#label=🖥
+
+[memory]
+interval=30
+label=
+signal=9
+color=#C0C000
+
+[volume]
+interval=once
+signal=10
+color=#98C379
 
 [date]
-command=echo $(date '+%a %d %B %Y')
-label= 
-interval=60 
+interval=once
+label=
+signal=2
 color=#F79494
 
 [time]
-command=echo $(date '+%H:%M')
-label= 
-interval=1
+label=
+interval=30
 color=#61AEEE
+
+[update]
+label=
+interval=1800
+signal=20
+color=#b29f27

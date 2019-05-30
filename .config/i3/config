@@ -1,3 +1,4 @@
+# vim: ft=i3
 ##--Basic Definitions---##
 set $mod Mod4
 set $amod Mod1
@@ -29,29 +30,21 @@ set $urgent-color           #E53935
 set $inactive-text-color    #676E7D
 
 
-# Audio Definitions
-set $audio exec --no-startup-id amixer -q sset Master
-set $audio_play exec playerctl play
-set $audio_pause exec playerctl pause
-set $audio_play_pause exec playerctl play-pause
-set $audio_next exec playerctl next
-set $audo_prev exec playerctl previous
-
 # Screen Brightness Definitions
-set $bright_up exec xbacklight -inc 20
-set $bright_down exec xbacklight -dec 20
+#set $bright_up exec xbacklight -inc 20
+#set $bright_down exec xbacklight -dec 20
 
 
 ##---MISC---##
 floating_modifier $mod
-bindsym $mod+Return $term
+#bindsym $mod+Return $term
 bindsym $mod+q kill
-bindsym $mod+x $lock
+#bindsym $mod+x $lock
 bindsym $mod+$amod+r reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 font pango:$font+$font_size_normal
 
@@ -83,21 +76,21 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+space split h
+#bindsym $mod+space split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
 
 # enter fullscreen mode
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 #bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+#bindsym $mod+Shift+space floating toggle
 
 # focus the parent container
 bindsym $mod+Shift+a focus parent
@@ -134,6 +127,12 @@ bindsym $mod+r mode "resize"
 
 ##---WORKSPACE SETTINGS---##
 
+# automaticly go back and forth between workspace
+workspace_auto_back_and_forth yes
+
+set $Lmon "HDMI-A-0"
+set $Rmon "DisplayPort-0"
+
 # Define Workspace names
 set $workspace1 "1"
 set $workspace2 "2"
@@ -145,8 +144,12 @@ set $workspace7 "7"
 set $workspace8 "8"
 set $workspace9 "9"
 set $workspace10 "10"
-# application worspace
-set $workspaceP "P"
+set $workspaceTop "Top"
+
+workspace $workspaceTop output $Lmon
+
+bindsym $mod+space workspace $workspaceTop
+bindsym $mod+shift+space move workspace to output above
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -160,8 +163,11 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
-bindsym $mod+Shift+n workspace prev
-bindsym $mod+Shift+m workspace next
+
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+h workspace prev
+bindsym $mod+Control+Right workspace next
+bindsym $mod+Control+l workspace next
 bindsym $mod+Tab workspace back_and_forth
 
 # move focused container to workspace
@@ -183,7 +189,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # class                 border              backgr. text        indicator            child_border
 client.focused          $focused-color      $focused-color      $focused-color       $focused-color
 client.unfocused        $bg-color           $bg-color           $bg-color            $bg-color
-client.focused_inactive $focused-color      $focused-color      $focused-color       $focused-color
+client.focused_inactive $bg-color           $bg-color           $bg-color            $bg-color
 client.urgent           $urgent-color       $urgent-color       $urgent-color        $urgent-color
 
 
@@ -191,10 +197,11 @@ client.urgent           $urgent-color       $urgent-color       $urgent-color   
 
 # bar settings
 bar {
-#status_command /home/simon/.pyenv/versions/utils/bin/python ~/.config/i3/status.py
+        font pango:monospace, FontAwesome 14
         status_command i3blocks 
         position top        
         workspace_buttons yes
+        output $Rmon
         colors {
                 background $bg-color
                     separator #757575
@@ -217,8 +224,8 @@ for_window [instance="dropdown_*"] resize set 1600 600
 for_window [instance="dropdown_htop"] resize set 1500 900
 for_window [instance="dropdown_htop"] border pixel 2
 
-for_window [instance="dropdown_nnn"] resize set 1000 500
-for_window [instance="dropdown_nnn"] border pixel 2
+for_window [instance="dropdown_vifm"] resize set 2000 1200
+for_window [instance="dropdown_vifm"] border pixel 2
 
 for_window [instance="dropdown_pycalc"] resize set 800 400
 for_window [instance="dropdown_pycalc"] border pixel 2
@@ -237,6 +244,17 @@ for_window [instance="pavucontrol"] border pixel 2
 for_window [instance="pavucontrol"] move position center 
 
 
+# Dropdown
+bindsym $mod+Shift+BackSpace move scratchpad
+bindsym $mod+backslash scratchpad show
+bindsym $mod+$amod+h exec --no-startup-id ddspawn htop
+bindsym $mod+Shift+Return exec --no-startup-id ddspawn vifm
+bindsym $mod+$amod+m exec --no-startup-id ddspawn pycalc
+bindsym $mod+$amod+p exec --no-startup-id appspawn pavucontrol
+bindsym $mod+$amod+c exec --no-startup-id ddspawn calcurse
+bindsym $mod+$amod+n exec --no-startup-id ddspawn newsboat
+
+
 ##---KEYBINDINGS---##
 
 
@@ -251,63 +269,107 @@ bindsym $mod+g gaps inner current set 10
 bindsym $mod+Shift+g gaps inner current set 0
 
 
+# Audio Definitions
+#set $volume exec --no-startup-id volume
+#set $audio_play exec playerctl play
+#set $audio_pause exec playerctl pause
+#set $audio_play_pause exec playerctl play-pause
+#set $audio_next exec playerctl next
+#set $audo_prev exec playerctl previous
+
 #Audio
-bindsym XF86AudioRaiseVolume $audio 2%+
-bindsym XF86AudioLowerVolume $audio 2%-
-bindsym XF86AudioMute $audio toggle
-bindsym XF86AudioPlay $audio_play_pause
-bindsym XF86AudioPause $audio_play_pause
-bindsym XF86AudioNext $audio_next
-bindsym XF86AudioPrev $audio_prev
+#bindsym XF86AudioRaiseVolume $volume +6
+#bindsym XF86AudioLowerVolume $volume -6
+#bindsym Shift+XF86AudioRaiseVolume $volume +20
+#bindsym Shift+XF86AudioLowerVolume $volume -20
+#bindsym Control+XF86AudioRaiseVolume $volume +1
+#bindsym Control+XF86AudioLowerVolume $volume -1
+
+#bindsym XF86AudioMute $volume m
+
+#bindsym XF86AudioPlay $audio_play_pause
+#bindsym XF86AudioPause $audio_play_pause
+#bindsym XF86AudioNext $audio_next
+#bindsym XF86AudioPrev $audio_prev
+
 #alternative audio
-bindsym $mod+plus $audio 2%+
-bindsym $mod+Shift+plus $audio 10%+
-bindsym $mod+minus $audio 2%-
-bindsym $mod+Shift+minus $audio 10%-
+#bindsym $mod+plus $volume +6
+#bindsym $mod+Shift+plus $volume +20
+#bindsym $mod+Control+plus $volume +1
+#bindsym $mod+minus $volume -6
+#bindsym $mod+Shift+minus $volume -20
+#bindsym $mod+Control+minus $volume -1
+#bindsym $mod+m $volume m
 
 # Screen Brightness
-bindsym XF86MonBrightnessUp $bright_up
-bindsym XF86MonBrightnessDown $bright_down
+#bindsym XF86MonBrightnessUp $bright_up
+#bindsym XF86MonBrightnessDown $bright_down
 
 # Screenshots & Recording
-bindsym Print exec shot
-bindsym $mod+Shift+Print exec screenshotsmenu
+#bindsym Print exec shot
+#bindsym $mod+Shift+Print exec screenshotsmenu
 
 # Dmenu
-bindsym $mod+a exec dmenu_run
-bindsym $mod+Shift+q exec quitmenu
-bindsym $mod+c exec clipmenu
-bindsym $mod+Shift+c exec clipdel -d ".*"
-bindsym $mod+p exec pdfmenu
+#bindsym $mod+a exec dmenu_run
+#bindsym $mod+Shift+q exec quitmenu
+#bindsym $mod+c exec clipmenu
+#bindsym $mod+Shift+c exec clipdel -d ".*"
+#bindsym $mod+p exec pdfmenu
 bindsym $mod+d exec downloadmenu
-bindsym $mod+numbersign exec bukustarmenu
-bindsym $mod+Shift+numbersign exec bukumenu
+#bindsym $mod+numbersign exec bukustarmenu
+#bindsym $mod+Shift+numbersign exec bukumenu
 bindsym $mod+period exec bukuaddmenu
 bindsym $mod+Shift+period exec bukuaddtitlemenu
-bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
+#bindsym $mod+s exec --no-startup-id selsearchmenu
+#bindsym $mod+e exec emojimenu
+#bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
 
 # Start Applications
-bindsym $mod+w exec $BROWSER
-bindsym $mod+Shift+p exec $BROWSER --private-window
+#bindsym $mod+w exec $BROWSER -P firefox-profile
+#bindsym $mod+Shift+p exec $BROWSER --private-window
 
 
-bindsym $mod+f1 exec steam
-bindsym $mod+Shift+b exec firefox --private-window
-bindsym $mod+i $term -e htop
+#bindsym $mod+Shift+b exec firefox --private-window
+#bindsym $mod+i $term -e htop
 #bindsym $mod+s redshift
 
-# Dropdown
-bindsym $mod+Shift+BackSpace move scratchpad
-bindsym $mod+backslash scratchpad show
-bindsym $mod+$amod+h exec --no-startup-id ddspawn htop
-bindsym $mod+$amod+Return exec --no-startup-id ddspawn nnn -i
-bindsym $mod+$amod+m exec --no-startup-id ddspawn pycalc
-bindsym $mod+$amod+p exec --no-startup-id appspawn pavucontrol
-bindsym $mod+$amod+c exec --no-startup-id ddspawn calcurse
-bindsym $mod+$amod+n exec --no-startup-id ddspawn newsboat
 
 # Dmenu
 bindsym $mod+u exec --no-startup-id dmenuunicode
+
+# F keys
+#bindsym $mod+F1 exec steam
+#bindsym $mod+F2
+#bindsym $mod+F3
+#bindsym $mod+F4
+#bindsym $mod+F5
+#bindsym $mod+F6
+#bindsym $mod+F7
+#bindsym $mod+F8 exec --no-startup-id autotypemenu
+#bindsym $mod+F9 exec $BROWSER -P clean
+#bindsym $mod+F10
+#bindsym $mod+F11
+#bindsym $mod+F12 exec --no-startup-id fontawesomemenu
+#BINDSYM $MOd+Shift+F1 exec --no-startup-id ddspawn vifm /mnt/wh
+#bindsym $mod+Shift+F2
+#bindsym $mod+Shift+F3
+#bindsym $mod+Shift+F4
+#bindsym $mod+Shift+F5
+#bindsym $mod+Shift+F6
+#bindsym $mod+Shift+F7
+#bindsym $mod+Shift+F8
+#bindsym $mod+Shift+F9
+#bindsym $mod+Shift+F10
+#bindsym $mod+Shift+F11
+#bindsym $mod+Shift+F12
+
+# regular key bindings
+bindsym Caps_Lock exec --no-startup-id ri3blocks 1
+bindsym --release Caps_Lock exec --no-startup-id ri3blocks 1
+bindsym Num_Lock exec --no-startup-id ri3blocks 1
+bindsym --release Num_Lock exec --no-startup-id ri3blocks 1
+bindsym Scroll_Lock exec --no-startup-id ri3blocks 1
+bindsym --release Scroll_Lock exec --no-startup-id ri3blocks 1
 
 ##--Startup---##
 exec --no-startup-id compton
