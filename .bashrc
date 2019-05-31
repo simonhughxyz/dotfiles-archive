@@ -103,7 +103,8 @@ alias defde='def -u "German - English" -u "English - German"'
 # media
 alias vid='mpv'
 alias img='sxiv -a'
-alias yt='mpv --hwdec="vdpau" --vo=vdpau --ytdl-format="bestvideo[ext=mp4][height<=?1440][fps<=60]+bestaudio[ext=m4a]"'
+alias yt='mpv --hwdec="vdpau" --vo=vdpau --ytdl-format="bestvideo[ext=mp4][height<=?1080][fps<=60]+bestaudio[ext=m4a]"'
+alias yt2k='mpv --hwdec="vdpau" --vo=vdpau --ytdl-format="bestvideo[ext=mp4][height<=?1440][fps<=30]+bestaudio[ext=m4a]"'
 
 # buku
 alias bu='buku --suggest'

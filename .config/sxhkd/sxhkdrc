@@ -20,6 +20,8 @@ super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
     selsearchmenu
+super + y
+    ytmenu
 super + numbersign
     bukumenu -t star
 super + slash
@@ -59,18 +61,18 @@ super + Print
 
 # F Keys
 super + F1
-    steam
-super + F2
     chromium
-super + F3
+super + F2
     gvim
-super + F4
+super + F3
     libreoffice
+super + F4
+    steam
 super + F6
     virtualbox
 super + F8
     autotypemenu
 super + F11
     fontawesomemenu
-super + F12; {g,d,u}
-    setxkb {gb,de,us}
+super + F12; {g,d,u,f}
+    setxkb {gb,de,us,fr}
