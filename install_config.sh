@@ -6,7 +6,7 @@
 # WARNING! All equivilant files in $CONFIG will be permenantly removed
 
 # create symlink for all files and dirs in .config
-for f in "$PWD"/.config/*; do
+for f in "$PWD"/config/*; do
     newpath="$XDG_CONFIG_HOME/$(basename $f)"
 
     echo "removing $newpath..."

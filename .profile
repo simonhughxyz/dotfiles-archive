@@ -14,6 +14,7 @@ export PICTURES="$HOME/Pictures"
 export VIDEOS="$HOME/Videos"
 export DEV="$HOME/dev"
 export PDFS="$HOME/pdfs"
+export WH="/mnt/wh"
 
 export PATH="$PATH:$SCRIPTS:$DMENU"
 export EDITOR="vim"

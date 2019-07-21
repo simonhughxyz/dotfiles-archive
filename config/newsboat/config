@@ -1,4 +1,4 @@
-auto-reload yes
+#auto-reload yes
 
 # Format
 datetime-format "%d %b %y"
@@ -33,3 +33,6 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 bind-key ^t next-unread
+
+# macros
+macro y set browser "mpv %u"; open-in-browser ; set browser "elinks %u"

@@ -4,7 +4,6 @@ set $mod Mod4
 set $amod Mod1
 set $term exec --no-startup-id $TERM
 #set $TERMINAL $term
-set $lock exec i3lock --color 475263
 
 # border / titlebar
 for_window [class="^.*"] border pixel 2
@@ -37,9 +36,7 @@ set $inactive-text-color    #676E7D
 
 ##---MISC---##
 floating_modifier $mod
-#bindsym $mod+Return $term
 bindsym $mod+q kill
-#bindsym $mod+x $lock
 bindsym $mod+$amod+r reload
 bindsym $mod+Shift+r restart
 
@@ -183,14 +180,34 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
 
+# Assigned Workspaces
+
+# htop
+set $workspaceHtop ""
+assign [instance="htop"] $workspaceHtop
+exec --no-startup-id st -n htop -e htop
+bindsym $mod+t workspace $workspaceHtop
+
+# newsboat
+set $workspaceNB ""
+assign [instance="newsboat"] $workspaceNB
+exec --no-startup-id st -n newsboat -e newsboat
+bindsym $mod+n workspace $workspaceNB
+
+# MPV
+set $workspaceMPV ""
+assign [class="mpv"] $workspaceMPV
+for_window [class="mpv"] layout tabbed
+bindsym $mod+v workspace $workspaceMPV
+
 ##---Decotations---##
 
 # window colors
 # class                 border              backgr. text        indicator            child_border
-client.focused          $focused-color      $focused-color      $focused-color       $focused-color
-client.unfocused        $bg-color           $bg-color           $bg-color            $bg-color
-client.focused_inactive $bg-color           $bg-color           $bg-color            $bg-color
-client.urgent           $urgent-color       $urgent-color       $urgent-color        $urgent-color
+client.focused          $focused-color      $focused-color      $text-color          $focused-color
+client.unfocused        $bg-color           $bg-color           $text-color          $bg-color
+client.focused_inactive $bg-color           $bg-color           $text-color          $bg-color
+client.urgent           $urgent-color       $urgent-color       $text-color          $urgent-color
 
 
 
@@ -211,6 +228,7 @@ bar {
                 urgent_workspace   $urgent-color        $urgent-color       $text-color
         }
 }
+
 
 ##---DropDownWindows--##
 
@@ -246,7 +264,7 @@ for_window [instance="pavucontrol"] move position center
 
 # Dropdown
 bindsym $mod+Shift+BackSpace move scratchpad
-bindsym $mod+backslash scratchpad show
+#bindsym $mod+backslash scratchpad show
 bindsym $mod+$amod+h exec --no-startup-id ddspawn htop
 bindsym $mod+Shift+Return exec --no-startup-id ddspawn vifm
 bindsym $mod+$amod+m exec --no-startup-id ddspawn pycalc
@@ -268,112 +286,3 @@ bindsym $mod+$amod+n exec --no-startup-id ddspawn newsboat
 bindsym $mod+g gaps inner current set 10
 bindsym $mod+Shift+g gaps inner current set 0
 
-
-# Audio Definitions
-#set $volume exec --no-startup-id volume
-#set $audio_play exec playerctl play
-#set $audio_pause exec playerctl pause
-#set $audio_play_pause exec playerctl play-pause
-#set $audio_next exec playerctl next
-#set $audo_prev exec playerctl previous
-
-#Audio
-#bindsym XF86AudioRaiseVolume $volume +6
-#bindsym XF86AudioLowerVolume $volume -6
-#bindsym Shift+XF86AudioRaiseVolume $volume +20
-#bindsym Shift+XF86AudioLowerVolume $volume -20
-#bindsym Control+XF86AudioRaiseVolume $volume +1
-#bindsym Control+XF86AudioLowerVolume $volume -1
-
-#bindsym XF86AudioMute $volume m
-
-#bindsym XF86AudioPlay $audio_play_pause
-#bindsym XF86AudioPause $audio_play_pause
-#bindsym XF86AudioNext $audio_next
-#bindsym XF86AudioPrev $audio_prev
-
-#alternative audio
-#bindsym $mod+plus $volume +6
-#bindsym $mod+Shift+plus $volume +20
-#bindsym $mod+Control+plus $volume +1
-#bindsym $mod+minus $volume -6
-#bindsym $mod+Shift+minus $volume -20
-#bindsym $mod+Control+minus $volume -1
-#bindsym $mod+m $volume m
-
-# Screen Brightness
-#bindsym XF86MonBrightnessUp $bright_up
-#bindsym XF86MonBrightnessDown $bright_down
-
-# Screenshots & Recording
-#bindsym Print exec shot
-#bindsym $mod+Shift+Print exec screenshotsmenu
-
-# Dmenu
-#bindsym $mod+a exec dmenu_run
-#bindsym $mod+Shift+q exec quitmenu
-#bindsym $mod+c exec clipmenu
-#bindsym $mod+Shift+c exec clipdel -d ".*"
-#bindsym $mod+p exec pdfmenu
-bindsym $mod+d exec downloadmenu
-#bindsym $mod+numbersign exec bukustarmenu
-#bindsym $mod+Shift+numbersign exec bukumenu
-bindsym $mod+period exec bukuaddmenu
-bindsym $mod+Shift+period exec bukuaddtitlemenu
-#bindsym $mod+s exec --no-startup-id selsearchmenu
-#bindsym $mod+e exec emojimenu
-#bindsym $mod+Shift+w exec feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
-
-# Start Applications
-#bindsym $mod+w exec $BROWSER -P firefox-profile
-#bindsym $mod+Shift+p exec $BROWSER --private-window
-
-
-#bindsym $mod+Shift+b exec firefox --private-window
-#bindsym $mod+i $term -e htop
-#bindsym $mod+s redshift
-
-
-# Dmenu
-bindsym $mod+u exec --no-startup-id dmenuunicode
-
-# F keys
-#bindsym $mod+F1 exec steam
-#bindsym $mod+F2
-#bindsym $mod+F3
-#bindsym $mod+F4
-#bindsym $mod+F5
-#bindsym $mod+F6
-#bindsym $mod+F7
-#bindsym $mod+F8 exec --no-startup-id autotypemenu
-#bindsym $mod+F9 exec $BROWSER -P clean
-#bindsym $mod+F10
-#bindsym $mod+F11
-#bindsym $mod+F12 exec --no-startup-id fontawesomemenu
-#BINDSYM $MOd+Shift+F1 exec --no-startup-id ddspawn vifm /mnt/wh
-#bindsym $mod+Shift+F2
-#bindsym $mod+Shift+F3
-#bindsym $mod+Shift+F4
-#bindsym $mod+Shift+F5
-#bindsym $mod+Shift+F6
-#bindsym $mod+Shift+F7
-#bindsym $mod+Shift+F8
-#bindsym $mod+Shift+F9
-#bindsym $mod+Shift+F10
-#bindsym $mod+Shift+F11
-#bindsym $mod+Shift+F12
-
-# regular key bindings
-bindsym Caps_Lock exec --no-startup-id ri3blocks 1
-bindsym --release Caps_Lock exec --no-startup-id ri3blocks 1
-bindsym Num_Lock exec --no-startup-id ri3blocks 1
-bindsym --release Num_Lock exec --no-startup-id ri3blocks 1
-bindsym Scroll_Lock exec --no-startup-id ri3blocks 1
-bindsym --release Scroll_Lock exec --no-startup-id ri3blocks 1
-
-##--Startup---##
-exec --no-startup-id compton
-# Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter -f
-# Redshift will adjust color temp and brightness throughout the day
-exec --no-startup-id redshift

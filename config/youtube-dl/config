@@ -1,0 +1,8 @@
+--audio-format best
+--add-metadata
+--geo-bypass
+--buffer-size 200M
+--external-downloader aria2c
+--external-downloader-args '-c -j 16 -x 16 -s 16 -k 1M'
+-o ~/Downloads/ytdl/%(title)s.%(ext)s
+-f bestvideo[ext=mp4][height<=?1080][fps<=?60][vcodec!=vp9]+bestaudio/best

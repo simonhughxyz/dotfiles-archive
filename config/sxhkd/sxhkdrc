@@ -1,0 +1,124 @@
+# Basic Binds
+super + shift + s
+    pkill -USR1 sxhkd
+super + Return
+    $TERMINAL
+super + x
+    i3lock --color 475263
+super + w
+    $BROWSER -P firefox-profile
+super + shift + w
+    feh --bg-fill --randomize ~/Pictures/*/*-ls-*
+super + shift + m
+    togglemouse
+
+# Key Locks
+{@}Caps_Lock
+    ri3blocks 1
+{@}Num_Lock
+    ri3blocks 1
+{@}Scroll_Lock
+    ri3blocks 1
+
+
+# Dmenu
+super + a
+    dmenu_run
+super + shift + q
+    quitmenu
+super + {_,shift +} c
+    {clipmenu, clipdel -d ".*"}
+super + s
+    selsearchmenu
+super + shift + backslash
+    ytp
+super + backslash
+    xsel -b -c && sleep 0.2 && xdotool selectwindow click 3 sleep 0.2 key A && ytp
+#super + shift + backslash
+#    xdotool selectwindow key ctrl+c && ytp
+super + shift + backslash
+    streammenu
+super + Menu
+    bukumenu -t star - x
+super + shift + Menu
+    bukumenu -t - star,x
+super + slash
+    bukutagmenu
+super + shift + slash
+    bukumenu -t x
+super + z
+    bukumenu -t star
+super + {_,shift +} period
+    bukuadd{_,title}menu
+super + e
+    emojimenu
+super + p
+    pdfmenu
+
+
+
+# Audio
+super + m
+    volume mute
+super + shift + v ; {0-9} ; {0-9} ; {0-9}
+    volume {0-9}{0-9}{0-9}
+super + {_,shift +,control +} equal
+    volume +{5,20,1}
+super + {_,shift +,control +} minus
+    volume -{5,20,1}
+# XF86 Audio
+XF86AudioMute
+    volume mute
+XF86Audio{Raise,Lower}Volume {_,+ shift,+ control}
+    volume {+,-}{5,20,1}
+#XF86Audio{Play,Pause}
+#    playerctl {play,pause}
+#XF86Audio{Next,Prev}
+#    playerctl {next,prev}
+
+
+# Screen Brightness
+XF86MonBrightness{Up,Down}
+    xbacklight -{inc,dec} 20
+
+# Screen Capture
+Print
+    shot
+super + Print
+    screenshotsmenu
+super + shift + Print
+    shotmenu
+super + F12
+    recordmenu listmenu
+super + shift + F12
+    recordmenu
+
+# F Keys
+super + F1
+    chromium
+super + F2
+    gvim
+super + F3
+    libreoffice
+super + F4
+    steam
+super + F6
+    virtualbox
+super + F7
+    gimp
+super + F8
+    audacity
+super + F9
+    autotypemenu
+super + F10
+    htmltopdfmenu
+super + F11
+    ytp menu
+super + shift + F11
+    ytp rhistory
+super + shift + F10
+    fontawesomemenu
+super + shift + F10
+    setxkb gb
+super + shift + F11 ; {a-z} ; {a-z}
+    setxkb {a-z}{a-z}
