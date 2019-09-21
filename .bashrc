@@ -8,14 +8,49 @@ fi
 # Activate vi mode
 set -o vi
 
-# PS1 Prompt
-PS1_HOST="\[\e[33m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]>\[\e[36m\]\w\[\e[m\]\\$ "
 
-PS1_NO_HOST="\[\e[33m\]\u\[\e[m\]>\[\e[36m\]\w\[\e[m\]\\$ "
+# COLORS & TEST DECORATION
+COL_NORMAL="\[\e[m\]"
+COL_BLACK="\[\e[30m\]"
+COL_RED="\[\e[31m\]"
+COL_GREEN="\[\e[32m\]"
+COL_YELLOW="\[\e[33m\]"
+COL_BLUE="\[\e[34m\]"
+COL_PURPLE="\[\e[35m\]"
+COL_CYAN="\[\e[36m\]"
+COL_WHITE="\[\e[37m\]"
 
-PS1_CURRENT_DIR="\[\e[33m\]\u\[\e[m\]>\[\e[36m\]\W\[\e[m\]\\$ "
+COL_BG_BLACK="\[\e[40m\]"
+COL_BG_RED="\[\e[41m\]"
+COL_BG_GREEN="\[\e[42m\]"
+COL_BG_YELLOW="\[\e[43m\]"
+COL_BG_BLUE="\[\e[44m\]"
+COL_BG_PURPLE="\[\e[45m\]"
+COL_BG_CYAN="\[\e[46m\]"
+COL_BG_WHITE="\[\e[47m\]"
 
-export PS1=$PS1_CURRENT_DIR
+TEXT_NORMAL="\[\e[0m\]"
+TEXT_BOLD="\[\e[1m\]"
+TEXT_UNDERLINE="\[\e[4m\]"
+
+
+# PS1 PROMPT
+git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+get_user(){
+    [ "$USER" != "simon" ] && echo "$USER"
+}
+
+get_host(){
+    [ "$HOSTNAME" != "archtower" ] && echo "$HOSTNAME "
+}
+
+PS1="$COL_YELLOW\$(get_user) $COL_PURPLE\$(get_host)$COL_YELLOW\W$COL_PURPLE\$(git_branch) $COL_CYAN>$COL_NORMAL "
+
+export PS1=$PS1
+
 
 ##---ALIASES---##
 alias sbash='source ~/.bashrc'  # reload .bashrc
@@ -62,9 +97,12 @@ alias cdvid="cd $VIDEOS"
 alias cddot="cd $DOTFILES"
 alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
+alias cdb="cd $LBIN"
 alias cdsc="cd $SCRIPTS"
 alias cdpdfs="cd $PDFS"
 alias cdwh="cd $WH"
+alias cdbd="cd $BUILDS"
+alias fcd=". fcd"
 b(){ cd "$(bk -L | fzf)"; }
 
 # mkdir
@@ -88,11 +126,11 @@ alias vg='gvim'
 # git
 alias gs='git status'
 alias gb='git branch'
-alias gch='git checkout'
-alias ga='git add .'
-alias gc='git commit'
+alias gc='git checkout'
+alias ga='git add'
 alias gcm='git commit -m'
 alias gp='git push'
+alias gm='git merge'
 
 # stardict
 alias def='sdcv --color'
@@ -131,7 +169,6 @@ alias tma='tm -er -a'
 # misc
 alias hist?='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
-alias weather="curl wttr.in"
 alias s="du -sh ./* | sort -h"
 alias sd="du -sh ./*/ | sort -h"
 
@@ -199,45 +236,6 @@ function beg {
     awk '{print "cool" $0}' $1
 }
 
-# FZF
-# fd - cd to selected directory
-fda() {
-  local dir
-  dir=$(find ${1:-.} -path '\/*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-fd() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-# fdr - cd to selected parent directory
-fdr() {
-  local declare dirs=()
-  get_parent_dirs() {
-    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
-    if [[ "${1}" == '/' ]]; then
-      for _dir in "${dirs[@]}"; do echo $_dir; done
-    else
-      get_parent_dirs $(dirname "$1")
-    fi
-  }
-  local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf-tmux --tac)
-  cd "$DIR"
-}
-# cdf - cd into the directory of the selected file
-cdf() {
-   local file
-   local dir
-   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
-}
-# fhe - repeat history edit
-writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
-
-fhe() {
-    ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | tr '\n' ' ' | sed -re 's/^\s*[0-9]+\s*//;s/[[:blank:]]*$//' | xsel
-}
-#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #PyEnv
 export PATH="/home/simon/.pyenv/bin:$PATH"

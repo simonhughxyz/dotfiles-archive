@@ -10,7 +10,7 @@ set history=500
 set noerrorbells
 set vb t_vb=
 set listchars=eol:$,tab:»\ ,trail:~,extends:>,precedes:<,nbsp:~
-set pastetoggle=<C-p>
+set pastetoggle=<F1>
 set mouse=a
 set clipboard=unnamed
 set backspace=indent,eol,start
@@ -21,10 +21,16 @@ set modeline
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
-set spelllang=en_gb
 set noshowmode
 set undofile
 set undodir=~/.vim/undodir
+" }}}
+" Dictionary and Spelling {{{
+set spelllang=en_gb
+set dictionary+=~/.vim/words/english
+set dictionary+=~/.vim/words/new-german
+set thesaurus+=~/.vim/words/th_english
+set complete+=k
 " }}}
 " Plugin {{{
 " Install Vim-Plug if not found
@@ -49,6 +55,8 @@ Plug 'ap/vim-css-color'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'fourjay/vim-password-store'
 " Plug 'tpope/vim-fugitive'
 " Plug 'w0rp/ale'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
@@ -77,10 +85,14 @@ set t_Co=256
 syntax enable           " enable syntax processing
 colorscheme gruvbox
 " Make background transparent
-" hi Normal guibg=NONE ctermbg=NONE
 hi Normal ctermbg=NONE
 " set custom syntax colors
-hi Comment ctermbg=235 ctermfg=250
+hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
+" set color of 80 char width column
+highlight ColorColumn ctermbg=0 guibg=#303030
+" change color of cursor line
+highlight CursorLine ctermbg=0 guibg=#303030
+highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#303030
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4           " 4 space tab
@@ -94,7 +106,6 @@ set cindent
 " UI Layout {{{
 set number  relativenumber      " show line numbers
 set showcmd                     " show command in bottom bar
-set cursorline                  " highlight current line
 set wildmenu                    " show wildmenu on tab
 set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
 set lazyredraw                  " Vim will only redraw when needed
@@ -102,7 +113,9 @@ set showmatch                   " higlight matching parenthesis
 set ruler                       " show row and column in footer
 set fillchars+=vert:┃
 set splitbelow splitright       " Splits open at the bottom and right
-set textwidth=80                " Wrap text at 80th column
+" set textwidth=80                " Wrap text at 80th column
+set cursorline                  " highlight current line
+set colorcolumn=80              " show line at 80th character column
 " }}}
 " Searching {{{
 set ignorecase          " ignore case when searching
@@ -114,10 +127,12 @@ vnoremap / y/\V<C-r>=escape(@",'/\')<CR><CR>
 " }}}
 " Folding {{{
 "=== folding ===
-set foldmethod=marker   " fold based on indent level
-set foldnestmax=2      " max 10 depth
+set foldmethod=indent   " fold based on indent level
+set foldnestmax=1      " max 1 depth
 set foldenable          " don't fold files by default on open
 set foldlevelstart=0   " start with fold level of 1
+" set fold colors
+highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
 " }}}
 " Status Line {{{
 function! GitBranch()
@@ -168,15 +183,21 @@ function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
     exe 'hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000'
     exe 'hi statusline ctermbg=2'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guifg=#008000'
+    exe 'hi CursorLine ctermbg=0 guibg=#008000'
   elseif (mode() =~# '\v(v|V|)')
     exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
     exe 'hi statusline ctermbg=3'
+    exe 'hi CursorLineNr ctermfg=3 guifg=#808000'
   elseif (mode() ==# 'i')
     exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
     exe 'hi statusline ctermbg=6'
+    exe 'hi CursorLineNr ctermbg=16 ctermfg=6 guifg=#008080'
+    exe 'hi CursorLine ctermbg=16 guibg=#008000'
   else
     exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
     exe 'hi statusline ctermbg=1'
+    exe 'hi CursorLineNr ctermfg=1 guifg=#800000'
   endif
 
   return ''
@@ -252,6 +273,16 @@ inoremap \\ \
 " }}}
 " File Type {{{
 
+function! Run(...)
+    let l:cmd=g:runcmd
+    if a:1 != ''
+        let l:cmd=a:1
+    endif
+    exec 'silent :!' . l:cmd . ' &'
+    exec 'redraw!'
+endfu!
+command Run call Run()
+
 " runs file type detect if filetype is empty
 function! SetFileType()
     if &filetype != 'filetype='
@@ -261,10 +292,14 @@ endfu!
 " get filetype on write
 autocmd BufWritePost * call SetFileType()
 
+autocmd BufWritePost statusbar call system("reloadbar")
+
 augroup vim
     autocmd FileType vim set tabstop=4
     autocmd FileType vim set softtabstop=4
     autocmd FileType vim set shiftwidth=4
+    autocmd FileType vim set foldmethod=marker
+    autocmd FileType vim set foldnestmax=2
     autocmd FileType vim inoremap # "<space>
     autocmd FileType vim inoremap \# #
     autocmd FileType vim inoremap \f <ESC>Ifunction!<space><ESC>A()<ESC>oendfu!<ESC>O
@@ -272,14 +307,20 @@ augroup vim
 augroup END
 
 augroup sh
+    autocmd FileType sh let g:runcmd='sh %'
+    autocmd FileType sh set makeprg=sh\ %
     autocmd FileType sh set tabstop=4
     autocmd FileType sh set softtabstop=4
     autocmd FileType sh set shiftwidth=4
+    autocmd FileType sh set foldmethod=indent
+    autocmd FileType sh set foldnestmax=1
     autocmd FileType sh inoremap # #<space>
 augroup END
 
 augroup python
     autocmd!
+    autocmd FileType python let g:runcmd='python %'
+    autocmd FileType python set makeprg=python\ %
     autocmd FileType python set tabstop=4
     autocmd FileType python set softtabstop=4
     autocmd FileType python set shiftwidth=4
@@ -288,6 +329,8 @@ augroup python
     autocmd FileType python set autoindent
     autocmd FileType python set smartindent
     autocmd FileType python set fileformat=unix 
+    autocmd FileType python set foldmethod=indent
+    autocmd FileType python set foldnestmax=1
     autocmd FileType python inoremap \\ \
     autocmd FileType python inoremap # #<space>
     autocmd FileType python inoremap \# #
@@ -325,9 +368,13 @@ augroup END
 
 augroup html
     autocmd!
+    autocmd FileType html let g:runcmd='$BROWSER %'
+    autocmd FileType html set makeprg=$BROWSER\ %
     autocmd FileType html set tabstop=2
     autocmd FileType html set softtabstop=2
     autocmd FileType html set shiftwidth=2 
+    autocmd FileType html set foldmethod=indent
+    autocmd FileType html set foldnestmax=5
     autocmd FileType html inoremap ,, ,
     autocmd FileType html inoremap >< ><ESC>yF<o<Esc>pa<space><Esc>F<"hyt<space>ddo<Esc>"hpa><Esc>F<a/<Esc>O
     autocmd FileType html inoremap ,cc <!--//--><Esc>0f/i<space><space><left>
@@ -387,6 +434,7 @@ augroup END
 
 augroup css
     autocmd!
+    autocmd FileType css set makeprg=$BROWSER\ %
     autocmd FileType css set tabstop=2
     autocmd FileType css set softtabstop=2
     autocmd FileType css set shiftwidth=2
@@ -395,12 +443,62 @@ augroup css
     autocmd FileType css set autoindent
     autocmd FileType css set smartindent
     autocmd FileType css set fileformat=unix 
+    autocmd FileType css set foldmethod=marker
+    autocmd FileType css set foldmarker={,}
+    autocmd FileType css set foldnestmax=1
+    autocmd FileType css inoremap { <space>{<ESC>o}<ESC>O
+    autocmd FileType css inoremap \b <ESC>^ibackground:<space><ESC>A;
+    autocmd FileType css inoremap \bc <ESC>^ibackground-color:<space><ESC>A;
+augroup END
+
+augroup nroff
+    autocmd!
+    autocmd FileType nroff set makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
+    autocmd FileType nroff set tabstop=2
+    autocmd FileType nroff set softtabstop=2
+    autocmd FileType nroff set shiftwidth=2
+    autocmd FileType nroff set expandtab
+    autocmd FileType nroff set autoindent
+    autocmd FileType nroff set nosmartindent
+    autocmd FileType nroff set nocindent
+    autocmd FileType nroff filetype indent off
+    autocmd FileType nroff set fileformat=unix 
+    autocmd FileType nroff set foldmethod=marker
+    autocmd FileType nroff set foldnestmax=1
+    autocmd FileType nroff let g:runcmd='zathura %:r.pdf'
+    autocmd FileType nroff inoremap # \"<space>
+    autocmd FileType nroff inoremap \# #
+    autocmd FileType nroff inoremap \b <ESC>I\"<space><ESC>A<space>{{{<ESC>o\"<space>}}}<ESC>O
 augroup END
 " }}}
 " Templates {{{
 
 function! Template(name)
-    exe 'silen! 0r ~/.vim/templates/' . a:name . '.temp'
+    exe "silent! 0r ~/.vim/templates/" . a:name . ".temp"
+    exe "silent! normal! Gdd"
+    exe "silent! %s/<<<AUTHOR>>>/Simon Hugh Moore/g"
+    exe "silent! %s/<<<UAUTHOR>>>/SIMON HUGH MOORE/g"
+
+    exe "silent! %s/<<<EMAIL>>>/simonhughdev@gmail.com/g"
+    exe "silent! %s/<<<UEMAIL>>>/SIMONHUGHDEV@GMAIL.COM/g"
+
+    exe "silent! %s/<<<NAME>>>/" . expand('%:r') . "/g"
+    exe "silent! %s/<<<UNAME>>>/" . toupper(expand('%:r')) . "/g"
+
+    exe "silent! %s/<<<FNAME>>>/" . expand('%:t') . "/g"
+    exe "silent! %s/<<<UFNAME>>>/" . toupper(expand('%:t')) . "/g"
+
+    exe "silent! %s/<<<PATH>>>/" . escape(expand('%:p'), '/\') . "/g"
+
+    exe "silent! %s/<<<DIR>>>/" . expand('%:p:h:t') . "/g"
+    exe "silent! %s/<<<UDIR>>>/" . toupper(expand('%:p:h:t')) . "/g"
+    exe "silent! %s/<<<FDIR>>>/" . escape(expand('%:p:h'), '/\') . "/g"
+
+    exe "silent! %s/<<<EXT>>>/" . expand('%:e') . "/g"
+    exe "silent! %s/<<<UEXT>>>/" . toupper(expand('%:e')) . "/g"
+
+    exe "silent! normal! gg/<<<CURSOR>>>\<CR>vf>;;x"
+    call SetFileType()
 endfu!
 
 command -nargs=1 -complete=file Temp call Template(<f-args>)
@@ -649,12 +747,15 @@ nnoremap <C-L> <C-W><C-L> " Move to the right pane in split screen
 " nnoremap j gj   " Move down one displayed line
 " nnoremap k gk   " Move up one displayed line
 nnoremap <C-O> :Files<cr>   " Open FZF search
+nnoremap <C-B> :Buffers<cr>   " Open FZF search
 " FOLDING
 nnoremap z\ za  " Toggle Folding
 nnoremap z[ zR  " Open all Folds
 nnoremap z] zM  " Close all folds
 " Serch visually selected text
-vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+vnoremap // "vy/\V<C-r>=escape(@v,'/\')<CR><CR>
+" Replace visually selected text
+vnoremap /s "vy:%s/<C-r>=escape(@v,'/\')<CR>//g<left><left>
 " FZF completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -667,6 +768,7 @@ let mapleader=" "
 nnoremap <leader>r :so $MYVIMRC<CR>
 " Buffer Commands
 nnoremap <silent><leader>b :Buffers<cr>
+nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>n :bn<cr>
 nnoremap <silent><leader>p :bp<cr>
 " spellcheck
@@ -676,10 +778,6 @@ nnoremap <leader>la :set spelllang=en_us<CR>
 nnoremap <leader>ld :set spelllang=de<CR>
 " toggle gundo
 nnoremap <silent><leader>u :GundoToggle<CR>
-" switch to dark mode
-nnoremap <silent><leader>bd :set background=dark<CR>
-" switch to light mode
-nnoremap <silent><leader>bl :set background=light<CR>
 " Register to Clipboard (requires gvim/nvim/vim-x11 installed)
 nnoremap <silent><leader>y :RegToClip "<CR>
 nnoremap <silent><leader>Y :RegToClip<space>
