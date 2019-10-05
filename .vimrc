@@ -46,6 +46,7 @@ call plug#begin()
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/vim-easy-align'
 "Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
@@ -75,6 +76,11 @@ set rtp+=~/.fzf
 if has('python3')
     let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
 endif
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 " }}}
 " Colors {{{
 set background=dark
