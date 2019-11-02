@@ -6,7 +6,7 @@ super + Return
 super + x
     lock
 super + w
-    $BROWSER -P firefox-profile
+    $BROWSER -P privacy
 super + shift + w
     feh --bg-fill --randomize ~/Pictures/*/*-ls-*
 super + shift + m
@@ -38,7 +38,7 @@ super + backslash
 #    xdotool selectwindow key ctrl+c && ytp
 super + shift + backslash
     streammenu
-super + Menu
+super + Prior
     bukumenu -t star - x,p
 super + shift + Menu
     bukumenu -t - star,x,p
@@ -46,8 +46,8 @@ super + slash
     bukutagmenu
 super + shift + slash
     bukumenu -t x,p
-super + z ; {l,p,d,s,y,f}
-    bukumenu -t {linux,p,docs,shop,yt,follow}
+super + z ; {l,p,d,s,y,f,g}
+    bukumenu -t {linux,p,docs,shop,yt,follow,git}
 super + {_,shift +} period
     bukuadd{_,title}menu
 super + e
@@ -62,8 +62,8 @@ super + shift + p
 # Audio
 super + m
     volume mute
-super + shift + v ; {0-9} ; {0-9} ; {0-9}
-    volume {0-9}{0-9}{0-9}
+super + shift + m ; {0-9} ; {0-9}
+    volume {0-9}{0-9}0
 super + {_,shift +,control +} equal
     volume +{5,20,1}
 super + {_,shift +,control +} minus
@@ -80,6 +80,8 @@ XF86Audio{Raise,Lower}Volume {_,+ shift,+ control}
 
 
 # Screen Brightness
+super + shift + b ; {0-9}
+    xbacklight -set {0-9}0
 XF86MonBrightness{Up,Down}
     xbacklight -{inc,dec} 20
 
@@ -124,3 +126,7 @@ super + shift + F10
     setxkb gb
 super + shift + F11 ; {a-z} ; {a-z}
     setxkb {a-z}{a-z}
+
+#Bluetooth
+XF86Bluetooth
+   bluetoothctl power on
