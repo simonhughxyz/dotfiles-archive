@@ -18,6 +18,6 @@ localfolders = ~/.mail/gmail_simonhmoore94
 [Repository gmail_simonhmoore94-remote]
 type = Gmail
 remoteuser = simon.h.moore94@gmail.com
-remotepass = bzmolwpchhiwwymb
+remotepass = 
 ssl_version=tls1_2
 sslcacertfile= /etc/ssl/certs/ca-certificates.crt

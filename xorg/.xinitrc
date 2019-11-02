@@ -24,6 +24,7 @@ statusbar &
 st -n htop -e htop &
 st -n newsboat -e newsboat &
 ntpd -qg    # set time and date from ntp server
+bluetoothctl power on # Switch on bluetooth
 
 while true; do
     /usr/local/bin/dwm 2> ~/.log/dwm.log

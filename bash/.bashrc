@@ -5,6 +5,9 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Set default file permissions
+umask 077 # Owner has all permissions, group has none and everyone has none
+
 # Activate vi mode
 set -o vi
 
@@ -189,6 +192,12 @@ sha1check() {
 sha256check() {
     [ "$2" ] && local i=$2 || local i=$(cat -)
     sha256sum $1 | g $i
+}
+hashcheck() {
+    [ "$2" ] && local i=$2 || local i=$(cat -)
+    md5sum $1 | grep $i || echo "bad"
+    sha1sum $1 | grep $i
+    sha256sum $1 | grep $i
 }
 extract() { 
     if [ -f $1 ] ; then 
