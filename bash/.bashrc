@@ -11,6 +11,8 @@ umask 077 # Owner has all permissions, group has none and everyone has none
 # Activate vi mode
 set -o vi
 
+umask 077
+
 
 # COLORS & TEST DECORATION
 COL_NORMAL="\[\e[m\]"
@@ -47,13 +49,25 @@ get_user(){
 }
 
 get_host(){
-    [ "$HOSTNAME" != "archtower" ] && echo "$HOSTNAME "
+    [ "$HOSTNAME" != "voidbook" ] && echo "$HOSTNAME "
 }
 
 PS1="$COL_YELLOW\$(get_user) $COL_PURPLE\$(get_host)$COL_YELLOW\W$COL_PURPLE\$(git_branch) $COL_CYAN>$COL_NORMAL "
 
 export PS1=$PS1
 
+# Color Man page
+man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
+}
 
 ##---ALIASES---##
 alias sbash='source ~/.bashrc'  # reload .bashrc
@@ -64,6 +78,9 @@ alias sudo='sudo '
 alias path='echo $PATH'
 alias c='clear'
 alias p='pacman'
+alias xi="sudo xbps-install"
+alias xr="sudo xbps-remove"
+alias xq="xbps-query"
 alias mux='tmuxinator'
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
@@ -112,7 +129,7 @@ b(){ cd "$(bk -L | fzf)"; }
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
-alias grep='rg --color=auto'
+alias grep='grep --color=auto'
 alias g='grep -i'
 alias gv='grep -iv'
 alias gc='grep'
@@ -133,12 +150,12 @@ alias gc='git checkout'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gp='git push'
-alias gm='git merge'
+alias gm='git megrepe'
 
 # stardict
 alias def='sdcv --color'
-alias defen='def -u "dictd_www.dict.org_gcide"'
-alias defel='def -u "dictd_www.dict.org_elements"'
+alias defen='def -u "dictd_www.dict.ogrep_gcide"'
+alias defel='def -u "dictd_www.dict.ogrep_elements"'
 alias defcomp='def -u "Free On-Line Dictionary of Computing"'
 alias defde='def -u "German - English" -u "English - German"'
 
@@ -157,7 +174,7 @@ alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
 alias free='free -hlt'
 alias free1000='free -hlt --si' # display using power of 1000 instead 1024
 alias ps='ps auxf'
-alias ps?='ps auxf | grep -v rg | grep -i -e "PID %CPU %MEM" -e' 
+alias ps?='ps auxf | grep -v grep | grep -i -e "PID %CPU %MEM" -e' 
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
 # networking
@@ -246,7 +263,7 @@ function beg {
 }
 
 
-#PyEnv
-export PATH="/home/simon/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# #PyEnv
+# export PATH="/home/simon/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
