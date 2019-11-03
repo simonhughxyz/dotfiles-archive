@@ -24,7 +24,7 @@ syncthing -no-browser & # syncs files between devises
 clipmenud & # deamon for clipmenu
 redshift & # reduced blue levels on screen
 unclutter -f & # removes mouse from screen after x seconds
-# compton & # for transparency and some other effects
+compton & # for transparency and some other effects
 dunst & # for notifications
 sxhkd > ~/.log/sxhkd.log & # keybindings
 statusbar &
