@@ -15,7 +15,7 @@ xcape -e 'Caps_Lock=Escape'
 #xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min
 
-# feh --bg-fill --randomize ~/Pictures/*/*-ls-* &
+feh --bg-fill --randomize ~/.config/background &
 
 # startup apps
 xbacklight -set 25 & # set screen brightness to 25%
