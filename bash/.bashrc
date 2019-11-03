@@ -48,11 +48,7 @@ get_user(){
     [ "$USER" != "simon" ] && echo "$USER"
 }
 
-get_host(){
-    [ "$HOSTNAME" != "voidbook" ] && echo "$HOSTNAME "
-}
-
-PS1="$COL_YELLOW\$(get_user) $COL_PURPLE\$(get_host)$COL_YELLOW\W$COL_PURPLE\$(git_branch) $COL_CYAN>$COL_NORMAL "
+PS1="$COL_YELLOW\$(get_user)$COL_YELLOW\W$COL_PURPLE\$(git_branch) $COL_CYAN>$COL_NORMAL "
 
 export PS1=$PS1
 
