@@ -18,7 +18,7 @@ xset s 900 900 # lock screen and turn off after 5 min
 feh --bg-fill --randomize ~/.config/background &
 
 # startup apps
-xbacklight -set 25 & # set screen brightness to 25%
+xbacklight -set 20 & # set screen brightness to 25%
 start-pulseaudio-x11 & # make sure pulseaudio is running
 syncthing -no-browser & # syncs files between devises
 clipmenud & # deamon for clipmenu
