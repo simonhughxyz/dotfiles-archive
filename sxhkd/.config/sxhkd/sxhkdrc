@@ -40,6 +40,8 @@ super + shift + backslash
     streammenu
 super + Prior
     bukumenu -t star - x,p
+super + Menu
+    bukumenu -t star - x,p
 super + shift + Menu
     bukumenu -t - star,x,p
 super + slash
