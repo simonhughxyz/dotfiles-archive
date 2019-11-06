@@ -55,6 +55,7 @@ Plug 'ap/vim-css-color'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'fourjay/vim-password-store'
@@ -81,6 +82,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Vim-markdown
+let g:vim_markdown_folding_style_pythonic = 1
 " }}}
 " Colors {{{
 set background=dark
