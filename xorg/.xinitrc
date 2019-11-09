@@ -28,6 +28,7 @@ clipmenud & # deamon for clipmenu
 redshift & # reduced blue levels on screen
 unclutter -f & # removes mouse from screen after x seconds
 compton & # for transparency and some other effects
+export $(dbus-launch)
 dunst & # for notifications
 sxhkd > ~/.log/sxhkd.log & # keybindings
 statusbar &
