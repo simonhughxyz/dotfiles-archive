@@ -53,7 +53,9 @@ super + z ; {l,p,d,s,y,f,g}
 super + {_,shift +} period
     bukuadd{_,title}menu
 super + e
-    emojimenu
+    unicodemenu ~/.config/emoji
+super + shift + e
+    unicodemenu ~/.config/fontawesome
 super + p
     pdfmenu
 super + shift + p
