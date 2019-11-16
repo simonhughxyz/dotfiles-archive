@@ -148,6 +148,9 @@ alias gcm='git commit -m'
 alias gp='git push'
 alias gm='git megrepe'
 
+# find
+alias find='fd'
+
 # stardict
 alias def='sdcv --color'
 alias defen='def -u "dictd_www.dict.ogrep_gcide"'
