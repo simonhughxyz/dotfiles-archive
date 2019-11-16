@@ -142,11 +142,13 @@ alias vg='gvim'
 # git
 alias gs='git status'
 alias gb='git branch'
-alias gc='git checkout'
 alias ga='git add'
-alias gcm='git commit -m'
+alias gc='git commit'
+alias go='git checkout'
 alias gp='git push'
-alias gm='git megrepe'
+alias gl='git pull'
+alias gf='git fetch'
+alias gm='git merge'
 
 # find
 alias find='fd'
