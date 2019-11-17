@@ -268,3 +268,6 @@ function beg {
 # export PATH="/home/simon/.pyenv/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
+
+# Source fzf keybindingd
+source /usr/share/doc/fzf/key-bindings.bash
