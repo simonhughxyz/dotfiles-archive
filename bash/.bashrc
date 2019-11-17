@@ -270,4 +270,4 @@ function beg {
 # eval "$(pyenv virtualenv-init -)"
 
 # Source fzf keybindingd
-source /usr/share/doc/fzf/key-bindings.bash
+[ -e /usr/share/doc/fzf/key-bindings.bash ] && source /usr/share/doc/fzf/key-bindings.bash
