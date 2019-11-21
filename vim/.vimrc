@@ -327,6 +327,12 @@ augroup sh
     autocmd FileType sh inoremap # #<space>
 augroup END
 
+augroup make
+    autocmd FileType make set noexpandtab
+    autocmd FileType make set foldmethod=indent
+    autocmd FileType make set foldnestmax=1
+augroup END
+
 augroup python
     autocmd!
     autocmd FileType python let g:runcmd='python %'
@@ -380,11 +386,12 @@ augroup html
     autocmd!
     autocmd FileType html let g:runcmd='$BROWSER %'
     autocmd FileType html set makeprg=$BROWSER\ %
-    autocmd FileType html set tabstop=2
-    autocmd FileType html set softtabstop=2
-    autocmd FileType html set shiftwidth=2 
-    autocmd FileType html set foldmethod=indent
-    autocmd FileType html set foldnestmax=5
+    autocmd FileType html,xhtml,xml set tabstop=2
+    autocmd FileType html,xhtml,xml set softtabstop=2
+    autocmd FileType html,xhtml,xml set shiftwidth=2 
+    autocmd FileType html,xhtml,xml set foldmethod=indent
+    autocmd FileType html,xhtml,xml set foldnestmax=5
+    autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType html inoremap ,, ,
     autocmd FileType html inoremap >< ><ESC>yF<o<Esc>pa<space><Esc>F<"hyt<space>ddo<Esc>"hpa><Esc>F<a/<Esc>O
     autocmd FileType html inoremap ,cc <!--//--><Esc>0f/i<space><space><left>
