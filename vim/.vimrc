@@ -392,6 +392,7 @@ augroup html
     autocmd FileType html,xhtml,xml set foldmethod=indent
     autocmd FileType html,xhtml,xml set foldnestmax=5
     autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType html inoremap ,, ,
     autocmd FileType html inoremap >< ><ESC>yF<o<Esc>pa<space><Esc>F<"hyt<space>ddo<Esc>"hpa><Esc>F<a/<Esc>O
     autocmd FileType html inoremap ,cc <!--//--><Esc>0f/i<space><space><left>
