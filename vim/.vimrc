@@ -329,6 +329,8 @@ augroup END
 
 augroup make
     autocmd FileType make set noexpandtab
+    autocmd FileType make set shiftwidth=8
+    autocmd FileType make set softtabstop=0
     autocmd FileType make set foldmethod=indent
     autocmd FileType make set foldnestmax=1
 augroup END
