@@ -71,6 +71,7 @@ alias spbash='source ~/.profile'
 
 # shortcuts 
 alias sudo='sudo '
+alias se='sudoedit'
 alias path='echo $PATH'
 alias c='clear'
 alias p='pacman'
