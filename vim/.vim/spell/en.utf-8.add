@@ -9,3 +9,6 @@ Donepezil
 Memantine
 Risperidone
 config
+iptables
+ssh
+udp
