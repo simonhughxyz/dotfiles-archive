@@ -150,6 +150,7 @@ alias gp='git push'
 alias gl='git pull'
 alias gf='git fetch'
 alias gm='git merge'
+alias gd='git diff'
 
 # find
 alias find='fd'
