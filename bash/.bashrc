@@ -11,9 +11,6 @@ umask 077 # Owner has all permissions, group has none and everyone has none
 # Activate vi mode
 set -o vi
 
-umask 077
-
-
 # COLORS & TEST DECORATION
 COL_NORMAL="\[\e[m\]"
 COL_BLACK="\[\e[30m\]"
