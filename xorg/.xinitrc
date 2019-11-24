@@ -32,8 +32,6 @@ export $(dbus-launch) &
 dunst & # for notifications
 sxhkd > ~/.log/sxhkd.log & # keybindings
 statusbar &
-st -n htop -e htop &
-st -n newsboat -e newsboat &
 bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
 
