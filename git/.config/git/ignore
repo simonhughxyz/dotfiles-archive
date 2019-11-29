@@ -12,5 +12,8 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
+# tmp directory where I keep worktrees
+tmp/
+
 # Vim swap files
 *.swp
