@@ -20,6 +20,9 @@ super + shift + m
 {@}Scroll_Lock
     refbar
 
+# Apps
+super + shift + h
+    st -n htop -e htop
 
 # Dmenu
 super + a
