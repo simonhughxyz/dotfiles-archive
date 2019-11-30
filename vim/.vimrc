@@ -335,6 +335,7 @@ augroup markdown
     autocmd FileType markdown set shiftwidth=4
     autocmd FileType markdown set textwidth=79
     autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
+    autocmd FileType markdown inoremap ``` <Esc>I```<Esc>o```<Esc>O
 augroup END 
 
 augroup make
