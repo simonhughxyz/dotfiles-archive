@@ -314,6 +314,7 @@ augroup vim
     autocmd FileType vim inoremap \# #
     autocmd FileType vim inoremap \f <ESC>Ifunction!<space><ESC>A()<ESC>oendfu!<ESC>O
     autocmd FileType vim inoremap \i <Esc>Iif (<ESC>A)<ESC>oendif<ESC>O
+    autocmd FileType vim vmap <leader># :EasyAlign*"<cr>
 augroup END
 
 augroup sh
