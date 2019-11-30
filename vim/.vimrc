@@ -796,8 +796,6 @@ nnoremap <silent><leader>s :setlocal spell!<CR>
 nnoremap <leader>lb :set spelllang=en_gb<CR>
 nnoremap <leader>la :set spelllang=en_us<CR>
 nnoremap <leader>ld :set spelllang=de<CR>
-" toggle gundo
-nnoremap <silent><leader>u :GundoToggle<CR>
 " Register to Clipboard (requires gvim/nvim/vim-x11 installed)
 nnoremap <silent><leader>y :RegToClip "<CR>
 nnoremap <silent><leader>Y :RegToClip<space>
@@ -817,5 +815,8 @@ nnoremap <silent><Leader>cc :set invcursorcolumn<CR>
 nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
 " Toggle GitGutter Highlights
 nnoremap <leader>g :GitGutterLineHighlightsToggle<CR>
+" Easy Align
+vmap <leader><Bslash> :EasyAlign*<Bar><CR>
+vmap <leader># :EasyAlign*#<CR>
 " Swap characters
 " }}}
