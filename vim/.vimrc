@@ -328,6 +328,15 @@ augroup sh
     autocmd FileType sh inoremap # #<space>
 augroup END
 
+augroup markdown
+    autocmd FileType markdown set makeprg=$BROWSER\ %
+    autocmd FileType markdown set tabstop=4
+    autocmd FileType markdown set softtabstop=4
+    autocmd FileType markdown set shiftwidth=4
+    autocmd FileType markdown set textwidth=79
+    autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
+augroup END 
+
 augroup make
     autocmd FileType make set noexpandtab
     autocmd FileType make set shiftwidth=8
