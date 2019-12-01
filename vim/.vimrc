@@ -336,6 +336,12 @@ augroup markdown
     autocmd FileType markdown set textwidth=79
     autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
     autocmd FileType markdown inoremap ``` <Esc>I```<Esc>o```<Esc>O
+    autocmd FileType markdown inoremap \1 <Esc>I#<space><Esc>o
+    autocmd FileType markdown inoremap \2 <Esc>I##<space><Esc>o
+    autocmd FileType markdown inoremap \3 <Esc>I###<space><Esc>o
+    autocmd FileType markdown inoremap \4 <Esc>I####<space><Esc>o
+    autocmd FileType markdown inoremap \5 <Esc>I#####<space><Esc>o
+    autocmd FileType markdown inoremap \6 <Esc>I######<space><Esc>o
 augroup END 
 
 augroup make
