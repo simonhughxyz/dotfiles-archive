@@ -822,12 +822,13 @@ nnoremap <silent><Leader>w :set invlist<CR>
 nnoremap <silent><Leader>cl :set invcursorline<CR>
 " Show cursor colum
 nnoremap <silent><Leader>cc :set invcursorcolumn<CR>
+" Toggle Conceal
+nnoremap <silent><Leader>ct :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
 " Toggle deadkeys
 nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
 " Toggle GitGutter Highlights
 nnoremap <leader>g :GitGutterLineHighlightsToggle<CR>
 " Easy Align
-vmap <leader><Bslash> :EasyAlign*<Bar><CR>
 vmap <leader># :EasyAlign*#<CR>
 " Swap characters
 " }}}
