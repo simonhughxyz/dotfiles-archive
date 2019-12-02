@@ -342,6 +342,7 @@ augroup markdown
     autocmd FileType markdown inoremap \4 <Esc>I####<space><Esc>o
     autocmd FileType markdown inoremap \5 <Esc>I#####<space><Esc>o
     autocmd FileType markdown inoremap \6 <Esc>I######<space><Esc>o
+    autocmd FileType markdown inoremap \<Bar> <Bar><Esc>I<Bar><Esc>V:s/ *<bar> */ <bar> /g<cr>0x$xyyp0lvt<bar>r-
 augroup END 
 
 augroup make
