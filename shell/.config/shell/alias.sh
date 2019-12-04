@@ -113,7 +113,7 @@ alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
 alias free='free -hlt'
 alias free1000='free -hlt --si' # display using power of 1000 instead 1024
 alias ps='ps auxf'
-alias ps?='ps auxf | grep -v grep | grep -i -e "PID %CPU %MEM" -e' 
+alias psq='ps auxf | grep -v grep | grep -i -e "PID %CPU %MEM" -e' 
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
 # networking
