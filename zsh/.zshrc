@@ -2,7 +2,14 @@
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-PS1="%F{yellow}%1~ %F{blue}%(!.#.>)%f%b "
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+# RPROMPT=\$vcs_info_msg_0_
+# PROMPT=\$vcs_info_msg_0_'%# '
+zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
+PS1="%F{yellow}%1~ \$vcs_info_msg_0_ %F{blue}%(!.#.>)%f%b "
 
 # History in cache directory:
 HISTSIZE=10000
@@ -65,8 +72,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "$HOME/.config/shell/alias.sh" ] && source "$HOME/.config/shell/alias.sh"
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
