@@ -126,7 +126,7 @@ alias tma='tm -er -a'
 
 
 # misc
-alias hist?='history | g'
+alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias s="du -sh ./* | sort -h"
 alias sd="du -sh ./*/ | sort -h"
