@@ -4,6 +4,18 @@
 setopt GLOB_COMPLETE # case insensitive globbing
 setopt AUTO_CD # change directory without cd
 
+#history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+setopt SHARE_HISTORY # share history across multiple zsh sessions
+setopt APPEND_HISTORY # append to hist-file rather than override
+setopt INC_APPEND_HISTORY # update hist-file after every command
+setopt HIST_EXPIRE_DUPS_FIRST # expire duplicate commands first
+setopt HIST_IGNORE_DUPS # do not store duplicate commands
+setopt HIST_FIND_NO_DUPS # ignore duplicates when searching
+setopt HIST_REDUCE_BLANKS # remove blank lines from history
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 autoload -Uz vcs_info
@@ -15,10 +27,6 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
 PS1="%F{yellow}%1~ \$vcs_info_msg_0_ %F{blue}%(!.#.>)%f%b "
 
-# History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
 autoload -U compinit
