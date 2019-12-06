@@ -1,5 +1,9 @@
 # Luke's config for the Zoomer Shell
 
+# Shell options
+setopt GLOB_COMPLETE # case insensitive globbing
+setopt AUTO_CD # change directory without cd
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 autoload -Uz vcs_info
