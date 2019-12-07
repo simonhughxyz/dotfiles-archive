@@ -1,10 +1,10 @@
-# Luke's config for the Zoomer Shell
-
 # Shell options
 setopt GLOB_COMPLETE # case insensitive globbing
 setopt AUTO_CD # change directory without cd
+setopt CORRECT # enable corrections
+setopt CORRECT_ALL
 
-#history
+# History
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
