@@ -1,9 +1,12 @@
-
 # Shell options
 setopt GLOB_COMPLETE # case insensitive globbing
 setopt AUTO_CD # change directory without cd
+setopt AUTO_PUSHD # Add cd into directory history
+setopt PUSHD_IGNORE_DUPS # Ignore duplicate directories
+setopt CORRECT # enable corrections
+setopt CORRECT_ALL
 
-#history
+# History
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
@@ -15,15 +18,16 @@ setopt HIST_IGNORE_DUPS # do not store duplicate commands
 setopt HIST_FIND_NO_DUPS # ignore duplicates when searching
 setopt HIST_REDUCE_BLANKS # remove blank lines from history
 
-# Enable colors and change prompt:
+
+# Prompt
 autoload -U colors && colors
+# Git
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-# RPROMPT=\$vcs_info_msg_0_
-# PROMPT=\$vcs_info_msg_0_'%# '
 zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
+# set prompt
 PS1="%F{yellow}%1~ \$vcs_info_msg_0_ %F{blue}%(!.#.>)%f%b "
 
 
@@ -66,24 +70,13 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
-
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/shell/alias.sh" ] && source "$HOME/.config/shell/alias.sh"
+[ -f "$HOME/.config/shell/alias.zsh" ] && source "$HOME/.config/shell/alias.zsh"
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
