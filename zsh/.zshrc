@@ -1,4 +1,3 @@
-# Luke's config for the Zoomer Shell
 
 # Shell options
 setopt GLOB_COMPLETE # case insensitive globbing
