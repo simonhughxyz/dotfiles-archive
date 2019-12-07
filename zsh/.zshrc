@@ -16,15 +16,16 @@ setopt HIST_IGNORE_DUPS # do not store duplicate commands
 setopt HIST_FIND_NO_DUPS # ignore duplicates when searching
 setopt HIST_REDUCE_BLANKS # remove blank lines from history
 
-# Enable colors and change prompt:
+
+# Prompt
 autoload -U colors && colors
+# Git
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-# RPROMPT=\$vcs_info_msg_0_
-# PROMPT=\$vcs_info_msg_0_'%# '
 zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
+# set prompt
 PS1="%F{yellow}%1~ \$vcs_info_msg_0_ %F{blue}%(!.#.>)%f%b "
 
 
