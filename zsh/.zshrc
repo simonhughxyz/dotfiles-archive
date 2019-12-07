@@ -1,6 +1,8 @@
 # Shell options
 setopt GLOB_COMPLETE # case insensitive globbing
 setopt AUTO_CD # change directory without cd
+setopt AUTO_PUSHD # Add cd into directory history
+setopt PUSHD_IGNORE_DUPS # Ignore duplicate directories
 setopt CORRECT # enable corrections
 setopt CORRECT_ALL
 
