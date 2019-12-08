@@ -28,7 +28,8 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
 # set prompt
-PS1="%F{yellow}%1~ \$vcs_info_msg_0_ %F{blue}%(!.#.>)%f%b "
+RPROMPT="\$vcs_info_msg_0_"
+PROMPT="%F{yellow}%1~ %F{blue}%(!.#.>)%f%b "
 
 
 # Basic auto/tab complete:
