@@ -26,7 +26,8 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-zstyle ':vcs_info:git:*' formats '%F{5}(%b)'
+zstyle ':vcs_info:git:*' formats '%F{5}(%b)%f'
+zstyle ':vcs_info:*' enable git
 # set prompt
 RPROMPT="\$vcs_info_msg_0_"
 PROMPT="%F{yellow}%1~ %F{blue}%(!.#.>)%f%b "
