@@ -5,6 +5,7 @@ setopt AUTO_PUSHD # Add cd into directory history
 setopt PUSHD_IGNORE_DUPS # Ignore duplicate directories
 setopt CORRECT # enable corrections
 setopt CORRECT_ALL
+setopt RM_STAR_WAIT # Ask for confirmation after 'rm *'
 
 # History
 HISTSIZE=10000
