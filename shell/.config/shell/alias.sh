@@ -124,7 +124,7 @@ alias myip='curl ifconfig.me/ip; echo'
 # transmission
 alias tm='transmission-remote'
 alias tma='tm -er -a'
-
+alias tmd='tm -l | grep -v Stopped'
 
 # misc
 alias hist='history | g'
