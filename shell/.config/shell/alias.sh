@@ -62,7 +62,7 @@ b(){ cd "$(bk -L | fzf)"; }
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
-alias grep='grep --color=auto'
+alias grep='rg --color=auto'
 alias g='grep -i'
 alias gv='grep -iv'
 alias gc='grep'
