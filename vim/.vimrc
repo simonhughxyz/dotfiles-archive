@@ -836,6 +836,6 @@ nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
 " Toggle GitGutter Highlights
 nnoremap <leader>g :GitGutterLineHighlightsToggle<CR>
 " Easy Align
-vmap <leader># :EasyAlign*#<CR>
+vmap <leader># :EasyAlign # {'filter': 'v/^#/'}<CR>
 " Swap characters
 " }}}
