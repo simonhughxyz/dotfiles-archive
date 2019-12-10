@@ -63,10 +63,6 @@ alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
 alias grep='rg --color=auto'
-alias g='grep -i'
-alias gv='grep -iv'
-alias gc='grep'
-alias gcv='grep -v'
 
 # diff
 alias diff='diff --color=auto'
