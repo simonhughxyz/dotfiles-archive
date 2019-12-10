@@ -118,6 +118,7 @@ alias ipinfo='curl ifconfig.me/all && echo ""'
 alias myip='curl ifconfig.me/ip; echo'
 
 # transmission
+alias tms='transmission-daemon'
 alias tm='transmission-remote'
 alias tma='tm -er -a'
 alias tmd='tm -l | grep -v Stopped'
