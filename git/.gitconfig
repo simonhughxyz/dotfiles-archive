@@ -1,7 +1,18 @@
 [user]
 	email = simonhughdev@gmail.com
 	name = simonhughcom
+
 [diff]
 	tool = vimdiff
+
 [difftool]
 	prompt = false
+
+[alias]
+    cm = commit
+    st = status
+    co = checkout
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    cmm = commit -m
+    df = diff
+    dfs = diff --staged
