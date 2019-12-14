@@ -11,7 +11,8 @@
 
 [alias]
     cm = commit
-    st = status
+    ca = commit --amend
+    s = status
     co = checkout
     b = branch
     rs = restore
