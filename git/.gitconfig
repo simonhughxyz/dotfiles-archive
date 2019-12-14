@@ -18,6 +18,7 @@
     rs = restore
     f = fetch
     fo = fetch origin
+    m = merge
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     cmm = commit -m
     df = diff
