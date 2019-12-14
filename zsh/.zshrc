@@ -1,9 +1,9 @@
 # Shell options
-setopt GLOB_COMPLETE # case insensitive globbing
-setopt AUTO_CD # change directory without cd
-setopt AUTO_PUSHD # Add cd into directory history
+setopt GLOB_COMPLETE     # case insensitive globbing
+setopt AUTO_CD           # change directory without cd
+setopt AUTO_PUSHD        # Add cd into directory history
 setopt PUSHD_IGNORE_DUPS # Ignore duplicate directories
-setopt CORRECT # enable corrections
+setopt CORRECT           # enable corrections
 setopt CORRECT_ALL
 setopt RM_STAR_WAIT # Ask for confirmation after 'rm *'
 export REPORTTIME=30 # Report time for any command lasting more than 30 seconds
@@ -12,13 +12,13 @@ export REPORTTIME=30 # Report time for any command lasting more than 30 seconds
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
-setopt SHARE_HISTORY # share history across multiple zsh sessions
-setopt APPEND_HISTORY # append to hist-file rather than override
-setopt INC_APPEND_HISTORY # update hist-file after every command
+setopt SHARE_HISTORY          # share history across multiple zsh sessions
+setopt APPEND_HISTORY         # append to hist-file rather than override
+setopt INC_APPEND_HISTORY     # update hist-file after every command
 setopt HIST_EXPIRE_DUPS_FIRST # expire duplicate commands first
-setopt HIST_IGNORE_DUPS # do not store duplicate commands
-setopt HIST_FIND_NO_DUPS # ignore duplicates when searching
-setopt HIST_REDUCE_BLANKS # remove blank lines from history
+setopt HIST_IGNORE_DUPS       # do not store duplicate commands
+setopt HIST_FIND_NO_DUPS      # ignore duplicates when searching
+setopt HIST_REDUCE_BLANKS     # remove blank lines from history
 
 
 # Prompt
