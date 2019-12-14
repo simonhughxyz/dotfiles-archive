@@ -16,6 +16,7 @@
     co = checkout
     b = branch
     rs = restore
+    f = fetch
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     cmm = commit -m
     df = diff
