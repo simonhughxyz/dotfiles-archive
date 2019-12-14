@@ -1,7 +1,7 @@
 # ZSH alias
 
 # Suffix
-alias -s {mp4,MP4,mkv,MKV,mp3,MP3,mov,MOV}='mpv'
+alias -s {mp4,MP4,mkv,MKV,mp3,MP3,mov,MOV,mpg,MPG,m4v,M4V,ogg,OGG,wav,WAV,webm,WEBM}='mpv'
 alias -s {jpg,JPG,png,PNG}='sxiv'
 alias -s {pdf,PDF,ps,PS}='zathura'
 
