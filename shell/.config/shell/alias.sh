@@ -62,11 +62,7 @@ b(){ cd "$(bk -L | fzf)"; }
 alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
-alias grep='grep --color=auto'
-alias g='grep -i'
-alias gv='grep -iv'
-alias gc='grep'
-alias gcv='grep -v'
+alias grep='rg --color=auto'
 
 # diff
 alias diff='diff --color=auto'
@@ -122,9 +118,10 @@ alias ipinfo='curl ifconfig.me/all && echo ""'
 alias myip='curl ifconfig.me/ip; echo'
 
 # transmission
+alias tms='transmission-daemon'
 alias tm='transmission-remote'
 alias tma='tm -er -a'
-
+alias tmd='tm -l | grep -v Stopped'
 
 # misc
 alias hist='history | g'
