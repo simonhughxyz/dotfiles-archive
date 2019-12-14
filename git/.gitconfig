@@ -1,6 +1,7 @@
 [user]
 	email = simonhughdev@gmail.com
 	name = Simon H Moore
+    username = simonhughcom
 
 [diff]
 	tool = vimdiff
