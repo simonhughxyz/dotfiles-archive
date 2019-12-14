@@ -10,6 +10,8 @@
 	prompt = false
 
 [alias]
+    ps = push
+    pl = pull
     cm = commit
     ca = commit --amend
     s = status
