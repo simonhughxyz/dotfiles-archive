@@ -14,6 +14,9 @@ alias 4='cd -4'
 alias 5='cd -5'
 
 # Global
+alias -g NO='1> /dev/null'
+alias -g NE='2> /dev/null'
+alias -g NA='&> /dev/null'
 alias -g G='| rg -i'
 alias -g C='| wc -l'
 alias -g L='| less'
