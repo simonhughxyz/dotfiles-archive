@@ -6,3 +6,15 @@
 " Run `installnative` in tridactyl.
 
 
+"
+" Bind Keys
+"
+
+" Run mpv on links
+bind v hint -W mpvsafe
+
+" Run mpv on current URL
+bind V composite get_current_url | mpvsafe
+
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
