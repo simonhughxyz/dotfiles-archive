@@ -2,6 +2,8 @@
 https://www.archlinux.org/feeds/news/                                           "~Arch Linux" "linux"
 
 # News
+https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en   "~Google News - Top Stories" "news"
+https://www.reddit.com/r/worldnews/.rss                                         "~Reddit - World News" "news"
 http://feeds.bbci.co.uk/news/rss.xml                                            "~BBC Top Stories" "news"
 http://feeds.bbci.co.uk/news/world/rss.xml                                      "~BBC World" "news"
 http://feeds.bbci.co.uk/news/uk/rss.xml                                         "~BBC UK" "news"
