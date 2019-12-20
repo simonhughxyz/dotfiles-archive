@@ -16,7 +16,7 @@ set hintchars hjklasdfgyuiopqwertnmzxcb
 "
 
 " Run mpv on links
-bind v hint -W mpvsafe
+bind v hint -JW mpvsafe
 
 " Run mpv on current URL
 bind V composite get_current_url | mpvsafe
