@@ -5,6 +5,11 @@
 " Required tridactly-native to be installed.
 " Run `installnative` in tridactyl.
 
+"
+" Settings
+"
+
+set hintchars hjklasdfgyuiopqwertnmzxcb
 
 "
 " Bind Keys
