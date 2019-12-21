@@ -19,6 +19,12 @@ set hintchars hjklasdfgyuiopqwertnmzxcb
 " Bind Keys
 "
 
+" Find
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+
 " Run mpv on links
 bind v hint -JW mpvsafe
 
