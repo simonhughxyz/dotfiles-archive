@@ -9,6 +9,10 @@
 " Settings
 "
 
+" Color theme to use for menu
+colors dark
+
+" Characters to use for hints
 set hintchars hjklasdfgyuiopqwertnmzxcb
 
 "
