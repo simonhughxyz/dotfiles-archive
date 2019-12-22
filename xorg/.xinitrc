@@ -1,9 +1,9 @@
 #!/bin/bash
 xrdb -merge ~/.Xresources
 
-setxkbmap -layout gb -option "caps:ctrl_modifier" -option "altwin:prtsc_rwin"
-xcape -e 'Caps_Lock=Escape'
-
+# setxkbmap -layout gb -option "caps:ctrl_modifier" -option "altwin:prtsc_rwin"
+# xcape -e 'Caps_Lock=Escape'
+setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwim"
 
 # Set up dual monitor display
 # xrandr --output DisplayPort-0 --mode 2560x1440 --above HDMI-A-0
