@@ -19,7 +19,7 @@ auconscreatecontainer true
 set hintchars hjklasdfgyuiopqwertnmzxcb
 
 " Editor
-set editorcmd terminator -u -e "urxvt -e vim %f -c 'normal %lG%cl'"
+set editorcmd urxvt -e "vim"
 
 "
 " Bind Keys
