@@ -25,6 +25,9 @@ bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 
+# Mute
+bind m mute toggle
+
 " Run mpv on links
 bind v hint -JW mpvsafe
 
