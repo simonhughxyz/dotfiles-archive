@@ -18,6 +18,9 @@ auconscreatecontainer true
 " Characters to use for hints
 set hintchars hjklasdfgyuiopqwertnmzxcb
 
+" Editor
+set editorcmd terminator -u -e "urxvt -e vim %f -c 'normal %lG%cl'"
+
 "
 " Bind Keys
 "
