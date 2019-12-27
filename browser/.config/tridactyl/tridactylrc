@@ -27,6 +27,7 @@ bind N findnext -1
 
 # Mute
 bind m mute toggle
+bind M mute all toggle
 
 " Run mpv on links
 bind v hint -JW mpvsafe
