@@ -12,6 +12,9 @@
 " Color theme to use for menu
 colors dark
 
+" Auto create containers 
+auconscreatecontainer true
+
 " Characters to use for hints
 set hintchars hjklasdfgyuiopqwertnmzxcb
 
@@ -37,3 +40,7 @@ bind V composite get_current_url | mpvsafe
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
+
+# Autocontain
+autocontain google\.(co\.uk|com) google
+autocontain gmail.com google
