@@ -21,6 +21,7 @@ set modeline
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+set updatetime=100
 set noshowmode
 set undofile
 set undodir=~/.vim/undodir
