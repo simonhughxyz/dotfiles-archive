@@ -61,6 +61,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'fourjay/vim-password-store'
 Plug 'frazrepo/vim-rainbow'
+Plug 'coderifous/textobj-word-column.vim'
 " Plug 'tpope/vim-fugitive'
 " Plug 'w0rp/ale'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
