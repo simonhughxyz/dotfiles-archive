@@ -60,6 +60,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'fourjay/vim-password-store'
+Plug 'frazrepo/vim-rainbow'
 " Plug 'tpope/vim-fugitive'
 " Plug 'w0rp/ale'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
@@ -86,6 +87,9 @@ nmap ga <Plug>(EasyAlign)
 
 " Vim-markdown
 let g:vim_markdown_folding_style_pythonic = 1
+
+" Vim rainbow
+let g:rainbow_active = 1
 " }}}
 " Colors {{{
 set background=dark
