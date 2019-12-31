@@ -47,6 +47,7 @@ call plug#begin()
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 "Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
