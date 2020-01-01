@@ -1,12 +1,7 @@
 #!/bin/sh
 xrdb -merge ~/.Xresources
 
-# setxkbmap -layout gb -option "caps:ctrl_modifier" -option "altwin:prtsc_rwin"
-# xcape -e 'Caps_Lock=Escape'
 setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin"
-
-# Set up dual monitor display
-# xrandr --output DisplayPort-0 --mode 2560x1440 --above HDMI-A-0
 
 #xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min
