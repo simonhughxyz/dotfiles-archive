@@ -23,7 +23,7 @@ fi
 
 # startup apps
 start-pulseaudio-x11 & # make sure pulseaudio is running
-syncthing -no-browser & # syncs files between devises
+syncthing -no-browser > ~/.local/share/syncthing/syncthing.log 2>&1 # syncs files between devises
 clipmenud & # deamon for clipmenu
 redshift & # reduced blue levels on screen
 unclutter -f & # removes mouse from screen after x seconds
