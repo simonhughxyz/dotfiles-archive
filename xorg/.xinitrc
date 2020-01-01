@@ -10,7 +10,7 @@ feh --bg-fill --randomize ~/.config/background &
 
 # set backlight depending if night or day
 hour=$(date '+%H')
-if test $hour -ge 20 -o -le 08; then
+if [ $hour -ge 20 ] || [ $hour -le 08 ]; then
     xbacklight -set 10 &
 else
     xbacklight -set 20 &
