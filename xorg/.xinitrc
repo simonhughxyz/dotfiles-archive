@@ -31,5 +31,5 @@ bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
 
 while true; do
-    /usr/local/bin/dwm 2> ~/.log/dwm.log
+    /usr/local/bin/dwm 2> ~/.local/share/dwm/dwm.log
 done
