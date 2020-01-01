@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 xrdb -merge ~/.Xresources
 
 # setxkbmap -layout gb -option "caps:ctrl_modifier" -option "altwin:prtsc_rwin"
