@@ -23,14 +23,14 @@ fi
 
 # startup apps
 start-pulseaudio-x11 & # make sure pulseaudio is running
-syncthing -no-browser > ~/.local/share/syncthing/syncthing.log 2>&1 # syncs files between devises
+syncthing -no-browser > ~/.local/share/syncthing/syncthing.log 2>&1 & # syncs files between devises
 clipmenud & # deamon for clipmenu
 redshift & # reduced blue levels on screen
 unclutter -f & # removes mouse from screen after x seconds
 compton & # for transparency and some other effects
 export $(dbus-launch) &
-dunst & # for notifications
-sxhkd > ~/.log/sxhkd.log & # keybindings
+dunst & # for notification
+sxhkd > ~/.local/share/sxhkd/sxhkd.log 2>&1 & # keybindings
 statusbar &
 bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
