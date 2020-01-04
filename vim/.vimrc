@@ -1,295 +1,3 @@
-"Misc {{{
-set nocompatible
-syntax on
-set encoding=utf-8
-scriptencoding utf-8
-filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
-set history=500
-" NO ANOYING BELL!!!
-set noerrorbells
-set vb t_vb=
-set listchars=eol:$,tab:»\ ,trail:~,extends:>,precedes:<,nbsp:~
-set pastetoggle=<F1>
-set mouse=a
-set clipboard=unnamed
-set backspace=indent,eol,start
-let g:python_host_prog = '/home/simonhugh/.pyenv/versions/2.7.15/envs/apps2/bin/python'
-let g:python3_host_prog = '/home/simonhugh/.pyenv/versions/3.7.1/envs/apps3/bin/python3'
-set modelines=1
-set modeline
-" :W sudo saves the file 
-" (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
-set updatetime=100
-set noshowmode
-set undofile
-set undodir=~/.vim/undodir
-" }}}
-" Dictionary and Spelling {{{
-set spelllang=en_gb
-set dictionary+=~/.vim/words/english
-set dictionary+=~/.vim/words/new-german
-set thesaurus+=~/.vim/words/th_english
-set complete+=k
-" }}}
-" Plugin {{{
-" Install Vim-Plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" Load Plugins
-" let plugin_path='~/.vim/bundle'
-call plug#begin()
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/vim-easy-align'
-Plug 'AndrewRadev/splitjoin.vim'
-"Plug 'itchyny/lightline.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'ap/vim-css-color'
-" Plug 'sjl/gundo.vim'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug '/usr/bin/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'plasticboy/vim-markdown'
-Plug 'Yggdroot/indentLine'
-Plug 'baskerville/vim-sxhkdrc'
-Plug 'fourjay/vim-password-store'
-Plug 'frazrepo/vim-rainbow'
-Plug 'coderifous/textobj-word-column.vim'
-" Plug 'tpope/vim-fugitive'
-" Plug 'w0rp/ale'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-call plug#end()
-" }}}
-" Plugin Settings {{{
-let g:vimwiki_list = [{'path': '~/.wiki/'}]
-set rtp+=~/.fzf
-if has('python3')
-    let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
-endif
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Vim-markdown
-let g:vim_markdown_folding_style_pythonic = 1
-
-" Vim rainbow
-let g:rainbow_active = 1
-" }}}
-" Colors {{{
-set background=dark
-set t_Co=256
-"if (has("termguicolors"))
-"  set termguicolors
-"endif
-syntax enable           " enable syntax processing
-colorscheme gruvbox
-" Make background transparent
-hi Normal ctermbg=NONE
-" set custom syntax colors
-hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
-" set color of 80 char width column
-highlight ColorColumn ctermbg=0 guibg=#303030
-" change color of cursor line
-highlight CursorLine ctermbg=0 guibg=#303030
-highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#303030
-" }}}
-" Spaces & Tabs {{{
-set tabstop=4           " 4 space tab
-set expandtab           " use spaces for tabs
-set softtabstop=4       " 4 space tab
-set shiftwidth=4
-set autoindent
-set smartindent
-set cindent
-" }}}
-" UI Layout {{{
-set number  relativenumber      " show line numbers
-set showcmd                     " show command in bottom bar
-set wildmenu                    " show wildmenu on tab
-set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
-set lazyredraw                  " Vim will only redraw when needed
-set showmatch                   " higlight matching parenthesis
-set ruler                       " show row and column in footer
-set fillchars+=vert:┃
-set splitbelow splitright       " Splits open at the bottom and right
-" set textwidth=80                " Wrap text at 80th column
-set cursorline                  " highlight current line
-set colorcolumn=80              " show line at 80th character column
-" }}}
-" Searching {{{
-set ignorecase          " ignore case when searching
-set smartcase           " dont ignore uppercase
-set incsearch           " search as characters are entered
-set hlsearch            " highlight all matches
-" Visual Select Search
-vnoremap / y/\V<C-r>=escape(@",'/\')<CR><CR>
-" }}}
-" Folding {{{
-"=== folding ===
-set foldmethod=indent   " fold based on indent level
-set foldnestmax=1      " max 1 depth
-set foldenable          " don't fold files by default on open
-set foldlevelstart=0   " start with fold level of 1
-" set fold colors
-highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
-" }}}
-" Status Line {{{
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?' '.l:branchname.' |':''
-endfunction
-
-function! StatusLinePaste()
-    let l:paste = &paste
-    if (&paste == 1)
-        return ' Paste '
-    else
-        return ''
-    endif
-endfunction
-
-" Get current vim mode
-function! GetMode()
-let l:currentmode={
-            \ 'n'  : 'Normal',
-            \ 'no' : 'N·Operator Pending',
-            \ 'v'  : 'Visual',
-            \ 'V'  : 'V·Line',
-            \ '' : 'V·Block',
-            \ 's'  : 'Select',
-            \ 'S'  : 'S·Line',
-            \ '' : 'S·Block',
-            \ 'i'  : 'Insert',
-            \ 'R'  : 'Replace',
-            \ 'Rv' : 'V·Replace',
-            \ 'c'  : 'Command',
-            \ 'cv' : 'Vim Ex',
-            \ 'ce' : 'Ex',
-            \ 'r'  : 'Prompt',
-            \ 'rm' : 'More',
-            \ 'r?' : 'Confirm',
-            \ '!'  : 'Shell',
-            \}
-    return currentmode[mode()]
-endfunctio
-
-" Automatically change the statusline color depending on mode
-function! ChangeStatuslineColor()
-  if (mode() =~# '\v(n|no)')
-    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000'
-    exe 'hi statusline ctermbg=2'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guifg=#008000'
-    exe 'hi CursorLine ctermbg=0 guibg=#008000'
-  elseif (mode() =~# '\v(v|V|)')
-    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
-    exe 'hi statusline ctermbg=3'
-    exe 'hi CursorLineNr ctermfg=3 guifg=#808000'
-  elseif (mode() ==# 'i')
-    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
-    exe 'hi statusline ctermbg=6'
-    exe 'hi CursorLineNr ctermbg=16 ctermfg=6 guifg=#008080'
-    exe 'hi CursorLine ctermbg=16 guibg=#008000'
-  else
-    exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
-    exe 'hi statusline ctermbg=1'
-    exe 'hi CursorLineNr ctermfg=1 guifg=#800000'
-  endif
-
-  return ''
-endfunction
-
-hi statusline ctermfg=232 ctermbg=2
-
-"define 3 custom highlight groups
-hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000
-hi User2 ctermbg=5 ctermfg=0  guibg=#008000 guifg=#000000
-hi User3 ctermbg=4 ctermfg=0  guibg=#008000 guifg=#000000
-hi User8 ctermbg=234 ctermfg=248  guibg=#008000 guifg=#000000
-hi User9 ctermbg=236 ctermfg=248 guibg=#008000 guifg=#000000
-
-set laststatus=2
-set statusline=
-
-" LEFT SIDE
-" Used for color change
-set statusline+=%{ChangeStatuslineColor()}
-set statusline+=%1*
-" show vim mode
-set statusline+=\ %{GetMode()}
-set statusline+=\ %*
-" show paste toggle
-set statusline+=%2*
-set statusline+=%{StatusLinePaste()}
-set statusline+=%*
-" show file name
-set statusline+=\ %.40f
-" truncate line from here
-set statusline+=%<
-" show if file is modified
-set statusline+=\ %m
-" show if file is read only
-set statusline+=\ %r
-
-" RIGHT SIDE
-set statusline+=%=
-" show git brannch
-set statusline+=%{StatuslineGit()}
-" show file type
-set statusline+=\ %Y
-set statusline+=\ \|
-" show buffer number
-set statusline+=\ %n
-set statusline+=\ \|
-" show character code user cursor
-set statusline+=\ 0x%B
-" gray section
-set statusline+=\ %8*
-" show file percentage
-set statusline+=\ %p%%
-set statusline+=\ %*
-set statusline+=%9*
-" show column:line / total lines
-set statusline+=\ %v:%l
-set statusline+=\ \/\ %L
-set statusline+=\ %*
-" }}}
-" NetRw {{{
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-" }}}
-" FZF {{{
-" set rtp+=~/.fzf
-" }}}
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-" }}}za
-" Input mode Shortcuts {{{
-inoremap \\ \
-" }}}
 " File Type {{{
 
 function! Run(...)
@@ -332,11 +40,13 @@ augroup sh
     autocmd FileType sh set tabstop=4
     autocmd FileType sh set softtabstop=4
     autocmd FileType sh set shiftwidth=4
-    autocmd FileType sh set foldmethod=indent
-    autocmd FileType sh set foldnestmax=1
+    " autocmd FileType sh set foldmethod=indent
+    " autocmd FileType sh set foldnestmax=1
+    autocmd FileType sh let g:sh_fold_enabled=5
+    autocmd FileType sh let g:is_sh=1
+    autocmd FileType sh set foldmethod=syntax
     autocmd FileType sh inoremap # #<space>
 augroup END
-
 augroup markdown
     autocmd FileType markdown set makeprg=$BROWSER\ %
     autocmd FileType markdown set tabstop=4
@@ -517,6 +227,298 @@ augroup nroff
     autocmd FileType nroff inoremap \# #
     autocmd FileType nroff inoremap \b <ESC>I\"<space><ESC>A<space>{{{<ESC>o\"<space>}}}<ESC>O
 augroup END
+" }}}
+"Misc {{{
+set nocompatible
+filetype plugin indent on
+" syntax on
+set encoding=utf-8
+scriptencoding utf-8
+set omnifunc=syntaxcomplete#Complete
+set history=500
+" NO ANOYING BELL!!!
+set noerrorbells
+set vb t_vb=
+set listchars=eol:$,tab:»\ ,trail:~,extends:>,precedes:<,nbsp:~
+set pastetoggle=<F1>
+set mouse=a
+set clipboard=unnamed
+set backspace=indent,eol,start
+let g:python_host_prog = '/home/simonhugh/.pyenv/versions/2.7.15/envs/apps2/bin/python'
+let g:python3_host_prog = '/home/simonhugh/.pyenv/versions/3.7.1/envs/apps3/bin/python3'
+set modelines=1
+set modeline
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+set updatetime=100
+set noshowmode
+set undofile
+set undodir=~/.vim/undodir
+" }}}
+" Folding {{{
+"=== folding ===
+set foldenable          " don't fold files by default on open
+set foldmethod=indent   " fold based on indent level
+set foldnestmax=1      " max 1 depth
+set foldlevelstart=0   " start with fold level of 1
+" set fold colors
+highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
+" }}}
+" Dictionary and Spelling {{{
+set spelllang=en_gb
+set dictionary+=~/.vim/words/english
+set dictionary+=~/.vim/words/new-german
+set thesaurus+=~/.vim/words/th_english
+set complete+=k
+" }}}
+" Plugin {{{
+" Install Vim-Plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Load Plugins
+" let plugin_path='~/.vim/bundle'
+call plug#begin()
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/vim-easy-align'
+Plug 'AndrewRadev/splitjoin.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-css-color'
+" Plug 'sjl/gundo.vim'
+" Plug 'tmhedberg/SimpylFold'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'Yggdroot/indentLine'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'fourjay/vim-password-store'
+Plug 'frazrepo/vim-rainbow'
+Plug 'coderifous/textobj-word-column.vim'
+" Plug 'tpope/vim-fugitive'
+" Plug 'w0rp/ale'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+call plug#end()
+" }}}
+" Plugin Settings {{{
+let g:vimwiki_list = [{'path': '~/.wiki/'}]
+set rtp+=~/.fzf
+if has('python3')
+    let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
+endif
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Vim-markdown
+let g:vim_markdown_folding_style_pythonic = 1
+
+" Vim rainbow
+let g:rainbow_active = 1
+" }}}
+" Colors {{{
+set background=dark
+set t_Co=256
+"if (has("termguicolors"))
+"  set termguicolors
+"endif
+syntax enable           " enable syntax processing
+colorscheme gruvbox
+" Make background transparent
+hi Normal ctermbg=NONE
+" set custom syntax colors
+hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
+" set color of 80 char width column
+highlight ColorColumn ctermbg=0 guibg=#303030
+" change color of cursor line
+highlight CursorLine ctermbg=0 guibg=#303030
+highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#303030
+" }}}
+" Spaces & Tabs {{{
+set tabstop=4           " 4 space tab
+set expandtab           " use spaces for tabs
+set softtabstop=4       " 4 space tab
+set shiftwidth=4
+set autoindent
+set smartindent
+set cindent
+" }}}
+" UI Layout {{{
+set number  relativenumber      " show line numbers
+set showcmd                     " show command in bottom bar
+set wildmenu                    " show wildmenu on tab
+set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
+set lazyredraw                  " Vim will only redraw when needed
+set showmatch                   " higlight matching parenthesis
+set ruler                       " show row and column in footer
+set fillchars+=vert:┃
+set splitbelow splitright       " Splits open at the bottom and right
+" set textwidth=80                " Wrap text at 80th column
+set cursorline                  " highlight current line
+set colorcolumn=80              " show line at 80th character column
+" }}}
+" Searching {{{
+set ignorecase          " ignore case when searching
+set smartcase           " dont ignore uppercase
+set incsearch           " search as characters are entered
+set hlsearch            " highlight all matches
+" Visual Select Search
+vnoremap / y/\V<C-r>=escape(@",'/\')<CR><CR>
+" }}}
+" Status Line {{{
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?' '.l:branchname.' |':''
+endfunction
+
+function! StatusLinePaste()
+    let l:paste = &paste
+    if (&paste == 1)
+        return ' Paste '
+    else
+        return ''
+    endif
+endfunction
+
+" Get current vim mode
+function! GetMode()
+let l:currentmode={
+            \ 'n'  : 'Normal',
+            \ 'no' : 'N·Operator Pending',
+            \ 'v'  : 'Visual',
+            \ 'V'  : 'V·Line',
+            \ '' : 'V·Block',
+            \ 's'  : 'Select',
+            \ 'S'  : 'S·Line',
+            \ '' : 'S·Block',
+            \ 'i'  : 'Insert',
+            \ 'R'  : 'Replace',
+            \ 'Rv' : 'V·Replace',
+            \ 'c'  : 'Command',
+            \ 'cv' : 'Vim Ex',
+            \ 'ce' : 'Ex',
+            \ 'r'  : 'Prompt',
+            \ 'rm' : 'More',
+            \ 'r?' : 'Confirm',
+            \ '!'  : 'Shell',
+            \}
+    return currentmode[mode()]
+endfunctio
+
+" Automatically change the statusline color depending on mode
+function! ChangeStatuslineColor()
+  if (mode() =~# '\v(n|no)')
+    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000'
+    exe 'hi statusline ctermbg=2'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guifg=#008000'
+    exe 'hi CursorLine ctermbg=0 guibg=#008000'
+  elseif (mode() =~# '\v(v|V|)')
+    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
+    exe 'hi statusline ctermbg=3'
+    exe 'hi CursorLineNr ctermfg=3 guifg=#808000'
+  elseif (mode() ==# 'i')
+    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
+    exe 'hi statusline ctermbg=6'
+    exe 'hi CursorLineNr ctermbg=16 ctermfg=6 guifg=#008080'
+    exe 'hi CursorLine ctermbg=16 guibg=#008000'
+  else
+    exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
+    exe 'hi statusline ctermbg=1'
+    exe 'hi CursorLineNr ctermfg=1 guifg=#800000'
+  endif
+
+  return ''
+endfunction
+
+hi statusline ctermfg=232 ctermbg=2
+
+"define 3 custom highlight groups
+hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000
+hi User2 ctermbg=5 ctermfg=0  guibg=#008000 guifg=#000000
+hi User3 ctermbg=4 ctermfg=0  guibg=#008000 guifg=#000000
+hi User8 ctermbg=234 ctermfg=248  guibg=#008000 guifg=#000000
+hi User9 ctermbg=236 ctermfg=248 guibg=#008000 guifg=#000000
+
+set laststatus=2
+set statusline=
+
+" LEFT SIDE
+" Used for color change
+set statusline+=%{ChangeStatuslineColor()}
+set statusline+=%1*
+" show vim mode
+set statusline+=\ %{GetMode()}
+set statusline+=\ %*
+" show paste toggle
+set statusline+=%2*
+set statusline+=%{StatusLinePaste()}
+set statusline+=%*
+" show file name
+set statusline+=\ %.40f
+" truncate line from here
+set statusline+=%<
+" show if file is modified
+set statusline+=\ %m
+" show if file is read only
+set statusline+=\ %r
+
+" RIGHT SIDE
+set statusline+=%=
+" show git brannch
+set statusline+=%{StatuslineGit()}
+" show file type
+set statusline+=\ %Y
+set statusline+=\ \|
+" show buffer number
+set statusline+=\ %n
+set statusline+=\ \|
+" show character code user cursor
+set statusline+=\ 0x%B
+" gray section
+set statusline+=\ %8*
+" show file percentage
+set statusline+=\ %p%%
+set statusline+=\ %*
+set statusline+=%9*
+" show column:line / total lines
+set statusline+=\ %v:%l
+set statusline+=\ \/\ %L
+set statusline+=\ %*
+" }}}
+" NetRw {{{
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+" }}}
+" FZF {{{
+" set rtp+=~/.fzf
+" }}}
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+" }}}za
+" Input mode Shortcuts {{{
+inoremap \\ \z
 " }}}
 " Templates {{{
 
