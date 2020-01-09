@@ -290,12 +290,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/splitjoin.vim'
-"Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-" Plug 'sjl/gundo.vim'
 " Plug 'tmhedberg/SimpylFold'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'plasticboy/vim-markdown'
@@ -304,16 +301,6 @@ Plug 'baskerville/vim-sxhkdrc'
 Plug 'fourjay/vim-password-store'
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
-" Plug 'tpope/vim-fugitive'
-" Plug 'w0rp/ale'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
 call plug#end()
 " }}}
 " Plugin Settings {{{
