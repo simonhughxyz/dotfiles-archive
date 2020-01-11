@@ -302,6 +302,7 @@ Plug 'fourjay/vim-password-store'
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 " }}}
 " Plugin Settings {{{
