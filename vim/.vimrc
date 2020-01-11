@@ -301,6 +301,7 @@ Plug 'baskerville/vim-sxhkdrc'
 Plug 'fourjay/vim-password-store'
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
+Plug 'michaeljsmith/vim-indent-object'
 call plug#end()
 " }}}
 " Plugin Settings {{{
