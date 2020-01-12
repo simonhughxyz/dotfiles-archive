@@ -1,0 +1,45 @@
+Given pass (short password):
+  pass
+
+Execute (test short password syntax):
+  AssertEqual SyntaxAt(2), 'password_store_password_short'
+
+Given pass (longer password):
+  passwordlonger
+
+Execute (test longer password syntax):
+  AssertEqual SyntaxAt(2), 'password_store_password'
+
+Given pass (another password):
+  passwordlonger
+
+Before (disable syntax):
+  let g:password_store_settings = {}
+  let g:password_store_settings.enable_syntax = 'false'
+
+Execute (test disable syntax ):
+  AssertEqual &filetype, 'pass'
+
+Execute (test increment password length):
+  AssertEqual len( password_store#generate()), 12
+
+Execute (test new generates do not match):
+  AssertNotEqual password_store#generate(), password_store#generate()
+
+Given text (test ftdetect):
+  passwordtesting
+
+Before (mimic settings):
+  let g:password_store_settings = {}
+  let g:password_store_settings.enable_syntax = 'false'
+  let g:password_store_settings.pw_length = '16'
+
+Execute (test ftdetect trigger):
+  set filetype=pass
+  AssertEqual password_store#setting('enable_syntax'), 'false'
+  AssertEqual len( password_store#generate() ), 16
+
+Execute (test highlight group parsing):
+  Assert password_store#get_highight('Comment', 'guifg') =~# '\v#[0-9a-f]{6}'
+  Assert password_store#get_highight('Comment', 'not_a_real_group') =~# ''
+
