@@ -303,6 +303,7 @@ Plug 'fourjay/vim-password-store'
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 " }}}
 " Plugin Settings {{{
