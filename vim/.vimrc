@@ -47,6 +47,11 @@ augroup sh
     autocmd FileType sh set foldmethod=syntax
     autocmd FileType sh inoremap # #<space>
 augroup END
+
+augroup gitcommit
+     autocmd FileType gitcommit setlocal spell
+augroup END
+
 augroup markdown
     autocmd FileType markdown set makeprg=$BROWSER\ %
     autocmd FileType markdown set tabstop=4
