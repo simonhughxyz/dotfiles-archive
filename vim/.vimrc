@@ -25,6 +25,7 @@ augroup vim
     autocmd FileType vim set tabstop=4
     autocmd FileType vim set softtabstop=4
     autocmd FileType vim set shiftwidth=4
+    autocmd FileType vim set expandtab
     autocmd FileType vim set foldmethod=marker
     autocmd FileType vim set foldnestmax=2
     autocmd FileType vim inoremap # "<space>
@@ -40,6 +41,7 @@ augroup sh
     autocmd FileType sh set tabstop=4
     autocmd FileType sh set softtabstop=4
     autocmd FileType sh set shiftwidth=4
+    autocmd FileType sh set expandtab
     " autocmd FileType sh set foldmethod=indent
     " autocmd FileType sh set foldnestmax=1
     autocmd FileType sh let g:sh_fold_enabled=5
@@ -58,6 +60,7 @@ augroup markdown
     autocmd FileType markdown set tabstop=4
     autocmd FileType markdown set softtabstop=4
     autocmd FileType markdown set shiftwidth=4
+    autocmd FileType markdown set expandtab
     autocmd FileType markdown set textwidth=79
     autocmd FileType markdown setlocal spell
     autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
@@ -73,8 +76,10 @@ augroup END
 
 augroup make
     autocmd FileType make set noexpandtab
+    autocmd FileType make set tabstop=8
     autocmd FileType make set shiftwidth=8
     autocmd FileType make set softtabstop=0
+    autocmd FileType make set noexpandtab
     autocmd FileType make set foldmethod=indent
     autocmd FileType make set foldnestmax=1
 augroup END
@@ -86,8 +91,8 @@ augroup python
     autocmd FileType python set tabstop=4
     autocmd FileType python set softtabstop=4
     autocmd FileType python set shiftwidth=4
-    autocmd FileType python set textwidth=79
     autocmd FileType python set expandtab
+    autocmd FileType python set textwidth=79
     autocmd FileType python set autoindent
     autocmd FileType python set smartindent
     autocmd FileType python set fileformat=unix 
@@ -135,6 +140,7 @@ augroup html
     autocmd FileType html,xhtml,xml set tabstop=2
     autocmd FileType html,xhtml,xml set softtabstop=2
     autocmd FileType html,xhtml,xml set shiftwidth=2 
+    autocmd FileType html,xhtml,xml set expandtab
     autocmd FileType html,xhtml,xml set foldmethod=indent
     autocmd FileType html,xhtml,xml set foldnestmax=5
     autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
@@ -202,6 +208,7 @@ augroup css
     autocmd FileType css set tabstop=2
     autocmd FileType css set softtabstop=2
     autocmd FileType css set shiftwidth=2
+    autocmd FileType css set expandtab
     autocmd FileType css set textwidth=79
     autocmd FileType css set expandtab
     autocmd FileType css set autoindent
@@ -220,7 +227,6 @@ augroup nroff
     autocmd FileType nroff set makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
     autocmd FileType nroff set tabstop=2
     autocmd FileType nroff set softtabstop=2
-    autocmd FileType nroff set shiftwidth=2
     autocmd FileType nroff set expandtab
     autocmd FileType nroff set autoindent
     autocmd FileType nroff set nosmartindent
