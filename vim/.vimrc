@@ -50,6 +50,7 @@ augroup END
 
 augroup gitcommit
      autocmd FileType gitcommit setlocal spell
+     autocmd FileType gitcommit setlocal textwidth=79
 augroup END
 
 augroup markdown
