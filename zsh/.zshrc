@@ -20,6 +20,8 @@ setopt HIST_IGNORE_DUPS       # do not store duplicate commands
 setopt HIST_FIND_NO_DUPS      # ignore duplicates when searching
 setopt HIST_REDUCE_BLANKS     # remove blank lines from history
 
+# Set default permission
+umask 077 # leads to 600 for files and 700 for directories
 
 # Prompt
 autoload -U colors && colors
