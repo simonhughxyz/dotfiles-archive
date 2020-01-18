@@ -797,8 +797,14 @@ endfunction
 
 " }}}
 " Line Shortcuts {{{
-" Replace all is aliased to S.
+" Replace all
 nnoremap \ :%s//g<Left><Left>
+" Replace all in visual range
+vnoremap \ :s//g<Left><Left>
+" Search visually selected text
+vnoremap // "vy/\V<C-r>=escape(@v,'/\')<CR><CR>
+" Replace visually selected text
+vnoremap /s "vy:%s/<C-r>=escape(@v,'/\')<CR>//g<left><left>
 " Change panes
 nnoremap <C-J> <C-W><C-J>  " Move down one pane in split sceen
 nnoremap <C-K> <C-W><C-K>    " Move up one pane in split screen
@@ -812,10 +818,6 @@ nnoremap <C-B> :Buffers<cr>   " Open FZF search
 nnoremap z\ za  " Toggle Folding
 nnoremap z[ zR  " Open all Folds
 nnoremap z] zM  " Close all folds
-" Serch visually selected text
-vnoremap // "vy/\V<C-r>=escape(@v,'/\')<CR><CR>
-" Replace visually selected text
-vnoremap /s "vy:%s/<C-r>=escape(@v,'/\')<CR>//g<left><left>
 " FZF completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
