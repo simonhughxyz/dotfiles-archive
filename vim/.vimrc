@@ -306,6 +306,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak'
+Plug 'junegunn/vim-after-object'
 Plug 'kana/vim-textobj-user'
 Plug 'wellle/targets.vim'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -339,6 +340,9 @@ let g:vim_markdown_folding_style_pythonic = 1
 
 " Vim rainbow
 let g:rainbow_active = 1
+
+" vim-after-object
+autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', ' ', '.', ',', '_', '$')
 " }}}
 " Colors {{{
 set background=dark
