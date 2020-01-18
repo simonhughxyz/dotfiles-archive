@@ -28,6 +28,7 @@ augroup vim
     autocmd FileType vim set expandtab
     autocmd FileType vim set foldmethod=marker
     autocmd FileType vim set foldnestmax=2
+    autocmd FileType vim call after_object#enable('=', '+', '-', ':')
     autocmd FileType vim inoremap # "<space>
     autocmd FileType vim inoremap \# #
     autocmd FileType vim inoremap \f <ESC>Ifunction!<space><ESC>A()<ESC>oendfu!<ESC>O
