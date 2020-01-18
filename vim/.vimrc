@@ -798,7 +798,7 @@ endfunction
 " }}}
 " Line Shortcuts {{{
 " Replace all is aliased to S.
-" nnoremap S :%s//g<Left><Left>
+nnoremap \ :%s//g<Left><Left>
 " Change panes
 nnoremap <C-J> <C-W><C-J>  " Move down one pane in split sceen
 nnoremap <C-K> <C-W><C-K>    " Move up one pane in split screen
