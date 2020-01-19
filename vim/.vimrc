@@ -846,7 +846,7 @@ nnoremap <silent><leader>yy ^yg_
 " Paste from Clipboard
 nnoremap <silent><Leader>p "+p
 nnoremap <silent><Leader>P "+P
-" Search
+" Toggle highlight
 nnoremap <silent><Leader>h :noh<CR>
 " Show empty chars
 nnoremap <silent><Leader>w :set invlist<CR>
