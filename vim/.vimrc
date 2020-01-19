@@ -376,7 +376,8 @@ set cindent
 set number  relativenumber      " show line numbers
 set showcmd                     " show command in bottom bar
 set wildmenu                    " show wildmenu on tab
-set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
+" set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
+set wildmode=longest:full,full
 set lazyredraw                  " Vim will only redraw when needed
 set showmatch                   " higlight matching parenthesis
 set ruler                       " show row and column in footer
