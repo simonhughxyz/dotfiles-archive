@@ -344,6 +344,9 @@ let g:rainbow_active = 1
 
 " vim-after-object
 autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', ' ', '.', ',', '_', '$')
+
+" vim-table-mode
+let g:table_mode_corner='|'
 " }}}
 " Colors {{{
 set background=dark
