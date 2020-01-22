@@ -330,6 +330,10 @@ set rtp+=~/.fzf
 if has('python3')
     let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
 endif
+
+"Grovebox
+let g:gruvbox_italic=1
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
