@@ -1,11 +1,15 @@
+st.termName: st-256color
+st.opacity: 200
+st.background:#0e0e0e
 URxvt.termName: rxvt
+st.font: Liberation Mono:pixelsize=24:antialias=true:autohint=true;
 URxvt.font: xft:monospace:size=18
-URxvt.borderLess: false 
-URxvt.letterSpace: 0 
-URxvt.transparent: true
-URxvt.shading: 30 
-URxvt.scrollBar: false
-URxvt.urlLauncher: firefox
+*.borderLess: false 
+*.letterSpace: 0 
+*.transparent: true
+*.shading: 30 
+*.scrollBar: false
+*.urlLauncher: firefox
 !! Colour scheme
 *background:#0e0e0e
 *foreground:#fff
