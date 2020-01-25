@@ -241,6 +241,10 @@ augroup nroff
     autocmd FileType nroff inoremap \# #
     autocmd FileType nroff inoremap \b <ESC>I\"<space><ESC>A<space>{{{<ESC>o\"<space>}}}<ESC>O
 augroup END
+
+augroup xdefaults
+    autocmd BufRead,BufNewFile .Xresources set makeprg=xrdb\ -merge\ %
+augroup END
 " }}}
 "Misc {{{
 set nocompatible
