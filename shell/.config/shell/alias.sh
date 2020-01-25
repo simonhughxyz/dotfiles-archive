@@ -117,10 +117,10 @@ alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^
 # networking
 alias ipinfo='curl ifconfig.me/all && echo ""'
 alias myip='curl ifconfig.me/ip; echo'
-alias ipt='iptables'
-alias ip6t='ip6tables'
-alias iptl='iptables -nvL | less'
-alias ip6tl='ip6tables -nvL | less'
+alias ipt='sudo iptables'
+alias ip6t='sudo ip6tables'
+alias iptl='sudo iptables -nvL | less'
+alias ip6tl='sudo ip6tables -nvL | less'
 
 # transmission
 alias tms='transmission-daemon'
