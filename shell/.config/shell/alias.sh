@@ -73,6 +73,7 @@ alias v='vim'
 alias vg='gvim'
 
 # git
+alias g='git'
 alias gs='git status'
 alias gb='git branch'
 alias ga='git add'
