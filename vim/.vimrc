@@ -822,6 +822,11 @@ nnoremap <C-J> <C-W><C-J>  " Move down one pane in split sceen
 nnoremap <C-K> <C-W><C-K>    " Move up one pane in split screen
 nnoremap <C-H> <C-W><C-H>  " Move to the left pane in split screen
 nnoremap <C-L> <C-W><C-L> " Move to the right pane in split screen
+" Change panes with arrow keys
+nnoremap <C-Down> <C-W><C-J>  " Move down one pane in split sceen
+nnoremap <C-Up> <C-W><C-K>    " Move up one pane in split screen
+nnoremap <C-Left> <C-W><C-H>  " Move to the left pane in split screen
+nnoremap <C-Right> <C-W><C-L> " Move to the right pane in split screen
 " nnoremap j gj   " Move down one displayed line
 " nnoremap k gk   " Move up one displayed line
 nnoremap <C-O> :Files<cr>   " Open FZF search
