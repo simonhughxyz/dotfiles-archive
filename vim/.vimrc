@@ -326,6 +326,10 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 call plug#end()
 " }}}
 " Plugin Settings {{{
