@@ -18,6 +18,7 @@ alias mux='tmuxinator'
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
 alias mail='neomutt'
+alias bt='bluetoothctl'
 
 # ls
 alias ls='ls --color=auto --group-directories-first'
