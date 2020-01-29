@@ -5,6 +5,6 @@
 
 local is_never = true  -- no way to read the osc mode, so we assume it starts in never mode.
 mp.add_key_binding("b", "osc-toggle", function()
-    is_never = not is_never
     mp.command("script-message osc-visibility " .. (is_never and "always" or "never"))
+    is_never = not is_never
 end)
