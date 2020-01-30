@@ -5,7 +5,7 @@ setopt AUTO_PUSHD        # Add cd into directory history
 setopt PUSHD_IGNORE_DUPS # Ignore duplicate directories
 setopt CORRECT           # enable corrections
 setopt CORRECT_ALL
-setopt RM_STAR_WAIT # Ask for confirmation after 'rm *'
+# setopt RM_STAR_WAIT # Ask for confirmation after 'rm *'
 export REPORTTIME=30 # Report time for any command lasting more than 30 seconds
 
 # History
