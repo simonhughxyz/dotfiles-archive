@@ -7,6 +7,7 @@ alias -s {pdf,PDF,ps,PS}='zathura'
 
 
 # cd
+alias d='dirs -v'
 alias 1='cd -'
 alias 2='cd -2'
 alias 3='cd -3'
