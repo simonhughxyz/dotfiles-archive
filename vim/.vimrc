@@ -330,6 +330,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+Plug 'chaoren/vim-wordmotion'
 call plug#end()
 " }}}
 " Plugin Settings {{{
