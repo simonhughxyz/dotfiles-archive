@@ -12,3 +12,5 @@ config
 iptables
 ssh
 udp
+math
+filetype
