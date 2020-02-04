@@ -59,8 +59,6 @@ alias cdbd="cd $BUILDS"
 alias fcd=". fcd"
 b(){ cd "$(bk -L | fzf)"; }
 
-# mkdir
-alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
 alias grep='rg --color=auto'
