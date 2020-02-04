@@ -22,6 +22,7 @@ alias bt='bluetoothctl'
 
 # conifg
 alias bc='bc -q -l' # don't show msg, use math lib.
+alais df='df -hT --total' # human readable, print filetype and total.
 
 # ls
 alias ls='ls --color=auto --group-directories-first'
