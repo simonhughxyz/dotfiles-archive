@@ -138,3 +138,5 @@ alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias s="du -sh ./* | sort -h"
 alias sd="du -sh ./*/ | sort -h"
+alias bc='bc -q -l' # don't show msg, use math lib.
+alias df='df -hT --total' # human readable, print filetype and total.
