@@ -20,10 +20,6 @@ alias paste='xclip -o'
 alias mail='neomutt'
 alias bt='bluetoothctl'
 
-# conifg
-alias bc='bc -q -l' # don't show msg, use math lib.
-alias df='df -hT --total' # human readable, print filetype and total.
-
 # ls
 alias ls='ls --color=auto --group-directories-first'
 alias l='ls'
