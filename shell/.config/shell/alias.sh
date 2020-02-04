@@ -137,4 +137,3 @@ alias dus='du | sort -h'  # sort by filesize.
 alias dud='\du -sh -c ./*/ | sort -h' # Only directories and sort.
 alias bc='bc -q -l' # don't show msg, use math lib.
 alias df='df -hT --total' # human readable, print filetype and total.
-alias ln='ln -iv' # asks to overide file and verbose.
