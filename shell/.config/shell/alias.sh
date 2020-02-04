@@ -139,3 +139,6 @@ alias bc='bc -q -l' # don't show msg, use math lib.
 alias df='df -hT --total' # human readable, print filetype and total.
 alias ln='ln -iv' # asks to override file and verbose.
 alias mkdir='mkdir -pv'     # Add parent dir on demand
+alias qcp='qcp -f do'   # Destination column only.
+alias qmv='qmv -f do'   # Destination column only.
+
