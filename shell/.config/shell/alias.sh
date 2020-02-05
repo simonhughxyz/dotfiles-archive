@@ -118,8 +118,8 @@ alias ipinfo='curl ifconfig.me/all && echo ""'
 alias myip='curl ifconfig.me/ip; echo'
 alias ipt='sudo iptables'
 alias ip6t='sudo ip6tables'
-alias iptl='sudo iptables -nvL | less'
-alias ip6tl='sudo ip6tables -nvL | less'
+alias iptl='sudo iptables -nvL'
+alias ip6tl='sudo ip6tables -nvL'
 
 # transmission
 # Borrowed idea from:
