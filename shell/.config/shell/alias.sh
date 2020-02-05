@@ -122,10 +122,6 @@ alias iptl='sudo iptables -nvL | less'
 alias ip6tl='sudo ip6tables -nvL | less'
 
 # transmission
-alias tms='transmission-daemon'
-alias tm='transmission-remote'
-alias tma='tm -er -a'
-alias tmd='tm -l | grep -v Stopped'
 # Borrowed idea from:
 # https://github.com/gotbletu/shownotes/blob/master/transmission-cli.txt
 # made some changes and added new functions.
