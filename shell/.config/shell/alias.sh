@@ -126,7 +126,7 @@ alias tms='transmission-daemon'
 alias tm='transmission-remote'
 alias tma='tm -er -a'
 alias tmd='tm -l | grep -v Stopped'
-# Borrowed from:
+# Borrowed idea from:
 # https://github.com/gotbletu/shownotes/blob/master/transmission-cli.txt
 # made some changes and added new functions.
 tm-daemon() { transmission-daemon ;}
