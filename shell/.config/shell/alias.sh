@@ -134,7 +134,7 @@ tm-altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
 tm-altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
 tm-add() { transmission-remote --add "$1" ;}
 tm-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
-tm-pause() { transmission-remote -t"$1" --stop ;}		# <id> or all
+tm-stop() { transmission-remote -t"$1" --stop ;}		# <id> or all
 tm-start() { transmission-remote -t"$1" --start ;}		# <id> or all
 tm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
 tm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
