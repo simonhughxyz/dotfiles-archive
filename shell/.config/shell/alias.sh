@@ -141,6 +141,33 @@ tm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data als
 tm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
 tm-info() { transmission-remote -t"$1" --info ;}
 tm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
+tm-list() {
+    help="$(basename "$0") -- list torrents in transmission.
+
+    where:
+        stopped|s    list stopped torrents.
+        down|d       list downloading torrents.
+        up|u         list uploading/seeding torrents.
+        complete|c   list complete torrents.
+        incomplete|i list incomplete torrents.
+        finished|f   list finished torrents.
+        help|h       show this help message.
+    "
+    # returns torrents with matching status.
+    get-with-status() {
+        transmission-remote -l | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $9 ~ S' 
+    }
+    case "$1" in
+        stopped|s) get-with-status "Stopped" ;;
+        down|d) get-with-status "Downloading|Up & Down" ;;
+        up|u) get-with-status "Seeding" ;;
+        complete|c) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 ~ /100%/' ;;
+        incomplete|i) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 !~ /100%/' ;;
+        finished|f) get-with-status "Idle|Seeding" ;;
+        help|h) echo "$help" ;;
+        *|all|a) transmission-remote -l ;;
+     esac
+}
 
 # misc
 alias hist='history | g'
