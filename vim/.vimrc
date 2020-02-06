@@ -833,16 +833,16 @@ nnoremap <C-Up> <C-W><C-K>    " Move up one pane in split screen
 nnoremap <C-Left> <C-W><C-H>  " Move to the left pane in split screen
 nnoremap <C-Right> <C-W><C-L> " Move to the right pane in split screen
 " Move along display lines.
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+" nnoremap j gj
+" nnoremap k gk
+" vnoremap j gj
+" vnoremap k gk
+" nnoremap <Down> gj
+" nnoremap <Up> gk
+" vnoremap <Down> gj
+" vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 
 nnoremap <C-O> :Files<cr>   " Open FZF search
 nnoremap <C-B> :Buffers<cr>   " Open FZF search
