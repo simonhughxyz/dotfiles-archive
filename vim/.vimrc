@@ -223,6 +223,13 @@ augroup css
     autocmd FileType css inoremap \bc <ESC>^ibackground-color:<space><ESC>A;
 augroup END
 
+augroup json
+    autocmd FileType json set tabstop=2
+    autocmd FileType json set softtabstop=2
+    autocmd FileType json set shiftwidth=2
+    autocmd FileType json set expandtab
+augroup END
+
 augroup nroff
     autocmd!
     autocmd FileType nroff set makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
