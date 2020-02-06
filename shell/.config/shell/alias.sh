@@ -57,6 +57,7 @@ alias cdpdfs="cd $PDFS"
 alias cdwh="cd $WH"
 alias cdbd="cd $BUILDS"
 alias fcd=". fcd"
+mcd() { mkdir "$1"; cd "$1"; }  # make dir and cd into it.
 b(){ cd "$(bk -L | fzf)"; }
 
 
