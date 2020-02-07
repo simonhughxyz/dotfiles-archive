@@ -21,7 +21,7 @@
   "idle-seeding-limit": 15,
   "idle-seeding-limit-enabled": true,
   "incomplete-dir": "/mnt/wh/torrents/incomplete",
-  "incomplete-dir-enabled": false,
+  "incomplete-dir-enabled": true,
   "inhibit-desktop-hibernation": false,
   "lpd-enabled": false,
   "main-window-height": 1406,
