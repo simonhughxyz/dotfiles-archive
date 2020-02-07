@@ -10,7 +10,7 @@
   "bind-address-ipv6": "::",
   "blocklist-enabled": false,
   "blocklist-updates-enabled": true,
-  "blocklist-url": "http://www.example.com/blocklist",
+  "blocklist-url": "",
   "cache-size-mb": 4,
   "compact-view": false,
   "dht-enabled": true,
