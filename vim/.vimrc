@@ -338,6 +338,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'chaoren/vim-wordmotion'
+Plug 'AndrewRadev/switch.vim'
 call plug#end()
 " }}}
 " Plugin Settings {{{
