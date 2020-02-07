@@ -95,6 +95,6 @@
   "upload-slots-per-torrent": 14,
   "user-has-given-informed-consent": true,
   "utp-enabled": true,
-  "watch-dir": "/home/simon/Desktop",
-  "watch-dir-enabled": false
+  "watch-dir": "/home/simon/Downloads",
+  "watch-dir-enabled": true
 }
