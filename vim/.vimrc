@@ -223,6 +223,13 @@ augroup css
     autocmd FileType css inoremap \bc <ESC>^ibackground-color:<space><ESC>A;
 augroup END
 
+augroup json
+    autocmd FileType json set tabstop=2
+    autocmd FileType json set softtabstop=2
+    autocmd FileType json set shiftwidth=2
+    autocmd FileType json set expandtab
+augroup END
+
 augroup nroff
     autocmd!
     autocmd FileType nroff set makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
@@ -331,6 +338,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'chaoren/vim-wordmotion'
+Plug 'AndrewRadev/switch.vim'
 call plug#end()
 " }}}
 " Plugin Settings {{{
@@ -832,8 +840,18 @@ nnoremap <C-Down> <C-W><C-J>  " Move down one pane in split sceen
 nnoremap <C-Up> <C-W><C-K>    " Move up one pane in split screen
 nnoremap <C-Left> <C-W><C-H>  " Move to the left pane in split screen
 nnoremap <C-Right> <C-W><C-L> " Move to the right pane in split screen
-" nnoremap j gj   " Move down one displayed line
-" nnoremap k gk   " Move up one displayed line
+" Move along display lines.
+" nnoremap j gj
+" nnoremap k gk
+" vnoremap j gj
+" vnoremap k gk
+" nnoremap <Down> gj
+" nnoremap <Up> gk
+" vnoremap <Down> gj
+" vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
+
 nnoremap <C-O> :Files<cr>   " Open FZF search
 nnoremap <C-B> :Buffers<cr>   " Open FZF search
 " FOLDING

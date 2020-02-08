@@ -57,10 +57,9 @@ alias cdpdfs="cd $PDFS"
 alias cdwh="cd $WH"
 alias cdbd="cd $BUILDS"
 alias fcd=". fcd"
+mcd() { mkdir "$1"; cd "$1"; }  # make dir and cd into it.
 b(){ cd "$(bk -L | fzf)"; }
 
-# mkdir
-alias mkdir='mkdir -pv'     # Add parent dir on demand
 
 # grep
 alias grep='rg --color=auto'
@@ -120,17 +119,77 @@ alias ipinfo='curl ifconfig.me/all && echo ""'
 alias myip='curl ifconfig.me/ip; echo'
 alias ipt='sudo iptables'
 alias ip6t='sudo ip6tables'
-alias iptl='sudo iptables -nvL | less'
-alias ip6tl='sudo ip6tables -nvL | less'
+alias iptl='sudo iptables -nvL'
+alias ip6tl='sudo ip6tables -nvL'
+iptl-search() {sudo iptables -nvL | awk -vRS= "BEGIN{IGNORECASE = 1}/^Chain $1/" ;}
 
 # transmission
-alias tms='transmission-daemon'
-alias tm='transmission-remote'
-alias tma='tm -er -a'
-alias tmd='tm -l | grep -v Stopped'
+# Borrowed idea from:
+# https://github.com/gotbletu/shownotes/blob/master/transmission-cli.txt
+# made some changes and added new functions.
+tm-daemon() { transmission-daemon ;}
+tm-quit() { killall transmission-daemon ;}
+tm-altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
+tm-altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
+tm-add() { transmission-remote --add "$1" ;}
+tm-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
+tm-stop() { transmission-remote -t"$1" --stop ;}		# <id> or all
+tm-start() { transmission-remote -t"$1" --start ;}		# <id> or all
+tm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
+tm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
+tm-info() { transmission-remote -t"$1" --info ;}
+tm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
+tm-list() {
+    help="$(basename "$0") -- list torrents in transmission.
+
+    where:
+        stopped|s    list stopped torrents.
+        down|d       list downloading torrents.
+        up|u         list uploading/seeding torrents.
+        complete|c   list complete torrents.
+        incomplete|i list incomplete torrents.
+        finished|f   list finished torrents.
+        help|h       show this help message.
+    "
+    # returns torrents with matching status.
+    get-with-status() {
+        transmission-remote -l | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $9 ~ S' 
+    }
+    case "$1" in
+        stopped|s) get-with-status "Stopped" ;;
+        down|d) get-with-status "Downloading|Up & Down" ;;
+        up|u) get-with-status "Seeding" ;;
+        complete|c) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 ~ /100%/' ;;
+        incomplete|i) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 !~ /100%/' ;;
+        finished|f) get-with-status "Idle|Seeding" ;;
+        help|h) echo "$help" ;;
+        *|all|a) transmission-remote -l ;;
+     esac
+}
 
 # misc
 alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
-alias s="du -sh ./* | sort -h"
-alias sd="du -sh ./*/ | sort -h"
+alias du='du -d1 -h'  # max depth and human readable.
+alias dus='du | sort -h'  # sort by filesize.
+alias dud='\du -sh -c ./*/ | sort -h' # Only directories and sort.
+alias bc='bc -q -l' # don't show msg, use math lib.
+alias df='df -hT --total' # human readable, print filetype and total.
+alias ln='ln -iv' # asks to override file and verbose.
+alias mkdir='mkdir -pv'     # Add parent dir on demand
+alias qcp='qcp -f do'   # Destination column only.
+alias qmv='qmv -f do'   # Destination column only.
+
+# functions
+
+# Color for manpages
+man() {
+  env LESS_TERMCAP_mb=$'\E[01;31m' \
+  LESS_TERMCAP_md=$'\E[01;31m' \
+  LESS_TERMCAP_me=$'\E[0m' \
+  LESS_TERMCAP_se=$'\E[0m' \
+  LESS_TERMCAP_so=$'\E[01;44;33m' \
+  LESS_TERMCAP_ue=$'\E[0m' \
+  LESS_TERMCAP_us=$'\E[01;32m' \
+  man "$@"
+}
