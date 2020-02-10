@@ -65,6 +65,8 @@ augroup markdown
     autocmd FileType markdown set expandtab
     autocmd FileType markdown set textwidth=79
     autocmd FileType markdown setlocal spell
+    autocmd FileType markdown set conceallevel=2
+    autocmd FileType markdown set concealcursor=c
     autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
     autocmd FileType markdown inoremap ``` <Esc>I```<Esc>o```<Esc>O
     autocmd FileType markdown inoremap \1 <Esc>I#<space><Esc>o
@@ -78,8 +80,8 @@ augroup END
 
 augroup make
     autocmd FileType make set noexpandtab
-    autocmd FileType make set tabstop=8
-    autocmd FileType make set shiftwidth=8
+    autocmd FileType make set tabstop=4
+    autocmd FileType make set shiftwidth=4
     autocmd FileType make set softtabstop=0
     autocmd FileType make set noexpandtab
     autocmd FileType make set foldmethod=indent
@@ -281,6 +283,10 @@ set updatetime=100
 set noshowmode
 set undofile
 set undodir=~/.vim/undodir
+" conceal
+set conceallevel=2
+" don't conceal on line when in visual, insert or normal mode.
+set concealcursor=c
 " }}}
 " Folding {{{
 "=== folding ===
@@ -369,6 +375,9 @@ autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', ' ', '
 
 " vim-table-mode
 let g:table_mode_corner='|'
+
+" indent line
+let g:indentLine_setConceal = 0
 " }}}
 " Colors {{{
 set background=dark
