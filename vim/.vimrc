@@ -64,6 +64,8 @@ augroup markdown
     autocmd FileType markdown set expandtab
     autocmd FileType markdown set textwidth=79
     autocmd FileType markdown setlocal spell
+    autocmd FileType markdown set conceallevel=2
+    autocmd FileType markdown set concealcursor=c
     autocmd FileType markdown vmap<leader><Bslash> :EasyAlign*<Bar><cr>
     autocmd FileType markdown inoremap ``` <Esc>I```<Esc>o```<Esc>O
     autocmd FileType markdown inoremap \1 <Esc>I#<space><Esc>o
