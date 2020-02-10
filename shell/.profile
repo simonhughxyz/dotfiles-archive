@@ -21,7 +21,7 @@ export PDFS="$HOME/pdfs"
 export WH="/mnt/wh"
 export BUILDS="$HOME/.builds"
 
-export PATH="$PATH:$VOIDSCR:$SCRIPTS:$DMENU:$FZFSCR:$WRAPPER"
+export PATH="$PATH:$VOIDSCR:$SCRIPTS:$FZFSCR:$WRAPPER"
 export EDITOR="vim"
 export VISUAL="vim"
 export TERMINAL="xst"
