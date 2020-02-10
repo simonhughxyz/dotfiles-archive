@@ -280,6 +280,8 @@ set updatetime=100
 set noshowmode
 set undofile
 set undodir=~/.vim/undodir
+" don't conceal on line when in visual, insert or normal mode.
+set concealcursor=c
 " }}}
 " Folding {{{
 "=== folding ===
