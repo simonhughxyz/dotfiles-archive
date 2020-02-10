@@ -368,6 +368,9 @@ autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', ' ', '
 
 " vim-table-mode
 let g:table_mode_corner='|'
+
+" indent line
+let g:indentLine_setConceal = 0
 " }}}
 " Colors {{{
 set background=dark
