@@ -1,14 +1,14 @@
-set makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
-set tabstop=2
-set softtabstop=2
-set expandtab
-set autoindent
-set nosmartindent
-set nocindent
 filetype indent off
-set fileformat=unix 
-set foldmethod=marker
-set foldnestmax=1
+setlocal makeprg=tbl\ %\ \\\|\ groff\ -ms\ -Tpdf\ >\ %:r.pdf
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal expandtab
+setlocal autoindent
+setlocal nosmartindent
+setlocal nocindent
+setlocal fileformat=unix 
+setlocal foldmethod=marker
+setlocal foldnestmax=1
 let g:runcmd='zathura %:r.pdf'
 inoremap # \"<space>
 inoremap \# #
