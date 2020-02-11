@@ -1,9 +1,9 @@
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set foldmethod=marker
-set foldnestmax=2
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal foldmethod=marker
+setlocal foldnestmax=2
 call after_object#enable('=', '+', '-', ':')
 inoremap # "<space>
 inoremap \\ \
