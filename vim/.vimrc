@@ -1,12 +1,20 @@
 " File Type {{{
 
 function! Run(...)
-    let l:cmd=g:runcmd
-    if a:1 != ''
-        let l:cmd=a:1
+    " use b:runcmd if set
+    if exists("b:runcmd") | let l:cmd=b:runcmd | endif
+    
+    " use function argument as cmd if provided.
+    if exists("a:1") | let l:cmd=a:1 | endif
+
+    " run command.
+    if exists("l:cmd")
+        silent !clear
+        exec 'silent :!' . l:cmd . ' &'
+        exec 'redraw!'
+    else
+        echo "No runcmd provided, use b:runcmd to set run command!"
     endif
-    exec 'silent :!' . l:cmd . ' &'
-    exec 'redraw!'
 endfu!
 command Run call Run()
 
