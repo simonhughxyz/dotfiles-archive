@@ -1,4 +1,4 @@
-let g:runcmd='$BROWSER %'
+let b:runcmd='$BROWSER %'
 setlocal makeprg=$BROWSER\ %
 setlocal tabstop=2
 setlocal softtabstop=2
