@@ -231,6 +231,10 @@ augroup json
     autocmd FileType json set softtabstop=2
     autocmd FileType json set shiftwidth=2
     autocmd FileType json set expandtab
+    autocmd FileType json setlocal foldmethod=marker
+    autocmd FileType json setlocal foldmarker={,}
+    autocmd FileType json setlocal foldnestmax=5
+    autocmd FileType json setlocal foldlevel=1
 augroup END
 
 augroup nroff
