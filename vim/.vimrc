@@ -21,22 +21,6 @@ autocmd BufWritePost * call SetFileType()
 
 autocmd BufWritePost statusbar call system("reloadbar")
 
-augroup sh
-    autocmd FileType sh let g:runcmd='sh %'
-    autocmd FileType sh set makeprg=sh\ %
-    autocmd FileType sh set tabstop=4
-    autocmd FileType sh set softtabstop=4
-    autocmd FileType sh set shiftwidth=4
-    autocmd FileType sh set expandtab
-    " autocmd FileType sh set foldmethod=indent
-    " autocmd FileType sh set foldnestmax=1
-    autocmd FileType sh let g:sh_fold_enabled=5
-    autocmd FileType sh let g:is_sh=1
-    autocmd FileType sh set foldmethod=syntax
-    autocmd FileType sh inoremap # #<space>
-augroup END
-
-
 augroup xdefaults
     autocmd BufRead,BufNewFile .Xresources set makeprg=xrdb\ -merge\ %
 augroup END
