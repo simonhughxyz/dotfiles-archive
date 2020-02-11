@@ -1,4 +1,3 @@
-let g:runcmd='python %'
 setlocal makeprg=python\ %
 setlocal tabstop=4
 setlocal softtabstop=4
