@@ -20,10 +20,6 @@ endfu!
 autocmd BufWritePost * call SetFileType()
 
 autocmd BufWritePost statusbar call system("reloadbar")
-
-augroup xdefaults
-    autocmd BufRead,BufNewFile .Xresources set makeprg=xrdb\ -merge\ %
-augroup END
 " }}}
 "Misc {{{
 set nocompatible
