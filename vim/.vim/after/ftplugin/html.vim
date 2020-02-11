@@ -1,13 +1,13 @@
 let g:runcmd='$BROWSER %'
-set makeprg=$BROWSER\ %
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2 
-set expandtab
-set foldmethod=indent
-set foldnestmax=5
-set omnifunc=htmlcomplete#CompleteTags
-set omnifunc=xmlcomplete#CompleteTags
+setlocal makeprg=$BROWSER\ %
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2 
+setlocal expandtab
+setlocal foldmethod=indent
+setlocal foldnestmax=5
+setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal omnifunc=xmlcomplete#CompleteTags
 inoremap ,, ,
 inoremap >< ><ESC>yF<o<Esc>pa<space><Esc>F<"hyt<space>ddo<Esc>"hpa><Esc>F<a/<Esc>O
 inoremap ,cc <!--//--><Esc>0f/i<space><space><left>
