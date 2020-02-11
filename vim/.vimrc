@@ -214,7 +214,6 @@ augroup css
     autocmd FileType css set shiftwidth=2
     autocmd FileType css set expandtab
     autocmd FileType css set textwidth=79
-    autocmd FileType css set expandtab
     autocmd FileType css set autoindent
     autocmd FileType css set smartindent
     autocmd FileType css set fileformat=unix 
