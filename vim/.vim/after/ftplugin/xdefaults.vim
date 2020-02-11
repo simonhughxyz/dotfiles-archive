@@ -1,1 +1,1 @@
-set makeprg=xrdb\ -merge\ %
+setlocal makeprg=xrdb\ -merge\ %

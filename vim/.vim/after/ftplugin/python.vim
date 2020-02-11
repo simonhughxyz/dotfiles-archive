@@ -1,15 +1,15 @@
 let g:runcmd='python %'
-set makeprg=python\ %
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set textwidth=79
-set autoindent
-set smartindent
-set fileformat=unix 
-set foldmethod=indent
-set foldnestmax=1
+setlocal makeprg=python\ %
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal textwidth=79
+setlocal autoindent
+setlocal smartindent
+setlocal fileformat=unix 
+setlocal foldmethod=indent
+setlocal foldnestmax=1
 inoremap \\ \
 inoremap # #<space>
 inoremap \# #
