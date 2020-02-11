@@ -1,12 +1,12 @@
-set makeprg=$BROWSER\ %
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set textwidth=79
+setlocal makeprg=$BROWSER\ %
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal textwidth=79
 setlocal spell
-set conceallevel=2
-set concealcursor=c
+setlocal conceallevel=2
+setlocal concealcursor=c
 vmap<leader><Bslash> :EasyAlign*<Bar><cr>
 inoremap ``` <Esc>I```<Esc>o```<Esc>O
 inoremap \1 <Esc>I#<space><Esc>o
