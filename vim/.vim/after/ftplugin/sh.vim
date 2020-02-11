@@ -1,4 +1,3 @@
-let g:runcmd='sh %'
 setlocal makeprg=sh\ %
 setlocal tabstop=4
 setlocal softtabstop=4
