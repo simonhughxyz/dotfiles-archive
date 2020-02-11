@@ -9,7 +9,7 @@ setlocal nocindent
 setlocal fileformat=unix 
 setlocal foldmethod=marker
 setlocal foldnestmax=1
-let g:runcmd='zathura %:r.pdf'
+let b:runcmd='zathura %:r.pdf'
 inoremap # \"<space>
 inoremap \# #
 inoremap \b <ESC>I\"<space><ESC>A<space>{{{<ESC>o\"<space>}}}<ESC>O
