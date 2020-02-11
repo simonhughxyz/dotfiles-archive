@@ -1,7 +1,7 @@
-set noexpandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=0
-set noexpandtab
-set foldmethod=indent
-set foldnestmax=1
+setlocal noexpandtab
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=0
+setlocal noexpandtab
+setlocal foldmethod=indent
+setlocal foldnestmax=1
