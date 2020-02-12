@@ -68,6 +68,7 @@ alias grep='rg --color=auto'
 alias diff='diff --color=auto'
 
 # vim
+alias vim='nvim'
 alias vi='vim'
 alias v='vim'
 alias vg='gvim'
