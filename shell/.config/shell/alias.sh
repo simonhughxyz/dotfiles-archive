@@ -181,6 +181,7 @@ alias mkdir='mkdir -pv'     # Add parent dir on demand
 alias qcp='qcp -f do'   # Destination column only.
 alias qmv='qmv -f do'   # Destination column only.
 alias rsync='rsync -vh --progress' # verbose, human readable and show progress.
+alias scp='rsync -avhW --no-compress --progress' # Use rsync to copy locally
 
 # functions
 
