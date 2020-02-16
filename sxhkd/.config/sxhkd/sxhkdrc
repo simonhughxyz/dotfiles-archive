@@ -69,7 +69,7 @@ super + shift + p
 # Audio
 super + m
     volume mute
-super + shift + m ; {0-9} ; {0-9}
+super + shift + s ; {0-9} ; {0-9}
     volume {0-9}{0-9}0
 super + {_,shift +,control +} equal
     volume +{5,20,1}
