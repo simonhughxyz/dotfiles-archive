@@ -75,7 +75,7 @@ status() {
     free -h | awk '/}Mem:/ {print $3 "/" $2}'
     echo "$delim"
     
-	printf "%{F#98C379}"
+	echo "%{F#98C379}"
 	volume
 	echo "$delim"
 
