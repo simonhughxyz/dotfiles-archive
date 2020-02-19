@@ -61,6 +61,19 @@ record() {
 	[ -e "$recpid_file" ] && echo "%{F#e82e1e}⏺ rec $delim"
 }
 
+battery() {
+    bat_empty=" "
+    bat_quarter=" "
+    bat_half=" "
+    bat_almost=" "
+    bat_full=" "
+
+    BAT0=$(acpi -b | awk '/Battery 0/{print $4}' | tr -d ',')
+    BAT1=$(acpi -b | awk '/Battery 1/{print $4}' | tr -d ',')
+
+    echo "$BAT0 $BAT1"
+}
+
 status() {
     echo "%{r}"
     # keystate
@@ -85,6 +98,9 @@ status() {
 
     echo "%{F#61AEEE}🕒"
     date '+%H:%M'
+
+    echo "$delim"
+    battery
 
     # update
 }
