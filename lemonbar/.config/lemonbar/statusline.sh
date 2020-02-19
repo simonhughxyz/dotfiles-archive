@@ -91,6 +91,6 @@ status() {
 
 
 while :; do
-    echo -e "$(status | tr '\n' ' ')"
+    echo "$(status | tr '\n' ' ')"
     sleep 30
 done
