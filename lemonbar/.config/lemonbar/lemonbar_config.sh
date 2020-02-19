@@ -12,5 +12,4 @@ geometry="x30"
 f_color="#DDDDDD"
 b_color="#202020"
 
-# sh ./statusline.sh | lemonbar -p -f "${font}" -f "${icon_font}" -g "${geometry}" -B "${b_color}" -F "${f_color}"
-sh ./statusline.sh | lemonbar -p -f "${font}" -f "${icon_font}" -g "${geometry}" -F "${f_color}"
+sh "$HOME/.config/lemonbar/statusline.sh" | lemonbar -p -f "${font}" -f "${icon_font}" -g "${geometry}" -B "${b_color}" -F "${f_color}"
