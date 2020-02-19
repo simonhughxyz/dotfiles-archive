@@ -1,5 +1,6 @@
 #! /bin/sh
 
+sxhkd -c "$HOME/.config/sxhkd/bspwm_sxhkdrc" &
 sh "$HOME/.config/lemonbar/lemonbar_config.sh"
 
 bspc monitor -d I II III IV V VI VII VIII IX X
