@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# LEMONBAR_CONFIG
+# LIMEBAR
 # Simon Hugh Moore
 #
 # Set config options for lemonbar
