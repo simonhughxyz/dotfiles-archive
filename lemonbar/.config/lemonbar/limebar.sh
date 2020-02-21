@@ -6,7 +6,8 @@
 # Set config options for lemonbar
 
 # Kill any running lemonbar
-pgrep -x lemonbar > /dev/null && pkill -x lemonbar &
+# pgrep -x lemonbar > /dev/null && pkill -x lemonbar &
+killall lemonbar &
 
 # font="-xos4-terminesspowerline-medium-r-normal--12-120-72-72-c-60-iso10646-1"
 font="-xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1"
