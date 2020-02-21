@@ -84,7 +84,7 @@ status() {
     uptime | awk '{print $3}' | cut -d',' -f 1
     echo "$delim"
 
-    echo "%{F#C0C000}📊"
+    echo "%{F#C0C000}📊"
     free -h | awk '/}Mem:/ {print $3 "/" $2}'
     echo "$delim"
     
@@ -96,7 +96,7 @@ status() {
     date '+%a %d %B %Y'
     echo "$delim"
 
-    echo "%{F#61AEEE}🕒"
+    echo "%{F#61AEEE}🕒"
     date '+%H:%M'
 
     echo "$delim"
