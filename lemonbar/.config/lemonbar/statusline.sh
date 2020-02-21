@@ -123,5 +123,5 @@ status() {
 
 while :; do
     echo "$(status | tr '\n' ' ')"
-    sleep 30
+    sleep 1
 done
