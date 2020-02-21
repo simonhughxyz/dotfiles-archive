@@ -74,7 +74,22 @@ battery() {
     echo "$BAT0 $BAT1"
 }
 
+desktops() {
+    f_color="%{F#c25704}"
+    f_selcolor="%{F#ffffff}"
+    b_selcolor="%{B#c25704}"
+
+    current=$(bspc query -D -d --names)
+    color_current="$f_selcolor$b_selcolor $current $f_color%{B-}"
+    desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
+
+    echo "$f_color$desktops"
+}
+
 status() {
+    echo "%{l}"
+    desktops
+
     echo "%{r}"
     # keystate
 
