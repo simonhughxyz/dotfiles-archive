@@ -1,6 +1,12 @@
 #!/bin/sh
 
+pipe=/tmp/limebar_statusline
 delim="%{F#d5d5d5}|"
+
+# create pipe if it doesn't exist.
+if [ ! -p $pipe ]; then
+    mkfifo $pipe
+fi
 
 keystate() {
     lockline=$(xset -q | grep "Num Lock")
