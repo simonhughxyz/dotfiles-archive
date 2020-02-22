@@ -30,6 +30,8 @@ statusbar &
 bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
 
-while true; do
-    /usr/local/bin/dwm 2> ~/.local/share/dwm/dwm.log
-done
+exec bspwm
+
+# while true; do
+#     /usr/local/bin/bspwm 2> ~/.local/share/bspwm/bspwm.log
+# done
