@@ -8,7 +8,7 @@ super + {t,f}
 # Desktop
 # focus desktop / send node to desktop
 super + {_,shift +} {1-9,0,v}
-    bspc {desktop -f,node -d} '{1-9,10,V}' & sh $HOME/.config/lemonbar/statusline.sh
+    bspc {desktop -f,node -d} '{1-9,10,V}' & $HOME/.config/lemonbar/statusline.sh
 #super + {_,shift +} {1-9,0,v}
 #    opt={desktop -f,node -d}
 #   desktop='{1-9,10,V}'; \
