@@ -68,6 +68,8 @@ record() {
 }
 
 battery() {
+    # Don't run if acpi not available
+    command -v acpi || exit 1
     bat_empty=" "
     bat_quarter=" "
     bat_half=" "
@@ -77,7 +79,7 @@ battery() {
     BAT0=$(acpi -b | awk '/Battery 0/{print $4}' | tr -d ',')
     BAT1=$(acpi -b | awk '/Battery 1/{print $4}' | tr -d ',')
 
-    echo "$BAT0 $BAT1"
+    echo "$delim $BAT0 $BAT1"
 }
 
 desktops() {
@@ -120,7 +122,7 @@ status() {
     echo "%{F#61AEEE}🕒"
     date '+%H:%M'
 
-    echo "$delim"
+    # echo "$delim"
     battery
 
     # update
