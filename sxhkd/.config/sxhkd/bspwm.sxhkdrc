@@ -19,7 +19,7 @@ super + Tab
     bspc desktop -f last & $HOME/.config/lemonbar/statusline.sh
 
 super + bracket{left,right}
-    bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local & $HOME/.config/lemonbar/statusline.sh
 
 # focus/swap
 super + {_,shift + }{Left,Down,Up,Right}
