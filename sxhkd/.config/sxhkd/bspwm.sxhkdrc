@@ -5,6 +5,10 @@ super + q
 super + {numbersign,f,apostrophe}
     bspc node -t {tiled,fullscreen,floating}
 
+# cycle between monocle and tiles moad
+super + semicolon
+    bspc desktop --layout next
+
 # Desktop
 # focus desktop / send node to desktop
 super + {_,shift +} {1-9,0,v}
