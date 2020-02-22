@@ -1,6 +1,6 @@
 # BSPWM
-super + q
-    bspc node -k
+super + {_,ctrl +} q
+    bspc node -{c,k}
 
 super + {numbersign,f,apostrophe}
     bspc node -t {tiled,fullscreen,floating}
