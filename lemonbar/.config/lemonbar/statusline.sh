@@ -126,8 +126,18 @@ status() {
     # update
 }
 
+update_pipe() {
+    echo "$(status | tr '\n' ' ')" >$pipe &
+}
 
-while :; do
-    echo "$(status | tr '\n' ' ')"
-    sleep 1
-done
+loop() {
+    while :; do
+        update_pipe
+        sleep 30
+    done
+}
+
+case $1 in
+    loop) loop;;
+    *) update_pipe;;
+esac
