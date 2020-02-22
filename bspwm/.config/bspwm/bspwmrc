@@ -14,3 +14,6 @@ bspc config gapless_monocle      true
 
 # prevent apps from stealing focus
 bspc config ignore_ewmh_focus true
+
+# Rules
+bspc rule -a mpv desktop='V'
