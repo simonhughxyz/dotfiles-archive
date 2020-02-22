@@ -9,6 +9,10 @@ super + {t,f}
 # focus desktop / send node to desktop
 super + {_,shift +} {1-9,0,v}
     bspc {desktop -f,node -d} '{1-9,10,V}' & sh $HOME/.config/lemonbar/statusline.sh
+#super + {_,shift +} {1-9,0,v}
+#    opt={desktop -f,node -d}
+#   desktop='{1-9,10,V}'; \
+#    bspc query -D -d "$desktop.focused" && bspc "$opt" last || bspc "$opt" "$desktop"
 
 super + bracket{left,right}
     bspc desktop -f {prev,next}.local
