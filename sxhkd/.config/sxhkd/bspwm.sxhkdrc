@@ -2,8 +2,8 @@
 super + q
     bspc node -k
 
-super + {t,f}
-    bspc node -t {tiled,fullscreen}
+super + {numbersign,f,apostrophe}
+    bspc node -t {tiled,fullscreen,floating}
 
 # Desktop
 # focus desktop / send node to desktop
