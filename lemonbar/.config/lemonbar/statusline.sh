@@ -69,7 +69,7 @@ record() {
 
 battery() {
     # Don't run if acpi not available
-    command -v acpi || exit 1
+    command -v acpi > /dev/null 2>&1 || exit 1
     bat_empty=" "
     bat_quarter=" "
     bat_half=" "
