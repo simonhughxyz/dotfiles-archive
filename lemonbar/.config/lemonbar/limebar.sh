@@ -16,4 +16,8 @@ geometry="x30"
 f_color="#DDDDDD"
 b_color="#202020"
 
-sh "$HOME/.config/lemonbar/statusline.sh" | lemonbar -p -f "${font}" -f "${icon_font}" -f "Font Awesome" -g "${geometry}" -B "${b_color}" -F "${f_color}"
+pipe=/tmp/limebar_statusline
+
+./statusline.sh loop &
+
+tail -f "$pipe" | lemonbar -p -f "${font}" -f "${icon_font}" -f "Font Awesome" -g "${geometry}" -B "${b_color}" -F "${f_color}" &
