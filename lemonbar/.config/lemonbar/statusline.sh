@@ -133,7 +133,15 @@ update_pipe() {
 }
 
 loop() {
-    pgrep -x statusline.sh > /dev/null && pkill -x statusline.sh
+    trap 'exit 1' INT HUP QUIT TERM ALRM USR1
+    lock_file=/tmp/statusline.lock
+    if { set -C; 2>/dev/null >$lock_file; }; then
+        trap "rm -f $lock_file" EXIT
+    else
+        echo "lock file exists, exiting..."
+        exit
+    fi
+
     while :; do
         update_pipe
         sleep 30
