@@ -133,6 +133,7 @@ update_pipe() {
 }
 
 loop() {
+    pgrep -x statusline.sh > /dev/null && pkill -x statusline.sh
     while :; do
         update_pipe
         sleep 30
