@@ -2,8 +2,8 @@
 super + {_,ctrl +} q
     bspc node -{c,k}
 
-super + {numbersign,f,apostrophe}
-    bspc node -t {tiled,fullscreen,floating}
+super + {_,shift +} numbersign
+    bspc node -t {tiled,floating}
 
 # cycle between monocle and tiles moad or fullscreen
 super + {_,shift +} f
