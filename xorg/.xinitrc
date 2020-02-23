@@ -26,7 +26,6 @@ compton & # for transparency and some other effects
 export $(dbus-launch) &
 dunst & # for notification
 sxhkd > ~/.local/share/sxhkd/sxhkd.log 2>&1 & # keybindings
-statusbar &
 bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
 
