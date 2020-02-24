@@ -18,6 +18,6 @@ b_color="#202020"
 
 pipe=/tmp/limebar_statusline
 
-./statusline.sh loop &
+$HOME/.config/lemonbar/statusline.sh loop &
 
 tail -f "$pipe" | lemonbar -p -f "${font}" -f "${icon_font}" -f "Font Awesome" -g "${geometry}" -B "${b_color}" -F "${f_color}" &
