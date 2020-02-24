@@ -41,6 +41,10 @@ weather() {
     echo "$symbol $temp"
 }
 
+memory() {
+    free -h | awk '/Mem:/ {print $3 "/" $2}'
+}
+
 volume() {
 	[ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && return 0
 
@@ -108,7 +112,7 @@ status() {
     echo "$delim"
 
     echo "%{F#C0C000}📊"
-    free -h | awk '/}Mem:/ {print $3 "/" $2}'
+    memory 
     echo "$delim"
     
 	echo "%{F#98C379}"
