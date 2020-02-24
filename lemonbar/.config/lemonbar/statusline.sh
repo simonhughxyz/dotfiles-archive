@@ -152,3 +152,4 @@ case $1 in
     loop) loop;;
     *) update_pipe;;
 esac
+exit
