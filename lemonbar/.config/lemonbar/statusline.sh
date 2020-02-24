@@ -86,6 +86,10 @@ battery() {
     echo "$delim $BAT0 $BAT1"
 }
 
+uptime() {
+    uptime | awk '{print $3}' | cut -d',' -f 1
+}
+
 desktops() {
     f_color="%{F#c25704}"
     f_selcolor="%{F#ffffff}"
@@ -108,7 +112,7 @@ status() {
 	# record
 
     echo "%{F#c98a1e}⬆"
-    uptime | awk '{print $3}' | cut -d',' -f 1
+    uptime
     echo "$delim"
 
     echo "%{F#C0C000}📊"
