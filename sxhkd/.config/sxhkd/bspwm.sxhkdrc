@@ -1,5 +1,5 @@
 # BSPWM
-super + {_,ctrl +} q
+super + {_,shift +} q
     bspc node -{c,k}
 
 super + {_,shift +} numbersign
