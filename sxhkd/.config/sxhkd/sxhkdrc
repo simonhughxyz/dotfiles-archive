@@ -27,7 +27,7 @@ super + shift + h
 # Dmenu
 super + a
     dmenu_run
-super + shift + q
+ctrl + alt + Delete
     quitmenu
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
