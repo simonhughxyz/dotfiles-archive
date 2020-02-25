@@ -12,7 +12,7 @@ super + {_,shift +} f
 # Desktop
 # focus desktop / send node to desktop
 super + {_,shift +} {1-9,0,v}
-    bspc {desktop -f,node -d} '{1-9,10,V}' & $HOME/.config/lemonbar/statusline.sh
+    bspc {desktop -f,node -d} '{1-9,10,V}' & $HOME/.config/lemonbar/melonbar
 #super + {_,shift +} {1-9,0,v}
 #    opt={desktop -f,node -d}
 #   desktop='{1-9,10,V}'; \
@@ -20,10 +20,10 @@ super + {_,shift +} {1-9,0,v}
 
 # Go back to previous desktop
 super + Tab
-    bspc desktop -f last & $HOME/.config/lemonbar/statusline.sh
+    bspc desktop -f last & $HOME/.config/lemonbar/melonbar
 
 super + bracket{left,right}
-    bspc desktop -f {prev,next}.local & $HOME/.config/lemonbar/statusline.sh
+    bspc desktop -f {prev,next}.local & $HOME/.config/lemonbar/melonbar
 
 # focus/swap
 super + {_,shift + }{Left,Down,Up,Right}
