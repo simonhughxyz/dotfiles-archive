@@ -1,7 +1,7 @@
 #! /bin/sh
 
 sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" &
-$HOME/.config/lemonbar/melonbar run &
+melonbar run &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10 'V'
 

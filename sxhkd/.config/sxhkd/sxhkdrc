@@ -14,11 +14,11 @@ super + shift + m
 
 # Key Locks
 {@}Caps_Lock
-    refbar
+    melonbar
 {@}Num_Lock
-    refbar
+    melonbar
 {@}Scroll_Lock
-    refbar
+    melonbar
 
 # Apps
 super + shift + h
