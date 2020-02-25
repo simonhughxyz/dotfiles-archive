@@ -1,8 +1,10 @@
 #!/bin/sh
 
-delim="%{F#d5d5d5}|"
+delim="%{F#d5d5d5}|%{F-}"
 
 _keystate() {
+    f_color="e82e1e"
+
     lockline=$(xset -q | grep "Num Lock")
 
     caplock=$(echo "$lockline" | awk '{print $4}')
@@ -11,11 +13,11 @@ _keystate() {
 
     message=""
 
-    [ "$caplock" = "on" ] && message="%{F#e82e1e%{FAPLOCK $delim"
-    [ "$numlock" = "on" ] && message="$message %{F#e82e1e}NUMLOCK $delim"
-    [ "$scrolllock" = "on" ] && message="$message %{F#e82e1e}SCROLLLOCK $delim"
+    [ "$caplock" = "on" ] && message="%{F#$f_color}CAPLOCK $delim"
+    [ "$numlock" = "on" ] && message="$message %{F#$f_color}NUMLOCK $delim"
+    [ "$scrolllock" = "on" ] && message="$message %{F#$f_color}SCROLLLOCK $delim"
 
-    echo "$message"
+    echo "$message%{F-}"
 }
 
 _weather() {
@@ -36,10 +38,14 @@ _weather() {
 }
 
 _memory() {
-    free -h | awk '/Mem:/ {print $3 "/" $2}'
-}
+    f_color="C0C000"
+
+    echo "%{F#$f_color}📊 $(free -h | awk '/Mem:/ {print $3 "/" $2}')%{F-}"
+    }
 
 _volume() {
+    f_color="98C379"
+
 	[ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && return 0
 
 	vol=$(pulsemixer --get-volume | awk '{print $1}')
@@ -52,17 +58,21 @@ _volume() {
 		icon="🔉"
 	fi
 
-	printf "%s %s%%\n" "$icon" "$vol"
+	printf "%%{F#$f_color}%s %s%%\n%%{F-}" "$icon" "$vol"
 }
 
 _update() {
+    f_color="b29f27"
+
     updatenr=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
-    [ "$updatenr" != "0" ] && printf "$delim %{F#b29f27} 📦 $updatenr"
+    [ "$updatenr" != "0" ] && printf "$delim %{F#$f_color} 📦 $updatenr%{F-}"
 }
 
 _record() {
+    f_color="e82e1e"
+
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
-	[ -e "$recpid_file" ] && echo "%{F#e82e1e}⏺ rec $delim"
+	[ -e "$recpid_file" ] && echo "%{F#$f_color}⏺ rec $delim%{F-}"
 }
 
 _battery() {
@@ -81,27 +91,31 @@ _battery() {
 }
 
 _uptime() {
-    uptime | awk '{print $3}' | cut -d',' -f 1
+    f_color="c98a1e"
+
+    echo "%{F#$f_color}⬆ $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
 }
 
 _desktops() {
-    f_color="%{F#c25704}"
-    f_selcolor="%{F#ffffff}"
-    b_selcolor="%{B#c25704}"
+    f_color="c25704"
+    f_selcolor="ffffff"
+    b_selcolor="c25704"
 
     current=$(bspc query -D -d --names)
-    color_current="$f_selcolor$b_selcolor $current $f_color%{B-}"
+    color_current="%{F#$f_selcolor}%{B#$b_selcolor} $current %{F#$f_color}%{B-}"
     desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
 
-    echo "$f_color$desktops"
+    echo "%{F#$f_color}$desktops%{F-}%{B-}"
 }
 
 _time() {
-    echo "%{F#61AEEE}🕒 $(date '+%H:%M')%{F-}"
+    f_color="61AEEE"
+    echo "%{F#$f_color}🕒 $(date '+%H:%M')%{F-}"
 }
 
 _date() {
-    echo "%{F#F79494}📅 $(date '+%a %d %B %Y')%{F-}"
+    f_color="F79494"
+    echo "%{F#$f_color}📅 $(date '+%a %d %B %Y')%{F-}"
 }
 
 status() {
@@ -109,19 +123,16 @@ status() {
     _desktops
 
     echo "%{r}"
-    # keystate
+    _keystate
 
 	# record
 
-    echo "%{F#c98a1e}⬆"
     _uptime
     echo "$delim"
 
-    echo "%{F#C0C000}📊"
     _memory 
     echo "$delim"
     
-	echo "%{F#98C379}"
 	_volume
 	echo "$delim"
 
