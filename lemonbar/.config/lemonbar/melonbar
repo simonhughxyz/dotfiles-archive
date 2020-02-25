@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# LIMEBAR
+# Simon Hugh Moore
+#
+# Set config options for lemonbar
+
+# Kill any running lemonbar
+# pgrep -x lemonbar > /dev/null && pkill -x lemonbar &
+
+# font="-xos4-terminesspowerline-medium-r-normal--12-120-72-72-c-60-iso10646-1"
+font="-xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1"
+# icon_font="-xos4-terminusicons2mono-medium-r-normal--12-120-72-72-m-60-iso8859-1"
+icon_font="Font Awesome"
+geometry="x30"
+f_color="#DDDDDD"
+b_color="#202020"
+
+pipe=/tmp/limebar_statusline
+
+
+_update_pipe() {
+    if [ -p $pipe ]; then
+        $HOME/.config/lemonbar/statusline2.sh > $pipe
+    else
+        echo "FIFO pipe missing, first execute '$(basename $0) run'."
+    fi
+}
+
+
+_run(){
+    # Create pipe if it doesn't exist and
+    #  remove it when exit.
+    # If pipe does exist, exit.
+    if { mkfifo $pipe 2>/dev/null; }; then
+        trap 'exit 1' INT HUP QUIT TERM ALRM USR1
+        trap "rm -f $pipe" EXIT
+    else
+        echo "$(basename $0) is already running, exiting..."
+        exit
+    fi
+
+    # pass contents of pipe into lemonbar
+    tail -f "$pipe" | lemonbar -p -f "${font}" -f "${icon_font}" -f "Font Awesome" -g "${geometry}" -B "${b_color}" -F "${f_color}" &
+
+    # update pipe in an infinite loop that iterates every
+    # 30 seconds
+    while :; do
+        _update_pipe
+        sleep 30
+    done
+}
+
+case $1 in
+    run) _run ;;
+    *) _update_pipe ;;
+esac

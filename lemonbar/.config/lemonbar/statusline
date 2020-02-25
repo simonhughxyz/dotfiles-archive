@@ -1,14 +1,8 @@
 #!/bin/sh
 
-pipe=/tmp/limebar_statusline
 delim="%{F#d5d5d5}|"
 
-# create pipe if it doesn't exist.
-if [ ! -p $pipe ]; then
-    mkfifo $pipe
-fi
-
-keystate() {
+_keystate() {
     lockline=$(xset -q | grep "Num Lock")
 
     caplock=$(echo "$lockline" | awk '{print $4}')
@@ -24,7 +18,7 @@ keystate() {
     echo "$message"
 }
 
-weather() {
+_weather() {
     w="$(curl -s wttr.in?format=%t,%C)"
     desc="${w#*,}"
     temp="${w%,*}"
@@ -41,11 +35,11 @@ weather() {
     echo "$symbol $temp"
 }
 
-memory() {
+_memory() {
     free -h | awk '/Mem:/ {print $3 "/" $2}'
 }
 
-volume() {
+_volume() {
 	[ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && return 0
 
 	vol=$(pulsemixer --get-volume | awk '{print $1}')
@@ -61,17 +55,17 @@ volume() {
 	printf "%s %s%%\n" "$icon" "$vol"
 }
 
-update() {
+_update() {
     updatenr=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
     [ "$updatenr" != "0" ] && printf "$delim %{F#b29f27} 📦 $updatenr"
 }
 
-record() {
+_record() {
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
 	[ -e "$recpid_file" ] && echo "%{F#e82e1e}⏺ rec $delim"
 }
 
-battery() {
+_battery() {
     # Don't run if acpi not available
     command -v acpi > /dev/null 2>&1 || exit 1
     bat_empty=" "
@@ -86,11 +80,11 @@ battery() {
     echo "$delim $BAT0 $BAT1"
 }
 
-uptime() {
+_uptime() {
     uptime | awk '{print $3}' | cut -d',' -f 1
 }
 
-desktops() {
+_desktops() {
     f_color="%{F#c25704}"
     f_selcolor="%{F#ffffff}"
     b_selcolor="%{B#c25704}"
@@ -104,7 +98,7 @@ desktops() {
 
 status() {
     echo "%{l}"
-    desktops
+    _desktops
 
     echo "%{r}"
     # keystate
@@ -112,15 +106,15 @@ status() {
 	# record
 
     echo "%{F#c98a1e}⬆"
-    uptime
+    _uptime
     echo "$delim"
 
     echo "%{F#C0C000}📊"
-    memory 
+    _memory 
     echo "$delim"
     
 	echo "%{F#98C379}"
-	volume
+	_volume
 	echo "$delim"
 
     echo "%{F#F79494}📅"
@@ -131,33 +125,9 @@ status() {
     date '+%H:%M'
 
     # echo "$delim"
-    battery
+    _battery
 
     # update
 }
 
-update_pipe() {
-    echo "$(status | tr '\n' ' ')" >$pipe &
-}
-
-loop() {
-    trap 'exit 1' INT HUP QUIT TERM ALRM USR1
-    lock_file=/tmp/statusline.lock
-    if { set -C; 2>/dev/null >$lock_file; }; then
-        trap "rm -f $lock_file" EXIT
-    else
-        echo "lock file exists, exiting..."
-        exit
-    fi
-
-    while :; do
-        update_pipe
-        sleep 30
-    done
-}
-
-case $1 in
-    loop) loop;;
-    *) update_pipe;;
-esac
-exit
+status | tr '\n' ' ' && exit
