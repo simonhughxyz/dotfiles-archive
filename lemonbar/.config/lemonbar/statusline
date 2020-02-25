@@ -96,6 +96,14 @@ _desktops() {
     echo "$f_color$desktops"
 }
 
+_time() {
+    echo "%{F#61AEEE}🕒 $(date '+%H:%M')%{F-}"
+}
+
+_date() {
+    echo "%{F#F79494}📅 $(date '+%a %d %B %Y')%{F-}"
+}
+
 status() {
     echo "%{l}"
     _desktops
@@ -117,14 +125,11 @@ status() {
 	_volume
 	echo "$delim"
 
-    echo "%{F#F79494}📅"
-    date '+%a %d %B %Y'
+    _date
     echo "$delim"
 
-    echo "%{F#61AEEE}🕒"
-    date '+%H:%M'
+    _time
 
-    # echo "$delim"
     _battery
 
     # update
