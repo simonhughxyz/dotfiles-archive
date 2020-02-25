@@ -21,7 +21,7 @@ pipe=/tmp/limebar_statusline
 
 _update_pipe() {
     if [ -p $pipe ]; then
-        $HOME/.config/lemonbar/statusline2.sh > $pipe
+        $HOME/.config/lemonbar/statusline > $pipe
     else
         echo "FIFO pipe missing, first execute '$(basename $0) run'."
     fi
