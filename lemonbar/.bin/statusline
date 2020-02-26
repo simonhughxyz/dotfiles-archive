@@ -111,6 +111,8 @@ _desktops() {
     color_current="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:} $current %{A}%{F-}%{B-}"
 
     desktops=$(bspc query -D --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
+
+    # Uncomment to show desktops without clickable areas.
     # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
 
     echo "$desktops%{F-}%{B-}"
