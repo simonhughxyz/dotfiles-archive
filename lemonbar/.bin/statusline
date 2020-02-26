@@ -97,8 +97,8 @@ _uptime() {
 }
 
 _desktops() {
-    f_color="ffffff"
-    b_color="c25704"
+    f_color="ffffff"    # Foreground color for active desktop
+    b_color="c25704"    # Background color for active desktop
 
     # Change to given desktop with left mouse click
     click_command="bspc desktop -f '&' \& melonbar"
@@ -107,14 +107,21 @@ _desktops() {
     # on active (highlighted) desktop
     active_click_command="bspc desktop -f last.local \& melonbar"
 
+    # Get the current active desktop
     current=$(bspc query -D -d --names)
+
+    # Format the current active desktop with correct colors
+    # and click command
     color_current="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:} $current %{A}%{F-}%{B-}"
 
+    # Get a list of all desktops and format them with click commands.
+    # Replace the active dektop with color_current.
     desktops=$(bspc query -D --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
 
     # Uncomment to show desktops without clickable areas.
     # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
 
+    # Print of the formated desktop list and reset all colors.
     echo "$desktops%{F-}%{B-}"
 }
 
