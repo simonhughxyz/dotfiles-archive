@@ -97,15 +97,23 @@ _uptime() {
 }
 
 _desktops() {
-    f_color="c25704"
-    f_selcolor="ffffff"
-    b_selcolor="c25704"
+    f_color="ffffff"
+    b_color="c25704"
+
+    # Change to given desktop with left mouse click
+    click_command="bspc desktop -f '&' \& melonbar"
+
+    # Change to last used desktop with left mouse click
+    # on active (highlighted) desktop
+    active_click_command="bspc desktop -f last.local \& melonbar"
 
     current=$(bspc query -D -d --names)
-    color_current="%{F#$f_selcolor}%{B#$b_selcolor} $current %{F#$f_color}%{B-}"
-    desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
+    color_current="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:} $current %{A}%{F-}%{B-}"
 
-    echo "%{F#$f_color}$desktops%{F-}%{B-}"
+    desktops=$(bspc query -D --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
+    # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
+
+    echo "$desktops%{F-}%{B-}"
 }
 
 _time() {
