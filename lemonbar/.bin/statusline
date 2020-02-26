@@ -163,4 +163,6 @@ status() {
     # update
 }
 
+# Remove all newline chars and print status.
+# Lemonbar requires a newline char at the end of the statusline.
 status | tr '\n' ' ' && echo
