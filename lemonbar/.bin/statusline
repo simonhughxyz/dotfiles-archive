@@ -116,7 +116,7 @@ _desktops() {
 
     # Get a list of all desktops and format them with click commands.
     # Replace the active dektop with color_current.
-    desktops=$(bspc query -D --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
+    desktops=$(bspc query -D -m --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
 
     # Uncomment to show desktops without clickable areas.
     # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
