@@ -146,4 +146,4 @@ status() {
     # update
 }
 
-status | tr '\n' ' ' && exit
+status | tr '\n' ' ' && echo
