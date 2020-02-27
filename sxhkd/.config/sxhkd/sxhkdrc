@@ -25,6 +25,11 @@ super + t
     $TERMINAL -c htop -n htop -e htop
 super + w
     $BROWSER -P privacy
+super + space; {t,c,g,v}
+    {tor-browser, \
+    chromium, \
+    google-chrome-stable, \
+    virt-manager}
 
 # Dmenu
 super + a
