@@ -17,7 +17,7 @@ clickable_areas=12  # Number of clickable areas.
 f_color="#c25704"
 b_color="#202020"
 
-pipe=/tmp/limebar_statusline
+pipe=/tmp/melonbar_pipe
 
 
 _update_pipe() {
