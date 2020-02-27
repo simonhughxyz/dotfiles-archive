@@ -23,6 +23,8 @@ super + shift + m
 # Apps
 super + t
     $TERMINAL -c htop -n htop -e htop
+super + w
+    $BROWSER -P privacy
 
 # Dmenu
 super + a
