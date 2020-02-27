@@ -5,10 +5,8 @@ super + Return
     $TERMINAL
 super + x
     lock
-super + w
-    $BROWSER -P privacy
-# super + shift + w
-#    feh --bg-fill --randomize ~/Pictures/*/*-ls-*
+super + shift + w
+    feh --bg-fill --randomize ~/Pictures/*/*-ls-*
 super + shift + m
     togglemouse
 
