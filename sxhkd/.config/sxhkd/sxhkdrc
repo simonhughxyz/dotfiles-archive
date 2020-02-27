@@ -19,7 +19,7 @@ super + space; m
     melonbar
 
 # Apps
-super + t
+super + h
     $TERMINAL -c htop -n htop -e htop
 super + w
     $BROWSER -P privacy
