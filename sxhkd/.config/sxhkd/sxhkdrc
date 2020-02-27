@@ -21,7 +21,7 @@ super + shift + m
     melonbar
 
 # Apps
-super + shift + h
+super + t
     st -n htop -e htop
 
 # Dmenu
