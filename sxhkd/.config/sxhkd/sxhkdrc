@@ -22,7 +22,7 @@ super + shift + m
 
 # Apps
 super + t
-    st -n htop -e htop
+    $TERMINAL -c htop -n htop -e htop
 
 # Dmenu
 super + a
