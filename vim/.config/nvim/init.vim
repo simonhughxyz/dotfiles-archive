@@ -182,8 +182,8 @@ hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
 " set color of 80 char width column
 highlight ColorColumn ctermbg=0 guibg=#303030
 " change color of cursor line
-highlight CursorLine ctermbg=0 guibg=#303030
-highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#303030
+highlight CursorLine ctermbg=0 guibg=#000000
+highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4           " 4 space tab
@@ -266,17 +266,18 @@ function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
     exe 'hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000'
     exe 'hi statusline ctermbg=2'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guifg=#008000'
-    exe 'hi CursorLine ctermbg=0 guibg=#008000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000'
+    exe 'hi CursorLine ctermbg=0 guibg=#000000'
+
   elseif (mode() =~# '\v(v|V|)')
     exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
     exe 'hi statusline ctermbg=3'
-    exe 'hi CursorLineNr ctermfg=3 guifg=#808000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=3 guifg=#808000'
   elseif (mode() ==# 'i')
     exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
     exe 'hi statusline ctermbg=6'
-    exe 'hi CursorLineNr ctermbg=16 ctermfg=6 guifg=#008080'
-    exe 'hi CursorLine ctermbg=16 guibg=#008000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=#000000 guifg=#008080'
+    exe 'hi CursorLine ctermbg=16 guibg=#000000'
   else
     exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
     exe 'hi statusline ctermbg=1'
@@ -286,7 +287,7 @@ function! ChangeStatuslineColor()
   return ''
 endfunction
 
-hi statusline ctermfg=232 ctermbg=2
+hi statusline ctermfg=232 ctermbg=2 guibg=#aaaaaa guifg=#101010
 
 "define 3 custom highlight groups
 hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000
