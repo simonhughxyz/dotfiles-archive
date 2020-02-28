@@ -111,7 +111,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'wellle/targets.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
+Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'tmhedberg/SimpylFold'
 Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
@@ -163,13 +164,19 @@ let g:indentLine_setConceal = 0
 " Colors {{{
 set background=dark
 set t_Co=256
-"if (has("termguicolors"))
-"  set termguicolors
-"endif
+if (has("termguicolors"))
+    set t_8f=\[[38;2;%lu;%lu;%lum
+    set t_8b=\[[48;2;%lu;%lu;%lum
+    set termguicolors
+
+    " nvim-colorizer only works with termguicolors
+    lua require 'colorizer'.setup()
+endif
 syntax enable           " enable syntax processing
 colorscheme gruvbox
 " Make background transparent
-hi Normal ctermbg=NONE
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
 " set custom syntax colors
 hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
 " set color of 80 char width column
