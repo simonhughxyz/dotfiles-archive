@@ -268,20 +268,27 @@ function! ChangeStatuslineColor()
     exe 'hi statusline ctermbg=2'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000'
     exe 'hi CursorLine ctermbg=0 guibg=#000000'
-
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#008000 guifg=#000000'
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#008000 guifg=#000000'
   elseif (mode() =~# '\v(v|V|)')
     exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
     exe 'hi statusline ctermbg=3'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=3 guifg=#808000'
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#808000 guifg=#000000'
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#808000 guifg=#000000'
   elseif (mode() ==# 'i')
     exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
     exe 'hi statusline ctermbg=6'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=#000000 guifg=#008080'
     exe 'hi CursorLine ctermbg=16 guibg=#000000'
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#008080 guifg=#000000'
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#008080 guifg=#000000'
   else
     exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
     exe 'hi statusline ctermbg=1'
     exe 'hi CursorLineNr ctermfg=1 guifg=#800000'
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#800000 guifg=#eeeeee'
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#800000 guifg=#eeeeee'
   endif
 
   return ''
