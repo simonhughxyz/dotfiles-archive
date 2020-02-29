@@ -357,9 +357,6 @@ let g:netrw_banner = 0
 " FZF {{{
 " set rtp+=~/.fzf
 " }}}
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-" }}}za
 " Input mode Shortcuts {{{
 inoremap \\ \z
 " }}}
