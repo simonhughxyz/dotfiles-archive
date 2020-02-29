@@ -146,3 +146,5 @@ function beg {
 
 # Source fzf keybindingd
 [ -e /usr/share/doc/fzf/key-bindings.bash ] && source /usr/share/doc/fzf/key-bindings.bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
