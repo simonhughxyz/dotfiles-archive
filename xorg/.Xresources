@@ -10,8 +10,8 @@ URxvt.font:      xft:monospace:size=18
 *.scrollBar:     false
 *.urlLauncher:   firefox
 !! Colour scheme
-*background:     #0e0e0e
-*foreground:     #fff
+*background:     #000000
+*foreground:     #ffffff
 *highlightColor: #444
 !! The default colors are "Gruvbox"
 *.color0:        #1d2021
