@@ -1,6 +1,6 @@
 st.termName:     st-256color
 st.opacity:      200
-st.font:         Liberation Mono:pixelsize=30:antialias=true:autohint=true;
+st.font:         Liberation Mono:pixelsize=28:antialias=true:autohint=true;
 URxvt.termName:  rxvt
 URxvt.font:      xft:monospace:size=18
 *.borderLess:    false
