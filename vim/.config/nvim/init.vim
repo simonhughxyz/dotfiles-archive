@@ -259,7 +259,7 @@ let l:currentmode={
             \ 'r?' : 'Confirm',
             \ '!'  : 'Shell',
             \}
-    return currentmode[mode()]
+    return get(currentmode, mode(), 'Normal')
 endfunctio
 
 " Automatically change the statusline color depending on mode
