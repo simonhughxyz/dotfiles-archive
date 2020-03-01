@@ -301,6 +301,10 @@ endfunction
 if version >= 700
     au InsertEnter * call ChangeStatuslineColor()
     au InsertLeave * call ChangeStatuslineColor()
+    au CmdlineEnter * call ChangeStatuslineColor()
+    au CmdlineLeave * call ChangeStatuslineColor()
+    au CmdwinEnter * call ChangeStatuslineColor()
+    au CmdwinLeave * call ChangeStatuslineColor()
 endif
 
 hi statusline ctermfg=232 ctermbg=2 guibg=#aaaaaa guifg=#101010
