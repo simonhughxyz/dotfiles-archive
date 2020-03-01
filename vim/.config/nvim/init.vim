@@ -301,8 +301,8 @@ endfunction
 if version >= 700
     au InsertEnter * call ChangeStatuslineColor()
     au InsertLeave * call ChangeStatuslineColor()
-    au CmdlineEnter * call ChangeStatuslineColor()
-    au CmdlineLeave * call ChangeStatuslineColor()
+    au CmdlineEnter * redrawstatus
+    au CmdlineLeave * redrawstatus
     au CmdwinEnter * call ChangeStatuslineColor()
     au CmdwinLeave * call ChangeStatuslineColor()
 endif
