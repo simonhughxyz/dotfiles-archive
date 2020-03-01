@@ -296,6 +296,13 @@ function! ChangeStatuslineColor()
   return ''
 endfunction
 
+" Fix for delay in color change
+" so far only works with insert mode.
+if version >= 700
+    au InsertEnter * call ChangeStatuslineColor()
+    au InsertLeave * call ChangeStatuslineColor()
+endif
+
 hi statusline ctermfg=232 ctermbg=2 guibg=#aaaaaa guifg=#101010
 
 "define 3 custom highlight groups
