@@ -258,6 +258,7 @@ let l:currentmode={
             \ 'rm' : 'More',
             \ 'r?' : 'Confirm',
             \ '!'  : 'Shell',
+            \ 't'  : 'Terminal',
             \}
     return get(currentmode, mode(), 'Normal')
 endfunctio
