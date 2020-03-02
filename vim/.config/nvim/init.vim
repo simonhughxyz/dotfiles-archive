@@ -263,34 +263,44 @@ let l:currentmode={
     return get(currentmode, mode(), 'Normal')
 endfunctio
 
+" define statusline and line number color for the vim modes
+let g:colors = {
+    \ 'black':  '#000000',
+    \ 'white':  '#eeeeee',
+    \ 'normal': '#008000',
+    \ 'visual': '#808000',
+    \ 'insert': '#008080',
+    \ 'else':   '#800000',
+\}
+
 " Automatically change the statusline color depending on mode
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
-    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000'
+    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
     exe 'hi statusline ctermbg=2'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000'
-    exe 'hi CursorLine ctermbg=0 guibg=#000000'
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#008000 guifg=#000000'
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#008000 guifg=#000000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=' . g:colors.black . ' guifg=' . g:colors.normal
+    exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.black
   elseif (mode() =~# '\v(v|V|)')
-    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=#808000 guifg=#000000'
+    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=' . g:colors.visual . ' guifg=' . g:colors.black
     exe 'hi statusline ctermbg=3'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=3 guifg=#808000'
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#808000 guifg=#000000'
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#808000 guifg=#000000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=3 guifg=' . g:colors.visual
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.visual . ' guifg=' . g:colors.black
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.visual . ' guifg=' . g:colors.black
   elseif (mode() ==# 'i')
-    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=#008080 guifg=#000000'
+    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=' . g:colors.insert . ' guifg=' . g:colors.black
     exe 'hi statusline ctermbg=6'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=#000000 guifg=#008080'
-    exe 'hi CursorLine ctermbg=16 guibg=#000000'
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#008080 guifg=#000000'
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#008080 guifg=#000000'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.black . ' guifg=' . g:colors.insert
+    exe 'hi CursorLine ctermbg=16 guibg=' . g:colors.black
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.insert . ' guifg=' . g:colors.black
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.insert . ' guifg=' . g:colors.black
   else
-    exe 'hi User1 ctermbg=1 ctermfg=255  guibg=#800000 guifg=#eeeeee'
+    exe 'hi User1 ctermbg=1 ctermfg=255  guibg=' . g:colors.else . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=1'
-    exe 'hi CursorLineNr ctermfg=1 guifg=#800000'
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=#800000 guifg=#eeeeee'
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=#800000 guifg=#eeeeee'
+    exe 'hi CursorLineNr ctermfg=1 guifg=' . g:colors.else
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.else . ' guifg=' . g:colors.white
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.else . ' guifg=' . g:colors.white
   endif
 
   return ''
@@ -309,14 +319,16 @@ if version >= 700
     au TermLeave * call ChangeStatuslineColor()
 endif
 
-hi statusline ctermfg=232 ctermbg=2 guibg=#aaaaaa guifg=#101010
+" main statusline color
+" background and foreground are swapped out of some reason.
+exe 'hi statusline ctermfg=232 ctermbg=2 guibg=' . g:colors.white . ' guifg=#101010'
 
 "define 3 custom highlight groups
-hi User1 ctermbg=2 ctermfg=0  guibg=#008000 guifg=#000000
-hi User2 ctermbg=5 ctermfg=0  guibg=#008000 guifg=#000000
-hi User3 ctermbg=4 ctermfg=0  guibg=#008000 guifg=#000000
-hi User8 ctermbg=234 ctermfg=248  guibg=#008000 guifg=#000000
-hi User9 ctermbg=236 ctermfg=248 guibg=#008000 guifg=#000000
+exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+exe 'hi User2 ctermbg=5 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+exe 'hi User3 ctermbg=4 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.black
 
 set laststatus=2
 set statusline=
