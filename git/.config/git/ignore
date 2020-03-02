@@ -17,3 +17,6 @@ tmp/
 
 # Vim swap files
 *.swp
+
+# ctags file
+tags
