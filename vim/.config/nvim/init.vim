@@ -305,6 +305,8 @@ if version >= 700
     au CmdlineLeave * redrawstatus
     au CmdwinEnter * call ChangeStatuslineColor()
     au CmdwinLeave * call ChangeStatuslineColor()
+    au TermEnter * call ChangeStatuslineColor()
+    au TermLeave * call ChangeStatuslineColor()
 endif
 
 hi statusline ctermfg=232 ctermbg=2 guibg=#aaaaaa guifg=#101010
