@@ -19,7 +19,7 @@ tmp/
 *.swp
 
 # ctags file
-tags
+/tags
 # Used by gutentags vim plugin
-tags.lock
-tags.temp
+/tags.lock
+/tags.temp
