@@ -115,7 +115,6 @@ Plug 'wellle/targets.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'ap/vim-css-color'
-Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'tmhedberg/SimpylFold'
 Plug 'plasticboy/vim-markdown'
 Plug 'Yggdroot/indentLine'
@@ -131,6 +130,11 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'chaoren/vim-wordmotion'
 Plug 'AndrewRadev/switch.vim'
+
+" Neovim Plugins
+if has('nvim')
+    Plug 'norcalli/nvim-colorizer.lua'
+endif
 call plug#end()
 " }}}
 " Plugin Settings {{{
@@ -168,12 +172,14 @@ let g:indentLine_setConceal = 0
 set background=dark
 set t_Co=256
 if (has("termguicolors"))
-    set t_8f=\[[38;2;%lu;%lu;%lum
-    set t_8b=\[[48;2;%lu;%lu;%lum
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
     set termguicolors
 
-    " nvim-colorizer only works with termguicolors
-    lua require 'colorizer'.setup()
+    " nvim-colorizer only works with termguicolors and neovim
+    if has('nvim')
+        lua require 'colorizer'.setup()
+    endif
 endif
 syntax enable           " enable syntax processing
 colorscheme gruvbox
@@ -317,8 +323,10 @@ if version >= 700
     au CmdlineLeave * redrawstatus
     au CmdwinEnter * call ChangeStatuslineColor()
     au CmdwinLeave * call ChangeStatuslineColor()
-    au TermEnter * call ChangeStatuslineColor()
-    au TermLeave * call ChangeStatuslineColor()
+    if has('nvim')
+        au TermEnter * call ChangeStatuslineColor()
+        au TermLeave * call ChangeStatuslineColor()
+    endif
 endif
 
 " main statusline color
