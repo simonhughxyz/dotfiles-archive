@@ -20,3 +20,6 @@ tmp/
 
 # ctags file
 tags
+# Used by gutentags vim plugin
+tags.lock
+tags.temp
