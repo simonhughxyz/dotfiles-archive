@@ -664,6 +664,7 @@ endfunction
 " Line Shortcuts {{{
 " Function Keys
 " <F1> is paste toggle
+nnoremap <F4> :make<CR>
 nnoremap <F9> :TagbarOpenAutoClose<CR>
 nnoremap <F10> :TagbarToggle<CR>
 " Replace all
