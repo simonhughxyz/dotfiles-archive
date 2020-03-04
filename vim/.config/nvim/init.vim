@@ -71,7 +71,7 @@ set foldlevelstart=0   " start with fold level of 1
 highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
 " }}}
 " Dictionary and Spelling {{{
-set spelllang=en_gb
+set spelllang=en_us
 set dictionary+=~/.vim/words/english
 set dictionary+=~/.vim/words/new-german
 set thesaurus+=~/.vim/words/th_english
