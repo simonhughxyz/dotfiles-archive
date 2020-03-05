@@ -117,14 +117,14 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'ap/vim-css-color'
 " Plug 'tmhedberg/SimpylFold'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'Yggdroot/indentLine'
-Plug 'baskerville/vim-sxhkdrc'
-Plug 'fourjay/vim-password-store'
+Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
+Plug 'fourjay/vim-password-store', { 'for': 'pass' }
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'dhruvasagar/vim-table-mode'
+Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
