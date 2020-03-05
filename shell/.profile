@@ -1,7 +1,7 @@
 ##---PATHS---##
 ##---PATHS---##
 export HOME="/home/simon"
-export LBIN="$HOME/.bin"
+export LBIN="$HOME/.bin:$HOME/bin"
 export SCRIPTS="$LBIN/scripts"
 export DMENU="$LBIN/dmenu"
 export WRAPPER="$LBIN/wrapper"
