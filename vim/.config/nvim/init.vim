@@ -102,6 +102,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 " Plug '/usr/bin/fzf'
+Plug 'universal-ctags/ctags', { 'do': './autogen.sh;./configure --prefix=$HOME;make install'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
