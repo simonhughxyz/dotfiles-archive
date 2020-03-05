@@ -124,7 +124,7 @@ Plug 'fourjay/vim-password-store', { 'for': 'pass' }
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
