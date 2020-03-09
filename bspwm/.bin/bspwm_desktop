@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# BSPWM_DESKTOP 
+# Simon Hugh Moore
+#
+# Change to desktop while implementing:
+# - Dynamic desktops: Only keep desktops open that have nodes in them.
+# - Return to last: If trying to go to already active desktop, go to previous.
+
+

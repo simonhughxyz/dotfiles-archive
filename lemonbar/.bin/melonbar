@@ -38,7 +38,7 @@ _run(){
         trap "rm -f $pipe" EXIT
     else
         echo "$(basename $0) is already running, exiting..."
-        exit
+        exit 1
     fi
 
     # pass contents of pipe into lemonbar

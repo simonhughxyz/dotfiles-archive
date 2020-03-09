@@ -29,8 +29,4 @@ sxhkd > ~/.local/share/sxhkd/sxhkd.log 2>&1 & # keybindings
 bluetoothctl power on # Switch on bluetooth
 # ntpd -qg    # set time and date from ntp server
 
-exec bspwm
-
-# while true; do
-#     /usr/local/bin/bspwm 2> ~/.local/share/bspwm/bspwm.log
-# done
+exec bspwm > ~/.local/share/bspwm/bspwm.log 2>&1
