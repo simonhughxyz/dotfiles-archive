@@ -44,6 +44,9 @@ _run(){
     # pass contents of pipe into lemonbar
     tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
 
+    # Make sure lemonbar quits when script exits
+    trap 'killall lemonbar' EXIT
+
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
