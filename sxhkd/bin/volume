@@ -17,4 +17,4 @@ else
 fi
 
 # refresh statusbar
-$HOME/.config/lemonbar/statusline.sh
+melonbar
