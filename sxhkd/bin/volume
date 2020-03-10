@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Set, raise, lower or mute volume while refreshing i3blocks
+# To set volume simply provide a volume level as a argument (volume 10)
+# To raise or lower volume use a + or - infront of level (volume +/-10)
+# To toggle mute pass the mute or m argument (volume m/mute)
+
+[ "$1" ] && level=$1 || level=$(cat -)
+
+
+if echo "$level" | grep -qE '\+|-'; then
+    pulsemixer --change-volume $level
+elif [ "$level" = "mute" ] || [ "$level" = "m" ]; then
+    pulsemixer --toggle-mute
+else
+    pulsemixer --set-volume $level
+fi
+
+# refresh statusbar
+$HOME/.config/lemonbar/statusline.sh
