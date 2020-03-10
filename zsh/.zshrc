@@ -80,14 +80,21 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+
+# First check if file exists before sourcing it.
+_source() {
+    [ -f $1 ] && source $1
+}
+
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shell/alias.sh" ] && source "$HOME/.config/shell/alias.sh"
-[ -f "$HOME/.config/shell/alias.zsh" ] && source "$HOME/.config/shell/alias.zsh"
+_source "$HOME/.config/shell/alias.sh"
+_source "$HOME/.config/shell/alias.zsh"
 
 # Load autojump
-source /usr/share/autojump/autojump.zsh
+_source /usr/share/autojump/autojump.zsh
+
+# Load fzf
+_source ~/.fzf.zsh
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+_source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
