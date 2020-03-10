@@ -96,5 +96,8 @@ _source /usr/share/autojump/autojump.zsh
 # Load fzf
 _source ~/.fzf.zsh
 
+# Load autosuggestions
+_source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Load zsh-syntax-highlighting; should be last.
 _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
