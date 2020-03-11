@@ -24,16 +24,39 @@ setopt HIST_REDUCE_BLANKS     # remove blank lines from history
 umask 077 # leads to 600 for files and 700 for directories
 
 # Prompt
+# Git status
+git_status() {
+    local message=""
+    local message_color="%F{5}"
+
+    # https://git-scm.com/docs/git-status#_short_format
+    local staged=$(git status --porcelain 2>/dev/null | grep -e "^[MADRCU]")
+    local unstaged=$(git status --porcelain 2>/dev/null | grep -e "^[MADRCU? ][MADRCU?]")
+
+    if [[ -n ${staged} ]]; then
+        message_color="%F{green}"
+    elif [[ -n ${unstaged} ]]; then
+        message_color="%F{yellow}"
+    fi
+
+    local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [[ -n ${branch} ]]; then
+        message+="${message_color}${branch}%f"
+    fi
+
+    echo -n "${message}"
+}
+
 autoload -U colors && colors
-# Git
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-zstyle ':vcs_info:git:*' formats '%F{5}(%b)%f'
-zstyle ':vcs_info:*' enable git
+# # Git
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+# zstyle ':vcs_info:git:*' formats '%F{5}(%b)%f'
+# zstyle ':vcs_info:*' enable git
 # set prompt
-RPROMPT="\$vcs_info_msg_0_"
+RPROMPT='$(git_status)'
 PROMPT="%F{yellow}%1~ %F{blue}%(!.#.>)%f%b "
 
 
