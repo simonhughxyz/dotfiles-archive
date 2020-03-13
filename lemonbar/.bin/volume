@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# VOLUME
+# Simon H Moore
+# 
 # Set, raise, lower or mute volume while refreshing melonbar
 # To set volume simply provide a volume level as an argument (volume 10)
 # To raise or lower volume use a + or - in front of level (volume +/-10)
