@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Set, raise, lower or mute volume while refreshing melonbar
+# To set volume simply provide a volume level as an argument (volume 10)
+# To raise or lower volume use a + or - in front of level (volume +/-10)
+# To toggle mute pass the mute or m argument (volume m/mute)
+
+case $1 in
+    m|mute) pulsemixer --toggle-mute ;;
+    [0-9]|[1-9][0-9]|1[0-4][0-9]|150) pulsemixer --set-volume $1 ;;
+    [+-][0-9]|[+-][1-9][0-9]|[+-]1[0-4][0-9]|[+-]150) pulsemixer --change-volume $1 ;;
+    *) echo "Invalid option: $1" && exit 1 ;;
+esac
+
+# refresh statusbar
+melonbar
