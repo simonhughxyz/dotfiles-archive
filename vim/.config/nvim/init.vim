@@ -280,7 +280,7 @@ let g:colors = {
     \ 'white':  '#eeeeee',
     \ 'normal': '#008000',
     \ 'visual': '#808000',
-    \ 'insert': '#008080',
+    \ 'insert': '#00a0a0',
     \ 'else':   '#800000',
 \}
 
