@@ -22,3 +22,4 @@ bspc config focused_border_color "#C25704"
 
 # Rules
 bspc rule -a mpv desktop='V'
+bspc rule -a Zathura state=tiled
