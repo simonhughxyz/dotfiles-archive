@@ -258,19 +258,19 @@
     # Xev might be helpful to find names for keys.
 
     # Close notification.
-    close = mod4+bracketright
+    close = mod4+mod1+minus
 
     # Close all notifications.
-    close_all = mod4+shift+bracketright
+    close_all = mod4+mod1+shift+minus
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1". Make sure this key actually exists on your keyboard layout,
     # e.g. check output of 'xmodmap -pke'
-    history = mod4+bracketleft
+    history = mod4+mod1+equal
 
         # Context menu.
-        context = mod4+shift+bracketleft
+        context = mod4+mod1+plus
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
