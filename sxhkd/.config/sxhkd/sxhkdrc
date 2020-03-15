@@ -24,14 +24,20 @@ super + h
 super + w
     $BROWSER -P privacy
 
-super + alt + c
-    chromium
+super + alt + w; {c,g} 
+    {chromium,google-chrome-stable}
 super + alt + t
     tor-browser
-super + alt + g
-    google-chrome-stable
 super + alt + v
     virt-manager
+super + alt + s
+    steam
+super + alt + l
+    libreoffice
+super + alt + g
+    gimp
+super + alt + a
+    audacity
 
 # Dmenu
 super + a
@@ -113,20 +119,6 @@ super + shift + F12
     recordmenu
 
 # F Keys
-super + F1
-    chromium
-super + F2
-    gvim
-super + F3
-    libreoffice
-super + F4
-    steam
-super + F6
-    virtualbox
-super + F7
-    gimp
-super + F8
-    audacity
 super + F9
     autotypemenu
 super + F10
