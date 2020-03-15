@@ -27,7 +27,7 @@ super + bracket{left,right}
 
 # Change focus or swap nodes for both tiled and monocle layout
 super + {_,shift + }{Left,Down,Up,Right}
-    layout=$(bspc query -T -d | jq -r .layout); \
+    layout=$(bspc-query layout); \
     [[ "$layout" == "tiled" ]] && bspc node -{f,s} {west,south,north,east}.local; \
     [[ "$layout" == "monocle" ]] && bspc node -{f,s} {prev,next,prev,next}.local
 
