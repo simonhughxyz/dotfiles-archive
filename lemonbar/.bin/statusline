@@ -125,6 +125,13 @@ _desktops() {
     echo "$desktops%{F-}%{B-}"
 }
 
+_window(){
+    f_color="-"
+    b_color="-"
+    window_name="$(xdotool getwindowfocus getwindowname)"
+    echo "%{B$b_color}%{F$f_color}$window_name%{F-}%{B-}"
+}
+
 _time() {
     f_color="61AEEE"
     echo "%{F#$f_color}🕒 $(date '+%H:%M')%{F-}"
@@ -138,6 +145,9 @@ _date() {
 status() {
     echo "%{l}"
     _desktops
+    
+    echo " "
+    _window
 
     echo "%{r}"
     _keystate
