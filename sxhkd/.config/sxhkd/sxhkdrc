@@ -23,11 +23,15 @@ super + h
     $TERMINAL -c htop -n htop -e htop
 super + w
     $BROWSER -P privacy
-super + space; {t,c,g,v}
-    {tor-browser, \
-    chromium, \
-    google-chrome-stable, \
-    virt-manager}
+
+super + alt + c
+    chromium
+super + alt + t
+    tor-browser
+super + alt + g
+    google-chrome-stable
+super + alt + v
+    virt-manager
 
 # Dmenu
 super + a
