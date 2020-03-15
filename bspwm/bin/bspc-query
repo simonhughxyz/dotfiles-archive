@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# BSPC-QUERY
+# Simon Hugh Moore
+#
+# Custom querys for bspwm
+
+_help() {
+    echo "help message"
+}
+_current_layout() {
+    bspc query --tree --desktop | jq -r .layout
+}
+
+case $1 in
+    layout) _current_layout ;;
+    *|-h) _help ;;
+esac
