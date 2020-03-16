@@ -3,7 +3,7 @@ super + {_,shift +} q
     bspc node -{c,k}
 
 super + {_,shift +} numbersign
-    bspc node -t {tiled,floating}
+    bspc node -t {tiled,\~floating}
 
 # cycle between monocle and tiles moad or fullscreen
 super + {_,shift +} f
