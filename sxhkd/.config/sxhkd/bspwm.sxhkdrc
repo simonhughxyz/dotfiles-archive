@@ -7,7 +7,7 @@ super + {_,shift +} numbersign
 
 # cycle between monocle and tiles moad or fullscreen
 super + {_,shift +} f
-    bspc {desktop --layout next,node -t fullscreen}
+    bspc {desktop --layout next,node -t \~fullscreen}
 
 # Desktop
 # focus desktop / send node to desktop
