@@ -9,14 +9,12 @@ super + {_,shift +} numbersign
 super + {_,shift +} f
     bspc {desktop --layout next,node -t \~fullscreen}
 
-# Desktop
-# focus desktop / send node to desktop
-super + {_,shift +} {1-9,0,v}
-    bspc {desktop -f,node -d} '{1-9,10,V}' & melonbar
-#super + {_,shift +} {1-9,0,v}
-#    opt={desktop -f,node -d}
-#   desktop='{1-9,10,V}'; \
-#    bspc query -D -d "$desktop.focused" && bspc "$opt" last || bspc "$opt" "$desktop"
+# DESKTOP
+super + {1-9,0,v}
+    desktop={1-9,10,V}; \
+    bspc query -D -d "$desktop.focused" && bspc desktop -f last || bspc desktop -f $desktop & melonbar
+super + shift + {1-9,0,v}
+    bspc node -d {1-9,10,V} & melonbar
 
 # Go back to previous desktop
 super + Tab
