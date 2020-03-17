@@ -18,7 +18,7 @@ super + shift + {1-9,0,v}
 
 # Go back to previous desktop
 super + Tab
-    bspc desktop -f last & melonbar
+    bspc desktop -f last.local & melonbar
 
 super + bracket{left,right}
     bspc desktop -f {prev,next}.local & melonbar
