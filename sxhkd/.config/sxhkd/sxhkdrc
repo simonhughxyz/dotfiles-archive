@@ -38,6 +38,8 @@ super + alt + g
     gimp
 super + alt + a
     audacity
+super + alt + o
+    obs
 
 # Dmenu
 super + a
