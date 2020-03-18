@@ -19,7 +19,7 @@ export NNN_BMS='d:~/Downloads;w:/mnt/wh;D:~/.dotfiles;t:/mnt/wh/torrents'
 # export NNN_PLUG='o:fzopen;m:nmount;x:_chmod +x $nnn'
 
 # context colors [default: '4444' (blue)]
-# export NNN_COLORS='1234'
+export NNN_COLORS='0253'
 
 # archives [default: bzip2, (g)zip, tar]
 # export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
