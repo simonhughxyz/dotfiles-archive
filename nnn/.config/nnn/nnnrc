@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# NNNRC
+# Simon Hugh Moore
+#
+# Configuration file for nnn.
+# This file needs to be sourced by the shell that runs nnn.
+
+# binary options to nnn
+# NNN_OPTS="cEnrx"
+
+# custom opener (see plugin nuke)
+# NNN_OPENER="/path/to/custom/opener"
+
+# key-bookmark pairs
+# NNN_BMS='d:~/Documents;D:~/Docs archive/'
+
+# key-plugin (or cmd) pairs
+# NNN_PLUG='o:fzopen;m:nmount;x:_chmod +x $nnn'
+
+# context colors [default: '4444' (blue)]
+# NNN_COLORS='1234'
+
+# archives [default: bzip2, (g)zip, tar]
+# NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
+
+# custom SSHFS cmd
+# NNN_SSHFS='sshfs -o reconnect,idmap=user'
+
+# custom rclone cmd
+# NNN_RCLONE='rclone mount --read-only'
+
+# use desktop Trash [default: delete]
+# NNN_TRASH=1
+
+# key emulated by middle mouse click
+# NNN_MCLICK='^R'
