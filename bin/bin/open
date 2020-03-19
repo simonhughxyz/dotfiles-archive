@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# OPEN
+# Simon Hugh Moore
+#
+# Opens files with my default apps.
+
+f_path="$1"
+f_name=$(basename "$1")
+f_ext="${f_name##*.}"
