@@ -25,7 +25,8 @@ case $1 in
     # presentation
     *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice $1 ;;
 
-    
+    # text
+    *.txt|*.csv|*.cfg|*.ini|*.conf|*.cnf) vim $1 ;;
 
     *) echo "File not recognized" ;;
 esac
