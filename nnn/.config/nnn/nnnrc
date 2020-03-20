@@ -13,7 +13,7 @@
 export NNN_OPENER="$HOME/bin/open"
 
 # key-bookmark pairs
-export NNN_BMS='d:~/Downloads;w:/mnt/wh;D:~/.dotfiles;t:/mnt/wh/torrents'
+export NNN_BMS='d:~/Downloads;w:/mnt/wh;D:~/.dotfiles;t:/mnt/wh/torrents;p:~/projects'
 
 # key-plugin (or cmd) pairs
 # export NNN_PLUG='o:fzopen;m:nmount;x:_chmod +x $nnn'
