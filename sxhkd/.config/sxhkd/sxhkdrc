@@ -1,8 +1,8 @@
 # Basic Binds
 super + shift + s
     pkill -USR1 -x sxhkd
-super + Return
-    $TERMINAL
+super + {_,shift +} Return
+    $TERMINAL {_,-e nnn}
 super + x
     slock
 super + shift + w
