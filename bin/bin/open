@@ -26,7 +26,7 @@ case $1 in
     *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice $1 ;;
 
     # text
-    *.txt|*.csv|*.cfg|*.ini|*.conf|*.cnf|*rc) vim $1 ;;
+    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) vim $1 ;;
 
     # code
     *.sh|*.bash|*.zsh|*.fish|*.py|*.pl|*.java) vim $1 ;;
