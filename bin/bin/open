@@ -5,31 +5,31 @@
 #
 # Opens files with the default app.
 
-case $1 in
+case "$1" in
     # image
-    *.png|*.jpg|*.jpeg|*.gif|*.tif|*.tiff|*.bmp|*.ico) sxiv $1 ;;
+    *.png|*.jpg|*.jpeg|*.gif|*.tif|*.tiff|*.bmp|*.ico) sxiv "$1" ;;
 
     # video
-    *.mkv|*.mp[4gv]|*.mpeg|*.webm|*.m4[pv]|*.ogv|*.avi|*.wmv|*.mov|*.qt|*.flv|*.swf|*.h264|*.hevc) mpv $1 ;;
+    *.mkv|*.mp[4gv]|*.mpeg|*.webm|*.m4[pv]|*.ogv|*.avi|*.wmv|*.mov|*.qt|*.flv|*.swf|*.h264|*.hevc) mpv "$1" ;;
 
     # audio
-    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) mpv $1 ;;
+    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) mpv "$1" ;;
 
     # documents
-    *.pdf|*.ps|*.epub) zathura $1 ;;
-    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) libreoffice $1 ;;
+    *.pdf|*.ps|*.epub) zathura "$1" ;;
+    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) libreoffice "$1" ;;
 
     # spreadsheet
-    *.o[dt]s|*.fodts|*.xl[st]|*.xls[xm]|*.xltx) libreoffice $1 ;;
+    *.o[dt]s|*.fodts|*.xl[st]|*.xls[xm]|*.xltx) libreoffice "$1" ;;
 
     # presentation
-    *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice $1 ;;
+    *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice "$1" ;;
 
     # text
-    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) vim $1 ;;
+    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) vim "$1" ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) vim $1 ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) vim "$1" ;;
 
     *) echo "File not recognized" ;;
 esac
