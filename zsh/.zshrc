@@ -25,7 +25,10 @@ umask 077 # leads to 600 for files and 700 for directories
 
 # Prompt
 # Git status
-git_status() {
+prompt_git_status() {
+    f_color_staged="green"
+    f_color_unstaged="yellow"
+
     local message=""
     local message_color="%F{5}"
 
@@ -34,9 +37,9 @@ git_status() {
     local unstaged=$(git status --porcelain 2>/dev/null | grep -e "^[MADRCU? ][MADRCU?]")
 
     if [[ -n ${staged} ]]; then
-        message_color="%F{green}"
+        message_color="%F{$f_color_staged}"
     elif [[ -n ${unstaged} ]]; then
-        message_color="%F{yellow}"
+        message_color="%F{$f_color_unstaged}"
     fi
 
     local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -47,17 +50,20 @@ git_status() {
     echo -n "${message}"
 }
 
+prompt_current_dir() {
+    f_color="yellow"
+    echo "%F{$f_color}%c" 
+}
+
+prompt_symbol() {
+    f_color="blue"
+    echo "%F{$f_color}%(!.#.>)%f%b"
+}
+
 autoload -U colors && colors
-# # Git
-# autoload -Uz vcs_info
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-# zstyle ':vcs_info:git:*' formats '%F{5}(%b)%f'
-# zstyle ':vcs_info:*' enable git
-# set prompt
-RPROMPT='$(git_status)'
-PROMPT="%F{yellow}%1~ %F{blue}%(!.#.>)%f%b "
+RPROMPT='$(prompt_git_status)'
+PROMPT="$(prompt_current_dir) $(prompt_symbol) "
 
 
 # Basic auto/tab complete:
