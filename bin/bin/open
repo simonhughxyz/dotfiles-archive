@@ -5,6 +5,8 @@
 #
 # Opens files with the default app.
 
+term() { ${TERMINAL:-st} -e "$1" "$2" || (echo "Can't find terminal" & exit 1); }
+
 case "$1" in
     # image
     *.png|*.jpg|*.jpeg|*.gif|*.tif|*.tiff|*.bmp|*.ico) sxiv "$1" ;;
@@ -26,10 +28,10 @@ case "$1" in
     *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice "$1" ;;
 
     # text
-    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) vim "$1" ;;
+    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term "vim" "$1" ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) vim "$1" ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term "vim" "$1" ;;
 
     *) echo "File not recognized" ;;
 esac
