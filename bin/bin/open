@@ -28,5 +28,8 @@ case $1 in
     # text
     *.txt|*.csv|*.cfg|*.ini|*.conf|*.cnf) vim $1 ;;
 
+    # code
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.pl|*.java) vim $1 ;;
+
     *) echo "File not recognized" ;;
 esac
