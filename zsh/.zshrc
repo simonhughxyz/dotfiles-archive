@@ -27,8 +27,8 @@ umask 077 # leads to 600 for files and 700 for directories
 # Git status
 prompt_git_status() {
     f_color="5"
-    f_color_staged="green"
-    f_color_unstaged="yellow"
+    f_color_staged="yellow"
+    f_color_unstaged="red"
 
     local message=""
     local message_color="%F{$f_color}"
