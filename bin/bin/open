@@ -29,7 +29,7 @@ case $1 in
     *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) vim $1 ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.pl|*.java) vim $1 ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js) vim $1 ;;
 
     *) echo "File not recognized" ;;
 esac
