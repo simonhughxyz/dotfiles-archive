@@ -2,6 +2,7 @@
 
 #vim
 vim/.config/nvim/plugged/
+vim/.config/nvim/undodir/
 vim/.vim/plugged/
 vim/.vim/autoload/
 vim/.vim/undodir/
