@@ -1,0 +1,4 @@
+# Gitignore for dotfiles
+
+#NNN
+nnn/.config/nnn/.history*
