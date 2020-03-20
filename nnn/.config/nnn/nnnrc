@@ -10,7 +10,7 @@
 # export NNN_OPTS="cEnrx"
 
 # custom opener (see plugin nuke)
-# export NNN_OPENER="/path/to/custom/opener"
+export NNN_OPENER="$HOME/bin/open"
 
 # key-bookmark pairs
 export NNN_BMS='d:~/Downloads;w:/mnt/wh;D:~/.dotfiles;t:/mnt/wh/torrents'
