@@ -8,11 +8,16 @@
 _help() {
     echo "help message"
 }
-_current_layout() {
+_desktop_layout() {
     bspc query --tree --desktop | jq -r .layout
 }
 
+_window_state() {
+    bspc query --tree --node | jq -r .client.state
+}
+
 case $1 in
-    layout) _current_layout ;;
+    layout) _desktop_layout ;;
+    state) _window_state ;;
     *|-h) _help ;;
 esac
