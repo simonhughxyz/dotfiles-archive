@@ -63,10 +63,15 @@ prompt_symbol() {
     echo "%(!.%F{$f_sudo_color}#.%F{$f_color}>)%f"
 }
 
+prompt_exit_code() {
+    f_color="red"
+    echo "%F{$f_color}%(?..%? )%f"
+}
+
 autoload -U colors && colors
 setopt prompt_subst
 RPROMPT='$(prompt_git_status)'
-PROMPT='$(prompt_current_dir) $(prompt_symbol)%f%b '
+PROMPT='$(prompt_current_dir) $(prompt_exit_code)$(prompt_symbol)%f%b '
 
 
 # Basic auto/tab complete:
