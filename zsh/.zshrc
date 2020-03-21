@@ -54,18 +54,18 @@ prompt_git_status() {
 prompt_current_dir() {
     f_color="yellow"
     last_path="1" # last nr of elements of path to show.
-    echo "%F{$f_color}%$last_path~" 
+    echo "%F{$f_color}%$last_path~%f" 
 }
 
 prompt_symbol() {
     f_color="blue"
-    echo "%F{$f_color}%(!.#.>)%f%b"
+    echo "%F{$f_color}%(!.#.>)%f"
 }
 
 autoload -U colors && colors
 setopt prompt_subst
 RPROMPT='$(prompt_git_status)'
-PROMPT='$(prompt_current_dir) $(prompt_symbol) '
+PROMPT='$(prompt_current_dir) $(prompt_symbol)%f%b '
 
 
 # Basic auto/tab complete:
