@@ -59,7 +59,8 @@ prompt_current_dir() {
 
 prompt_symbol() {
     f_color="blue"
-    echo "%F{$f_color}%(!.#.>)%f"
+    f_sudo_color="red"
+    echo "%(!.%F{$f_sudo_color}#.%F{$f_color}>)%f"
 }
 
 autoload -U colors && colors
