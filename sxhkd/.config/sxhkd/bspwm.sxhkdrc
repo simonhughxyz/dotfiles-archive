@@ -46,5 +46,5 @@ super + ctrl + {1-9}
     bspc node -o 0.{1-9}
 
 # cancel the preselection.
-super + ctrl + space
+super + Escape
     bspc node -p cancel
