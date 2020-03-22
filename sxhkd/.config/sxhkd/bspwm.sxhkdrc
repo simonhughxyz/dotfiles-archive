@@ -39,7 +39,7 @@ super + alt + {Left,Down,Up,Right}
 
 # preselect the direction.
 super + ctrl + {Left,Down,Up,Right}
-    bspc node -p {west,south,noth,east}
+    bspc node -p {west,south,north,east}
 
 # preselect the ratio.
 super + ctrl + {1-9}
