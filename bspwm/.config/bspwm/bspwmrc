@@ -27,6 +27,7 @@ bspc config ignore_ewmh_focus     true  # prevent apps from stealing focus.
 # Color
 bspc config normal_border_color   "#333333"
 bspc config focused_border_color  "#C25704"
+bspc config active_border_color  "#C25704"
 
 # Rules
 bspc rule -a mpv desktop='V'     # Open mpv in a dedicated video desktop.
