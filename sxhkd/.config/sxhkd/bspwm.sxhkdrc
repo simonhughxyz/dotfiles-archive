@@ -34,3 +34,17 @@ super + alt + {Left,Down,Up,Right}
      bspc node -z top 0 20; bspc node -z bottom 0 20,\
      bspc node -z top 0 -20; bspc node -z bottom 0 -20,\
      bspc node -z left 20 0; bspc node -z right 20 0}
+
+### PRESELECT ###
+
+# preselect the direction.
+super + ctrl + {Left,Down,Up,Right}
+    bspc node -p {west,south,noth,east}
+
+# preselect the ratio.
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# cancel the preselection.
+super + ctrl + space
+    bspc node -p cancel
