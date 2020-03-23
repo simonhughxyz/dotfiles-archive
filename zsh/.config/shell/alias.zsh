@@ -28,3 +28,8 @@ alias -g L='| less'
 alias -g H='| head'
 alias -g T='| tail'
 alias -g V='| vim -'
+
+# print selected command from history.
+fh() {
+    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+}
