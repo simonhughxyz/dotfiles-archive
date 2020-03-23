@@ -197,3 +197,8 @@ man() {
   LESS_TERMCAP_us=$'\E[01;32m' \
   man "$@"
 }
+
+
+fman() {
+    man $(man -k . | fzf --prompt='Man> ' --preview="man \$(echo {} | awk '{print \$1}')" | awk '{print $1}')
+}
