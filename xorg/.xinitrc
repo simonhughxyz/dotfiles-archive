@@ -6,6 +6,9 @@ setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin"
 #xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min
 
+# change default cursor to a pointer
+xsetroot -cursor_name left_ptr
+
 feh --bg-fill --randomize ~/.config/background &
 
 # set backlight depending if night or day
