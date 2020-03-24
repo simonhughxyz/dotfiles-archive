@@ -23,4 +23,5 @@ case "$1" in
     d|down) _bf $down;;
     u|up) _bf $up;;
     r|right) _bf $right;;
+    *) echo "Use: $( basename $0) left|down|up|right" && exit 1 ;;
 esac
