@@ -5,6 +5,9 @@
 #
 # Correctly focus node dependent on layout. 
 
+# Error message
+_error() { echo "Use: $( basename $0) -f|s left|down|up|right" && exit 1; }
+
 # get layout of focused window.
 layout=$( bspc query -T -d | jq -r .layout )
 
@@ -15,13 +18,16 @@ case "$layout" in
 esac
 
 # wrapper function for bspwm focus command.
-_bf() { bspc node -f $1.local; }
+_bf() { bspc node $1 $2.local; }
+
+# error if first argument is not -f|s
+[ "$1" != "-f" -a "$1" != "-s" ] && _error;
 
 # get direction of focus.
-case "$1" in
-    l|left) _bf $left;;
-    d|down) _bf $down;;
-    u|up) _bf $up;;
-    r|right) _bf $right;;
-    *) echo "Use: $( basename $0) left|down|up|right" && exit 1 ;;
+case "$2" in
+    l|left) _bf $1 $left;;
+    d|down) _bf $1 $down;;
+    u|up) _bf $1 $up;;
+    r|right) _bf $1 $right;;
+    *) _error ;;
 esac
