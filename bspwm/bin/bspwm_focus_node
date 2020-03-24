@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# BSPWM_FOCUS_NODE
+# Simon Hugh Moore
+#
+# Correctly focus node dependent on layout. 
+
+layout=$( bspc query -T -d | jq -r .layout )
+
+echo "$layout"
+
+case "$layout" in
+    tiled) left="west"; down="south"; up="north"; right="east" ;;
+    monocle) left="prev"; down="prev"; up="next"; right="next" ;; 
+esac
+
+_bf() { bspc node -f $@; }
+
+case "$1" in
+    l|left) _bf $left;;
+    d|down) _bf $down;;
+    u|up) _bf $up;;
+    r|right) _bf $right;;
+esac
