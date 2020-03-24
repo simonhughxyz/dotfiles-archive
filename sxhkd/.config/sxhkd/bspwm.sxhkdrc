@@ -24,10 +24,8 @@ super + bracket{left,right}
     bspc desktop -f {prev,next}.local & melonbar
 
 # Change focus or swap nodes for both tiled and monocle layout
-super + {_,shift + }{Left,Down,Up,Right}
-    layout=$(bspc-query layout); \
-    [[ "$layout" == "tiled" ]] && bspc node -{f,s} {west,south,north,east}.local; \
-    [[ "$layout" == "monocle" ]] && bspc node -{f,s} {prev,next,prev,next}.local
+super + {_, shift +} {Left,Down,Up,Right}
+    bspwm_focus_node -{f,s} {left,down,up,right}
 
 super + alt + {Left,Down,Up,Right}
     {bspc node -z left -20 0; bspc node -z right -20 0,\
