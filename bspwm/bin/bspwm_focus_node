@@ -5,17 +5,19 @@
 #
 # Correctly focus node dependent on layout. 
 
+# get layout of focused window.
 layout=$( bspc query -T -d | jq -r .layout )
 
-echo "$layout"
-
+# use correct command to focus node depending on layout.
 case "$layout" in
     tiled) left="west"; down="south"; up="north"; right="east" ;;
     monocle) left="prev"; down="prev"; up="next"; right="next" ;; 
 esac
 
-_bf() { bspc node -f $@; }
+# wrapper function for bspwm focus command.
+_bf() { bspc node -f $1.local; }
 
+# get direction of focus.
 case "$1" in
     l|left) _bf $left;;
     d|down) _bf $down;;
