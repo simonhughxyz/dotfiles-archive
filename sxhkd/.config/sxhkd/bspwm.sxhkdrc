@@ -27,6 +27,10 @@ super + bracket{left,right}
 super + {_, shift +} {Left,Down,Up,Right}
     bspwm_focus_node -{f,s} {left,down,up,right}
 
+# cycle through windows
+super + shift + bracket{left,right}
+    bspc node -f {prev,next}.local
+
 super + alt + {Left,Down,Up,Right}
     {bspc node -z left -20 0; bspc node -z right -20 0,\
      bspc node -z top 0 20; bspc node -z bottom 0 20,\
