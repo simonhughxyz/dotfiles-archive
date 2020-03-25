@@ -31,11 +31,8 @@ super + {_, shift +} {Left,Down,Up,Right}
 super + shift + bracket{left,right}
     bspc node -f {prev,next}.local
 
-super + alt + {Left,Down,Up,Right}
-    {bspc node -z left -20 0; bspc node -z right -20 0,\
-     bspc node -z top 0 20; bspc node -z bottom 0 20,\
-     bspc node -z top 0 -20; bspc node -z bottom 0 -20,\
-     bspc node -z left 20 0; bspc node -z right 20 0}
+super + alt + {_,shift +} {Left,Down,Up,Right}
+    bspwm_resize_node -{a,z} {left,down,up,right}
 
 ### PRESELECT ###
 
