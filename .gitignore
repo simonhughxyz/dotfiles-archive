@@ -1,11 +1,9 @@
 # Gitignore for dotfiles
 
 #vim
+vim/.config/nvim/autoload/
 vim/.config/nvim/plugged/
 vim/.config/nvim/undodir/
-vim/.vim/plugged/
-vim/.vim/autoload/
-vim/.vim/undodir/
 
 #NNN
 nnn/.config/nnn/.history*
