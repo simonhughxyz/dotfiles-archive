@@ -1,0 +1,2 @@
+" source neovim's init.vim
+source init.vim
