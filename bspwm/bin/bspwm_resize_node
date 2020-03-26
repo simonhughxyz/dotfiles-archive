@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# BSPWM_RESIZE_NODE
+# Simon Hugh Moore
+#
+# Correctly resize window.
+
+# amount of pixels to change size with.
+pixels="30"
+
+# Error message
+_error() { echo "Use: $( basename $0) -a|z left|down|up|right" && exit 1; }
+
+# wrapper function for bspwm resize command.
+_br() { echo "$1 $2"; bspc node -z $1 $2; }
+
+window_state=$( bspc query -T -n | jq -r .client.state )
+
+case "$1" in
+    -a) # get direction of resize.
+        case "$2" in
+            l|left) pixels="-$pixels 0"
+                _br "left" "$pixels"
+                [ $window_state = "tiled" ] && _br "right" "$pixels" ;;
+            d|down|bottom) pixels="0 $pixels"
+                _br "bottom" "$pixels"
+                [ $window_state = "tiled" ] && _br "top" "$pixels" ;;
+            u|up|top) pixels="0 -$pixels"
+                _br "top" "$pixels"
+                [ $window_state = "tiled" ] && _br "bottom" "$pixels" ;;
+            r|right) pixels="$pixels 0"
+                _br "right" "$pixels"
+                [ $window_state = "tiled" ] && _br "left" "$pixels" ;;
+            *) _error ;;
+        esac ;;
+    -z) # resize in reverse.
+        case "$2" in
+            l|left) pixels="-$pixels 0"
+                [ "$window_state" = "floating" ] && _br "right" "$pixels"
+                [ "$window_state" = "tiled" ] && _br "right" "$pixels" ;;
+            d|down|bottom) pixels="0 $pixels"
+                [ "$window_state" = "floating" ] && _br "top" "$pixels"
+                [ "$window_state" = "tiled" ] && _br "bottom" "$pixels" ;;
+            u|up|top) pixels="0 -$pixels"
+                [ "$window_state" = "floating" ] && _br "bottom" "$pixels"
+                [ "$window_state" = "tiled" ] && _br "top" "$pixels" ;;
+            r|right) pixels="$pixels 0"
+                [ "$window_state" = "floating" ] && _br "left" "$pixels"
+                [ "$window_state" = "tiled" ] && _br "right" "$pixels" ;;
+            *) _error ;;
+        esac ;;
+    *) _error ;;
+esac
