@@ -78,11 +78,6 @@ super + {_,shift +} period
     bukuadd{_,title}menu
 super + shift + p
     passmenu2 -t
-super + space; {p,e,f,s}
-    {pdfmenu, \
-    unicodemenu ~/.config/emoji, \
-    unicodemenu ~/.config/fontawesome, \
-    streammenu}
 
 
 
