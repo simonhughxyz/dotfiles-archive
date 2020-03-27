@@ -40,6 +40,10 @@ super + alt + a
     audacity
 super + alt + o
     obs
+super + alt + c; {e,f}
+    unicodemenu ~/.config/{emoji,fontawesome}
+super + alt + p
+    pdfmenu
 
 # Dmenu
 super + a
