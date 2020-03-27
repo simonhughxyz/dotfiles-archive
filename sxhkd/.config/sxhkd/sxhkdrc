@@ -26,10 +26,8 @@ super + w
 super + p
     $TERMINAL -c pulsemixer -n pulsemixer -e pulsemixer
 
-super + alt + w; {c,g} 
-    {chromium,google-chrome-stable}
-super + alt + t
-    tor-browser
+super + alt + w; {c,g,t} 
+    {chromium,google-chrome-stable,tor-browser}
 super + alt + v
     virt-manager
 super + alt + s
