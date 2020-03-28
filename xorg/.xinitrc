@@ -9,7 +9,8 @@ xset s 900 900 # lock screen and turn off after 5 min.
 # change default cursor to a pointer.
 xsetroot -cursor_name left_ptr
 
-feh --bg-fill --randomize ~/.config/background &
+# Set random wallpaper
+randwall &
 
 # set backlight depending if night or day.
 hour=$(date '+%H')
