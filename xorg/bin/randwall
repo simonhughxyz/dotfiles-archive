@@ -6,6 +6,6 @@
 # Sets a random image from wall_path as wallpaper.
 
 # path to wallpapers.
-wall_path=~/.config/background
+wall_path=${1:-~/.config/wallpaper}
 
 xwallpaper --zoom "$( fd . $wall_path | shuf -n 1 )"
