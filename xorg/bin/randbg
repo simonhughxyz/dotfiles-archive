@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# RANDBG
+# Simon Hugh Moore
+#
+# Sets a random image from wall_path as wallpaper.
+
+# path to wallpapers.
+wall_path=~/.config/background
+
+xwallpaper --zoom "$( fd . $wall_path | shuf -n 1 )"
