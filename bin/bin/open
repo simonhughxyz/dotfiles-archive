@@ -33,5 +33,5 @@ case "$1" in
     # code
     *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term "vim" "$1" ;;
 
-    *) echo "File not recognized" ;;
+    *) xdg-open "$1" ;; # see `man xdg-open` and `man xdg-mime`.
 esac

@@ -105,9 +105,6 @@ alias ytdl='youtube-dl'
 # buku
 alias bu='buku --suggest'
 
-# wallpaper
-alias randwall='feh --bg-fill --randomize ~/Pictures/*/*-ls-* &'
-
 # system info
 alias free='free -hlt'
 alias free1000='free -hlt --si' # display using power of 1000 instead 1024
