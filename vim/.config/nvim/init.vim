@@ -110,6 +110,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak'
+Plug 'unblevable/quick-scope'
 Plug 'junegunn/vim-after-object'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
@@ -170,6 +171,13 @@ let g:table_mode_corner='|'
 
 " indent line
 let g:indentLine_setConceal = 0
+
+" quickscope
+augroup qs_colors
+    autocmd!
+    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
 " }}}
 " Colors {{{
 set background=dark
