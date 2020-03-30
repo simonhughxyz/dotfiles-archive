@@ -8,6 +8,7 @@ vim/.config/nvim/.netrwhist
 
 #NNN
 nnn/.config/nnn/.history*
+nnn/.config/nnn/.selection
 
 #mpv
 mpv/.config/mpv/watch_later
