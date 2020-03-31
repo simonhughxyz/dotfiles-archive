@@ -149,19 +149,22 @@ tm-list() {
         finished|f   list finished torrents.
         help|h       show this help message.
     "
+    # Remove leading space form transmission list.
+    _tl() { transmission-remote -l | sed 's/^[ \t]\+//g'; }
+
     # returns torrents with matching status.
     get-with-status() {
-        transmission-remote -l | sed 's/^[ \t]?//g' | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $9 ~ S' 
+        _tl | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $8 ~ S' 
     }
     case "$1" in
         stopped|s) get-with-status "Stopped" ;;
         down|d) get-with-status "Downloading|Up & Down" ;;
         up|u) get-with-status "Seeding" ;;
-        complete|c) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 ~ /100%/' ;;
-        incomplete|i) transmission-remote -l | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $3 !~ /100%/' ;;
+        complete|c) _tl | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $2 ~ /100%/' ;;
+        incomplete|i) _tl | awk -F'[[:space:]][[:space:]]+' 'NR==1 || $2 !~ /100%/' ;;
         finished|f) get-with-status "Idle|Seeding" ;;
         help|h) echo "$help" ;;
-        *|all|a) transmission-remote -l ;;
+        *|all|a) _tl ;;
      esac
 }
 
