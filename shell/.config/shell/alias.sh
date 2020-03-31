@@ -144,8 +144,8 @@ tm-list() {
         stopped|s    list stopped torrents.
         down|d       list downloading torrents.
         up|u         list uploading/seeding torrents.
-        complete|c   list complete torrents.
-        incomplete|i list incomplete torrents.
+        complete|c   list complete torrents (100%).
+        incomplete|i list incomplete torrents (not 100%).
         finished|f   list finished torrents.
         help|h       show this help message.
     "
