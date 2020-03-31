@@ -151,7 +151,7 @@ tm-list() {
     "
     # returns torrents with matching status.
     get-with-status() {
-        transmission-remote -l | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $9 ~ S' 
+        transmission-remote -l | sed 's/^[ \t]?//g' | awk -F'[[:space:]][[:space:]]+' -v S="$1" 'NR==1 || $9 ~ S' 
     }
     case "$1" in
         stopped|s) get-with-status "Stopped" ;;
