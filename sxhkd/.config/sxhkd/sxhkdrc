@@ -84,8 +84,8 @@ super + shift + p
 # Audio
 super + m
     volume mute
-super + {control +,shift +i} m; {0-9}
-    volume {0,1}{0-9}0
+super + {control +,shift +} m; {0-9}
+    volume {_,1}{0-9}0
 super + {_,shift +,control +} equal
     volume +{5,20,1}
 super + {_,shift +,control +} minus
@@ -104,6 +104,8 @@ XF86Audio{Raise,Lower}Volume {_,+ shift,+ control}
 # Screen Brightness
 super + shift + b ; {0-9}
     xbacklight -set {0-9}0
+super + shift + b ; {minus,equal}
+    xbacklight {-,+} 5 
 XF86MonBrightness{Up,Down}
     xbacklight -{inc,dec} 20
 
