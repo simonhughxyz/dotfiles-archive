@@ -8,4 +8,6 @@
 # path to wallpapers.
 wall_path=${1:-~/.config/wallpaper}
 
-xwallpaper --zoom "$( fd . $wall_path | shuf -n 1 )"
+[ -d $wall_path ] && wall_path="$( fd . $wall_path | shuf -n 1 )"
+
+xwallpaper --zoom "${wall_path}"
