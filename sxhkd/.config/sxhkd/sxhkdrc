@@ -104,6 +104,8 @@ XF86Audio{Raise,Lower}Volume {_,+ shift,+ control}
 # Screen Brightness
 super + shift + b ; {0-9}
     xbacklight -set {0-9}0
+super + shift + b ; {minus,equal}
+    xbacklight {-,+} 5 
 XF86MonBrightness{Up,Down}
     xbacklight -{inc,dec} 20
 
