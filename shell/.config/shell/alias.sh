@@ -167,7 +167,7 @@ tm-list() {
         d*) filter-list "8" "Downloading|Up & Down" "$2";;
         u*) filter-list "8" "Seeding" "$2" ;;
         c*) filter-list "2" "100%" "$2";;
-        f*) filter-list "2" "Idle|Seeding" "$2" ;;
+        f*) filter-list "8" "Idle|Seeding" "$2" ;;
         h*) echo "$help" ;;
         *|all|a) _tl  ;;
      esac
