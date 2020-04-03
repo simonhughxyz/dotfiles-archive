@@ -1,0 +1,24 @@
+#### simonhugh94 gmail ####
+
+IMAPAccount simonhugh94GMAIL
+Host imap.gmail.com
+User simonhugh94@gmail.com
+PassCmd "pass get mutt google/main"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# remote storage
+IMAPStore simonhugh94GMAIL-remote
+Account simonhugh94GMAIL
+
+# local storage
+MaildirStore simonhugh94GMAIL-local
+Path ~/mail/gmail/simonhugh94/
+Inbox ~/mail/gmail/simonhugh94/INBOX
+
+Channel simonhugh94GMAIL-inbox
+Master :simonhugh94GMAIL-remote:
+Slave :simonhugh94GMAIL-local:
+Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+create Both
+SyncState *
