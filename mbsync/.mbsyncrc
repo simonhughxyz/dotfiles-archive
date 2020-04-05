@@ -5,6 +5,7 @@ Host imap.gmail.com
 User simon.h.moore94@gmail.com
 PassCmd "pass get mutt google/main"
 SSLType IMAPS
+SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # remote storage
