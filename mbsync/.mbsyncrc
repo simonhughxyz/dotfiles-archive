@@ -14,8 +14,8 @@ Account mainGM
 
 # local storage
 MaildirStore mainGM-local
-Path ~/mail/gmail/simonhmoore94/
-Inbox ~/mail/gmail/simonhmoore94/INBOX
+Path ~/.Mail/gmail/simonhmoore94/
+Inbox ~/.Mail/gmail/simonhmoore94/INBOX
 
 Channel mainGM
 Master :mainGM-remote:
