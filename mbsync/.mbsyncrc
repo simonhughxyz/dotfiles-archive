@@ -25,11 +25,11 @@ Expunge Both
 SyncState *
 
 Channel mainGM-sent
-Master :mainGM-remote:"[Goole Mail]/Sent Mail"
+Master :mainGM-remote:"[Gmail]/Sent Mail"
 Slave :mainGM-local:sent
 
 Channel mainGM-all
-Master :mainGM-remote:"[Goole Mail]/All Mail"
+Master :mainGM-remote:"[Gmail]/All Mail"
 Slave :mainGM-local:all
 
 Group mainGM
