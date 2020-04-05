@@ -2,7 +2,7 @@
 
 IMAPAccount simonhugh94GMAIL
 Host imap.gmail.com
-User simonhugh94@gmail.com
+User simon.h.moore94@gmail.com
 PassCmd "pass get mutt google/main"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
