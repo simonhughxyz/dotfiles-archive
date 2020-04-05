@@ -1,6 +1,6 @@
 #### simonhugh94 gmail ####
 
-IMAPAccount simonhugh94GMAIL
+IMAPAccount mainGM
 Host imap.gmail.com
 User simon.h.moore94@gmail.com
 PassCmd "pass get mutt google/main"
@@ -9,17 +9,17 @@ SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # remote storage
-IMAPStore simonhugh94GMAIL-remote
-Account simonhugh94GMAIL
+IMAPStore mainGM-remote
+Account mainGM
 
 # local storage
-MaildirStore simonhugh94GMAIL-local
-Path ~/mail/gmail/simonhugh94/
-Inbox ~/mail/gmail/simonhugh94/INBOX
+MaildirStore mainGM-local
+Path ~/mail/gmail/simonhmoore94/
+Inbox ~/mail/gmail/simonhmoore94/INBOX
 
-Channel simonhugh94GMAIL-inbox
-Master :simonhugh94GMAIL-remote:
-Slave :simonhugh94GMAIL-local:
+Channel mainGM
+Master :mainGM-remote:
+Slave :mainGM-local:
 Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
 create Both
 SyncState *
