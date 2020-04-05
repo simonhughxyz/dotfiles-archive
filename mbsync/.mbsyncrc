@@ -17,11 +17,11 @@ MaildirStore mainGM-local
 Path ~/.Mail/gmail/simonhmoore94/
 Inbox ~/.Mail/gmail/simonhmoore94/INBOX
 
-Channel mainGM
-Master :mainGM-remote:
-Slave :mainGM-local:
-Patterns * ![Gmail]*
-create Both
+Channel mainGM-inbox
+Master :mainGM-remote:"INBOX"
+Slave :mainGM-local:INBOX
+Create Both
+Expunge Both
 SyncState *
 
 Channel mainGM-sent
