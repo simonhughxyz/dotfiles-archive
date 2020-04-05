@@ -99,6 +99,7 @@ endif
 " let plugin_path='~/.vim/bundle'
 call plug#begin()
 Plug 'morhetz/gruvbox'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
