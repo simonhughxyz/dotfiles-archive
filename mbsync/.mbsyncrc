@@ -31,3 +31,8 @@ Slave :mainGM-local:sent
 Channel mainGM-all
 Master :mainGM-remote:"[Goole Mail]/All Mail"
 Slave :mainGM-local:all
+
+Group mainGM
+Channel mainGM-inbox
+channel mainGM-sent
+channel mainGM-all
