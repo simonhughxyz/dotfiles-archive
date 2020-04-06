@@ -1,14 +1,17 @@
 # Gitignore for dotfiles
 
-#vim
+# vim
 vim/.config/nvim/autoload/
 vim/.config/nvim/plugged/
 vim/.config/nvim/undodir/
 vim/.config/nvim/.netrwhist
 
-#NNN
+# ZSH
+zsh/.config/zsh/.zcompdump
+
+# NNN
 nnn/.config/nnn/.history*
 nnn/.config/nnn/.selection
 
-#mpv
+# mpv
 mpv/.config/mpv/watch_later
