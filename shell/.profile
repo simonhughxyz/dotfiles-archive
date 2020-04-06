@@ -42,6 +42,7 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 
 # Program settings
 export ZDOTDIR="$CONFIG/zsh"
+export GTK2_RC_FILES="$CONFIG/gtk-2.0"
 
 # Get NNN config
 nnn_config=$HOME/.config/nnn/nnnrc
