@@ -45,8 +45,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Program settings
-export ZDOTDIR="$CONFIG/zsh"
-export GTK2_RC_FILES="$CONFIG/gtk-2.0/gtkrc"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 
 # Get NNN config
 nnn_config=$HOME/.config/nnn/nnnrc
