@@ -40,6 +40,9 @@ export LIBVA_DRIVER_NAME="radeonsi"
 export PASSWORD_STORE_ENABLE_EXTENSIONS="true"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 
+# Program settings
+export ZDOTDIR="$CONFIG/zsh"
+
 # Get NNN config
 nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
