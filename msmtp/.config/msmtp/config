@@ -12,7 +12,7 @@ host           smtp.gmail.com
 port           587
 from           simon.h.moore94@gmail.com
 user           simon.h.moore94@gmail.com
-password       iqyyirwjmiybyvvv
+passwordeval   "pass get mutt google/main"
 
 # Set a default account
 account default : mainGM
