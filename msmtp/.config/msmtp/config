@@ -4,7 +4,7 @@ defaults
 auth           on
 tls            on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
-logfile        ~/.log/msmtp.log
+logfile        ~/.local/share/msmtp/msmtp.log
 
 # Gmail
 account        gmail_simonhmoore94
