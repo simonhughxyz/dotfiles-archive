@@ -40,6 +40,10 @@ export LIBVA_DRIVER_NAME="radeonsi"
 export PASSWORD_STORE_ENABLE_EXTENSIONS="true"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # Program settings
 export ZDOTDIR="$CONFIG/zsh"
 export GTK2_RC_FILES="$CONFIG/gtk-2.0/gtkrc"
