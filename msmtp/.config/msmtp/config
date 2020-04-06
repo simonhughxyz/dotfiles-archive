@@ -1,4 +1,3 @@
-# vim:filetype=msmtp
 # Set default values for all following accounts.
 defaults
 auth           on
