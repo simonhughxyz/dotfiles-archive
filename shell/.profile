@@ -32,7 +32,6 @@ export LANG="en_GB.UTF-8"
 #export TERM=rxvt-unicode-256color
 # export TERM=st-256color
 export STARDICT_DATA_DIR="$HOME/.dic"
-export XDG_CONFIG_HOME="$CONFIG"
 export WINEARCH="win64"
 #export WINEPREFIX="/home/simon/.steam/steam/steamapps/compatdata/377160/pfx setup_dxvk64"
 export WINEPREFIX="/home/simon/.wine/lutris64 setup_dxvk64"
