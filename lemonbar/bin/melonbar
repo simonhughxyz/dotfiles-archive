@@ -26,7 +26,7 @@ _cleanup() {
 
 _update_pipe() {
     if [ -p $pipe ]; then
-        $HOME/.bin/statusline > $pipe
+        statusline > $pipe
     else
         echo "FIFO pipe missing, first execute '$(basename $0) run'."
     fi
