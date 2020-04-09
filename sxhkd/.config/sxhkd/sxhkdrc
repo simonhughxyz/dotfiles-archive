@@ -2,7 +2,7 @@
 super + shift + s
     pkill -USR1 -x sxhkd
 super + {_,shift +} Return
-    $TERMINAL {-e tmux,-e nnn}
+    $TERMINAL {_,-e nnn}
 super + x
     slock
 super + shift + w
