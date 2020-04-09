@@ -138,3 +138,8 @@ _source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting; should be last.
 _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# Run tmux if not already running.
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux 
+fi
