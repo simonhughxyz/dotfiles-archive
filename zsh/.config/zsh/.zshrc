@@ -140,8 +140,10 @@ _source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # Run tmux if:
-# - Not already running.
-# - Is interactive.
+# - tmux is installed.
+# - not already running.
+# - shell is interactive.
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [[ $- = *i* ]]; then
-    tmux 
+    # Always run tmux in base session.
+    tmux attach -t base || tmux new -s base
 fi
