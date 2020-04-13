@@ -717,7 +717,7 @@ nnoremap z[ zR  " Open all Folds
 nnoremap z] zM  " Close all folds
 " FZF completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-f> <C-O>:call fzf#vim#complete#path("eval $FZF_DEFAULT_COMMAND")<return>
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 " next and previous hunk
