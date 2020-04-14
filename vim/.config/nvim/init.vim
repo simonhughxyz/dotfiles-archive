@@ -727,7 +727,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " Leader Shortcuts {{{
 let mapleader=" "
 " re-source .vimrc
-nnoremap <leader>r :so $MYVIMRC<CR>
+nnoremap <leader>R :so $MYVIMRC<CR>
 " Buffer Commands
 nnoremap <silent><leader>b :Buffers<cr>
 nnoremap <silent><leader>f :Files<cr>
@@ -759,6 +759,8 @@ nnoremap <silent><Leader>ct :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceall
 nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
 " Toggle GitGutter Highlights
 nnoremap <leader>g :GitGutterLineHighlightsToggle<CR>
+" Rainbow toggle
+nnoremap <leader>r :RainbowToggle<CR>
 " Easy Align
 vmap <leader># :EasyAlign # {'filter': 'v/^#/'}<CR>
 " Swap characters
