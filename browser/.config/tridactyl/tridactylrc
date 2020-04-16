@@ -20,7 +20,7 @@ auconscreatecontainer true
 set hintchars hjklgftyuvbuiondsrcm
 
 " Editor
-set editorcmd urxvt -e "vim"
+set editorcmd xst -e "vim"
 
 "
 " Bind Keys
