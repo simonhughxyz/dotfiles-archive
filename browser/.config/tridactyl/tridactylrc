@@ -16,7 +16,8 @@ colors dark
 auconscreatecontainer true
 
 " Characters to use for hints
-set hintchars hjklasdfgyuiopqwertnmzxcb
+" set hintchars hjklasdfgyuiopqwertnmzxcb
+set hintchars hjklgftyuvbuiondsrcm
 
 " Editor
 set editorcmd urxvt -e "vim"
