@@ -4,7 +4,7 @@
 
 # path
 export LBIN="$HOME/bin"
-export PATH="$PATH:$LBIN"
+export PATH="$LBIN:$PATH"
 
 # default programs
 export EDITOR="nvim"
