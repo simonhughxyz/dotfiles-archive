@@ -37,10 +37,10 @@ bind m mute toggle
 bind M mute all toggle
 
 " Run mpv on links
-bind v hint -JW mpvsafe
+bind v hint -JW js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
 
 " Run mpv on current URL
-bind V composite get_current_url | mpvsafe
+bind V composite get_current_url | js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
