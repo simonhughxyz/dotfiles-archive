@@ -4,6 +4,7 @@
 # Simon Hugh Moore
 #
 # Choose profile to run all mpv instances with. 
+# runs in conjunction with mpv wrapper script.
 
 # mpv runtime dir.
 runtime_dir=$XDG_RUNTIME_DIR/mpv
