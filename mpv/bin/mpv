@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# MPV
+# Simon Hugh Moore
+#
+# Wrapper script for mpv to read a file to determin what profile to run.
+
+# mpv runtime dir.
+runtime_dir=$XDG_RUNTIME_DIR/mpv
+# file to store profile to run.
+profile=$runtime_dir/profile
+
+
+# create runtime dir
+mkdir -p "$runtime_dir"
+
+# create profile file
+touch -a "$profile"
+
+# read profile file and run apropriate profile with mpv
+case $(head -n 1 $profile) in
+    hd|720) /usr/bin/mpv --profile=720 $@ ;;
+    sd|480) /usr/bin/mpv --profile=sd $@ ;;
+    *) /usr/bin/mpv $@ ;;
+esac
