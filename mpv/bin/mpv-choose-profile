@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# MPV-CHOOSE-PROFILE
+# Simon Hugh Moore
+#
+# Choose profile to run all mpv instances with. 
+
+# mpv runtime dir.
+runtime_dir=$XDG_RUNTIME_DIR/mpv
+# file to store profile to run.
+profile=$runtime_dir/profile
+
+# get profile choice and write in file.
+mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
