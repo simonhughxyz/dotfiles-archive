@@ -10,16 +10,26 @@ runtime_dir=$XDG_RUNTIME_DIR/mpv
 # file to store profile to run.
 profile=$runtime_dir/profile
 
-
 # create runtime dir
 mkdir -p "$runtime_dir"
-
 # create profile file
 touch -a "$profile"
 
+# get profile choice and write in file.
+_choose_profile() {
+    /usr/bin/mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
+}
+
+_mpv(){
 # read profile file and run apropriate profile with mpv
 case $(head -n 1 $profile) in
     hd|720) /usr/bin/mpv --profile=720 $@ ;;
     sd|480) /usr/bin/mpv --profile=sd $@ ;;
     *) /usr/bin/mpv $@ ;;
+esac
+}
+
+case $1 in
+    -P) _choose_profile ;;
+    *) _mpv $@ ;;
 esac
