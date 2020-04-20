@@ -16,19 +16,23 @@ mkdir -p "$runtime_dir"
 # create profile file
 touch -a "$profile"
 
-# Run mpv with profile
-_mpvp(){ /usr/bin/mpv --profile=$1 $@; }
+# mpv wrapper
+_mpv(){ /usr/bin/mpv $@; }
 
 # get profile choice and write in file.
 _choose_profile() {
-    _mpvp help | awk 'NR>1 {print $1}' | fzf > "$profile"
+    _mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
 }
 
 # read profile file and run apropriate profile with mpv
-_mpv(){ _mpvp $(head -n 1 $profile) $@; }
+_mpvp(){
+    pf=$(head -n 1 $profile)
+    echo "Running with profile: $pf"
+    [ -z "$pf" ] && _mpv $@ || _mpv --profile=$pf $@
+}
 
 # run mpv -P to choose profile with fzf
 case $1 in
     -P) _choose_profile ;;
-    *) _mpv $@ ;;
+    *) _mpvp $@ ;;
 esac
