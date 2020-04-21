@@ -17,7 +17,7 @@ auconscreatecontainer true
 
 " Characters to use for hints
 " set hintchars hjklasdfgyuiopqwertnmzxcb
-set hintchars hjklgftyuvbuiondsrcm
+set hintchars hjklgftyuvbiondsrcm
 
 " Editor
 set editorcmd xst -e "vim"
