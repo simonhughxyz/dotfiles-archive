@@ -34,3 +34,4 @@ bspc config presel_feedback_color  "#993004"
 bspc rule -a mpv desktop='V'     # open mpv in a dedicated video desktop.
 bspc rule -a mpv focus=off       # don't give new mpv windows focus.
 bspc rule -a Zathura state=tiled # open zathura in tiled mode.
+bspc rule -a emacs state=tiled   # open emacs in tiled mode.
