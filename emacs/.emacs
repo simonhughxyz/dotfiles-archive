@@ -26,6 +26,8 @@
 (eval-when-compile
   (require 'use-package))
 
-; (ensure-package-installed 'evil
-;                           'projectile
-;                           'magit)
+(use-package evil
+    :ensure t
+    :config
+    (evil-mode)
+    )
