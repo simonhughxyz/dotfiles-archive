@@ -26,6 +26,11 @@
     (evil-mode)
     )
 
+;; Minimal startup
+(setq inhibit-startup-message t)
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message nil)
+
 ;; Remove menu/tool/scroll bar.
 (tool-bar-mode -1)
 (menu-bar-mode -1)
