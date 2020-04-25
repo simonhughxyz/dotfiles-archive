@@ -16,6 +16,9 @@
 
 (use-package gruvbox-theme
     :ensure t
+    :config
+    (set-foreground-color "#E0DFDB")
+    (set-background-color "#101010")
 )
 (use-package evil
     :ensure t
