@@ -21,6 +21,9 @@
     )
 
 ;; Remove menu/tool/scroll bar.
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
+(if (boundp 'fringe-mode)
+    (fringe-mode -1))
+(if (boundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
