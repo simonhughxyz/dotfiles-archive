@@ -38,3 +38,6 @@
     (fringe-mode -1))
 (if (boundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
+
+;; Line Numbers
+(global-display-line-numbers-mode)
