@@ -14,6 +14,9 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package gruvbox-theme
+    :ensure t
+)
 (use-package evil
     :ensure t
     :config
