@@ -6,6 +6,9 @@ vim/.config/nvim/plugged/
 vim/.config/nvim/undodir/
 vim/.config/nvim/.netrwhist
 
+# emacs
+emacs/.emacs.d/elpa/
+
 # ZSH
 zsh/.config/zsh/.zcompdump
 
