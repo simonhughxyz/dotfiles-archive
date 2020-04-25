@@ -4,6 +4,7 @@ st.opacity:      180
 st.font:          Liberation Mono:pixelsize=28:antialias=true:autohint=true;
 URxvt.termName:  rxvt
 URxvt.font:      xft:monospace:size=18
+emacs.font:      Mono-12:antialias=true
 *.borderLess:    false
 *.letterSpace:   0
 *.transparent:   true
