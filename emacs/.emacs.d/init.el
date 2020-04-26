@@ -40,4 +40,7 @@
     (scroll-bar-mode -1))
 
 ;; Line Numbers
-(global-display-line-numbers-mode)
+(when (version<= "26.0.50" emacs-version )
+    (global-display-line-numbers-mode)
+    (setq display-line-numbers-type 'relative
+      display-line-numbers-current-absolute t))
