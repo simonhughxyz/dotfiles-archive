@@ -4,7 +4,7 @@ super + shift + s
 super + {_,shift +} Return
     $TERMINAL {_,-e nnn}
 super + x
-    slock
+    lock
 super + shift + w
     feh --bg-fill --randomize ~/Pictures/*/*-ls-*
 super + space; m
