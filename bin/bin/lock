@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# LOCK
+# Simon Hugh Moore
+#
+# Lock the screen
+
+# runtime dir.
+runtime=/tmp/lock
+# PID file
+pid=$runtime/pid
+
+# Script to run on exit
+_cleanup() {
+    rm -f "$pid"
+    exit
+}
+
+# Make sure only one instants of lock is running.
+if [ -f "$pid" ]; then
+    echo "$(basename $0) is already running, exiting..."
+    exit 1
+else
+    # delete pid file when exiting
+    trap _cleanup INT TERM EXIT
+    # create runtime dir
+    mkdir -p "$runtime"
+    echo $$ > "$pid"
+fi
+
+# run slock
+/bin/slock
