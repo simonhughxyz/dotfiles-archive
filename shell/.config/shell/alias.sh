@@ -124,23 +124,6 @@ alias iptl='sudo iptables -nvL'
 alias ip6tl='sudo ip6tables -nvL'
 iptl-search() {sudo iptables -nvL | awk -vRS= "BEGIN{IGNORECASE = 1}/^Chain $1/" ;}
 
-# transmission
-# Borrowed idea from:
-# https://github.com/gotbletu/shownotes/blob/master/transmission-cli.txt
-# made some changes and added new functions.
-tm-daemon() { transmission-daemon ;}
-tm-quit() { killall transmission-daemon ;}
-tm-altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
-tm-altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
-tm-add() { transmission-remote --add "$1" ;}
-tm-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
-tm-stop() { transmission-remote -t"$1" --stop ;}		# <id> or all
-tm-start() { transmission-remote -t"$1" --start ;}		# <id> or all
-tm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
-tm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
-tm-info() { transmission-remote -t"$1" --info ;}
-tm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
-
 # misc
 alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""

@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# TM
+# Simon Hugh Moore
+#
+# Helper functions for transmission.
+
+_daemon() { transmission-daemon ;}
+_quit() { killall transmission-daemon ;}
+_altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
+_altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
+_add() { transmission-remote --add "$1" ;}
+_askmorepeers() { transmission-remote -t"$1" --reannounce ;}
+_stop() { transmission-remote -t"$1" --stop ;}		# <id> or all
+_start() { transmission-remote -t"$1" --start ;}		# <id> or all
+_purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
+_remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
+_info() { transmission-remote -t"$1" --info ;}
+_speed() { while true;do clear; transmission-remote -t"$0" -i | grep Speed;sleep 1;done ;}
+_list(){
+    help="$(basename "$0") -- list torrents in transmission.
+
+    where:
+        stopped|s*       list stopped torrents.
+        down|d*          list downloading torrents.
+        up|u*            list uploading/seeding torrents.
+        complete|c*      list complete torrents (100%).
+        finished|f*      list finished torrents.
+        help|h*          show this help message.
+
+        Use ! after any command to negate the list.
+    "
+
+    # preprocess torrent-list
+    _tl() { transmission-remote -l | sed 's/^[ \t]\+//g'; }
+
+    # filter torrent list.
+    # Use: _filter_list "column number" "expression" "!"
+    _filter_list() {
+        eval  "_tl | awk -F'[[:space:]][[:space:]]+' 'NR==1 || \$$1 $3~ \"$2\"'" 
+    }
+
+    [ -n "$2" ] && [ "$2" != "!" ] && { echo "Use: $(basename "$0") COMMAND [!]"; return 1; }
+
+    case "$1" in
+        s*) _filter_list "8" "Stopped" "$2" ;;
+        d*) _filter_list "8" "Downloading|Up & Down" "$2";;
+        u*) _filter_list "8" "Seeding" "$2" ;;
+        c*) _filter_list "2" "100%" "$2";;
+        f*) _filter_list "8" "Idle|Seeding" "$2" ;;
+        h*) echo "$help" ;;
+        *|all|a) _tl  ;;
+     esac
+}
+
+case "$1" in
+    d|daemon) _daemon ;;
+    q|quit) _quit ;;
+    asenable) _altspeedenable ;;
+    asdisable) _altspeeddisable ;;
+    a|add) _add ;;
+    askmorepeers|morepeers) _askmorepeers ;;
+    stop) _stop ;;
+    start) _start ;;
+    purge) _purge ;;
+    rm|remove) _remove ;;
+    i|info) _info ;;
+    speed) _speed ;;
+    l|list) _list ;;
+esac
