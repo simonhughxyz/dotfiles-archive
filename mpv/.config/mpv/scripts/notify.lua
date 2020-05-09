@@ -15,6 +15,6 @@ end)
 -- Send notification when failed to open file.
 mp.register_event('end-file', function(event) 
     if event.reason == "error" then
-        os.execute("notify-send -u critical 'MPV' 'ERROR: failed to open file!'")
+        os.execute("notify-send 'MPV' 'ERROR: failed to open file!'")
     end
 end)
