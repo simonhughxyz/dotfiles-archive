@@ -140,41 +140,6 @@ tm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data als
 tm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
 tm-info() { transmission-remote -t"$1" --info ;}
 tm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
-tm-list() {
-    help="$(basename "$0") -- list torrents in transmission.
-
-    where:
-        stopped|s*       list stopped torrents.
-        down|d*          list downloading torrents.
-        up|u*            list uploading/seeding torrents.
-        complete|c*      list complete torrents (100%).
-        finished|f*      list finished torrents.
-        help|h*          show this help message.
-
-        Use ! after any command to negate the list.
-    "
-
-    # preprocess torrent-list
-    _tl() { transmission-remote -l | sed 's/^[ \t]\+//g'; }
-
-    # filter torrent list.
-    # Use: filter-list "column number" "expression" "!"
-    filter-list() {
-        eval  "_tl | awk -F'[[:space:]][[:space:]]+' 'NR==1 || \$$1 $3~ \"$2\"'" 
-    }
-    
-    [ -n "$2" ] && [ "$2" != "!" ] && { echo "Use: $(basename "$0") COMMAND [!]"; return 1; }
-
-    case "$1" in
-        s*) filter-list "8" "Stopped" "$2" ;;
-        d*) filter-list "8" "Downloading|Up & Down" "$2";;
-        u*) filter-list "8" "Seeding" "$2" ;;
-        c*) filter-list "2" "100%" "$2";;
-        f*) filter-list "8" "Idle|Seeding" "$2" ;;
-        h*) echo "$help" ;;
-        *|all|a) _tl  ;;
-     esac
-}
 
 # misc
 alias hist='history | g'
