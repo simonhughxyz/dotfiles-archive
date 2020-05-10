@@ -54,17 +54,17 @@ _list(){
 }
 
 case "$1" in
-    d|daemon) _daemon ;;
-    q|quit) _quit ;;
+    -d|daemon) _daemon ;;
+    -q|quit) _quit ;;
     asenable) _altspeedenable ;;
     asdisable) _altspeeddisable ;;
-    a|add) _add ;;
+    -a|add) _add ;;
     askmorepeers|morepeers) _askmorepeers ;;
     stop) _stop ;;
     start) _start ;;
     purge) _purge ;;
     rm|remove) _remove ;;
-    i|info) _info ;;
+    -i|info) _info ;;
     speed) _speed ;;
-    l|list) _list ;;
+    -l|list) _list ;;
 esac
