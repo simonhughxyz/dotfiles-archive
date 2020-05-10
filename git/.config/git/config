@@ -12,7 +12,7 @@
 [alias]
     ps  = push
     pl  = pull
-    cm  = commit
+    c  = commit
     ca  = commit --amend
     s   = status
     sp  = log --all --graph --decorate --oneline --simplify-by-decoration
@@ -28,6 +28,6 @@
     rh  = reset HEAD
     rso = reset --hard origin/master
     lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    cmm = commit -m
+    cm = commit -m
     df  = diff
     dfs = diff --staged
