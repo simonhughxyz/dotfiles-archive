@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# SHOT
+# Simon Hugh Moore
+#
+# Screenshot rapper
+
+# path to save screenshot too.
+path=~/Pictures/shots
+
+now=$(date '+%Y-%m-%d_%H:%M:%S')
+
+# save screenshot to path and clipboard.
+maim $@ | tee "$path/$now.jpg" | xclip -selection clipboard -t image/jpg
