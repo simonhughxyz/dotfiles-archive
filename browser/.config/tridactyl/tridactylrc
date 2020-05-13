@@ -50,5 +50,5 @@ bind V composite get_current_url | js -p tri.excmds.shellescape(JS_ARG).then(url
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
 # Autocontain
-autocontain google\.(co\.uk|com) google
-autocontain gmail.com google
+# autocontain google\.(co\.uk|com) google
+# autocontain gmail.com google
