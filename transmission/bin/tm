@@ -58,13 +58,13 @@ case "$1" in
     -q|quit) _quit ;;
     asenable) _altspeedenable ;;
     asdisable) _altspeeddisable ;;
-    -a|add) _add ;;
-    askmorepeers|morepeers) _askmorepeers ;;
-    stop) _stop ;;
-    start) _start ;;
-    purge) _purge ;;
-    rm|remove) _remove ;;
-    -i|info) _info ;;
+    -a|add) _add "$2" ;;
+    askmorepeers|morepeers) _askmorepeers "$2" ;;
+    stop) _stop "$2" ;;
+    start) _start "$2" ;;
+    purge) _purge "$2" ;;
+    -r|rm|remove) _remove "$2" ;;
+    -i|info) _info "$2" ;;
     speed) _speed ;;
     -l|list) _list ;;
 esac
