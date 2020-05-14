@@ -52,6 +52,9 @@ _list(){
         *|all|a) _tl  ;;
      esac
 }
+_stop_finished(){
+    _list finished | awk 'NR>1 {print $1}' | xargs -I {} transmission-remote -t{} --stop
+}
 
 case "$1" in
     -d|daemon) _daemon ;;
@@ -61,6 +64,7 @@ case "$1" in
     -a|add) _add "$2" ;;
     askmorepeers|morepeers) _askmorepeers "$2" ;;
     stop) _stop "$2" ;;
+    stopf) _stop_finished ;;
     start) _start "$2" ;;
     purge) _purge "$2" ;;
     -r|rm|remove) _remove "$2" ;;
