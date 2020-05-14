@@ -18,7 +18,7 @@ _remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
 _info() { transmission-remote -t"$1" --info ;}
 _speed() { while true;do clear; transmission-remote -t"$0" -i | grep Speed;sleep 1;done ;}
 _list(){
-    help="$(basename "$0") -- list torrents in transmission.
+    help="list torrents in transmission.
 
     where:
         stopped|s*       list stopped torrents.
