@@ -71,5 +71,5 @@ case "$1" in
     -r|rm|remove) _remove "$2" ;;
     -i|info) _info "$2" ;;
     speed) _speed ;;
-    -l|list) _list ;;
+    -l|list) _list "$2" ;;
 esac
