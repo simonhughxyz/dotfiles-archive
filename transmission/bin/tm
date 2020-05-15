@@ -66,7 +66,6 @@ case "$1" in
     -a|add) _add "$2" ;;
     askmorepeers|morepeers) _askmorepeers "$2" ;;
     stop) _stop "$2" ;;
-    stopf) _stop_finished ;;
     start) _start "$2" ;;
     purge) _purge "$2" ;;
     -r|rm|remove) _remove "$2" ;;
