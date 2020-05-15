@@ -53,7 +53,7 @@ _list(){
 }
 _stop() {
     case "$1" in
-        -f) _list finished | awk 'NR>1 {print $1}' | xargs -I {} transmission-remote -t{} --stop ;;
+        -f|finished) _list finished | awk 'NR>1 {print $1}' | xargs -I {} transmission-remote -t{} --stop ;;
         *) transmission-remote -t"$1" --stop ;;
     esac
 }
