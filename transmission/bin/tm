@@ -11,7 +11,6 @@ _altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
 _altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
 _add() { transmission-remote --add "$1" ;}
 _askmorepeers() { transmission-remote -t"$1" --reannounce ;}
-_stop() { transmission-remote -t"$1" --stop ;}		# <id> or all
 _start() { transmission-remote -t"$1" --start ;}		# <id> or all
 _purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
 _remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
@@ -52,8 +51,11 @@ _list(){
         *|all|a) _tl  ;;
      esac
 }
-_stop_finished(){
-    _list finished | awk 'NR>1 {print $1}' | xargs -I {} transmission-remote -t{} --stop
+_stop() {
+    case "$1" in
+        -f) _list finished | awk 'NR>1 {print $1}' | xargs -I {} transmission-remote -t{} --stop ;;
+        *) transmission-remote -t"$1" --stop ;;
+    esac
 }
 
 case "$1" in
