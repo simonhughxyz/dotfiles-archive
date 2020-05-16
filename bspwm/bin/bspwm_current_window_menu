@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# BSPWM_CURRENT_WINDOW_MENU
+# Simon Hugh Moore
+#
+# Select the current window from dmenu.
+
+windows=$( bspc query -N -n .window )
