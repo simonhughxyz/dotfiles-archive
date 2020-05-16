@@ -5,4 +5,11 @@
 #
 # Select the current window from dmenu.
 
-windows=$( bspc query -N -n .window )
+# get list of window id's
+windows=$( bspc query -N -n .window.local )
+
+# get choice of window as title.
+choice=$( echo $windows | xargs -d ' ' -I {} xdotool getwindowname {} | dmenu -l 10 )
+
+# switch to window.
+bspc node -f $( xdotool search --name "$choice" )
