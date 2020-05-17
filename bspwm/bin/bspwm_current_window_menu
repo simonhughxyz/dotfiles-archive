@@ -5,8 +5,11 @@
 #
 # Select the current window from dmenu.
 
-# get list of window id's
+# get list of window id's on local desktop.
 windows=$( bspc query -N -n .window.local )
+
+# get list of all windows if -a argument is passed.
+[ "$1" = "-a" ] && windows=$( bspc query -N -n .window )
 
 # get choice of window as title.
 choice=$( echo $windows | xargs -d ' ' -I {} xdotool getwindowname {} | dmenu -l 10 )
