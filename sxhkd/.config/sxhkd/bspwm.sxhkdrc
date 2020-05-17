@@ -31,8 +31,8 @@ super + {_, shift +} {Left,Down,Up,Right}
 super + shift + bracket{left,right}
     bspc node -f {prev,next}.local
 
-super + n
-    bspwm_current_window_menu
+super + {_, shift +} n
+    bspwm_current_window_menu {_,-a}
 
 super + alt + {_,shift +} {Left,Down,Up,Right}
     bspwm_resize_node -{a,z} {left,down,up,right}
