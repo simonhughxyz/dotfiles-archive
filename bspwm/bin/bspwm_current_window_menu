@@ -3,7 +3,9 @@
 # BSPWM_CURRENT_WINDOW_MENU
 # Simon Hugh Moore
 #
-# Select the current window from dmenu.
+# Lists all windows in current desktop in dmenu.
+# Chosen window is focused.
+# Use -a to list all windows.
 
 # get list of window id's on local desktop.
 windows=$( bspc query -N -n .window.local )
