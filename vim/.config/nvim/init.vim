@@ -125,6 +125,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'Yggdroot/indentLine'
 Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
 Plug 'fourjay/vim-password-store', { 'for': 'pass' }
+Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
