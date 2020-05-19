@@ -179,3 +179,10 @@ extract() {
          echo "'$1' is not a valid file" 
      fi 
 }
+
+# Hash checks
+hashcheck() {
+    md5sum -c "$1"
+    sha1sum -c "$1"
+    sha256sum -c "$1"
+}
