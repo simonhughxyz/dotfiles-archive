@@ -18,7 +18,7 @@ _cleanup() {
 
 # Make sure only one instants of lock is running.
 if [ -f "$pid" ]; then
-    echo "$(basename $0) is already running, exiting..."
+    echo "$(basename "$0") is already running, exiting..."
     exit 1
 else
     # delete pid file when exiting
