@@ -9,3 +9,7 @@ let g:sh_fold_enabled=5
 let g:is_sh=1
 setlocal foldmethod=syntax
 inoremap # #<space>
+
+" Automatically open quickfix window if errors found
+au QuickFixCmdPost [^l]* nested cwindow
+au QuickFixCmdPost    l* nested lwindow
