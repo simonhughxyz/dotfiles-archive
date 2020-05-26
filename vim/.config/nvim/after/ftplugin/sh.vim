@@ -13,3 +13,6 @@ inoremap # #<space>
 " Automatically open quickfix window if errors found
 au QuickFixCmdPost [^l]* nested cwindow
 au QuickFixCmdPost    l* nested lwindow
+
+" Auto run make on write
+au BufWritePost * :silent make | redraw!
