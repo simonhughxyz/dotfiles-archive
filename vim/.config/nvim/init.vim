@@ -104,6 +104,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 " Plug '/usr/bin/fzf'
 Plug 'universal-ctags/ctags', { 'do': './autogen.sh;./configure --prefix=$HOME;make install'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
