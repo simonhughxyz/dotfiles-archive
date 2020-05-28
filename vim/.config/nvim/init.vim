@@ -105,7 +105,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
-" Plug '/usr/bin/fzf'
 Plug 'universal-ctags/ctags', { 'do': './autogen.sh;./configure --prefix=$HOME;make install'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -120,8 +119,6 @@ Plug 'majutsushi/tagbar'
 Plug 'wellle/targets.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
-" Plug 'ap/vim-css-color'
-" Plug 'tmhedberg/SimpylFold'
 Plug 'Yggdroot/indentLine'
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
@@ -142,6 +139,7 @@ Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
 Plug 'fourjay/vim-password-store', { 'for': 'pass' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 
 " Neovim Plugins
 if has('nvim')
