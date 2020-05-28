@@ -137,7 +137,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " Language Specific plugins
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
 Plug 'fourjay/vim-password-store', { 'for': 'pass' }
