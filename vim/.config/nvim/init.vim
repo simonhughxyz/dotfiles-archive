@@ -110,7 +110,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
-Plug 'justinmk/vim-sneak'
 Plug 'unblevable/quick-scope'
 Plug 'junegunn/vim-after-object'
 Plug 'ludovicchabant/vim-gutentags'
