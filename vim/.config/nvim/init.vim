@@ -122,11 +122,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'ap/vim-css-color'
 " Plug 'tmhedberg/SimpylFold'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'Yggdroot/indentLine'
-Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
-Plug 'fourjay/vim-password-store', { 'for': 'pass' }
-Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'frazrepo/vim-rainbow'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'michaeljsmith/vim-indent-object'
@@ -139,6 +135,13 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+
+" Language Specific plugins
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
+Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
+Plug 'fourjay/vim-password-store', { 'for': 'pass' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " Neovim Plugins
 if has('nvim')
