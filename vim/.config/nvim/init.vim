@@ -111,26 +111,28 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'  " Align text.
 Plug 'junegunn/vim-peekaboo'    " Show register contents in sidebar.
 Plug 'unblevable/quick-scope'   " Highlights unique letters to help with 'f'.
-Plug 'junegunn/vim-after-object'    " Text object to target text after char.
 Plug 'ludovicchabant/vim-gutentags' " Manage tag files.
 Plug 'majutsushi/tagbar'    " Shows list of tags in a sidebar.
-" Plug 'kana/vim-textobj-user'
-Plug 'wellle/targets.vim'   " Expands on vim text objects and adds a few new ones.
 Plug 'AndrewRadev/splitjoin.vim'    " Split single lines or join multiple lines.
 Plug 'airblade/vim-gitgutter'   " Show git diff in sign column.
 Plug 'Yggdroot/indentLine'  " Show a line marking indents.
 Plug 'frazrepo/vim-rainbow' " Color matching brackets.
-Plug 'coderifous/textobj-word-column.vim'   " Add column text object.
-Plug 'michaeljsmith/vim-indent-object'  " Adds indent text object.
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 " Plug 'garbas/vim-snipmate'
 " Plug 'honza/vim-snippets'
-Plug 'chaoren/vim-wordmotion'   " Vim recognizes camel case and more as words.
 Plug 'AndrewRadev/switch.vim'   " Switch true to false, yes to no etc.
 Plug 'junegunn/goyo.vim'    " Distraction free writing.
 Plug 'junegunn/limelight.vim'   " Highlight the current column.
+
+" Text Object Plugins
+Plug 'wellle/targets.vim'   " Expands on vim text objects and adds a few new ones.
+Plug 'michaeljsmith/vim-indent-object'  " Adds indent text object.
+Plug 'chaoren/vim-wordmotion'   " Vim recognizes camel case and more as words.
+Plug 'junegunn/vim-after-object'    " Text object to target text after char.
+" Plug 'kana/vim-textobj-user'
+Plug 'coderifous/textobj-word-column.vim'   " Add column text object.
 
 " Language Specific plugins
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
