@@ -14,3 +14,5 @@ ssh
 udp
 math
 filetype
+plugin
+plugins
