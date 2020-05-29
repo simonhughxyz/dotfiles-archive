@@ -1,7 +1,7 @@
-*.font:          Liberation Mono:pixelsize=22:antialias=true:autohint=true;
+*.font:          Mono:pixelsize=22:antialias=true:autohint=true;
 st.termName:     st-256color
 st.opacity:      180
-st.font:          Liberation Mono:pixelsize=28:antialias=true:autohint=true;
+st.font:         Mono:pixelsize=28:antialias=true:autohint=true;
 URxvt.termName:  rxvt
 URxvt.font:      xft:monospace:size=18
 emacs.font:      Mono-20:antialias=true
