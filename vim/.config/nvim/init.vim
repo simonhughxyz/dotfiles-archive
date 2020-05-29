@@ -125,6 +125,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'AndrewRadev/switch.vim'   " Switch true to false, yes to no etc.
 Plug 'junegunn/goyo.vim'    " Distraction free writing.
 Plug 'junegunn/limelight.vim'   " Highlight the current column.
+Plug 'mcchrish/nnn.vim' " Use nnn file browser.
 
 " Text Object Plugins
 Plug 'wellle/targets.vim'   " Expands on vim text objects and adds a few new ones.
