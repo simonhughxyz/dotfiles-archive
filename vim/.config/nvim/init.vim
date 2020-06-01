@@ -151,7 +151,7 @@ endif
 call plug#end()
 " }}}
 " Plugin Settings {{{
-let g:vimwiki_list = [{'path': '~/.wiki/'}]
+let g:vimwiki_list = [{'path': '~/notes/', 'path_html': '~/notes/html/'}]
 set rtp+=~/.fzf
 if has('python3')
     let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
