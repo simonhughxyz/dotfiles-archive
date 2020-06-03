@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# FIREFOX-PROFILE
+# Simon Hugh Moore
+#
+# Manage firefox profiles for syncing.
+# Requires rsync.
+
+# Location of profile to manage.
+profile=~/sync/firefox-profile
+
+# tmp path for profile (best to keep it in memory).
+tmp_profile=${XDG_RUNTIME_DIR}/firefox-profile
+
+# Path where firefox stores its profiles.
+firefox_profiles=~/.mozilla/firefox
+
+
+# Copy profile dir to tmp location and symlink to firefox profiles.
+_setup() {
+    # create tmp dir if not exists
+    mkdir -p "$tmp_profile"
+
+    # copy profile to tmp location
+    rsync -r "$profile/" "$tmp_profile"
+
+    # create symlink
+    ln -sf "$tmp_profile" "$firefox_profiles/"
+}
+
+# Save profile to permanent location.
+_save() {
+    rsync -r "$tmp_profile/" "$profile"
+}
+
+case "$1" in
+    setup) _setup ;;
+    save) _save ;;
+    *) _setup ;;
+esac
