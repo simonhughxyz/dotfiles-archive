@@ -31,6 +31,10 @@ user_pref("browser.urlbar.trimURLs", false);
 // Don't show bookmark icons
 user_pref("browser.chrome.site_icons", false);
 
+// Enable dark theme
+user_pref("browser.in-content.dark-mode", true);
+user_pref("ui.systemUsesDarkTheme", 1);
+
 // MISC
 
 // How to handle protocols
