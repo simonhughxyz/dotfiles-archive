@@ -40,7 +40,7 @@ bind m mute toggle
 bind M mute all toggle
 
 # Follow link
-bind f hint -b
+bind f hint -w
 bind F hint
 
 " Run mpv on links
