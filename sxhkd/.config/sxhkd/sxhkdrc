@@ -22,7 +22,7 @@ super + space; m
 super + h
     $TERMINAL -c htop -n htop -e htop
 super + w
-    $BROWSER -P privacy
+    $BROWSER
 super + p
     $TERMINAL -c pulsemixer -n pulsemixer -e pulsemixer
 
