@@ -136,13 +136,14 @@ Plug 'junegunn/vim-after-object'    " Text object to target text after char.
 " Plug 'kana/vim-textobj-user'
 Plug 'coderifous/textobj-word-column.vim'   " Add column text object.
 
-" Language Specific plugins
+" Filetype Specific plugins
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
 Plug 'fourjay/vim-password-store', { 'for': 'pass' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
+Plug 'tridactyl/vim-tridactyl', { 'for': 'trydactyl' }
 
 " Neovim Plugins
 if has('nvim')
