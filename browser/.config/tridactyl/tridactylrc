@@ -29,6 +29,10 @@ set editorcmd xst -e "nvim"
 " Bind Keys
 "
 
+# Close windows and tabs
+bind q winclose
+bind Q tabclose
+
 " Find
 bind / fillcmdline find
 bind ? fillcmdline find -?
