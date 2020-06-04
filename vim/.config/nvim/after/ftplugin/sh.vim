@@ -15,4 +15,4 @@ au QuickFixCmdPost [^l]* nested cwindow
 au QuickFixCmdPost    l* nested lwindow
 
 " Auto run make on write
-au BufWritePost * :silent make | redraw!
+" au BufWritePost * :silent make | redraw!
