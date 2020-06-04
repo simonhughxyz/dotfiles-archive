@@ -22,7 +22,7 @@ _setup() {
     mkdir -p "$tmp_profile"
 
     # copy profile to tmp location
-    rsync -r "$profile/" "$tmp_profile"
+    rsync -r --exclude-from "$profile/.rsync_ignore" "$profile/" "$tmp_profile"
 
     # create symlink
     ln -sf "$tmp_profile" "$firefox_profiles/"
@@ -30,7 +30,7 @@ _setup() {
 
 # Save profile to permanent location.
 _save() {
-    rsync -r "$tmp_profile/" "$profile"
+    rsync -r --exclude-from "$profile/.rsync_ignore" "$tmp_profile/" "$profile"
 }
 
 case "$1" in
