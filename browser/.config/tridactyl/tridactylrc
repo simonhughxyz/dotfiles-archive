@@ -9,6 +9,9 @@
 " Settings
 "
 
+" Remove any existing settings.
+sanitize tridactyllocal tridactylsync
+
 " Color theme to use for menu
 colors dark
 
