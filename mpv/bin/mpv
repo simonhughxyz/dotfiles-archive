@@ -17,7 +17,8 @@ mkdir -p "$runtime_dir"
 touch -a "$profile"
 
 # mpv wrapper
-_mpv(){ /usr/bin/mpv $@; }
+# Run mpv in a tmux session so that its independant from parent shell.
+_mpv(){ tmux new -s mpv -d 2> /dev/null; tmux send-keys -t mpv "/usr/bin/mpv '$@' &> /dev/null &" ENTER; }
 
 # get profile choice and write in file.
 _choose_profile() {
