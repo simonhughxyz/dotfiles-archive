@@ -18,7 +18,7 @@ touch -a "$profile"
 
 # mpv wrapper
 # Run mpv in a tmux session so that its independant from parent shell.
-_mpv(){ tmux new -s mpv -d 2> /dev/null; tmux send-keys -t mpv "/usr/bin/mpv '$@' &> /dev/null &" ENTER; }
+_mpv(){ tmux new -s mpv -d; tmux send-keys -t mpv "/usr/bin/mpv \"$( echo $@ | sed 's/ /" "/g' )\" &> /dev/null &" ENTER; }
 
 # get profile choice and write in file.
 _choose_profile() {
@@ -29,11 +29,11 @@ _choose_profile() {
 _mpvp(){
     pf=$(head -n 1 $profile)
     echo "Running with profile: $pf"
-    [ -z "$pf" ] && _mpv $@ || _mpv --profile=$pf $@
+    [ -z "$pf" ] && _mpv $@ || _mpv "$@" "--profile=$pf"
 }
 
 # run mpv -P to choose profile with fzf
 case $1 in
     -P) _choose_profile ;;
-    *) _mpvp $@ ;;
+    *) _mpvp "$@" ;;
 esac
