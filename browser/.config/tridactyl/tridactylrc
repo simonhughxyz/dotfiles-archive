@@ -35,7 +35,7 @@ set editorcmd xst -e "nvim"
 " Bind Keys
 "
 
-# Close windows and tabs
+" Close windows and tabs
 bind q winclose
 bind Q tabclose
 
@@ -45,11 +45,11 @@ bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 
-# Mute
+" Mute
 bind m mute toggle
 bind M mute all toggle
 
-# Follow link
+" Follow link
 bind f hint -w
 unbind t
 bind t hint
@@ -63,6 +63,6 @@ bind V composite get_current_url | mpv
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
-# Autocontain
-# autocontain google\.(co\.uk|com) google
-# autocontain gmail.com google
+" Autocontain
+" autocontain google\.(co\.uk|com) google
+" autocontain gmail.com google
