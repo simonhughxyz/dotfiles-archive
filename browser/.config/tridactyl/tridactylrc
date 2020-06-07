@@ -22,7 +22,7 @@ alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_qu
 colors dark
 
 " Auto create containers 
-auconscreatecontainer true
+" auconscreatecontainer true
 
 " Characters to use for hints
 " set hintchars hjklasdfgyuiopqwertnmzxcb
