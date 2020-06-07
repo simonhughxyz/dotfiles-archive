@@ -5,6 +5,9 @@
 " Required tridactly-native to be installed.
 " Run `installnative` in tridactyl.
 
+" Remove any existing settings.
+sanitize tridactyllocal tridactylsync
+
 "
 " Alias
 "
@@ -14,9 +17,6 @@ alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_qu
 "
 " Settings
 "
-
-" Remove any existing settings.
-sanitize tridactyllocal tridactylsync
 
 " Color theme to use for menu
 colors dark
