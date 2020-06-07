@@ -6,6 +6,12 @@
 " Run `installnative` in tridactyl.
 
 "
+" Alias
+"
+alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
+
+
+"
 " Settings
 "
 
@@ -48,10 +54,10 @@ bind f hint -w
 bind t hint
 
 " Run mpv on links
-bind v hint -JW js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
+bind v hint -JW mpv
 
 " Run mpv on current URL
-bind V composite get_current_url | js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
+bind V composite get_current_url | mpv
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
