@@ -22,7 +22,7 @@ _mpv(){ tmux new -s mpv -d; tmux send-keys -t mpv "/usr/bin/mpv \"$( echo $@ | s
 
 # get profile choice and write in file.
 _choose_profile() {
-    _mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
+    /usr/bin/mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
 }
 
 # read profile file and run apropriate profile with mpv
