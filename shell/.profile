@@ -10,7 +10,7 @@ export PATH="$LBIN:$PATH"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="xst"
-export BROWSER="firefox"
+export BROWSER="www"
 export READER="zathura"
 export FILE="nnn"
 
