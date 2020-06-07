@@ -3,6 +3,32 @@
 # WWW
 # Simon Hugh Moore
 #
-# Calls the correct browser to use with my set up.
+# Wrapper for firefox setting up all the correct profiles.
 
+# Location of profile to manage.
+profile=~/sync/firefox-profile
 
+# tmp path for profile (best to keep it in memory).
+tmp_profile=${XDG_RUNTIME_DIR}/firefox-profile
+
+# Path where firefox stores its profiles.
+firefox_profiles=~/.mozilla/firefox
+
+_firefox(){ 
+    #  Copy firefox profile to tmp_dir if tmp_dir does not already exist
+    [ mkdir $tmp_dir ] && rsync -r --exclude-from "$profile/.rsync_ignore" "$profile/" "$tmp_profile"
+    
+    # create symlink to firefox profiles folder
+    ln -sf "$tmp_profile" "$firefox_profiles/"
+
+    # Run firefox always in new window.
+    firefox --new-window $@
+}
+
+_save_firefox_profile() { rsync -r --exclude-from "$profile/.rsync_ignore" "$tmp_profile/" "$profile"; }
+
+case $1 in
+    -f|firefox) _firefox $@ ;;
+    -s|save) _save_firefox_profile ;;
+    *) _firefox $@ ;;
+esac
