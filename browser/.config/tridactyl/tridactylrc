@@ -45,7 +45,7 @@ bind M mute all toggle
 
 # Follow link
 bind f hint -w
-bind F hint
+bind t hint
 
 " Run mpv on links
 bind v hint -JW js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
