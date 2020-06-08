@@ -16,7 +16,7 @@ firefox_profiles=~/.mozilla/firefox
 
 _firefox(){ 
     #  Copy firefox profile to tmp_dir if tmp_dir does not already exist
-    [ mkdir $tmp_profiles ] && rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$tmp_profiles"
+    mkdir $tmp_profiles && rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$tmp_profiles"
     
     # create symlink to firefox profiles folder
     ln -sf "$tmp_profiles" "$firefox_profiles"
