@@ -56,6 +56,8 @@ bind t hint
 
 " Run mpv on links
 bind v hint -JW mpv
+" On youtube
+bindurl *youtube.com v composite hint -Jpipe ytd-thumbnail>a href | mpv
 
 " Run mpv on current URL
 bind V composite get_current_url | mpv
