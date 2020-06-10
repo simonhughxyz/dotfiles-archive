@@ -54,6 +54,9 @@ bind f hint -w
 unbind t
 bind t hint
 
+" Yank with hint
+bind Y hint -y
+
 " Run mpv on links
 bind v hint -JW mpv
 " On youtube
