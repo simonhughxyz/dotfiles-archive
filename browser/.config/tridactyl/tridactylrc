@@ -31,6 +31,17 @@ set hintchars hjklgftyuvbiondsrcm
 " Editor
 set editorcmd xst -e "nvim"
 
+" Always open in new window
+autocmd DocStart .* tabdetach
+
+" Zoom levels
+autocmd DocStart .* zoom 170
+autocmd DocStart .*youtube\.com.* zoom 180
+autocmd DocStart .*startpage\.com.* zoom 220
+autocmd DocStart .*duckduckgo\.com.* zoom 200
+autocmd DocStart .*github\.com.* zoom 200
+autocmd DocStart .*archlinux\.org.* zoom 200
+
 "
 " Bind Keys
 "
@@ -71,11 +82,3 @@ bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//
 " Autocontain
 " autocontain google\.(co\.uk|com) google
 " autocontain gmail.com google
-
-" Zoom levels
-autocmd DocStart .* zoom 170
-autocmd DocStart .*youtube\.com.* zoom 180
-autocmd DocStart .*startpage\.com.* zoom 220
-autocmd DocStart .*duckduckgo\.com.* zoom 200
-autocmd DocStart .*github\.com.* zoom 200
-autocmd DocStart .*archlinux\.org.* zoom 200
