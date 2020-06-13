@@ -29,7 +29,7 @@ colors dark
 set hintchars hjklgftyuvbiondsrcm
 
 " Editor
-set editorcmd xst -e "nvim"
+set editorcmd xst -e "nvim -S $HOME/.config/nvim/after/ftplugin/tridactyl.vim"
 
 " Always open in new window
 autocmd DocStart .* tabdetach
