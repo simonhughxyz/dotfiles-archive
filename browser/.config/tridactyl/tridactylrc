@@ -66,6 +66,10 @@ bind f hint -w
 unbind t
 bind t hint
 
+" Optomize follow link for URL's.
+bindurl youtube.com f hint -Jw
+bindurl youtube.com t hint -J
+
 " Yank with hint
 bind Y hint -y
 
