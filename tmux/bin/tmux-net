@@ -7,15 +7,16 @@
 
 session_name="net"
 
-if [ ! $( tmux has-session -t $session_name &> /dev/null ) ]; then
-    # create session with first window called wifi and run iwd
-    tmux new-session -d -s $session_name -n wifi
-    tmux send-keys -t $session_name "iwctl" C-m 
+# If session exists then exit 1.
+tmux has-session -t $session_name > /dev/null 2>&1 && exit 1
 
-    # window 2 lists network deviced (ip addr)
-    tmux new-window -t $session_name:2 -n devices
-    tmux send-keys -t $session_name "ip addr" C-m
+# create session with first window called wifi and run iwd
+tmux new-session -d -s $session_name -n wifi
+tmux send-keys -t $session_name "iwctl" C-m 
 
-    # window 3 is for pinging
-    tmux new-window -t $session_name:3 -n ping
-fi
+# window 2 lists network devices (ip addr) and refreshed on return key.
+tmux new-window -t $session_name:2 -n devices
+tmux send-keys -t $session_name "while :; do ip addr; read; clear; done" C-m
+
+# window 3 is for pinging
+tmux new-window -t $session_name:3 -n ping
