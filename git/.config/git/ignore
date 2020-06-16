@@ -23,3 +23,7 @@ tmp/
 # Used by gutentags vim plugin
 /tags.lock
 /tags.temp
+
+# Used by syncthing
+.stfolder
+.stignore
