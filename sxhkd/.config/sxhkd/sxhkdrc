@@ -77,7 +77,7 @@ super + z ; {l,p,d,s,y,f,g}
 super + {_,shift +} period
     bukuadd{_,title}menu
 super + shift + p
-    passmenu2 -t
+    pass menu
 
 
 
