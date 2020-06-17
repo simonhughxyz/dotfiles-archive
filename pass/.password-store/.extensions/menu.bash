@@ -36,6 +36,12 @@ auto_login(){
     xdotool key Return
 }
 
+# Gets the nth chars from password.
+# Some idiotic login field require the nth password.
+_nth() {
+    pass nth "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
+}
+
 # got to password-store directory and get a list of files.
 cd $pass_dir
 password_files="$(find * -type f)"
@@ -44,7 +50,7 @@ password_files="$(find * -type f)"
 password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
 
 # choose what to get from pass file using dmenu
-choice=$(printf '*\nURL\nOTP\nPass\nLogin' | dmenu -i) || exit
+choice=$(printf '*\nURL\nOTP\nPass\nLogin\nnth' | dmenu -i) || exit
 
 # store the chosen pass file name in lastpass file
 echo "$password" > "$lastpass"
@@ -55,4 +61,5 @@ case "$choice" in
     Login) write "$(get_login)";;                         # autotype login
     OTP) write "$(pass otp show "$password")";;           # autotype OTP
     URL) $BROWSER "$(pass url "$password")";; # Visit URL
+    nth) write "$(_nth)";;
 esac
