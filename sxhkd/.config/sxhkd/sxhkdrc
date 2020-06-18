@@ -49,7 +49,7 @@ super + alt + p
 super + a
     dmenu_run
 ctrl + alt + Delete
-    quitmenu
+    powermenu
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
