@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# POWERMENU
+# Simon H Moore
+# 
+# Gives a list of options to:
+# hibernate, sleep, exit (logout), shutdown or reboot.
+
+# List of choices to pass to dmenu
+choices="Hibernate\nSleep\nExit\nShutdown\nReboot"
+
+# get choice form dmenu
+choice=$(echo -e "$choices" | dmenu -sb "#ad1616" -p "Power Menu: ")
+
+case "$choice" in 
+    Hibernate) sudo ZZZ;;
+    Sleep) sudo zzz;;
+    Exit) killall xinit;;
+    Shutdown) sudo shutdown -h now & ;;
+    Reboot) sudo reboot & ;;
+esac
