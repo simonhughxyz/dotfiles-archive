@@ -135,8 +135,10 @@ _window(){
 _window_count(){
     f_color="#ff6600"
     b_color="-"
-    window_count="$(bspc query -N -n .window.local | wc -l )"
-    echo "%{B$b_color}%{F$f_color} $window_count%{F-}%{B-}"
+    icon=""
+    window_count=" $(bspc query -N -n .window.local | wc -l )"
+    [ "$window_count" == " 0" ] && window_count="" && icon=""
+    echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}"
 }
 
 _time() {
