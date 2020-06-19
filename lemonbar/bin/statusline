@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 delim="%{F#d5d5d5}|%{F-}"
 
@@ -40,22 +40,22 @@ _weather() {
 _memory() {
     f_color="C0C000"
 
-    echo "%{F#$f_color}📊 $(free -h | awk '/Mem:/ {print $3}')%{F-}"
-    }
+    echo "%{F#$f_color} $(free -h | awk '/Mem:/ {print $3}')%{F-}"
+}
 
 _volume() {
     f_color="98C379"
 
-	[ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && return 0
+	[ "$(pulsemixer --get-mute)" = "1" ] && printf "Mute\\n" && return 0
 
 	vol=$(pulsemixer --get-volume | awk '{print $1}')
 
 	if [ "$vol" -gt "100" ]; then
-		icon="🔊"
+		icon=""
 	elif [ "$vol" -lt "50" ]; then
-		icon="🔈"
+		icon=""
 	else
-		icon="🔉"
+		icon=""
 	fi
 
 	printf "%%{F#$f_color}%s %s%%\n%%{F-}" "$icon" "$vol"
@@ -93,7 +93,7 @@ _battery() {
 _uptime() {
     f_color="c98a1e"
 
-    echo "%{F#$f_color}⬆ $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
+    echo "%{F#$f_color} $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
 }
 
 _desktops() {
@@ -134,12 +134,12 @@ _window(){
 
 _time() {
     f_color="61AEEE"
-    echo "%{F#$f_color}🕒 $(date '+%H:%M')%{F-}"
+    echo "%{F#$f_color} $(date '+%H:%M')%{F-}"
 }
 
 _date() {
     f_color="F79494"
-    echo "%{F#$f_color}📅 $(date '+%a %d %B %Y')%{F-}"
+    echo "%{F#$f_color} $(date '+%a %d %B %Y')%{F-}"
 }
 
 status() {
