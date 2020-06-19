@@ -139,7 +139,7 @@ _time() {
 
 _date() {
     f_color="F79494"
-    echo "%{F#$f_color} $(date '+%a %d %B %Y')%{F-}"
+    echo "%{F#$f_color} $(date '+%a %d %B')%{F-}"
 }
 
 status() {
