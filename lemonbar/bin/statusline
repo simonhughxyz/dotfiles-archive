@@ -46,7 +46,7 @@ _memory() {
 _volume() {
     f_color="98C379"
 
-	[ "$(pulsemixer --get-mute)" = "1" ] && printf "Mute\\n" && return 0
+	[ "$(pulsemixer --get-mute)" = "1" ] && printf "\\n" && return 0
 
 	vol=$(pulsemixer --get-volume | awk '{print $1}')
 
