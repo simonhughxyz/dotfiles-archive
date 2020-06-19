@@ -161,6 +161,9 @@ status() {
 
 	# record
 
+    _window_count
+    echo "$delim"
+
     _uptime
     echo "$delim"
 
