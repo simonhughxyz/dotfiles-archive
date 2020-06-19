@@ -40,7 +40,7 @@ _weather() {
 _memory() {
     f_color="C0C000"
 
-    echo "%{F#$f_color}📊 $(free -h | awk '/Mem:/ {print $3 "/" $2}')%{F-}"
+    echo "%{F#$f_color}📊 $(free -h | awk '/Mem:/ {print $3}')%{F-}"
     }
 
 _volume() {
