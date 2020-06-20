@@ -42,6 +42,7 @@ autocmd DocStart .*duckduckgo\.com.* zoom 200
 autocmd DocStart .*github\.com.* zoom 200
 autocmd DocStart .*archlinux\.org.* zoom 200
 autocmd DocStart .*amazon\.co\.uk.* zoom 150
+autocmd DocStart .*wikipedia\.org.* zoom 200
 
 "
 " Bind Keys
