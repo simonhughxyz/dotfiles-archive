@@ -10,7 +10,8 @@
 
 font="SourceCodeProSemiBold-13"
 icon_font="FontAwesome-13"
-geometry="x30"
+geometry="x28"
+offset="-2"
 clickable_areas=12  # Number of clickable areas.
 f_color="#c25704"
 b_color="#000000"
