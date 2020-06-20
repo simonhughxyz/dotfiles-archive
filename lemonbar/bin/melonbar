@@ -8,8 +8,8 @@
 # Kill any running lemonbar
 # pgrep -x lemonbar > /dev/null && pkill -x lemonbar &
 
-font="SourceCodeProSemiBold-14"
-icon_font="FontAwesome-14"
+font="SourceCodeProSemiBold-13"
+icon_font="FontAwesome-13"
 geometry="x30"
 clickable_areas=12  # Number of clickable areas.
 f_color="#c25704"
