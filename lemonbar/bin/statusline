@@ -78,16 +78,31 @@ _record() {
 _battery() {
     # Don't run if acpi not available
     command -v acpi > /dev/null 2>&1 || exit 1
-    bat_empty=" "
-    bat_quarter=" "
-    bat_half=" "
-    bat_almost=" "
-    bat_full=" "
+    f_color="#70bb70"
 
-    BAT0=$(acpi -b | awk '/Battery 0/{print $4}' | tr -d ',')
-    BAT1=$(acpi -b | awk '/Battery 1/{print $4}' | tr -d ',')
+    bat=""
+    while read line; do
+        tmp="$(echo "$line" | awk '{print $4}' | sed 's/,//;s/%//')"
+        
+        if [ "$tmp" -gt "75" ]; then
+            icon=""
+        elif [ "$tmp" -gt "50" ]; then
+            icon=""
+        elif [ "$tmp" -gt "20" ]; then
+            icon=""
+            f_color="#999900"
+        elif [ "$tmp" -lt "5" ]; then
+            icon=""
+            f_color="#aa2222"
+        else
+            icon=""
+            f_color="#aa2222"
+        fi
 
-    echo "$delim $BAT0 $BAT1"
+        bat="$bat %{F$f_color}$icon $tmp%%{f-}"
+    done <<< "$(acpi -b)"
+
+    echo "$delim$bat"
 }
 
 _uptime() {
