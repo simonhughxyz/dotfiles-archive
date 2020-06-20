@@ -13,7 +13,7 @@ icon_font="FontAwesome-14"
 geometry="x30"
 clickable_areas=12  # Number of clickable areas.
 f_color="#c25704"
-b_color="#202020"
+b_color="#000000"
 
 pipe=/tmp/melonbar_pipe
 
