@@ -99,7 +99,7 @@ _battery() {
             f_color="#aa2222"
         fi
 
-        bat="$bat %{F$f_color}$icon $tmp%%{f-}"
+        bat="$bat %{F$f_color}$icon $tmp%%{F-}"
     done <<< "$(acpi -b)"
 
     echo "$delim$bat"
