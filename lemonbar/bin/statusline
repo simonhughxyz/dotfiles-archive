@@ -1,6 +1,6 @@
 #!/bin/bash
 
-delim="%{F#d5d5d5}|%{F-}"
+delim="%{F#b0b0b0}|%{F-}"
 
 _keystate() {
     f_color="e82e1e"
