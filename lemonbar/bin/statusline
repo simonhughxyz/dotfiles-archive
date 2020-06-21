@@ -21,14 +21,14 @@ _keystate() {
     [ "$numlock" = "on" ] && message="$message %{F#$f_color}NUMLOCK $delim"
     [ "$scrolllock" = "on" ] && message="$message %{F#$f_color}SCROLLLOCK $delim"
 
-    echo "$message%{F-}"
+    echo "$message%{F-}" > $prefix/keystate
 }
 
 _memory() {
     f_color="C0C000"
     icon=""
 
-    echo "%{F#$f_color}$icon $(free -h | awk '/Mem:/ {print $3}')%{F-}"
+    echo "%{F#$f_color}$icon $(free -h | awk '/Mem:/ {print $3}')%{F-}" > $prefix/memory
 }
 
 _volume() {
@@ -46,7 +46,7 @@ _volume() {
 		icon=""
 	fi
 
-	printf "%%{F#$f_color}%s %s%%\n%%{F-}" "$icon" "$vol"
+	printf "%%{F#$f_color}%s %s%%\n%%{F-}" "$icon" "$vol" > $prefix/volume
 }
 
 _update() {
@@ -67,7 +67,7 @@ _record() {
 
 _battery() {
     # Don't run if acpi not available
-    command -v acpi > /dev/null 2>&1 || exit 1
+    command -v acpi > /dev/null 2>&1 || return
     f_color="#70bb70"
 
     bat=""
@@ -92,14 +92,14 @@ _battery() {
         bat="$bat %{F$f_color}$icon $tmp%%{F-}"
     done <<< "$(acpi -b)"
 
-    echo "$delim$bat"
+    echo "$delim$bat" > $prefix/battery
 }
 
 _uptime() {
     f_color="c98a1e"
     icon=""
 
-    echo "%{F#$f_color}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
+    echo "%{F#$f_color}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}" > $prefix/uptime
 }
 
 _desktops() {
@@ -128,14 +128,14 @@ _desktops() {
     # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
 
     # Print of the formated desktop list and reset all colors.
-    echo "$desktops%{F-}%{B-}"
+    echo "$desktops%{F-}%{B-}" > $prefix/desktops
 }
 
 _window(){
     f_color="-"
     b_color="-"
     window_name="$(xdotool getwindowfocus getwindowname)"
-    echo "%{B$b_color}%{F$f_color}$window_name%{F-}%{B-}"
+    echo "%{B$b_color}%{F$f_color}$window_name%{F-}%{B-}" > $prefix/window
 }
 
 _window_count(){
@@ -145,57 +145,83 @@ _window_count(){
 
     window_count=" $(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == " 0" ] && window_count="" && icon=""
-    echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}"
+    echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}" > $prefix/window_count
 }
 
 _time() {
     f_color="61AEEE"
     icon=""
 
-    echo "%{F#$f_color}$icon $(date '+%H:%M')%{F-}"
+    echo "%{F#$f_color}$icon $(date '+%H:%M')%{F-}" > $prefix/time
 }
 
 _date() {
     f_color="F79494"
     $icon=""
 
-    echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}"
+    echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}" > $prefix/date
+}
+
+_all(){
+    _keystate
+    _memory
+    _volume
+    _battery
+    _uptime
+    _desktops
+    _window
+    _window_count
+    _time
+    _date
 }
 
 status() {
     echo "%{l}"
-    _desktops
+    cat $prefix/desktops
     
     echo " "
-    _window
+    cat $prefix/window
 
     echo "%{r}"
-    _keystate
+    cat $prefix/keystate
 
 	# record
 
-    _window_count
+    cat $prefix/window_count
     echo "$delim"
 
-    _uptime
+    cat $prefix/uptime
     echo "$delim"
 
-    _memory 
+    cat $prefix/memory 
     echo "$delim"
     
-	_volume
+	cat $prefix/volume
 	echo "$delim"
 
-    _date
+    cat $prefix/date
     echo "$delim"
 
-    _time
+    cat $prefix/time
 
-    _battery
+    cat $prefix/battery
 
     # update
 }
 
-# Remove all newline chars and print status.
-# Lemonbar requires a newline char at the end of the statusline.
-status | tr '\n' ' ' && echo
+
+case "$1" in
+    time) _time;;
+    date) _date;;
+    volume) _volume;;
+    memory) _memory;;
+    uptime) _uptime;;
+    window-count) _window_count;;
+    window) _window;;
+    desktops) _desktops;;
+    keystate) _keystate;;
+    all) _all;;
+    *)  # Remove all newline chars and print status.
+        # Lemonbar requires a newline char at the end of the statusline.
+        status | tr '\n' ' ' && echo ;;
+esac

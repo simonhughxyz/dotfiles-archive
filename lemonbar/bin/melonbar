@@ -26,10 +26,23 @@ _cleanup() {
 
 _update_pipe() {
     if [ -p $pipe ]; then
-        statusline > $pipe
+        echo "$1" > $pipe
     else
-        echo "FIFO pipe missing, first execute '$(basename $0) run'."
+        echo "FIFO pipe missing, first execute '$( basename $0 ) run'."
     fi
+}
+
+
+_update(){
+    case "$1" in
+        window-manager) statusline desktops
+                        statusline window
+                        statusline window-count;;
+        volume) statusline volume ;;
+        *) statusline all ;;
+    esac
+
+    _update_pipe "$( statusline )"
 }
 
 
@@ -51,12 +64,14 @@ _run(){
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
-        _update_pipe
+        _update
         sleep 30
     done
 }
 
+
 case $1 in
     run) _run ;;
-    *) _update_pipe ;;
+    update) _update $@;;
+    *) _update ;;
 esac
