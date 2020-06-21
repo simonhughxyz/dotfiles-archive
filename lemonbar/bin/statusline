@@ -177,34 +177,34 @@ _all(){
 
 status() {
     echo "%{l}"
-    cat $prefix/desktops
+    cat $prefix/desktops 2> /dev/null
     
     echo " "
-    cat $prefix/window
+    cat $prefix/window 2> /dev/null
 
     echo "%{r}"
-    cat $prefix/keystate
+    cat $prefix/keystate 2> /dev/null
 
 	# record
 
-    cat $prefix/window_count
+    cat $prefix/window_count 2> /dev/null
     echo "$delim"
 
-    cat $prefix/uptime
+    cat $prefix/uptime 2> /dev/null
     echo "$delim"
 
-    cat $prefix/memory 
+    cat $prefix/memory  2> /dev/null
     echo "$delim"
     
-	cat $prefix/volume
+	cat $prefix/volume 2> /dev/null
 	echo "$delim"
 
-    cat $prefix/date
+    cat $prefix/date 2> /dev/null
     echo "$delim"
 
-    cat $prefix/time
+    cat $prefix/time 2> /dev/null
 
-    cat $prefix/battery
+    cat $prefix/battery 2> /dev/null
 
     # update
 }
