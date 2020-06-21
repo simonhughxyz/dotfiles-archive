@@ -198,9 +198,9 @@ status() {
 }
 
 _update_window_manager() {
-    _desktops &
     _window &
-    _window_count
+    _window_count &
+    _desktops
 }
 
 _update_system(){
