@@ -15,7 +15,7 @@ _get_default_sink_name() {
 _get_volume() {
     pacmd list-sinks |
         awk '/^\s+name: /{indefault = $2 == "<'$( _get_default_sink_name )'>"}
-            /^\s+volume: / && indefault {print $5; exit}'
+            /^\s+volume: / && indefault {print $5; exit}' | sed 's/%//'
 
 }
 
