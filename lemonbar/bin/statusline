@@ -22,8 +22,9 @@ _keystate() {
 
 _memory() {
     f_color="C0C000"
+    icon=""
 
-    echo "%{F#$f_color} $(free -h | awk '/Mem:/ {print $3}')%{F-}"
+    echo "%{F#$f_color}$icon $(free -h | awk '/Mem:/ {print $3}')%{F-}"
 }
 
 _volume() {
@@ -46,16 +47,18 @@ _volume() {
 
 _update() {
     f_color="b29f27"
+    icon="📦"
 
     updatenr=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
-    [ "$updatenr" != "0" ] && printf "$delim %{F#$f_color} 📦 $updatenr%{F-}"
+    [ "$updatenr" != "0" ] && printf "$delim %{F#$f_color} $icon $updatenr%{F-}"
 }
 
 _record() {
     f_color="e82e1e"
+    icon="⏺"
 
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
-	[ -e "$recpid_file" ] && echo "%{F#$f_color}⏺ rec $delim%{F-}"
+	[ -e "$recpid_file" ] && echo "%{F#$f_color}$icon rec $delim%{F-}"
 }
 
 _battery() {
@@ -90,8 +93,9 @@ _battery() {
 
 _uptime() {
     f_color="c98a1e"
+    icon=""
 
-    echo "%{F#$f_color} $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
+    echo "%{F#$f_color}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}"
 }
 
 _desktops() {
@@ -134,6 +138,7 @@ _window_count(){
     f_color="#ff6600"
     b_color="-"
     icon=""
+
     window_count=" $(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == " 0" ] && window_count="" && icon=""
     echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}"
@@ -141,12 +146,16 @@ _window_count(){
 
 _time() {
     f_color="61AEEE"
-    echo "%{F#$f_color} $(date '+%H:%M')%{F-}"
+    icon=""
+
+    echo "%{F#$f_color}$icon $(date '+%H:%M')%{F-}"
 }
 
 _date() {
     f_color="F79494"
-    echo "%{F#$f_color} $(date '+%a %d %B')%{F-}"
+    $icon=""
+
+    echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}"
 }
 
 status() {
