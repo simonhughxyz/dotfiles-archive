@@ -33,5 +33,5 @@ bspc rule -a Emacs state=tiled   # open emacs in tiled mode.
 
 # run bspwm specific sxhkd config.
 sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" &
-# run lemonbar panel
-melonbar run &
+# run lemonbar panel after sleep to give system time to catch up.
+sleep 1 && melonbar run &
