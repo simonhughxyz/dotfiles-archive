@@ -72,6 +72,6 @@ _run(){
 
 case $1 in
     run) _run ;;
-    update) _update $@;;
+    update) shift; _update $@;;
     *) _update ;;
 esac
