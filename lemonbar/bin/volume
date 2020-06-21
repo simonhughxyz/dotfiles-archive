@@ -16,4 +16,4 @@ case $1 in
 esac
 
 # refresh statusbar
-melonbar
+melonbar update volume
