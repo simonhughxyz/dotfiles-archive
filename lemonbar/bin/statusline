@@ -157,7 +157,7 @@ _time() {
 
 _date() {
     f_color="F79494"
-    $icon=""
+    icon=""
 
     echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}" > $prefix/date
 }
