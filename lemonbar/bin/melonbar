@@ -39,11 +39,12 @@ _update(){
             statusline window
             statusline window-count ;;
         volume) statusline volume ;;
-        *) statusline battery
+        loop) statusline battery
             statusline time
             statusline date
             statusline memory
             statusline uptime ;;
+        *) statusline all ;;
     esac
 
     _update_pipe "$( statusline )"
@@ -65,10 +66,12 @@ _run(){
     # pass contents of pipe into lemonbar
     tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
 
+    # update statusline once for initialization
+    _update
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
-        _update
+        _update loop
         sleep 30
     done
 }
