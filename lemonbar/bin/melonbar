@@ -35,16 +35,11 @@ _update_pipe() {
 
 _update(){
     case "$1" in
-        window-manager) statusline desktops
-            statusline window
-            statusline window-count ;;
-        volume) statusline volume ;;
-        loop) statusline battery
-            statusline time
-            statusline date
-            statusline memory
-            statusline uptime ;;
-        *) statusline all ;;
+        window-manager) statusline update window_manager;;
+        volume) statusline update volume ;;
+        loop) statusline update system ;;
+        all) statusline update all;;
+        *) statusline update all ;;
     esac
 
     _update_pipe "$( statusline )"

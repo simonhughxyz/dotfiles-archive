@@ -162,18 +162,6 @@ _date() {
     echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}" > $prefix/date
 }
 
-_all(){
-    _keystate
-    _memory
-    _volume
-    _battery
-    _uptime
-    _desktops
-    _window
-    _window_count
-    _time
-    _date
-}
 
 status() {
     echo "%{l}"
@@ -209,19 +197,51 @@ status() {
     # update
 }
 
+_update_window_manager() {
+    _desktops &
+    _window &
+    _window_count
+}
+
+_update_system(){
+    _battery &
+    _time &
+    _date &
+    _memory &
+    _uptime
+}
+
+
+_update_all(){
+    _volume &
+    _update_window_manager &
+    _update_system
+}
+
+_update(){
+    case "$1" in
+        battery) _battery ;;
+        time) _time ;;
+        date) _date ;;
+        volume) _volume ;;
+        memory) _memory ;;
+        uptime) _uptime ;;
+        window-count) _window_count ;;
+        window) _window ;;
+        desktops) _desktops ;;
+        keystate) _keystate ;;
+        # shortcuts
+        window_manager) _update_window_manager ;;
+        system) _update_system ;;
+        all) _update_all ;;
+        *) _update_all ;;
+    esac
+}
+
+
 
 case "$1" in
-    battery) _battery;;
-    time) _time;;
-    date) _date;;
-    volume) _volume;;
-    memory) _memory;;
-    uptime) _uptime;;
-    window-count) _window_count;;
-    window) _window;;
-    desktops) _desktops;;
-    keystate) _keystate;;
-    all) _all;;
+    -u|update) shift; _update $@ ;;
     *)  # Remove all newline chars and print status.
         # Lemonbar requires a newline char at the end of the statusline.
         status | tr '\n' ' ' && echo ;;
