@@ -211,6 +211,7 @@ status() {
 
 
 case "$1" in
+    battery) _battery;;
     time) _time;;
     date) _date;;
     volume) _volume;;
