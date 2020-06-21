@@ -1,5 +1,9 @@
 #!/bin/bash
 
+prefix=${XDG_RUNTIME_DIR}/melonbar/statusline
+
+mkdir -p "$prefix"
+
 delim="%{F#b0b0b0}|%{F-}"
 
 _keystate() {

@@ -16,7 +16,8 @@ clickable_areas=12  # Number of clickable areas.
 f_color="#c25704"
 b_color="#000000"
 
-pipe=/tmp/melonbar_pipe
+prefix=${XDG_RUNTIME_DIR}/melonbar
+pipe=$prefix/melonbar_pipe
 
 _cleanup() {
     rm -f $pipe
@@ -37,6 +38,7 @@ _run(){
     #  remove it when exit.
     # If pipe does exist, exit.
     if { mkfifo $pipe 2>/dev/null; }; then
+        mkdir -p $prefix
         trap _cleanup INT TERM EXIT
     else
         echo "$(basename $0) is already running, exiting..."
