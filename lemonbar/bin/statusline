@@ -34,11 +34,11 @@ _memory() {
 _volume() {
     f_color="98C379"
 
-	[ "$(pulsemixer --get-mute)" = "1" ] && printf "\\n" > $prefix/volume && return 0
+	vol=$( volume )
 
-	vol=$(pulsemixer --get-volume | awk '{print $1}')
-
-	if [ "$vol" -gt "100" ]; then
+	if [ "$vol" == "mute" ]; then
+        printf "\\n" > $prefix/volume && return 0
+    elif [ "$vol" -gt "100" ]; then
 		icon=""
 	elif [ "$vol" -lt "50" ]; then
 		icon=""
