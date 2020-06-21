@@ -213,9 +213,9 @@ _update_system(){
 
 
 _update_all(){
-    _volume &
     _update_window_manager &
-    _update_system
+    _update_system &
+    _volume
 }
 
 _update(){
