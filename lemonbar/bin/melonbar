@@ -50,8 +50,8 @@ _run(){
     # Create pipe if it doesn't exist and
     #  remove it when exit.
     # If pipe does exist, exit.
+    mkdir -p $prefix
     if { mkfifo $pipe 2>/dev/null; }; then
-        mkdir -p $prefix
         trap _cleanup INT TERM EXIT
     else
         echo "$(basename $0) is already running, exiting..."
