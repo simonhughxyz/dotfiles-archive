@@ -34,7 +34,7 @@ _memory() {
 _volume() {
     f_color="98C379"
 
-	vol=$( volume )
+	vol=$( volume get-status )
 
 	if [ "$vol" == "mute" ]; then
         printf "\\n" > $prefix/volume && return 0
