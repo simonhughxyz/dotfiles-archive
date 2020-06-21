@@ -8,11 +8,36 @@
 # To raise or lower volume use a + or - in front of level (volume +/-10)
 # To toggle mute pass the mute or m argument (volume m/mute)
 
+_get_default_sink_name() {
+    pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
+}
+
+_get_volume() {
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$( _get_default_sink_name )'>"}
+            /^\s+volume: / && indefault {print $5; exit}'
+
+}
+
+_get_mute() {
+    pacmd list-sinks | awk -F': ' '/^\smuted: /{print $2}'
+}
+
+_get_state(){
+    if [ "$(_get_mute)" = "yes" ]; then
+        echo "mute"
+    else
+        _get_volume
+    fi
+}
+
 case $1 in
     m|mute) pulsemixer --toggle-mute ;;
     [0-9]|[1-9][0-9]|1[0-4][0-9]|150) pulsemixer --set-volume $1 ;;
     [+-][0-9]|[+-][1-9][0-9]|[+-]1[0-4][0-9]|[+-]150) pulsemixer --change-volume $1 ;;
-    *) echo "Invalid option: $1" && exit 1 ;;
+    get-volume) _get_volume && exit ;;
+    get-mute) _get_mute && exit ;;
+    *) _get_state && exit ;; 
 esac
 
 # refresh statusbar
