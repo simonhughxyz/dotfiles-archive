@@ -62,7 +62,7 @@ _run(){
     tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
 
     # update statusline once for initialization
-    _update
+    _update all
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
