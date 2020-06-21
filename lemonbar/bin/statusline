@@ -20,23 +20,6 @@ _keystate() {
     echo "$message%{F-}"
 }
 
-_weather() {
-    w="$(curl -s wttr.in?format=%t,%C)"
-    desc="${w#*,}"
-    temp="${w%,*}"
-    
-    symbol=""
-    case "$desc" in
-        "Clear") symbol="🌞";;
-        "Sunny") symbol="☀";;
-        "Partly cloudy") symbol="⛅";;
-        "Cloudy") symbol="☁";;
-        "Shower In Vicinity") symbol="💧";;
-        *) symbol="$desc";;
-    esac
-    echo "$symbol $temp"
-}
-
 _memory() {
     f_color="C0C000"
 
