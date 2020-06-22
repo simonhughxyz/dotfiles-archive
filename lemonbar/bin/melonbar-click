@@ -27,8 +27,23 @@ _date(){
 }
 
 _time(){
-    message="$( date '+%nlocal: %I:%M:%S %P%nZone: %z %Z%nEpoch: %s%n' )"
-notify-send "$( date '+%H:%M:%S' )" "$message"
+    time="$( date '+%nlocal:\t%I:%M:%S %P%nZone:\t%z %Z%nEpoch:\t%s%n' )"
+
+    # europe
+    london_time="London:\t\t$( TZ=":Europe/London" date '+%H:%M:%S' )"
+    berlin_time="Berlin:\t\t$( TZ=":Europe/Berlin" date '+%H:%M:%S' )"
+    moscow_time="Moscow:\t\t$( TZ=":Europe/Moscow" date '+%H:%M:%S' )"
+    # America
+    new_york_time="New York:\t$( TZ=":America/New_York" date '+%H:%M:%S' )"
+    los_angeles_time="Los Angeles:\t$( TZ=":America/Los_Angeles" date '+%H:%M:%S' )"
+    # Asia
+    tokyo_time="Tokyo:\t\t$( TZ=":Asia/Tokyo" date '+%H:%M:%S' )"
+    hong_kong_time="Hong Kong:\t$( TZ=":Asia/Hong_Kong" date '+%H:%M:%S' )"
+
+    time_zones="<b>Time Zones:</b>\n$london_time\n$berlin_time\n$moscow_time\n$new_york_time\n$los_angeles_time\n$tokyo_time\n$hong_kong_time"
+
+    message="$time\n\n$time_zones"
+    notify-send "$( date '+%H:%M:%S' )" "$message"
 }
 
 case $1 in
