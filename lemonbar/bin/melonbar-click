@@ -22,7 +22,7 @@ notify-send "$( date '+%A %d %B %Y' )" "$message"
 }
 
 _time(){
-    message="$( date '+%nlocal: %I:%M:%S %P%nZone: %z %Z%nNano: %N%nEpoch: %s%n' )"
+    message="$( date '+%nlocal: %I:%M:%S %P%nZone: %z %Z%nEpoch: %s%n' )"
 notify-send "$( date '+%H:%M:%S' )" "$message"
 }
 
