@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# TIMEZONE
+# Simon Hugh Moore
+#
+# Print out all times for each timezone in system
+
+
+find /usr/share/zoneinfo/posix/ -print0 | sed 's\/usr/share/zoneinfo/posix/\\g' | xargs -0 -I {} sh -c 'echo "{}: $(TZ=":{}" date '+%H:%M:%S')"'
