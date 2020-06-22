@@ -27,8 +27,9 @@ _keystate() {
 _memory() {
     f_color="C0C000"
     icon=""
+    click_command="melonbar-click memory"
 
-    echo "%{F#$f_color}$icon $(free -h | awk '/Mem:/ {print $3}')%{F-}" > $prefix/memory
+    echo "%{F#$f_color}%{A:$click_command:}$icon $(free -h | awk '/Mem:/ {print $3}')%{A}%{F-}" > $prefix/memory
 }
 
 _volume() {
@@ -97,9 +98,10 @@ _battery() {
 
 _uptime() {
     f_color="c98a1e"
-    icon=""
+    icon="" 
+    click_command="melonbar-click uptime"
 
-    echo "%{F#$f_color}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{F-}" > $prefix/uptime
+    echo "%{F#$f_color}%{A:$click_command:}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{A}%{F-}" > $prefix/uptime
 }
 
 _desktops() {
@@ -151,15 +153,17 @@ _window_count(){
 _time() {
     f_color="61AEEE"
     icon=""
+    click_command="melonbar-click time"
 
-    echo "%{F#$f_color}$icon $(date '+%H:%M')%{F-}" > $prefix/time
+    echo "%{F#$f_color}%{A:$click_command:}$icon $(date '+%H:%M')%{A}%{F-}" > $prefix/time
 }
 
 _date() {
     f_color="F79494"
     icon=""
+    click_command="melonbar-click date"
 
-    echo "%{F#$f_color}$icon $(date '+%a %d %B')%{F-}" > $prefix/date
+    echo "%{F#$f_color}%{A:$click_command:}$icon $(date '+%a %d %B')%{A}%{F-}" > $prefix/date
 }
 
 
