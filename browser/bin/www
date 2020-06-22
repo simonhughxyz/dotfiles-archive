@@ -21,8 +21,8 @@ _firefox(){
     # create symlink to firefox profiles folder
     ln -sf "$tmp_profiles" "$firefox_profiles"
 
-    # Run firefox always in new window.
-    firefox --new-window $@
+    # Run firefox always in new window with timezone set to UTC.
+    TZ=UTC firefox --new-window $@
 }
 
 _save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$tmp_profiles/" "$profiles"; }
