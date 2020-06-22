@@ -16,9 +16,14 @@ _uptime(){
 }
 
 _date(){
-    message="$( date '+%nShort:\t%d-%m-%Y%nDOW:\t%u (%A)%nDOY:\t%j%nWOY:\t%V%nQOY:\t%q
-' )"
-notify-send "$( date '+%A %d %B %Y' )" "$message"
+    # get calender, replaces color code with markup.
+    cal="$( cal --color=always | sed 's/\\[7m/<b><u>/g;s/\\[27m/<\/u><\/b>/g' | tail -n +2 )"
+    # get date info.
+    date="$( date '+Short:\t%d-%m-%Y%nDOW:\t%u (%A)%nDOY:\t%j%nWOY:\t%V%nQOY:\t%q%n' )"
+
+    message="\n$cal\n$date"
+
+    notify-send "$( date '+%A %d %B %Y' )" "$message"
 }
 
 _time(){
