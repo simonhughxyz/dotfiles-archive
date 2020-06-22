@@ -39,8 +39,10 @@ _time(){
     # Asia
     tokyo_time="Tokyo:\t\t$( TZ=":Asia/Tokyo" date '+%H:%M:%S' )"
     hong_kong_time="Hong Kong:\t$( TZ=":Asia/Hong_Kong" date '+%H:%M:%S' )"
+    # Australia
+    sydney_time="Sydney:\t\t$( TZ=":Australia/Sydney" date '+%H:%M:%S' )"
 
-    time_zones="<b>Time Zones:</b>\n$london_time\n$berlin_time\n$moscow_time\n$new_york_time\n$los_angeles_time\n$tokyo_time\n$hong_kong_time"
+    time_zones="<b>Time Zones:</b>\n$london_time\n$berlin_time\n$moscow_time\n$new_york_time\n$los_angeles_time\n$tokyo_time\n$hong_kong_time\n$sydney_time"
 
     message="$time\n\n$time_zones"
     notify-send "$( date '+%H:%M:%S' )" "$message"
