@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# BSPWM_SUBSCRIBE_DESKTOP
+# Simon Hugh Moore
+#
+# write currently used bspwm desktops to file and update melonbar.
+
+
+prefix=${XDG_RUNTIME_DIR}/melonbar/statusline
+
+
+f_color="ffffff"    # Foreground color for active desktop
+b_color="c25704"    # Background color for active desktop
+
+
+# Change to given desktop with left mouse click
+click_command="bspc desktop -f '&' \& melonbar"
+
+# Change to last used desktop with left mouse click
+# on active (highlighted) desktop
+active_click_command="bspc desktop -f last.local \& melonbar"
+
+current_prefix="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:}"
+current_postfix="%{A}%{F-}%{B-}"
+other_prefix="%{A:$click_command:}"
+postfix="%{A}"
+
+bspc subscribe report | while read -r line; do
+    echo "$line" | tr ':' '\n' | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
+done

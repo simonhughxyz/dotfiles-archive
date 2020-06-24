@@ -130,8 +130,43 @@ _desktops() {
     # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
 
     # Print of the formated desktop list and reset all colors.
-    echo "$desktops%{F-}%{B-}" > $prefix/desktops
+    # echo "$desktops%{F-}%{B-}" > $prefix/desktops
 }
+
+
+_desktops2() {
+    f_color="ffffff"    # Foreground color for active desktop
+    b_color="c25704"    # Background color for active desktop
+
+    # Change to given desktop with left mouse click
+    click_command="bspc desktop -f '&' \& melonbar"
+
+    # Change to last used desktop with left mouse click
+    # on active (highlighted) desktop
+    active_click_command="bspc desktop -f last.local \& melonbar"
+
+    # and click command
+    color_current="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:} $current %{A}%{F-}%{B-}"
+
+    # Get a list of all desktops and format them with click commands.
+    # Replace the active dektop with color_current.
+    desktops=$(bspc query -D -m --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
+
+    # Uncomment to show desktops without clickable areas.
+    # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
+
+    # Print of the formated desktop list and reset all colors.
+    # echo "$desktops%{F-}%{B-}" > $prefix/desktops
+
+    current_prefix="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:}"
+    current_postfix="%{A}%{F-}%{B-}"
+    prefix="%{A:$click_command:}"
+    postfix="%{A}"
+    
+	bspc subscribe report | while read -r line; do
+        echo "$line" | tr ':' '\n' | sed "/^[^o|^O]/d;s/^o//g;s/^[^O].*/$prefix&$postfix/g;s/^O/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g"
+	done
+} 
 
 _window(){
     f_color="-"
