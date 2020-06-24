@@ -104,36 +104,8 @@ _uptime() {
     echo "%{F#$f_color}%{A:$click_command:}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{A}%{F-}" > $prefix/uptime
 }
 
-_desktops() {
-    f_color="ffffff"    # Foreground color for active desktop
-    b_color="c25704"    # Background color for active desktop
 
-    # Change to given desktop with left mouse click
-    click_command="bspc desktop -f '&' \& melonbar"
-
-    # Change to last used desktop with left mouse click
-    # on active (highlighted) desktop
-    active_click_command="bspc desktop -f last.local \& melonbar"
-
-    # Get the current active desktop
-    current=$(bspc query -D -d --names)
-
-    # Format the current active desktop with correct colors
-    # and click command
-    color_current="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:} $current %{A}%{F-}%{B-}"
-
-    # Get a list of all desktops and format them with click commands.
-    # Replace the active dektop with color_current.
-    desktops=$(bspc query -D -m --names | sed "s/^.*$/%{A:$click_command:}&%{A}/g;s/^%{A:.* '$current' .*:}$current%{A}$/$color_current/g")
-
-    # Uncomment to show desktops without clickable areas.
-    # desktops=$(bspc query -D --names | sed "s/^$current$/$color_current/g")
-
-    # Print of the formated desktop list and reset all colors.
-    echo "$desktops%{F-}%{B-}" > $prefix/desktops
-}
-
-_window(){
+_window_title(){
     f_color="-"
     b_color="-"
     window_name="$(xdotool getwindowfocus getwindowname)"
@@ -164,6 +136,42 @@ _date() {
     click_command="melonbar-click date"
 
     echo "%{F#$f_color}%{A:$click_command:}$icon $(date '+%a %d %B')%{A}%{F-}" > $prefix/date
+}
+
+
+_run_desktops() {
+    f_color="ffffff"    # Foreground color for active desktop
+    b_color="c25704"    # Background color for active desktop
+
+    # Change to given desktop with left mouse click
+    click_command="bspc desktop -f '&' \& melonbar"
+
+    # Change to last used desktop with left mouse click
+    # on active (highlighted) desktop
+    active_click_command="bspc desktop -f last.local \& melonbar"
+
+    current_prefix="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:}"
+    current_postfix="%{A}%{F-}%{B-}"
+    other_prefix="%{A:$click_command:}"
+    postfix="%{A}"
+
+    bspc subscribe report | while read -r line; do
+        # gets bspcs report and formats it for the statusline.
+        # see 'man bspc' and search for 'report'.
+        echo "$line" | tr ':' '\n' | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
+
+        # update window_title
+        # _window_title
+        # update window count
+        # _window_count
+    done
+}
+
+_run_window_title() {
+    bspc subscribe node_focus | while read -r line; do
+        # _window_title
+        echo "lol"
+    done
 }
 
 
@@ -201,11 +209,11 @@ status() {
     # update
 }
 
-_update_window_manager() {
-    _window &
-    _window_count &
-    _desktops
-}
+# _update_window_manager() {
+#     _window &
+#     _window_count &
+#     _desktops &
+# }
 
 _update_system(){
     _battery &
@@ -217,7 +225,7 @@ _update_system(){
 
 
 _update_all(){
-    _update_window_manager &
+    # _update_window_manager &
     _update_system &
     _volume
 }
@@ -231,8 +239,8 @@ _update(){
         memory) _memory ;;
         uptime) _uptime ;;
         window-count) _window_count ;;
-        window) _window ;;
-        desktops) _desktops ;;
+        # window) _window ;;
+        desktops) _run_desktops ;;
         keystate) _keystate ;;
         # shortcuts
         window_manager) _update_window_manager ;;
@@ -242,10 +250,19 @@ _update(){
     esac
 }
 
+_run(){
+    case "$1" in
+        desktops) _run_desktops ;;
+        window_title) _run_window_title ;;
+        *) _run_desktops & _run_window_title ;;
+    esac
+}
+
 
 
 case "$1" in
     -u|update) shift; _update $@ ;;
+    -r|run) shift; _run $@ ;;
     *)  # Remove all newline chars and print status.
         # Lemonbar requires a newline char at the end of the statusline.
         status | tr '\n' ' ' && echo ;;

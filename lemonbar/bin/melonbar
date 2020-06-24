@@ -35,7 +35,7 @@ _update_pipe() {
 
 _update(){
     case "$1" in
-        window-manager) statusline update window_manager;;
+        # window-manager) statusline update window_manager;;
         volume) statusline update volume ;;
         loop) statusline update system ;;
         all) statusline update all;;
@@ -57,6 +57,9 @@ _run(){
         echo "$(basename $0) is already running, exiting..."
         exit 1
     fi
+
+    # Run the bspwm subscriptions
+    statusline run &
 
     # pass contents of pipe into lemonbar
     tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
