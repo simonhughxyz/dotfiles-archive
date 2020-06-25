@@ -12,20 +12,20 @@ super + {_,shift +} f
 # DESKTOP
 super + {1-9,0,v}
     desktop={1-9,10,V}; \
-    bspc query -D -d "$desktop.focused" && bspc desktop -f last.local || bspc desktop -f "$desktop.local" & melonbar update window-manager
+    bspc query -D -d "$desktop.focused" && bspc desktop -f last.local || bspc desktop -f "$desktop.local"
 super + shift + {1-9,0,v}
-    bspc node -d {1-9,10,V} & melonbar update window-manager
+    bspc node -d {1-9,10,V}
 
 # Go back to previous desktop
 super + Tab
-    bspc desktop -f last.local & melonbar update window-manager
+    bspc desktop -f last.local
 
 super + bracket{left,right}
-    bspc desktop -f {prev,next}.local & melonbar update window-manager
+    bspc desktop -f {prev,next}.local
 
 # Change focus or swap nodes for both tiled and monocle layout
 super + {_, shift +} {Left,Down,Up,Right}
-    bspwm_focus_node -{f,s} {left,down,up,right} & melonbar update window-manager
+    bspwm_focus_node -{f,s} {left,down,up,right}
 
 # cycle through windows
 super + shift + bracket{left,right}
