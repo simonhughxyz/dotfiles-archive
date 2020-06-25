@@ -1,0 +1,40 @@
+#!/bin/sh
+
+
+
+prefix="$XDG_RUNTIME_DIR/record"
+# pipe to message record.
+pipe="$prefix/pipe"
+
+asktoend() { \
+    response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?")
+	[ "$response" = "Yes" ] && echo "kill" > $pipe
+    sleep 1 # no idea why but wont exit without sleep
+    exit
+}
+
+askrecording() { \
+    choice=$(printf "screencast\\nvideo\\naudio\\nscreencast(cpu)\\nvideo(cpu)" | dmenu -i -p "Record: ")
+	case "$choice" in
+		screencast) record -r screencast;;
+		audio) record -r audio;;
+		video) record -r video;;
+        # "screencast(cpu)") cpucast;;
+        # "video(cpu)") cpuvideo;;
+	esac
+    exit
+}
+
+listmenu() {
+    choice="$( record list | dmenu -i -l 10 )"
+
+    # if nothing is chosen then exit
+    [ "$choice" != "" ] || exit
+
+    mpv "$choice"
+}
+
+case "$1" in
+    list)    listmenu;;
+	*)           ([ -p "$pipe" ] && asktoend && exit) || askrecording;;
+esac
