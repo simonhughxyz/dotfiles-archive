@@ -55,12 +55,6 @@ super + {_,shift +} c
 super + s
     selsearchmenu
 super + shift + backslash
-    ytp
-super + backslash
-    xsel -b -c && sleep 0.2 && xdotool selectwindow click 3 sleep 0.2 key A && ytp
-#super + shift + backslash
-#    xdotool selectwindow key ctrl+c && ytp
-super + shift + backslash
     streammenu
 super + Prior
     bukumenu -t star - x,p
