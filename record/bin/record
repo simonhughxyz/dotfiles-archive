@@ -1,0 +1,152 @@
+#!/bin/sh
+
+# RECORD
+# Simon H Moore
+# 
+# Record the screen and sound.
+
+
+# Store recordings in dir
+rec_store="$HOME/rec/"
+
+# get current time and date to save to filename
+now="$(date '+%Y-%m-%d_%H:%M:%S')"
+
+res=2560x1440
+fps=30
+
+prefix="$XDG_RUNTIME_DIR/record"
+
+# Pipe to get commands from
+pipe="$prefix/pipe"
+
+# file to store recording processor ID so that you can kill it later
+recpid_file="$prefix/recordingpid"
+
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Record either audio, video or screencast (audio+video).
+
+Options:
+  -r, record [...]             begin recording.
+  -l, list                     Print list of files in \"$rec_store\".
+  -h, help                     Print this help message.
+"
+_help(){ echo "$__usage"; exit; }
+
+
+
+# kill recording, remove pipe and exit.
+_cleanup() {
+    recpid="$( cat "$recpid_file" 2> /dev/null )"
+    kill -15 "$recpid" 2> /dev/null
+    rm -f "$recpid_file" 2> /dev/null
+    rm -f "$pipe"
+    # wait for ffmpeg to finish.
+    sleep 0.5
+    exit
+}
+
+
+# Record both the screen and audio.
+_screencast(){
+    ffmpeg -y \
+    -vaapi_device /dev/dri/renderD128 \
+    -f x11grab \
+    -video_size $res \
+    -framerate $fps \
+    -i "$DISPLAY" \
+    -f alsa -i default \
+    -vf 'hwupload,scale_vaapi=format=nv12' \
+    -c:v h264_vaapi \
+    -qp 24 \
+    -c:a aac \
+    -f mp4 "$rec_store/${now}_cast_rec.mp4" &
+    echo $! > "$recpid_file"
+}
+
+
+# Record only video.
+_video(){
+    ffmpeg -y \
+    -vaapi_device /dev/dri/renderD128 \
+    -f x11grab \
+    -video_size $res \
+    -framerate $fps \
+    -i "$DISPLAY" \
+    -vf 'hwupload,scale_vaapi=format=nv12' \
+    -c:v h264_vaapi \
+    -qp 24 \
+    -f matroska "$rec_store/${now}_video_rec.mkv" &
+    echo $! > "$recpid_file"
+}
+
+# Record only video using CPU (No GPU).
+_cpuvideo() {
+    ffmpeg \
+	-f x11grab \
+    -video_size $res \
+    -framerate $fps \
+    -i "$DISPLAY" \
+    -c:v libx264 \
+    -f matroska "$rec_store/${now}_video_rec.mkv" &
+    echo $! > "$recpid_file"
+}
+
+# Record only audio.
+_audio() {
+	ffmpeg -y \
+	-f alsa -i default \
+	-c:a aac \
+	"$rec_store/${now}_audio_rec.aac" &
+	echo $! > "$recpid_file"
+}
+
+# Record a selected window
+# NOT WORKING RIGHT NOW!
+_window(){
+    xid=$(xprop -root _NET_ACTIVE_WINDOW | awk '{print $5}')
+    gst-launch-1.0 -q ximagesrc xid="$xid" use-damage=0 \
+    ! video/x-raw,framerate=60/1 \
+    ! queue ! videoconvert \
+    ! vaapisink ! vaapih265enc rate-control=cbr \
+    ! h265parse ! mkv. \
+    autoaudiosrc ! queue ! audioconvert ! mkv. \
+    matroskamux name=mkv ! filesink location="$rec_store/${now}_rec.mkv" &
+    echo $! > "$recpid_file"
+}
+
+# Set up for recording and wait for command.
+_record(){
+    # Check if only instance.
+    mkdir -p "$prefix"
+    if { mkfifo "$pipe" 2>/dev/null; }; then
+        trap _cleanup INT TERM EXIT
+    else
+        echo "$(basename "$0") is already running, exiting..."
+        exit 1
+    fi
+
+    case "$1" in
+        screencast)  _screencast;;
+        audio)       _audio;;
+        video)       _video;;
+    esac
+
+    # wait for 'kill' command and run cleanup.
+    while read -r line; do
+        [ "$line" = "kill" ] && _cleanup
+    done < "$pipe"
+}
+
+_list() {
+    ls -r "$rec_store"
+}
+
+
+case "$1" in
+    -h|help) _help ;;
+    -r|record) _record "$2" ;;
+    -l|list) list ;;
+    *) _record "$1" ;;
+esac
