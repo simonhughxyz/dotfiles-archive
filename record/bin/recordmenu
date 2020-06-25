@@ -14,7 +14,7 @@ asktoend() { \
 }
 
 askrecording() { \
-    choice=$(printf "screencast\\nvideo\\naudio\\nscreencast(cpu)\\nvideo(cpu)" | dmenu -i -p "Record: ")
+    choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Record: ")
 	case "$choice" in
 		screencast) record -r screencast;;
 		audio) record -r audio;;
