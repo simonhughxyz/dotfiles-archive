@@ -65,6 +65,21 @@ _screencast(){
     echo $! > "$recpid_file"
 }
 
+# case using cpu only (no gpu).
+cpucast(){
+    refbar
+    ffmpeg -y \
+    -f x11grab \
+    -video_size $res \
+    -framerate 30 \
+    -i $DISPLAY \
+    -f alsa -i default \
+    -c:v libx264 \
+    -preset ultrafast \
+    -c:a aac \
+    -f matroska "$dir/${now}_cast_rec.mkv" &
+    echo $! > $recpid_file
+}
 
 # Record only video.
 _video(){
