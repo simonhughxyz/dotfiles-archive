@@ -155,9 +155,12 @@ _desktops() {
     other_prefix="%{A:$click_command:}"
     postfix="%{A}"
 
-    # gets bspcs report and formats it for the statusline.
-    # see 'man bspc' and search for 'report'.
-    echo "$1" | tr ':' '\n' | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
+    # Get bspc report (see 'man bspc' and search for 'report').
+    # Separate items into lines and filter for current monitor
+    current_monitor="$( echo "$1" | tr ':' '\n' | sed -n "s/W//;/^M.*$/,/^m.*$/p" )"
+
+    # Format report for statusline.
+    echo "$current_monitor" | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
 }
 
 
