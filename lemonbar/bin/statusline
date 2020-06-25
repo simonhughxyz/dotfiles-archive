@@ -139,7 +139,7 @@ _date() {
 }
 
 
-_run_desktops() {
+_desktops() {
     f_color="ffffff"    # Foreground color for active desktop
     b_color="c25704"    # Background color for active desktop
 
@@ -155,27 +155,13 @@ _run_desktops() {
     other_prefix="%{A:$click_command:}"
     postfix="%{A}"
 
-    bspc subscribe report | while read -r line; do
-        # gets bspcs report and formats it for the statusline.
-        # see 'man bspc' and search for 'report'.
-        echo "$line" | tr ':' '\n' | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
-
-        # update window_title
-        # _window_title
-        # update window count
-        # _window_count
-    done
-}
-
-_run_window_title() {
-    bspc subscribe node_focus | while read -r line; do
-        # _window_title
-        echo "lol"
-    done
+    # gets bspcs report and formats it for the statusline.
+    # see 'man bspc' and search for 'report'.
+    echo "$1" | tr ':' '\n' | sed "/^[^o|^O|^F]/d;s/^o//g;s/^[^O|^F].*/$other_prefix&$postfix/g;s/^[O|F]/$current_prefix /g;s/^$current_prefix.*$/& $current_postfix/g" | tr '\n' ' ' > $prefix/desktops
 }
 
 
-status() {
+_status() {
     echo "%{l}"
     cat $prefix/desktops 2> /dev/null
     
@@ -215,6 +201,8 @@ status() {
 #     _desktops &
 # }
 
+# Update system info modules
+# these should be run on a loop.
 _update_system(){
     _battery &
     _time &
@@ -223,7 +211,8 @@ _update_system(){
     _uptime
 }
 
-
+# Update everything apart from WM modules
+# they a special case.
 _update_all(){
     # _update_window_manager &
     _update_system &
@@ -239,11 +228,9 @@ _update(){
         memory) _memory ;;
         uptime) _uptime ;;
         window-count) _window_count ;;
-        # window) _window ;;
-        desktops) _run_desktops ;;
+        window-title) _window_title ;;
+        desktops) _desktops "$2";;
         keystate) _keystate ;;
-        # shortcuts
-        window_manager) _update_window_manager ;;
         system) _update_system ;;
         all) _update_all ;;
         *) _update_all ;;
@@ -265,5 +252,5 @@ case "$1" in
     -r|run) shift; _run $@ ;;
     *)  # Remove all newline chars and print status.
         # Lemonbar requires a newline char at the end of the statusline.
-        status | tr '\n' ' ' && echo ;;
+        _status | tr '\n' ' ' && echo ;;
 esac

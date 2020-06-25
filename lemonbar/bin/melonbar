@@ -12,7 +12,7 @@ font="SourceCodeProSemiBold-13"
 icon_font="FontAwesome-13"
 geometry="x28"
 offset="-2"
-clickable_areas=15  # Number of clickable areas.
+clickable_areas=20  # Number of clickable areas.
 f_color="#c25704"
 b_color="#000000"
 
@@ -33,15 +33,17 @@ _update_pipe() {
 }
 
 
+# Update the contents of statusline and refresh.
 _update(){
     case "$1" in
-        # window-manager) statusline update window_manager;;
+        desktops) statusline update desktops "$2" ;;
+        window) statusline update window-count & statusline update window-title ;;
         volume) statusline update volume ;;
         loop) statusline update system ;;
         all) statusline update all;;
-        *) statusline update all ;;
     esac
 
+    # refresh statusline.
     _update_pipe "$( statusline )"
 }
 
@@ -58,14 +60,27 @@ _run(){
         exit 1
     fi
 
-    # Run the bspwm subscriptions
-    statusline run &
+        
 
     # pass contents of pipe into lemonbar
     tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
 
-    # update statusline once for initialization
+    # update statusline once for initialization.
     _update all
+
+    # updates every time desktop/monitor changes.
+    # see 'man bspc' for 'subscribe'
+    bspc subscribe report | while read -r line; do
+        # pass report to statusline for formatting.
+        _update desktops "$line"
+        _update window
+    done &
+
+    # updates every time window focus changes.
+    bspc subscribe node_focus | while read -r line; do
+        _update window
+    done &
+
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
