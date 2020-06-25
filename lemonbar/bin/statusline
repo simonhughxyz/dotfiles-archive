@@ -219,7 +219,8 @@ _update_system(){
 _update_all(){
     # _update_window_manager &
     _update_system &
-    _volume
+    _volume &
+    _keystate
 }
 
 _update(){

@@ -39,6 +39,7 @@ _update(){
         desktops) statusline update desktops "$2" ;;
         window) statusline update window-count & statusline update window-title ;;
         volume) statusline update volume ;;
+        keystate) statusline update keystate ;;
         loop) statusline update system ;;
         all) statusline update all;;
     esac

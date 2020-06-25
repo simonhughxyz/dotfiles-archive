@@ -12,11 +12,11 @@ super + space; m
 
 # Key Locks
 {@}Caps_Lock
-    melonbar
+    melonbar update keystate
 {@}Num_Lock
-    melonbar
+    melonbar update keystate
 {@}Scroll_Lock
-    melonbar
+    melonbar update keystate
 
 # Apps
 super + h
