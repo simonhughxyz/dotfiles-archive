@@ -48,7 +48,7 @@ _record() {
 _battery() {
     # Don't run if acpi not available
     command -v acpi > /dev/null 2>&1 || return
-    f_color="#70bb70"
+    f_color="#60ff60"
 
     bat=""
     while read line; do
