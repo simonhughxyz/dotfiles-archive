@@ -6,8 +6,10 @@ mkdir -p "$prefix"
 
 delim="%{F#b0b0b0}|%{F-}"
 
+alert_color="#ff2222"
+
 _keystate() {
-    f_color="e82e1e"
+    f_color=$alert_color
 
     lockline=$(xset -q | grep "Num Lock")
 
@@ -17,9 +19,9 @@ _keystate() {
 
     message=""
 
-    [ "$caplock" = "on" ] && message="%{F#$f_color}CAPLOCK $delim"
-    [ "$numlock" = "on" ] && message="$message %{F#$f_color}NUMLOCK $delim"
-    [ "$scrolllock" = "on" ] && message="$message %{F#$f_color}SCROLLLOCK $delim"
+    [ "$caplock" = "on" ] && message="%{F$f_color}CAPLOCK $delim"
+    [ "$numlock" = "on" ] && message="$message %{F$f_color}NUMLOCK $delim"
+    [ "$scrolllock" = "on" ] && message="$message %{F$f_color}SCROLLLOCK $delim"
 
     echo "$message%{F-}" > $prefix/keystate
 }
@@ -33,13 +35,13 @@ _update() {
 }
 
 _record() {
-    f_color="e82e1e"
+    f_color=$alert_color
     icon=""
 
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
 
     if [ "$1" = "Start Recording" ]; then
-        echo "%{F#$f_color}$icon %{F-}$delim" > $prefix/record
+        echo "%{F$f_color}$icon %{F-}$delim" > $prefix/record
     else
         echo "" > $prefix/record
     fi
@@ -120,7 +122,7 @@ _volume() {
 	vol=$( volume get-status )
 
 	if [ "$vol" == "mute" ]; then
-        printf "\\n" > $prefix/volume && return 0
+        printf "%%{F$alert_color}\\n%%{F}" > $prefix/volume && return 0
     elif [ "$vol" -gt "100" ]; then
 		icon=""
 	elif [ "$vol" -lt "50" ]; then
