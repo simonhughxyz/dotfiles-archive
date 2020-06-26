@@ -6,8 +6,10 @@ mkdir -p "$prefix"
 
 delim="%{F#b0b0b0}|%{F-}"
 
+alert_color="#ff2222"
+
 _keystate() {
-    f_color="e82e1e"
+    f_color=$alert_color
 
     lockline=$(xset -q | grep "Num Lock")
 
@@ -17,9 +19,9 @@ _keystate() {
 
     message=""
 
-    [ "$caplock" = "on" ] && message="%{F#$f_color}CAPLOCK $delim"
-    [ "$numlock" = "on" ] && message="$message %{F#$f_color}NUMLOCK $delim"
-    [ "$scrolllock" = "on" ] && message="$message %{F#$f_color}SCROLLLOCK $delim"
+    [ "$caplock" = "on" ] && message="%{F$f_color}CAPLOCK $delim"
+    [ "$numlock" = "on" ] && message="$message %{F$f_color}NUMLOCK $delim"
+    [ "$scrolllock" = "on" ] && message="$message %{F$f_color}SCROLLLOCK $delim"
 
     echo "$message%{F-}" > $prefix/keystate
 }
@@ -33,13 +35,13 @@ _update() {
 }
 
 _record() {
-    f_color="e82e1e"
+    f_color=$alert_color
     icon=""
 
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
 
     if [ "$1" = "Start Recording" ]; then
-        echo "%{F#$f_color}$icon %{F-}$delim" > $prefix/record
+        echo "%{F$f_color}$icon %{F-}$delim" > $prefix/record
     else
         echo "" > $prefix/record
     fi
@@ -88,10 +90,11 @@ _window_count(){
     f_color="-"
     b_color="-"
     icon=""
+    click_command="bspc node -c"
 
     window_count=" $(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == " 0" ] && window_count="" && icon=""
-    echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}" > $prefix/window_count
+    echo "%{B$b_color}%{F$f_color}%{A1:$click_command:}$icon$window_count%{A}%{F-}%{B-}" > $prefix/window_count
 }
 
 _uptime() {
@@ -116,10 +119,10 @@ _volume() {
     f_color="#10e070"
     b_color="-"
 
-	vol=$( volume get-status )
+	vol="$1"
 
 	if [ "$vol" == "mute" ]; then
-        printf "\\n" > $prefix/volume && return 0
+        printf "%%{F$alert_color} %%{F-}" > $prefix/volume && return 0
     elif [ "$vol" -gt "100" ]; then
 		icon=""
 	elif [ "$vol" -lt "50" ]; then
@@ -157,11 +160,11 @@ _desktops() {
     # b_active_color="#c25704"    # Background color for active desktop
 
     # Change to given desktop with left mouse click
-    click_command="bspc desktop -f '&' \& melonbar"
+    click_command="bspc desktop -f '&'"
 
     # Change to last used desktop with left mouse click
     # on active (highlighted) desktop
-    active_click_command="bspc desktop -f last.local \& melonbar"
+    active_click_command="bspc desktop -f last.local"
 
     other_prefix="%{F$f_color}%{B$b_color}%{A:$click_command:}"
     current_prefix="%{F$f_active_color}%{B$b_active_color}%{A:$active_click_command:}"
@@ -172,7 +175,7 @@ _desktops() {
     current_monitor="$( echo "$1" | tr ':' '\n' | sed -n "s/W//;/^M.*$/,/^m.*$/p" )"
 
     # Format report for statusline.
-    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o/$other_prefix/; s/^[O|F].*$/& /;s/^[O|F]/$current_prefix /; s/^.*$/&$postfix/" > $prefix/desktops
+    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//; s/^[^O|^F].*$/$other_prefix&/; s/^[O|F].*/& $postfix/; s/^[O|F]/$current_prefix /" > $prefix/desktops
 }
 
 
@@ -231,7 +234,6 @@ _update_system(){
 _update_all(){
     # _update_window_manager &
     _update_system &
-    _volume &
     _keystate &
     _record
 }
@@ -241,7 +243,7 @@ _update(){
         battery) _battery ;;
         time) _time ;;
         date) _date ;;
-        volume) _volume ;;
+        volume) _volume "$2" ;;
         memory) _memory ;;
         uptime) _uptime ;;
         window-count) _window_count ;;
