@@ -119,7 +119,7 @@ _volume() {
     f_color="#10e070"
     b_color="-"
 
-	vol=$( volume get-status )
+	vol="$1"
 
 	if [ "$vol" == "mute" ]; then
         printf "%%{F$alert_color} %%{F-}" > $prefix/volume && return 0
@@ -234,7 +234,6 @@ _update_system(){
 _update_all(){
     # _update_window_manager &
     _update_system &
-    _volume &
     _keystate &
     _record
 }
@@ -244,7 +243,7 @@ _update(){
         battery) _battery ;;
         time) _time ;;
         date) _date ;;
-        volume) _volume ;;
+        volume) _volume "$2" ;;
         memory) _memory ;;
         uptime) _uptime ;;
         window-count) _window_count ;;
