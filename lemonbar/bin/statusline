@@ -158,6 +158,7 @@ _desktops() {
     current_prefix="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:}"
     current_postfix="%{A}%{F-}%{B-}"
     other_prefix="%{A:$click_command:}"
+    postfix="%{A}%{B-}%{F-}"
     other_postfix="%{A}"
 
     # Get bspc report (see 'man bspc' and search for 'report').
@@ -165,7 +166,7 @@ _desktops() {
     current_monitor="$( echo "$1" | tr ':' '\n' | sed -n "s/W//;/^M.*$/,/^m.*$/p" )"
 
     # Format report for statusline.
-    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//g; s/^[^O|^F].*/$other_prefix&$other_postfix/g; s/^[O|F]/$current_prefix /g; s/^$current_prefix.*$/& $current_postfix/g" > $prefix/desktops
+    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o/$other_prefix/; s/^[O|F].*$/& /;s/^[O|F]/$current_prefix /; s/^.*$/&$postfix/" > $prefix/desktops
 }
 
 
