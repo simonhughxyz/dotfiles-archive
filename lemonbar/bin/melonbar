@@ -40,6 +40,7 @@ _update(){
         window) statusline update window-count & statusline update window-title ;;
         volume) statusline update volume ;;
         keystate) statusline update keystate ;;
+        record) statusline update record "$2" ;;
         loop) statusline update system ;;
         all) statusline update all;;
     esac
@@ -80,6 +81,13 @@ _run(){
     # updates every time window focus changes.
     bspc subscribe node_focus | while read -r line; do
         _update window
+    done &
+
+    # updates everytime record is run.
+    record subscribe | while read -r line; do
+        [ "$line" = "Start Recording" ] && _update record "$line"
+        [ "$line" = "End Recording" ] && _update record "$line"
+        echo "$line"
     done &
 
     # update pipe in an infinite loop that iterates every

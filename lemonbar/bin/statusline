@@ -60,10 +60,15 @@ _update() {
 
 _record() {
     f_color="e82e1e"
-    icon="⏺"
+    icon=""
 
 	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
-	[ -e "$recpid_file" ] && echo "%{F#$f_color}$icon rec $delim%{F-}"
+
+    if [ "$1" = "Start Recording" ]; then
+        echo "%{F#$f_color}$icon %{F-}$delim" > $prefix/record
+    else
+        echo "" > $prefix/record
+    fi
 }
 
 _battery() {
@@ -174,7 +179,7 @@ _status() {
     echo "%{r}"
     cat $prefix/keystate 2> /dev/null
 
-	# record
+    cat $prefix/record 2> /dev/null
 
     cat $prefix/window_count 2> /dev/null
     echo "$delim"
@@ -220,7 +225,8 @@ _update_all(){
     # _update_window_manager &
     _update_system &
     _volume &
-    _keystate
+    _keystate &
+    _record
 }
 
 _update(){
@@ -236,6 +242,7 @@ _update(){
         desktops) _desktops "$2";;
         keystate) _keystate ;;
         system) _update_system ;;
+        record) _record "$2" ;;
         all) _update_all ;;
         *) _update_all ;;
     esac
@@ -252,7 +259,7 @@ _run(){
 
 
 case "$1" in
-    -u|update) shift; _update $@ ;;
+    -u|update) shift; _update "$@" ;;
     -r|run) shift; _run $@ ;;
     *)  # Remove all newline chars and print status.
         # Lemonbar requires a newline char at the end of the statusline.
