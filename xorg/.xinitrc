@@ -15,9 +15,9 @@ randwall &
 # set backlight depending if night or day.
 hour=$(date '+%H')
 if [ $hour -ge 20 ] || [ $hour -le 08 ]; then
-    xbacklight -set 10 &
-else
     xbacklight -set 20 &
+else
+    xbacklight -set 30 &
 fi
 
 # startup apps
