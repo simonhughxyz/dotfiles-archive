@@ -158,11 +158,11 @@ _desktops() {
     # b_active_color="#c25704"    # Background color for active desktop
 
     # Change to given desktop with left mouse click
-    click_command="bspc desktop -f '&' \& melonbar"
+    click_command="bspc desktop -f '&'"
 
     # Change to last used desktop with left mouse click
     # on active (highlighted) desktop
-    active_click_command="bspc desktop -f last.local \& melonbar"
+    active_click_command="bspc desktop -f last.local"
 
     other_prefix="%{F$f_color}%{B$b_color}%{A:$click_command:}"
     current_prefix="%{F$f_active_color}%{B$b_active_color}%{A:$active_click_command:}"
