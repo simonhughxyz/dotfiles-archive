@@ -83,7 +83,12 @@ _run(){
         _update window
     done &
 
-    # updates everytime record is run.
+    # A hack to fix 'subscribe report' not updating when desktop gets occupied. 
+    bspc subscribe node_add | while read -r line; do
+        bspc desktop --focus focused
+    done &
+
+    # updates every time record is run.
     record subscribe | while read -r line; do
         [ "$line" = "Start Recording" ] && _update record "$line"
         [ "$line" = "End Recording" ] && _update record "$line"
