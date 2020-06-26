@@ -137,8 +137,6 @@ _window(){
 _record(){
     # make sure pipe is made.
     _make_pipe
-    # Check if only instance.
-    mkdir -p "$prefix"
     if [ -f $recpid_file]; then
         echo "Already Running" > "$pipe"
         echo "$(basename "$0") is already running, exiting..."
@@ -169,6 +167,7 @@ _list() {
 
 
 _make_pipe() {
+    mkdir -p "$prefix"
     mkfifo "$pipe" 2>/dev/null 
 }
 
