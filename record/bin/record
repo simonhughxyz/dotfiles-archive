@@ -30,6 +30,7 @@ Record either audio, video or screencast (audio+video).
 Options:
   -r, record [...]             begin recording.
   -l, list                     Print list of files in \"$rec_store\".
+  subscribe                    Get messages about the state of recording.
   -h, help                     Print this help message.
 "
 _help(){ echo "$__usage"; exit; }
@@ -41,7 +42,8 @@ _cleanup() {
     recpid="$( cat "$recpid_file" 2> /dev/null )"
     kill -15 "$recpid" 2> /dev/null
     rm -f "$recpid_file" 2> /dev/null
-    rm -f "$pipe"
+    # send message through pipe
+    echo "End recording" > "$pipe"
     # wait for ffmpeg to finish.
     sleep 0.5
     exit
@@ -133,13 +135,18 @@ _window(){
 
 # Set up for recording and wait for command.
 _record(){
+    # make sure pipe is made.
+    _make_pipe
     # Check if only instance.
     mkdir -p "$prefix"
-    if { mkfifo "$pipe" 2>/dev/null; }; then
-        trap _cleanup INT TERM EXIT
-    else
+    if [ -f $recpid_file]; then
+        echo "Already running" > "$pipe"
         echo "$(basename "$0") is already running, exiting..."
         exit 1
+    else
+        touch "$recpif_file"
+        trap exit INT TERM
+        trap _cleanup EXIT
     fi
 
     case "$1" in
@@ -147,6 +154,8 @@ _record(){
         audio)       _audio;;
         video)       _video;;
     esac
+
+    echo "Start recording" > $pipe
 
     # wait for 'kill' command and run cleanup.
     while read -r line; do
@@ -159,9 +168,28 @@ _list() {
 }
 
 
+_make_pipe() {
+    mkfifo "$pipe" 2>/dev/null 
+}
+
+# Sends a kill message.
+_kill(){
+    echo "kill" > "$pipe"
+}
+
+# Returns the state of recording.
+_subscribe() {
+    _make_pipe
+    tail -f $pipe 
+}
+
+
+
 case "$1" in
     -h|help) _help ;;
     -r|record) _record "$2" ;;
-    -l|list) list ;;
+    -l|list) _list ;;
+    -k|kill) _kill ;;
+    subscribe) _subscribe;;
     *) _record "$1" ;;
 esac
