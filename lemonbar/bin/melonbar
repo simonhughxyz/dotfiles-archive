@@ -13,7 +13,7 @@ icon_font="FontAwesome-13"
 geometry="x28"
 offset="-2"
 clickable_areas=20  # Number of clickable areas.
-f_color="#c25704"
+f_color="#ff3300"
 b_color="#000000"
 
 prefix=${XDG_RUNTIME_DIR}/melonbar
@@ -89,6 +89,12 @@ _run(){
         [ "$line" = "End Recording" ] && _update record "$line"
     done &
 
+    while read -r line; do
+       [ "$line" = "KILL" ] && _cleanup
+       [ "$line" = "KILL" ] && echo "lol"
+       echo "$line"
+    done < "$pipe"
+
     # update pipe in an infinite loop that iterates every
     # 30 seconds
     while :; do
@@ -97,9 +103,12 @@ _run(){
     done
 }
 
+_kill() { echo "KILL" > "$pipe"; }
+
 
 case $1 in
     run) _run ;;
     update) shift; _update $@;;
+    -k|kill) _kill ;;
     *) _update ;;
 esac

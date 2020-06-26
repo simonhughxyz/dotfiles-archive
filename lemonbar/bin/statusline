@@ -24,32 +24,6 @@ _keystate() {
     echo "$message%{F-}" > $prefix/keystate
 }
 
-_memory() {
-    f_color="C0C000"
-    icon=""
-    click_command="melonbar-click memory"
-
-    echo "%{F#$f_color}%{A:$click_command:}$icon $(free -h | awk '/Mem:/ {print $3}')%{A}%{F-}" > $prefix/memory
-}
-
-_volume() {
-    f_color="98C379"
-
-	vol=$( volume get-status )
-
-	if [ "$vol" == "mute" ]; then
-        printf "\\n" > $prefix/volume && return 0
-    elif [ "$vol" -gt "100" ]; then
-		icon=""
-	elif [ "$vol" -lt "50" ]; then
-		icon=""
-	else
-		icon=""
-	fi
-
-	printf "%%{F#$f_color}%s %s%%\n%%{F-}" "$icon" "$vol" > $prefix/volume
-}
-
 _update() {
     f_color="b29f27"
     icon="📦"
@@ -101,13 +75,6 @@ _battery() {
     echo "$delim$bat" > $prefix/battery
 }
 
-_uptime() {
-    f_color="c98a1e"
-    icon="" 
-    click_command="melonbar-click uptime"
-
-    echo "%{F#$f_color}%{A:$click_command:}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{A}%{F-}" > $prefix/uptime
-}
 
 
 _window_title(){
@@ -118,7 +85,7 @@ _window_title(){
 }
 
 _window_count(){
-    f_color="#ff6600"
+    f_color="-"
     b_color="-"
     icon=""
 
@@ -127,26 +94,67 @@ _window_count(){
     echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}" > $prefix/window_count
 }
 
-_time() {
-    f_color="61AEEE"
-    icon=""
-    click_command="melonbar-click time"
+_uptime() {
+    f_color="#f011c8"
+    b_color="-"
+    icon="" 
+    click_command="melonbar-click uptime"
 
-    echo "%{F#$f_color}%{A:$click_command:}$icon $(date '+%H:%M')%{A}%{F-}" > $prefix/time
+    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{A}%{B-}%{F-}" > $prefix/uptime
+}
+
+_memory() {
+    f_color="#eeee00"
+    b_color="-"
+    icon=""
+    click_command="melonbar-click memory"
+
+    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(free -h | awk '/Mem:/ {print $3}')%{A}%{B-}%{F-}" > $prefix/memory
+}
+
+_volume() {
+    f_color="#10e070"
+    b_color="-"
+
+	vol=$( volume get-status )
+
+	if [ "$vol" == "mute" ]; then
+        printf "\\n" > $prefix/volume && return 0
+    elif [ "$vol" -gt "100" ]; then
+		icon=""
+	elif [ "$vol" -lt "50" ]; then
+		icon=""
+	else
+		icon=""
+	fi
+
+	printf "%%{F$f_color}%%{B$b_color}%s %s%%\n%%{B-}%%{F-}" "$icon" "$vol" > $prefix/volume
 }
 
 _date() {
-    f_color="F79494"
+    f_color="#b020ff"
+    b_color="-"
     icon=""
     click_command="melonbar-click date"
 
-    echo "%{F#$f_color}%{A:$click_command:}$icon $(date '+%a %d %B')%{A}%{F-}" > $prefix/date
+    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(date '+%a %d %B')%{A}%{B-}%{F-}" > $prefix/date
 }
 
+_time() {
+    f_color="#10d0ff"
+    b_color="-"
+    icon=""
+    click_command="melonbar-click time"
+
+    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(date '+%H:%M')%{A}%{B-}%{F-}" > $prefix/time
+}
 
 _desktops() {
-    f_color="ffffff"    # Foreground color for active desktop
-    b_color="c25704"    # Background color for active desktop
+    f_color="#bb0070"    # Foreground color
+    b_color="-"    # Background color
+    f_active_color="#ffffff"    # Foreground color for active desktop
+    b_active_color=$f_color    # Background color for active desktop
+    # b_active_color="#c25704"    # Background color for active desktop
 
     # Change to given desktop with left mouse click
     click_command="bspc desktop -f '&' \& melonbar"
@@ -155,11 +163,9 @@ _desktops() {
     # on active (highlighted) desktop
     active_click_command="bspc desktop -f last.local \& melonbar"
 
-    current_prefix="%{F#$f_color}%{B#$b_color}%{A:$active_click_command:}"
-    current_postfix="%{A}%{F-}%{B-}"
-    other_prefix="%{A:$click_command:}"
+    other_prefix="%{F$f_color}%{B$b_color}%{A:$click_command:}"
+    current_prefix="%{F$f_active_color}%{B$b_active_color}%{A:$active_click_command:}"
     postfix="%{A}%{B-}%{F-}"
-    other_postfix="%{A}"
 
     # Get bspc report (see 'man bspc' and search for 'report').
     # Separate items into lines and filter for current monitor
