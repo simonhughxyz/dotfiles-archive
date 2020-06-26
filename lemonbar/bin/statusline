@@ -122,7 +122,7 @@ _volume() {
 	vol=$( volume get-status )
 
 	if [ "$vol" == "mute" ]; then
-        printf "%%{F$alert_color}\\n%%{F}" > $prefix/volume && return 0
+        printf "%%{F$alert_color} %%{F-}" > $prefix/volume && return 0
     elif [ "$vol" -gt "100" ]; then
 		icon=""
 	elif [ "$vol" -lt "50" ]; then
