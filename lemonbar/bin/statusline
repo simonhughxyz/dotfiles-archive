@@ -88,10 +88,11 @@ _window_count(){
     f_color="-"
     b_color="-"
     icon=""
+    click_command="bspc node -c"
 
     window_count=" $(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == " 0" ] && window_count="" && icon=""
-    echo "%{B$b_color}%{F$f_color}$icon$window_count%{F-}%{B-}" > $prefix/window_count
+    echo "%{B$b_color}%{F$f_color}%{A1:$click_command:}$icon$window_count%{A}%{F-}%{B-}" > $prefix/window_count
 }
 
 _uptime() {
