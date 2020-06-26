@@ -95,7 +95,7 @@ _window_count(){
 }
 
 _uptime() {
-    f_color="#f011c8"
+    f_color="#ff55bb"
     b_color="-"
     icon="" 
     click_command="melonbar-click uptime"
@@ -132,7 +132,7 @@ _volume() {
 }
 
 _date() {
-    f_color="#b020ff"
+    f_color="#ff00ff"
     b_color="-"
     icon=""
     click_command="melonbar-click date"
@@ -150,10 +150,10 @@ _time() {
 }
 
 _desktops() {
-    f_color="#bb0070"    # Foreground color
+    f_color="#bb00ff"    # Foreground color
     b_color="-"    # Background color
     f_active_color="#ffffff"    # Foreground color for active desktop
-    b_active_color=$f_color    # Background color for active desktop
+    b_active_color="#9000ff"    # Background color for active desktop
     # b_active_color="#c25704"    # Background color for active desktop
 
     # Change to given desktop with left mouse click
