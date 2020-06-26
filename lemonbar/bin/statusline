@@ -173,7 +173,7 @@ _desktops() {
     current_monitor="$( echo "$1" | tr ':' '\n' | sed -n "s/W//;/^M.*$/,/^m.*$/p" )"
 
     # Format report for statusline.
-    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o/$other_prefix/; s/^[O|F].*$/& /;s/^[O|F]/$current_prefix /; s/^.*$/&$postfix/" > $prefix/desktops
+    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//; s/^[^O|^F].*$/$other_prefix&/; s/^[O|F].*/& $postfix/; s/^[O|F]/$current_prefix /" > $prefix/desktops
 }
 
 
