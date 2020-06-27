@@ -4,9 +4,42 @@ prefix=${XDG_RUNTIME_DIR}/melonbar/statusline
 
 mkdir -p "$prefix"
 
-delim="%{F#b0b0b0}|%{F-}"
-
 alert_color="#ff2222"
+
+
+_delim(){
+    delim="|"
+    f_color="#b0b0b0"
+    b_color=""
+
+    # print stdin to left of delim.
+    while read line; do
+        echo "$line"
+    done
+
+    printf " %s " "%{F$f_color}%{B$b_color}$delim%{F-}%{B-}"
+}
+
+_color(){
+    code="F"
+    [ "$1" = "-b" ] && shift && code="B"
+    echo "%{$code$1}"
+    # print stdin to left of delim.
+    while read line; do
+        echo "$line"
+    done
+    echo "%{$code-}"
+}
+
+
+_mouse(){
+    echo "%{A${2:-1}:$1:}"
+    # print stdin to left of delim.
+    while read line; do
+        echo "$line"
+    done
+    echo "%{A}"
+}
 
 _keystate() {
     f_color=$alert_color
@@ -19,13 +52,12 @@ _keystate() {
 
     message=""
 
-    [ "$caplock" = "on" ] && message="%{F$f_color}CAPLOCK $delim"
-    [ "$numlock" = "on" ] && message="$message %{F$f_color}NUMLOCK $delim"
-    [ "$scrolllock" = "on" ] && message="$message %{F$f_color}SCROLLLOCK $delim"
+    [ "$caplock" = "on" ] && message="$( echo "CAPS" | _color "$alert_color" | _delim )"
+    [ "$numlock" = "on" ] && message="$message$( echo "NUM" | _color "$alert_color" | _delim )"
+    [ "$scrolllock" = "on" ] && message="$message$( echo "SCOLL" | _color "$alert_color" | _delim )"
 
-    echo "$message%{F-}" > $prefix/keystate
+    echo "$message" > $prefix/keystate
 }
-
 _update() {
     f_color="b29f27"
     icon="📦"
@@ -38,10 +70,8 @@ _record() {
     f_color=$alert_color
     icon=""
 
-	recpid_file="$XDG_RUNTIME_DIR/recordingpid"
-
     if [ "$1" = "Start Recording" ]; then
-        echo "%{F$f_color}$icon %{F-}$delim" > $prefix/record
+        echo "$icon" | _color "$f_color" | _delim > $prefix/record
     else
         echo "" > $prefix/record
     fi
@@ -80,21 +110,20 @@ _battery() {
 
 
 _window_title(){
-    f_color="-"
-    b_color="-"
     window_name="$(xdotool getwindowfocus getwindowname)"
-    echo "%{B$b_color}%{F$f_color}$window_name%{F-}%{B-}" > $prefix/window
+
+    echo "$window_name" | _color > $prefix/window_name
 }
 
 _window_count(){
-    f_color="-"
-    b_color="-"
     icon=""
     click_command="bspc node -c"
+    window_count="$(bspc query -N -n .window.local | wc -l )"
+    [ "$window_count" == "0" ] && window_count="" && icon=""
 
-    window_count=" $(bspc query -N -n .window.local | wc -l )"
-    [ "$window_count" == " 0" ] && window_count="" && icon=""
-    echo "%{B$b_color}%{F$f_color}%{A1:$click_command:}$icon$window_count%{A}%{F-}%{B-}" > $prefix/window_count
+    # module=$( _build_module "$window_count" "$icon" )
+    # _build_mouse "$module" "$click_command" > $prefix/window_count
+    echo "$icon $window_count" | _mouse "$click_command" | _delim > $prefix/window_count
 }
 
 _uptime() {
@@ -102,8 +131,12 @@ _uptime() {
     b_color="-"
     icon="" 
     click_command="melonbar-click uptime"
+    uptime="$( uptime | awk '{print $3}' | cut -d',' -f1 )"
 
-    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(uptime | awk '{print $3}' | cut -d',' -f 1)%{A}%{B-}%{F-}" > $prefix/uptime
+    # module=$( _build_module "$uptime" "$icon" "$f_color" )
+    # _build_mouse "$module" "$click_command" > $prefix/uptime
+
+    echo "$icon $uptime" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/uptime
 }
 
 _memory() {
@@ -111,8 +144,12 @@ _memory() {
     b_color="-"
     icon=""
     click_command="melonbar-click memory"
+    memory="$( free -h | awk '/Mem:/ {print $3}' )"
 
-    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(free -h | awk '/Mem:/ {print $3}')%{A}%{B-}%{F-}" > $prefix/memory
+    # module=$( _build_module "$memory" "$icon" "$f_color" )
+    # _build_mouse "$module" "$click_command" > $prefix/memory
+
+    echo "$icon $memory" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/memory
 }
 
 _volume() {
@@ -124,7 +161,7 @@ _volume() {
     scroll_down_command="volume -5"
 
 	vol="$1"
-    percentage="% "
+    percentage="%"
 
 	if [ "$vol" == "mute" ]; then
         f_color=$alert_color
@@ -132,14 +169,17 @@ _volume() {
         icon=""
         percentage=""
     elif [ "$vol" -gt "100" ]; then
-		icon=""
+		icon=" "
 	elif [ "$vol" -lt "50" ]; then
-		icon=""
+		icon=" "
 	else
-		icon=""
+		icon=" "
 	fi
 
-	printf "%%{F$f_color}%%{B$b_color}%%{A:%s:}%%{A4:%s:}%%{A5:%s:}%s %s%s%%{A}%%{B-}%%{F-}%" "$click_command" "$scroll_up_command" "$scroll_down_command" "$icon" "$vol" "$percentage" > $prefix/volume
+    # module=$(_build_module "$vol$percentage" "$icon" "$f_color")
+    # _build_mouse "$module" "$click_command" "" "" "$scroll_up_command" "$scroll_down_command" > $prefix/volume
+
+    echo "$icon$vol$percentage" | _color "$f_color" | _mouse "$click_command" | _mouse "$scroll_up_command" 4 | _mouse "$scroll_down_command" 5 | _delim > $prefix/volume
 }
 
 _date() {
@@ -147,8 +187,12 @@ _date() {
     b_color="-"
     icon=""
     click_command="melonbar-click date"
+    date="$( date '+%a %d %B' )"
 
-    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(date '+%a %d %B')%{A}%{B-}%{F-}" > $prefix/date
+    # module=$( _build_module "$date" "$icon" "$f_color" )
+    # _build_mouse "$module" "$click_command" > $prefix/date
+
+    echo "$icon $date" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/date
 }
 
 _time() {
@@ -156,8 +200,12 @@ _time() {
     b_color="-"
     icon=""
     click_command="melonbar-click time"
+    time="$( date '+%H:%M' )"
 
-    echo "%{F$f_color}%{B$b_color}%{A:$click_command:}$icon $(date '+%H:%M')%{A}%{B-}%{F-}" > $prefix/time
+    # module=$( _build_module "$time" "$icon" "$f_color" )
+    # _build_mouse "$module" "$click_command" > $prefix/time
+
+    echo "$icon $time" | _color "$f_color" | _mouse "$click_command" > $prefix/time
 }
 
 _desktops() {
@@ -183,16 +231,16 @@ _desktops() {
     current_monitor="$( echo "$1" | tr ':' '\n' | sed -n "s/W//;/^M.*$/,/^m.*$/p" )"
 
     # Format report for statusline.
-    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//; s/^[^O|^F].*$/$other_prefix&/; s/^[O|F].*/& $postfix/; s/^[O|F]/$current_prefix /" > $prefix/desktops
+    echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//; s/^[^O|^F].*$/$other_prefix&/; s/^[O|F].*/& $postfix/; s/^[O|F]/$current_prefix /" | tr '\n' ' ' > $prefix/desktops
 }
 
 
-_status() {
+_print_status() {
     echo "%{l}"
     cat $prefix/desktops 2> /dev/null
     
     echo " "
-    cat $prefix/window 2> /dev/null
+    cat $prefix/window_name 2> /dev/null
 
     echo "%{r}"
     cat $prefix/keystate 2> /dev/null
@@ -200,32 +248,20 @@ _status() {
     cat $prefix/record 2> /dev/null
 
     cat $prefix/window_count 2> /dev/null
-    echo "$delim"
 
     cat $prefix/uptime 2> /dev/null
-    echo "$delim"
 
     cat $prefix/memory  2> /dev/null
-    echo "$delim"
     
 	cat $prefix/volume 2> /dev/null
-	echo "$delim"
 
     cat $prefix/date 2> /dev/null
-    echo "$delim"
 
     cat $prefix/time 2> /dev/null
 
     cat $prefix/battery 2> /dev/null
-
-    # update
 }
 
-# _update_window_manager() {
-#     _window &
-#     _window_count &
-#     _desktops &
-# }
 
 # Update system info modules
 # these should be run on a loop.
@@ -265,20 +301,10 @@ _update(){
     esac
 }
 
-_run(){
-    case "$1" in
-        desktops) _run_desktops ;;
-        window_title) _run_window_title ;;
-        *) _run_desktops & _run_window_title ;;
-    esac
-}
-
-
 
 case "$1" in
     -u|update) shift; _update "$@" ;;
-    -r|run) shift; _run $@ ;;
     *)  # Remove all newline chars and print status.
         # Lemonbar requires a newline char at the end of the statusline.
-        _status | tr '\n' ' ' && echo ;;
+        _print_status | tr -d '\n' ; echo ;;
 esac
