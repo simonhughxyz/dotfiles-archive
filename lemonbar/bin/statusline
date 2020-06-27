@@ -119,10 +119,18 @@ _volume() {
     f_color="#10e070"
     b_color="-"
 
+    click_command="volume mute"
+    scroll_up_command="volume +5"
+    scroll_down_command="volume -5"
+
 	vol="$1"
+    percentage="% "
 
 	if [ "$vol" == "mute" ]; then
-        printf "%%{F$alert_color} %%{F-}" > $prefix/volume && return 0
+        f_color=$alert_color
+        vol=""
+        icon=""
+        percentage=""
     elif [ "$vol" -gt "100" ]; then
 		icon=""
 	elif [ "$vol" -lt "50" ]; then
@@ -131,7 +139,7 @@ _volume() {
 		icon=""
 	fi
 
-	printf "%%{F$f_color}%%{B$b_color}%s %s%%\n%%{B-}%%{F-}" "$icon" "$vol" > $prefix/volume
+	printf "%%{F$f_color}%%{B$b_color}%%{A:%s:}%%{A4:%s:}%%{A5:%s:}%s %s%s%%{A}%%{B-}%%{F-}%" "$click_command" "$scroll_up_command" "$scroll_down_command" "$icon" "$vol" "$percentage" > $prefix/volume
 }
 
 _date() {
