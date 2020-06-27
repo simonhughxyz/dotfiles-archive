@@ -1,6 +1,6 @@
 *.font:          Mono:pixelsize=22:antialias=true:autohint=true;
 st.termName:     st-256color
-st.opacity:      180
+st.opacity:      200
 st.font:         Mono:pixelsize=26:antialias=true:autohint=true;
 URxvt.termName:  rxvt
 URxvt.font:      xft:monospace:size=18
