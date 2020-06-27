@@ -23,7 +23,9 @@ _get_volume() {
 }
 
 _get_mute() {
-    pacmd list-sinks | awk -F': ' '/^\smuted: /{print $2}'
+    pacmd list-sinks |
+       awk -F': ' '/^\s+name: /{indefault = $2 == "<'$( _get_default_sink_name )'>"}
+            /^\s+muted: / && indefault {print $2; exit}' | sed 's/%//'
 }
 
 _get_state(){
