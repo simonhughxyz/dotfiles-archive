@@ -82,7 +82,6 @@ _battery() {
     command -v acpi > /dev/null 2>&1 || return
     f_color="#60ff60"
 
-    bat=""
     while read line; do
         tmp="$(echo "$line" | awk '{print $4}' | sed 's/,//;s/%//')"
         
@@ -92,13 +91,13 @@ _battery() {
             icon=""
         elif [ "$tmp" -gt "20" ]; then
             icon=""
-            f_color="#999900"
+            f_color="#f0f000"
         elif [ "$tmp" -lt "5" ]; then
             icon=""
-            f_color="#aa2222"
+            f_color=$alert_color
         else
             icon=""
-            f_color="#aa2222"
+            f_color=$alert_color
         fi
 
         bat="$bat $( echo "$icon $tmp%" | _color "$f_color" )"
