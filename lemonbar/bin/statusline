@@ -259,6 +259,7 @@ _print_status() {
     cat $prefix/time 2> /dev/null
 
     cat $prefix/battery 2> /dev/null
+    echo " "
 }
 
 
