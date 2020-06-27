@@ -17,7 +17,7 @@ _delim(){
         echo "$line"
     done
 
-    printf " %s " "%{F$f_color}%{B$b_color}$delim%{F-}%{B-}"
+    printf " %s %s" "%{F$f_color}%{B$b_color}$delim%{F-}%{B-}" "$1"
 }
 
 _color(){
@@ -101,10 +101,10 @@ _battery() {
             f_color="#aa2222"
         fi
 
-        bat="$bat %{F$f_color}$icon $tmp%%{F-}"
+        bat="$bat $( echo "$icon $tmp%" | _color "$f_color" )"
     done <<< "$(acpi -b)"
 
-    echo "$delim$bat" > $prefix/battery
+    _delim "$( echo "$bat" | sed 's/^\s//' )" > $prefix/battery
 }
 
 
