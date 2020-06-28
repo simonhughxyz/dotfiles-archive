@@ -6,8 +6,10 @@ mkdir -p "$prefix"
 
 alert_color="#ff2222"
 
-
+### Build Module Functions ###
 _delim(){
+    # Pipe into function to put delim on right side.
+    # Pass as argument to put delim on left side.
     delim="|"
     f_color="#b0b0b0"
     b_color=""
@@ -19,8 +21,9 @@ _delim(){
 
     printf " %s %s" "%{F$f_color}%{B$b_color}$delim%{F-}%{B-}" "$1"
 }
-
 _color(){
+    # Default: foreground color.
+    # '-b': background color.
     code="F"
     [ "$1" = "-b" ] && shift && code="B"
     echo "%{$code$1}"
@@ -30,9 +33,12 @@ _color(){
     done
     echo "%{$code-}"
 }
-
-
 _mouse(){
+    # Default/1: Left click.
+    # 2: Right click.
+    # 3: Middle click.
+    # 4: Scroll up.
+    # 5: Scroll down.
     echo "%{A${2:-1}:$1:}"
     # print stdin to left of delim.
     while read line; do
@@ -41,6 +47,7 @@ _mouse(){
     echo "%{A}"
 }
 
+### Modules ###
 _keystate() {
     f_color=$alert_color
 
@@ -65,7 +72,6 @@ _update() {
     updatenr=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
     [ "$updatenr" != "0" ] && printf "$delim %{F#$f_color} $icon $updatenr%{F-}"
 }
-
 _record() {
     f_color=$alert_color
     icon=""
@@ -76,7 +82,6 @@ _record() {
         echo "" > $prefix/record
     fi
 }
-
 _battery() {
     # Don't run if acpi not available
     command -v acpi > /dev/null 2>&1 || return
@@ -105,15 +110,11 @@ _battery() {
 
     _delim "$( echo "$bat" | sed 's/^\s//' )" > $prefix/battery
 }
-
-
-
 _window_title(){
     window_name="$(xdotool getwindowfocus getwindowname)"
 
     echo "$window_name" | _color > $prefix/window_name
 }
-
 _window_count(){
     icon=""
     click_command="bspc node -c"
@@ -124,7 +125,6 @@ _window_count(){
     # _build_mouse "$module" "$click_command" > $prefix/window_count
     echo "$icon $window_count" | _mouse "$click_command" | _delim > $prefix/window_count
 }
-
 _uptime() {
     f_color="#ff55bb"
     b_color="-"
@@ -137,7 +137,6 @@ _uptime() {
 
     echo "$icon $uptime" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/uptime
 }
-
 _memory() {
     f_color="#eeee00"
     b_color="-"
@@ -150,7 +149,6 @@ _memory() {
 
     echo "$icon $memory" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/memory
 }
-
 _volume() {
     f_color="#10e070"
     b_color="-"
@@ -180,7 +178,6 @@ _volume() {
 
     echo "$icon$vol$percentage" | _color "$f_color" | _mouse "$click_command" | _mouse "$scroll_up_command" 4 | _mouse "$scroll_down_command" 5 | _delim > $prefix/volume
 }
-
 _date() {
     f_color="#ff00ff"
     b_color="-"
@@ -193,7 +190,6 @@ _date() {
 
     echo "$icon $date" | _color "$f_color" | _mouse "$click_command" | _delim > $prefix/date
 }
-
 _time() {
     f_color="#10d0ff"
     b_color="-"
@@ -206,7 +202,6 @@ _time() {
 
     echo "$icon $time" | _color "$f_color" | _mouse "$click_command" > $prefix/time
 }
-
 _desktops() {
     f_color="#bb00ff"    # Foreground color
     b_color="-"    # Background color
@@ -233,7 +228,7 @@ _desktops() {
     echo "$current_monitor" | sed "/^[^o|^O|^F]/d; s/^o//; s/^[^O|^F].*$/$other_prefix&/; s/^[O|F].*/& $postfix/; s/^[O|F]/$current_prefix /" | tr '\n' ' ' > $prefix/desktops
 }
 
-
+### Print Status###
 _print_status() {
     echo "%{l}"
     cat $prefix/desktops 2> /dev/null
@@ -262,26 +257,24 @@ _print_status() {
     echo " "
 }
 
-
-# Update system info modules
-# these should be run on a loop.
+### Update ###
 _update_system(){
+    # Update system info modules
+    # these should be run on a loop.
     _battery &
     _time &
     _date &
     _memory &
     _uptime
 }
-
-# Update everything apart from WM modules
-# they a special case.
 _update_all(){
+    # Update everything apart from WM modules
+    # they a special case.
     # _update_window_manager &
     _update_system &
     _keystate &
     _record
 }
-
 _update(){
     case "$1" in
         battery) _battery ;;
