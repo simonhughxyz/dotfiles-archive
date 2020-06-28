@@ -44,5 +44,14 @@ export WH="/mnt/wh"
 nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
 
+# Start ssh-agent if its not already running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    mkdir -p "$XDG_RUNTIME_DIR/ssh"
+    ssh-agent -t 16h > "$XDG_RUNTIME_DIR/ssh/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
+fi
+
 # Start graphical server if i3 not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
