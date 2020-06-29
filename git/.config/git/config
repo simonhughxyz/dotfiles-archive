@@ -11,6 +11,7 @@
 
 [alias]
     p  = push
+    pa = !git remote | xargs -L1 git push --all
     pl  = pull
     c  = commit
     ca  = commit --amend
