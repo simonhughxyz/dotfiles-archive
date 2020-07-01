@@ -63,8 +63,8 @@ autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 "
 
 " Close windows and tabs
-bind q winclose
-bind Q tabclose
+bind q tabclose
+bind Q winclose
 
 " Find
 bind / fillcmdline find
