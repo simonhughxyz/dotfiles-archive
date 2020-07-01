@@ -84,6 +84,9 @@ bind M mute all toggle
 bind f hint -w
 unbind t
 bind t hint
+" Open ling in new tab
+unbind T
+bind T hint -b
 
 " Optomize follow link for URL's.
 bindurl youtube.com f hint -Jw
