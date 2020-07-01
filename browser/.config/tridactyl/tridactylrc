@@ -12,6 +12,8 @@ sanitize tridactyllocal tridactylsync
 " Alias
 "
 alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
+alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
+alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 
 
 "
@@ -96,8 +98,19 @@ bind v hint -JW mpv
 " On youtube
 bindurl youtube.com v composite hint -Jpipe ytd-thumbnail>a href | mpv
 
-" Run mpv on current URL
-bind V composite get_current_url | mpv
+
+" Download video using youtube-dl
+unbind d
+unbind D
+" On current URL
+bind D composite get_current_url | ytdl
+" Using hint
+bind d hint -JW ytdl
+" On Youtube
+bindurl youtube.com d composite hint -Jpipe ytd-thumbnail>a href | ytdl
+" Download playlist
+bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
+
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
