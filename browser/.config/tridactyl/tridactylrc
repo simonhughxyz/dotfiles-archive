@@ -46,6 +46,14 @@ autocmd DocStart .*amazon\.co\.uk.* zoom 150
 autocmd DocStart .*wikipedia\.org.* zoom 200
 
 "
+" Other site optimizations
+"
+
+" Skip 'home' page for youtube channel and go straight to 'video'
+autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
+
+
+"
 " Bind Keys
 "
 
