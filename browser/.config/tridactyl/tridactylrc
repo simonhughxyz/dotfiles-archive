@@ -66,6 +66,10 @@ autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 bind q tabclose
 bind Q winclose
 
+" Duplicate current url in new window
+unbind o
+bind o composite get_current_url | winopen
+
 " Find
 bind / fillcmdline find
 bind ? fillcmdline find -?
