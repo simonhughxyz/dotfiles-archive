@@ -103,7 +103,7 @@ alias defde='def -u "German - English" -u "English - German"'
 # media
 alias vid='mpv'
 alias img='sxiv -a'
-alias ytdl='youtube-dl'
+# alias ytdl='youtube-dl'
 
 # buku
 alias bu='buku --suggest'
