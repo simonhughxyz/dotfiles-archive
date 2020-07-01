@@ -19,12 +19,14 @@ config=$video_config
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
-Record either audio, video or screencast (audio+video).
+Download video or playlist, with or without notifications.
+Any argument starting with 'http' will be accepted as URL.
 
 Options:
   -n, --notify                               Turn on notifications.
-  -v, --video [ytdl_arg...] url              Download single video.
-  -p, --playlist [ytdl_arg...] url           Download playlist.
+  -v, --video                                Download single video.
+  -p, --playlist                             Download playlist.
+  -u, --url=url                              URL to download.
   -h, --help                                 Print this help message.
 "
 
