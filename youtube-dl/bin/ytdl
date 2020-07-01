@@ -55,7 +55,7 @@ while test $# -gt 0; do
         -p|--playlist) config=$playlist_config ;;
         -u) shift; url="$1" ;;
         --url=*) url=${1#*=} ;;
-        *) url="$1" ;;
+        http*) url="$1" ;;
     esac
     shift
 done
