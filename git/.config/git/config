@@ -10,25 +10,21 @@
 	prompt = false
 
 [alias]
+    s   = status
     p  = push
-    pa = !git remote | xargs -L1 git push --all
+    pa = !git remote | xargs -L1 git push
+    paa = !git remote | xargs -L1 git push --all
     pl  = pull
     c  = commit
     ca  = commit --amend
-    s   = status
-    sp  = log --all --graph --decorate --oneline --simplify-by-decoration
-    co  = checkout
     b   = branch
-    rs  = restore
     f   = fetch
-    fo  = fetch origin
     m   = merge
     o   = checkout
+    ob   = checkout -b
     om  = checkout master
-    rs  = reset
-    rh  = reset HEAD
-    rso = reset --hard origin/master
+    rs  = restore
+    sp  = log --all --graph --decorate --oneline --simplify-by-decoration
     lg  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    cm = commit -m
     df  = diff
     dfs = diff --staged
