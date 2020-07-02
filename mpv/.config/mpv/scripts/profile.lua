@@ -1,5 +1,6 @@
 -- profile
 -- Selects profile to use using runtime file or ENV variable.
+-- This script will make the '--profile=*' cli non-functional.
 --
 -- ENV variable: '$MPV_PROFILE'
 -- Runtime file: '$XDG_RUNTIME_DIR/mpv/profile'
