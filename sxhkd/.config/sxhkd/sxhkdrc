@@ -72,6 +72,8 @@ super + {_,shift +} period
     bukuadd{_,title}menu
 super + shift + p
     pass menu
+super + {_,shift +} h
+    mpv-history -{t,p} -d
 
 
 
