@@ -19,7 +19,7 @@ super + space; m
     melonbar update keystate
 
 # Apps
-super + h
+super + t
     $TERMINAL -c htop -n htop -e htop
 super + w
     $BROWSER
