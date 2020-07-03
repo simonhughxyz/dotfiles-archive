@@ -21,7 +21,7 @@ mp.register_event('file-loaded', function()
 
     -- get title or use '---'.
     title = mp.get_property('media-title');  
-    title = (title == mp.get_property('filename') and '---' or title);
+    -- title = (title == mp.get_property('filename') and '---' or title);
     
     -- get full path if local file.
     path = mp.get_property('path')
