@@ -15,11 +15,11 @@ tmp_history=$runtime_dir/history.log
 perm_history=~/.local/share/mpv/history.log
 
 _history(){
-    tac $history | grep -i "$grep"
+    tac $history | cut -d ' ' -f7- | grep -i "$grep"
 }
 
 _dmenu(){
-    file="$( _history | dmenu -i -l 10 | awk '{print $3}' )"
+    file="$( _history | dmenu -i -l 10 | awk '{print $1}' )"
     mpv "$file"
 }
 
