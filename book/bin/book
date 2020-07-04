@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# BOOK
+# Simon Hugh Moore
+#
+# A password store wrapper to make it into a "bookmark store".
+
+export PASSWORD_STORE_DIR=${BOOK_DIR:-~/.book}
+export PASSWORD_STORE_ENABLE_EXTENSIONS=${BOOK_ENABLE_EXTENSIONS:-"true"}
+export PASSWORD_STORE_EXTENSIONS_DIR=${BOOK_EXTENSIONS_DIR:-$PASSWORD_STORE_DIR/.extensions}
+
+case "$1" in
+    generate) echo "generate has been disabled!"; exit ;;
+esac
+pass $@
