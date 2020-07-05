@@ -29,7 +29,7 @@ mp.register_event('file-loaded', function()
         path = utils.join_path(mp.get_property("working-directory"), path)
     end
 
-    log = ('%s\t%s\t%s\n'):format(os.date('%Y-%m-%d\t%H:%M:%S'), path, title)
+    log = ('%s\t%s\t%s\n'):format(os.date('%Y-%m-%d %H:%M:%S'), path, title)
 
     write_to_log(TMP_HISTFILE, log)
     write_to_log(HISTFILE, log)
