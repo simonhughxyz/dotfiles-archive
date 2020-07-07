@@ -92,6 +92,7 @@ _run(){
     volume subscribe | while read -r line; do
         _update volume "$line"
     done &
+    volume update # Make sure volume is updated once to fill subscribe loop.
 
     # updates every time record is run.
     record subscribe | while read -r line; do
