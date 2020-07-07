@@ -74,6 +74,7 @@ case $1 in
     [+-]*|[0-9]*) _set_volume $1 ;;
     -V|get-volume) _get_volume && exit ;;
     -M|get-mute) _get_mute && exit ;;
-    subscribe) _subscribe;;
+    update) _update_pipe exit ;;
+    subscribe) _subscribe ;;
     *) _get_state && exit ;; 
 esac
