@@ -9,7 +9,7 @@ _daemon() { transmission-daemon ;}
 _quit() { killall transmission-daemon ;}
 _altspeedenable() { transmission-remote --alt-speed ;}	# limit bandwidth
 _altspeeddisable() {	transmission-remote --no-alt-speed ;}	# dont limit bandwidth
-_add() { transmission-remote --add "$1" ;}
+_add() { transmission-remote --add "${1:-$( xclip -sel clip -o )}" ;}
 _askmorepeers() { transmission-remote -t"$1" --reannounce ;}
 _start() { transmission-remote -t"$1" --start ;}		# <id> or all
 _purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
