@@ -9,6 +9,14 @@ logfile        ~/.local/share/msmtp/msmtp.log
 ### simonhugh.xyz ###
 #####################
 
+account         mailbox
+host            smtp.mailbox.org
+port            465
+from            simonhugh@mailbox.org
+user            simonhugh@mailbox.org
+tls_starttls    off
+passwordeval    "pass simonhugh.xyz/mailbox | head -n1"
+
 # simon
 account         simon
 host            smtp.mailbox.org
