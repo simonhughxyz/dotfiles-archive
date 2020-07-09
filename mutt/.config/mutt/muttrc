@@ -1,24 +1,37 @@
 set charset = "utf-8"
 
-set from = "simon.h.moore94@gmail.com"
+set from = "simon@simonhugh.xyz"
 set realname = "Simon H Moore"
 
-set imap_user=simon.h.moore94@gmail.com
+# paths
+set folder = ~/.mail/simonhugh.xyz
+set header_cache = ~/.cache/mutt/headers
+set message_cachedir = ~/.cache/mutt/bodies
+set mailcap_path = ~/.config/mutt/mailcap
+set certificate_file = /etc/ssl/certs/ca-certificates.crt
 
-set folder = "~/.mail/gmail_simonhmoore94"
-set spoolfile = "+INBOX"
-set postponed ="+[Gmail]/Drafts"
+# basic options
+set sendmail  = "/usr/bin/msmtp"
+set wait_key = no
+set mbox_type = Maildir
+set timeout = 3
+set mail_check = 0
+set delete
+set quit
+set thorough_search
+set mail_check_stats
+unset confirmappend
+unset move
+unset mark_old
+unset beep_new
 
-set sendmail  = "/usr/bin/msmtp -a gmail_simonhmoore94"
 
-set edit_headers=yes
-set mbox=+mbox
-set spoolfile=+inbox
-set record=+sent
-set postponed=+drafts
-set trash="+trash"
-set mbox_type=Maildir
-
-mailboxes =inbox =sent =drafts =trash
+# set edit_headers=yes
+# set mbox=+mbox
+set spoolfile=+INBOX
+# set record=+sent
+# set postponed=+drafts
+# set trash="+trash"
+# set mbox_type=Maildir
 
 source color.muttrc
