@@ -86,7 +86,7 @@ Account gmail.simonhmoore94
 
 # local storage
 MaildirStore gmail.simonhmoore94-local
-Path ~/.mail/simonhmoore94@gmail.com
+Path ~/.mail/simonhmoore94@gmail.com/
 Inbox ~/.mail/simonhmoore94@gmail.com/INBOX
 
 Channel gmail.simonhmoore94-inbox
