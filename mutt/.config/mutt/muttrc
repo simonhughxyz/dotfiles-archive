@@ -1,17 +1,12 @@
 set charset = "utf-8"
 
-set from = "simon@simonhugh.xyz"
-set realname = "Simon H Moore"
-
 # paths
-set folder = ~/.mail/simonhugh.xyz
 set header_cache = ~/.cache/mutt/headers
 set message_cachedir = ~/.cache/mutt/bodies
 set mailcap_path = ~/.config/mutt/mailcap
 set certificate_file = /etc/ssl/certs/ca-certificates.crt
 
 # basic options
-set sendmail  = "/usr/bin/msmtp"
 set wait_key = no
 set mbox_type = Maildir
 set timeout = 3
@@ -28,7 +23,6 @@ unset beep_new
 
 # set edit_headers=yes
 # set mbox=+mbox
-set spoolfile=+INBOX
 # set record=+sent
 # set postponed=+drafts
 # set trash="+trash"

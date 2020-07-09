@@ -1,0 +1,11 @@
+set from = "simon@simonhugh.xyz"
+set realname = "Simon H Moore"
+
+# paths
+set folder = ~/.mail/simonhugh.xyz
+
+set sendmail  = "/usr/bin/msmtp"
+
+set spoolfile=+INBOX
+
+source muttrc
