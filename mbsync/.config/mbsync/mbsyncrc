@@ -1,42 +1,112 @@
-#### simonhugh94 gmail ####
 
-IMAPAccount mainGM
-Host imap.gmail.com
-User simon.h.moore94@gmail.com
-PassCmd "pass get mutt google/main"
+#####################
+### simonhugh.xyz ###
+#####################
+
+IMAPAccount simonhugh.xyz
+Host imap.mailbox.org
+User simonhugh@mailbox.org
+PassCmd "pass simonhugh.xyz/mailbox | head -n1"
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-# remote storage
-IMAPStore mainGM-remote
-Account mainGM
 
-# local storage
-MaildirStore mainGM-local
-Path ~/.Mail/gmail/simonhmoore94/
-Inbox ~/.Mail/gmail/simonhmoore94/INBOX
+### Remote storage ###
+IMAPStore simonhugh.xyz-remote
+Account simonhugh.xyz
 
-Channel mainGM-inbox
-Master :mainGM-remote:"INBOX"
-Slave :mainGM-local:INBOX
+
+### Local storage ###
+MaildirStore simonhugh.xyz-local
+Path ~/Mail/simonhugh.xyz/
+Inbox ~/Mail/simonhugh.xyz/INBOX
+
+# Inbox
+Channel simonhugh.xyz-inbox
+Master :simonhugh.xyz-remote:"INBOX"
+Slave :simonhugh.xyz-local:INBOX
 Create Both
-Expunge Master
-SyncState *
+Expunge Both
 
-Channel mainGM-sent
-Master :mainGM-remote:"[Gmail]/Sent Mail"
-Slave :mainGM-local:sent
+# Drafts
+Channel simonhugh.xyz-drafts
+Master :simonhugh.xyz-remote:"Drafts"
+Slave :simonhugh.xyz-local:drafts
 Create Both
-Expunge Master
+Expunge Both
 
-Channel mainGM-all
-Master :mainGM-remote:"[Gmail]/All Mail"
-Slave :mainGM-local:all
+# Sent
+Channel simonhugh.xyz-sent
+Master :simonhugh.xyz-remote:"Sent"
+Slave :simonhugh.xyz-local:sent
 Create Both
-Expunge Master
+Expunge Both
 
-Group mainGM
-Channel mainGM-inbox
-channel mainGM-sent
-channel mainGM-all
+# Trash
+Channel simonhugh.xyz-trash
+Master :simonhugh.xyz-remote:"Trash"
+Slave :simonhugh.xyz-local:trash
+Create Both
+Expunge Both
+
+# Spam
+Channel simonhugh.xyz-spam
+Master :simonhugh.xyz-remote:"Junk"
+Slave :simonhugh.xyz-local:spam
+Create Both
+Expunge Both
+
+### Create Group ###
+Group simonhugh.xyz
+Channel simonhugh.xyz-inbox
+Channel simonhugh.xyz-archive
+Channel simonhugh.xyz-drafts
+Channel simonhugh.xyz-sent
+Channel simonhugh.xyz-trash
+Channel simonhugh.xyz-spam
+
+############################
+##### simonhugh94 gmail ####
+############################
+
+#IMAPAccount mainGM
+#Host imap.gmail.com
+#User simon.h.moore94@gmail.com
+#PassCmd "pass get mutt google/main"
+#SSLType IMAPS
+#SSLVersions TLSv1.2
+#CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+## remote storage
+#IMAPStore mainGM-remote
+#Account mainGM
+
+## local storage
+#MaildirStore mainGM-local
+#Path ~/.Mail/gmail/simonhmoore94/
+#Inbox ~/.Mail/gmail/simonhmoore94/INBOX
+
+#Channel mainGM-inbox
+#Master :mainGM-remote:"INBOX"
+#Slave :mainGM-local:INBOX
+#Create Both
+#Expunge Master
+#SyncState *
+
+#Channel mainGM-sent
+#Master :mainGM-remote:"[Gmail]/Sent Mail"
+#Slave :mainGM-local:sent
+#Create Both
+#Expunge Master
+
+#Channel mainGM-all
+#Master :mainGM-remote:"[Gmail]/All Mail"
+#Slave :mainGM-local:all
+#Create Both
+#Expunge Master
+
+#Group mainGM
+#Channel mainGM-inbox
+#channel mainGM-sent
+#channel mainGM-all
