@@ -28,4 +28,6 @@ unset beep_new
 # set trash="+trash"
 # set mbox_type=Maildir
 
+
 source color.muttrc
+source bindings.muttrc
