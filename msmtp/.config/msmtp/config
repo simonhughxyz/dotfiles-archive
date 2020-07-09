@@ -15,6 +15,7 @@ host            smtp.mailbox.org
 port            465
 from            simon@simonhugh.xyz
 user            simonhugh@mailbox.org
+tls_starttls    off
 passwordeval    "pass simonhugh.xyz/mailbox | head -n1"
 
 # Gmail
