@@ -5,6 +5,18 @@ tls            on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile        ~/.local/share/msmtp/msmtp.log
 
+#####################
+### simonhugh.xyz ###
+#####################
+
+# simon
+account         simon
+host            smtp.mailbox.org
+port            465
+from            simon@simonhugh.xyz
+user            simonhugh@mailbox.org
+passwordeval    "pass simonhugh.xyz/mailbox | head -n1"
+
 # Gmail
 account        mainGM
 host           smtp.gmail.com
