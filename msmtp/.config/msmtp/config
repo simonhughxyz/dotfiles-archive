@@ -35,5 +35,5 @@ user           simon.h.moore94@gmail.com
 passwordeval   "pass get mutt google/main"
 
 # Set a default account
-account default : mainGM
+account default : simon
 
