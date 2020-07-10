@@ -24,7 +24,7 @@ Inbox ~/.mail/simonhugh.xyz/INBOX
 
 # Inbox
 Channel simonhugh.xyz-inbox
-Master :simonhugh.xyz-remote:"INBOX"
+Master :simonhugh.xyz-remote:"INBOX/simon"
 Slave :simonhugh.xyz-local:INBOX
 Create Both
 Expunge Both
