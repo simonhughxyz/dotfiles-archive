@@ -8,4 +8,4 @@ set sendmail  = "/usr/bin/msmtp gmail.simonhmoore94"
 
 set spoolfile=+INBOX
 
-source muttrc
+source ../config
