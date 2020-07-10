@@ -1,0 +1,33 @@
+set charset = "utf-8"
+
+# paths
+set header_cache = ~/.cache/mutt/headers
+set message_cachedir = ~/.cache/mutt/bodies
+set mailcap_path = ~/.config/mutt/mailcap
+set certificate_file = /etc/ssl/certs/ca-certificates.crt
+
+# basic options
+set wait_key = no
+set mbox_type = Maildir
+set timeout = 3
+set mail_check = 0
+set delete
+set quit
+set thorough_search
+set mail_check_stats
+unset confirmappend
+unset move
+unset mark_old
+unset beep_new
+
+
+# set edit_headers=yes
+# set mbox=+mbox
+# set record=+sent
+# set postponed=+drafts
+# set trash="+trash"
+# set mbox_type=Maildir
+
+
+source color.muttrc
+source bindings.muttrc
