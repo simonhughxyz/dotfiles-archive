@@ -26,13 +26,17 @@ user            simonhugh@mailbox.org
 tls_starttls    off
 passwordeval    "pass simonhugh.xyz/mailbox | head -n1"
 
-# Gmail
-account        mainGM
-host           smtp.gmail.com
-port           587
-from           simon.h.moore94@gmail.com
-user           simon.h.moore94@gmail.com
-passwordeval   "pass get mutt google/main"
+###############################
+### simonhmoore94@gmail.com ###
+###############################
+
+account         gmail.simonhmoore94
+host            smtp.gmail.com
+port            587
+from            simon.h.moore94@gmail.com
+user            simon.h.moore94@gmail.com
+tls_starttls    on
+passwordeval    "pass get mutt google/main"
 
 # Set a default account
 account default : simon
