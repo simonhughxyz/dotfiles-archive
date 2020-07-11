@@ -144,6 +144,7 @@ Plug 'fourjay/vim-password-store', { 'for': 'pass' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tridactyl/vim-tridactyl', { 'for': 'trydactyl' }
+Plug 'neomutt/neomutt.vim', { 'for': 'muttrc' }
 
 " Neovim Plugins
 if has('nvim')
