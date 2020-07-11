@@ -38,5 +38,10 @@ set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
 
 
+# Not Much
+set nm_default_url = "notmuch:///home/simon/.mail"
+virtual-mailboxes "INBOX" "notmuch://?query=tag:inbox"
+virtual-mailboxes "NEW" "notmuch://?query=tag:new"
+
 source color.muttrc
 source bindings.muttrc
