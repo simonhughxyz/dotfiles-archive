@@ -8,4 +8,8 @@ set sendmail  = "/usr/bin/msmtp"
 
 set spoolfile=+INBOX
 
+# Not much
+virtual-mailboxes "INBOX" "notmuch://?query=to:simon@simonhugh.xyz OR to:simonhugh@mailbox.org AND tag:inbox"
+virtual-mailboxes "NEW" "notmuch://?query=to:simon@simonhugh.xyz OR to:simonhugh@mailbox.org AND tag:new"
+
 source ../config.muttrc
