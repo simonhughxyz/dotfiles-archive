@@ -8,4 +8,4 @@ set sendmail  = "/usr/bin/msmtp"
 
 set spoolfile=+INBOX
 
-source ../config
+source ../config.muttrc
