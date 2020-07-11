@@ -32,6 +32,11 @@ unset beep_new
 set date_format = "%d %b %y"
 set index_format = "%4C %Z %d %-25.25L %s"
 
+set sidebar_width = 25
+set sidebar_divider_char = '│'
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
 
 source color.muttrc
 source bindings.muttrc

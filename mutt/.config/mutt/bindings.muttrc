@@ -1,3 +1,8 @@
+####################
+### Key-bindings ###
+####################
+
+# Vim like keys
 bind pager j next-line
 bind pager k previous-line
 bind attach,index,pager \CD next-page
@@ -6,3 +11,6 @@ bind pager g top
 bind pager G bottom
 bind attach,index g first-entry
 bind attach,index G last-entry
+
+# Toggle sidebar
+bind index,pager B sidebar-toggle-visible
