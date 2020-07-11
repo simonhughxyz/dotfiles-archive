@@ -24,7 +24,7 @@ Inbox ~/.mail/simonhugh.xyz/INBOX
 
 # Inbox
 Channel simonhugh.xyz-inbox
-Master :simonhugh.xyz-remote:"INBOX/simon"
+Master :simonhugh.xyz-remote:"INBOX"
 Slave :simonhugh.xyz-local:INBOX
 Create Both
 Expunge Both
@@ -60,7 +60,6 @@ Expunge Both
 ### Create Group ###
 Group simonhugh.xyz
 Channel simonhugh.xyz-inbox
-Channel simonhugh.xyz-archive
 Channel simonhugh.xyz-drafts
 Channel simonhugh.xyz-sent
 Channel simonhugh.xyz-trash
