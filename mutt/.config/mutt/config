@@ -30,7 +30,7 @@ unset beep_new
 
 # Format options
 set date_format = "%d %b %y"
-set index_format = "%4C %Z %d %-25.25L %s"
+set index_format = "%4C %Z %<[y?%<[m?%<[d?%[%H:%M    ]&%[%a %d   ]>&%[%b %d   ]>&%[%d %b %y]> %-25.25L %s"
 
 set sidebar_width = 25
 set sidebar_divider_char = '│'
