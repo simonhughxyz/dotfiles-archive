@@ -28,6 +28,9 @@ endfu!
 autocmd BufWritePost * call SetFileType()
 
 autocmd BufWritePost statusbar call system("reloadbar")
+
+" open all mutt config files with filetype muttrc
+autocmd BufReadPost *.muttrc set filetype=muttrc
 " }}}
 "Misc {{{
 set nocompatible
