@@ -28,6 +28,10 @@ unset beep_new
 # set trash="+trash"
 # set mbox_type=Maildir
 
+# Format options
+set date_format = "%d %b %y"
+set index_format = "%4C %Z %d %-25.25L %s"
+
 
 source color.muttrc
 source bindings.muttrc
