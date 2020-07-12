@@ -6,10 +6,10 @@ set folder = ~/.mail/simonhmoore94@gmail.com
 
 set sendmail  = "/usr/bin/msmtp gmail.simonhmoore94"
 
-set spoolfile=+INBOX
+set spoolfile="notmuch://?query=to:simon.h.moore94@gmail.com AND tag:inbox"
 
 # Not much
-virtual-mailboxes "INBOX" "notmuch://?query=to:simon.h.moore94@gmail.com AND tag:inbox"
+virtual-mailboxes "INBOX" $spoolfile
 virtual-mailboxes "Unread" "notmuch://?query=to:simon.h.moore94@gmail.com AND tag:unread"
 virtual-mailboxes "Sent" "notmuch://?query=to:simon.h.moore94@gmail.com AND tag:sent"
 virtual-mailboxes "Archive" "notmuch://?query=to:simon.h.moore94@gmail.com AND tag:archive"
