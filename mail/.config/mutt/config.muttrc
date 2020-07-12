@@ -40,6 +40,7 @@ set mail_check_stats
 
 # Not Much
 set nm_default_url = "notmuch:///home/simon/.mail"
+set nm_unread_tag = unread
 
 source color.muttrc
 source bindings.muttrc
