@@ -20,3 +20,8 @@ bind index,pager [ sidebar-prev
 bind index,pager ] sidebar-next
 # Open the highlighted mailbox
 bind index,pager \# sidebar-open
+
+# Tagging
+macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+macro index c "<change-vfolder>?" "Change to vfolder overview"
+macro index \\\\ "<vfolder-from-query>" "Search mailbox"
