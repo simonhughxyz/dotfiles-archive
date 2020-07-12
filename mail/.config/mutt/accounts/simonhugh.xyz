@@ -10,6 +10,6 @@ set spoolfile=+INBOX
 
 # Not much
 virtual-mailboxes "INBOX" "notmuch://?query=to:simon@simonhugh.xyz OR to:simonhugh@mailbox.org AND tag:inbox"
-virtual-mailboxes "NEW" "notmuch://?query=to:simon@simonhugh.xyz OR to:simonhugh@mailbox.org AND tag:new"
+virtual-mailboxes "Unread" "notmuch://?query=to:simon@simonhugh.xyz OR to:simonhugh@mailbox.org AND tag:unread"
 
 source ../config.muttrc
