@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# MAIL-PULL
+# Simon Hugh Moore
+#
+# Pull and tag mail from server.
+
+# Pull all mail
+mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc -a
+
+# Not much
+notmuch new
+
+# retag all new messages as inbox and unread
+notmuch tag -new +inbox +unread -- tag:new
+
+# tag all messages from "me" as sent and remove inbox,unread tags
+notmuch tag -new -unread -inbox +sent -- from:simon@simonhugh.xyz OR from:simonhugh@mailbox.org OR from:simon.h.moore94@gmail.com
+
