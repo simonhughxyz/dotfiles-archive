@@ -1,1 +1,1 @@
-../accounts/simonhmoore94@gmail.com
+../accounts/simonhmoore94@gmail.com.muttrc
