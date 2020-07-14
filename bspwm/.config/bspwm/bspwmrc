@@ -30,6 +30,7 @@ bspc rule -a mpv desktop='V'     # open mpv in a dedicated video desktop.
 bspc rule -a mpv focus=off       # don't give new mpv windows focus.
 bspc rule -a Zathura state=tiled # open zathura in tiled mode.
 bspc rule -a Emacs state=tiled   # open emacs in tiled mode.
+bspc rule -a Sype state=tiled   # open skype in tiled mode.
 
 # run bspwm specific sxhkd config.
 sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" &
