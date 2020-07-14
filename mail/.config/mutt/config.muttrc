@@ -44,3 +44,4 @@ set nm_unread_tag = unread
 
 source color.muttrc
 source bindings.muttrc
+source alias.muttrc
