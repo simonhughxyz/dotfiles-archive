@@ -5,6 +5,7 @@ set header_cache = ~/.cache/mutt/headers
 set message_cachedir = ~/.cache/mutt/bodies
 set mailcap_path = ~/.config/mutt/mailcap
 set certificate_file = /etc/ssl/certs/ca-certificates.crt
+set tmpdir = "$XDG_RUNTIME_DIR"
 
 # basic options
 set wait_key = no
