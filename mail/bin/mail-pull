@@ -14,7 +14,8 @@ notmuch new
 # retag all new messages as inbox and unread
 notmuch tag -new +inbox +unread -- tag:new
 
-me="*@simonhugh.xyz OR simonhugh@mailbox.org OR simon.h.moore94@gmail.com"
+me="/.*@simonhugh.xyz|simonhugh@mailbox.org|simon.h.moore94@gmail.com/"
 
 # tag all messages from "me" as sent and remove inbox,unread tags unless addressed to me.
-notmuch tag -new -unread -inbox +sent -- from:"$me" AND NOT to:"$me"
+notmuch tag -new +sent -- "from:$me"
+notmuch tag -unread -inbox -- tag:sent AND NOT "to:$me"
