@@ -11,6 +11,9 @@ mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc -a
 # Not much
 notmuch new
 
+# count the number of new messages
+count=$( notmuch count tag:new )
+
 # retag all new messages as inbox and unread
 notmuch tag -new +inbox +unread -- tag:new
 
