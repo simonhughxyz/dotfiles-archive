@@ -19,3 +19,11 @@ me="/.*@simonhugh.xyz|simonhugh@mailbox.org|simon.h.moore94@gmail.com/"
 # tag all messages from "me" as sent and remove inbox,unread tags unless addressed to me.
 notmuch tag -new +sent -- "from:$me"
 notmuch tag -unread -inbox -- tag:sent AND NOT "to:$me"
+
+# notify of new messages
+if [ $count = 1 ]; then
+    notify-send -u normal "Mail" "You have 1 new message!" # singular
+elif [ $count != 0]; then
+    notify-send -u normal "Mail" "You have $count new messages!" #  plural
+fi
+
