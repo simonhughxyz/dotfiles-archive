@@ -11,7 +11,7 @@ set spoolfile="notmuch://?query=to:(admin@simonhugh.xyz OR postmaster@simonhugh.
 # Not much
 virtual-mailboxes "INBOX" $spoolfile
 virtual-mailboxes "Unread" "notmuch://?query=to:(admin@simonhugh.xyz OR postmaster@simonhugh.xyz OR webmaster@simonhugh.xyz OR hostmaster@simonhugh.xyz OR abuse@simonhugh.xyz) AND tag:unread"
-virtual-mailboxes "Sent" "notmuch://?query=from:(admin@simonhugh.xyz OR postmaster@simonhugh.xyz OR webmaster@simonhugh.xyz OR hostmaster@simonhugh.xyz OR abuse@simonhugh.xyz) AND tag:sent"
+virtual-mailboxes "Sent" "notmuch://?query=from:/^(admin|postmaster|webaster|hostmaster|abuse)@simonhugh[.]xyz$/ AND tag:sent"
 virtual-mailboxes "Archive" "notmuch://?query=to:(admin@simonhugh.xyz OR postmaster@simonhugh.xyz OR webmaster@simonhugh.xyz OR hostmaster@simonhugh.xyz OR abuse@simonhugh.xyz) AND tag:archive"
 virtual-mailboxes "Trash" "notmuch://?query=to:(admin@simonhugh.xyz OR postmaster@simonhugh.xyz OR webmaster@simonhugh.xyz OR hostmaster@simonhugh.xyz OR abuse@simonhugh.xyz) AND tag:deleted"
 virtual-mailboxes "Spam" "notmuch://?query=to:(admin@simonhugh.xyz OR postmaster@simonhugh.xyz OR webmaster@simonhugh.xyz OR hostmaster@simonhugh.xyz OR abuse@simonhugh.xyz) AND tag:spam"
