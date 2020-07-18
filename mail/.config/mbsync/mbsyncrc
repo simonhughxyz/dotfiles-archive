@@ -101,12 +101,6 @@ Slave :gmail.simonhmoore94-local:sent
 Create Both
 Expunge Master
 
-Channel gmail.simonhmoore94-all
-Master :gmail.simonhmoore94-remote:"[Gmail]/All Mail"
-Slave :gmail.simonhmoore94-local:all
-Create Both
-Expunge Both
-
 Channel gmail.simonhmoore94-deleted
 Master :gmail.simonhmoore94-remote:"[Gmail]/deleted"
 Slave :gmail.simonhmoore94-local:deleted
