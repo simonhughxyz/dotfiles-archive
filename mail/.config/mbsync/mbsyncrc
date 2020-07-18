@@ -102,7 +102,7 @@ Create Both
 Expunge Master
 
 Channel gmail.simonhmoore94-deleted
-Master :gmail.simonhmoore94-remote:"[Gmail]/deleted"
+Master :gmail.simonhmoore94-remote:"deleted"
 Slave :gmail.simonhmoore94-local:deleted
 Create Both
 Expunge Both
