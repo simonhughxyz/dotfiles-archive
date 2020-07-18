@@ -43,10 +43,10 @@ Slave :simonhugh.xyz-local:sent
 Create Both
 Expunge Both
 
-# Trash
-Channel simonhugh.xyz-trash
-Master :simonhugh.xyz-remote:"Trash"
-Slave :simonhugh.xyz-local:trash
+# deleted
+Channel simonhugh.xyz-deleted
+Master :simonhugh.xyz-remote:"deleted"
+Slave :simonhugh.xyz-local:deleted
 Create Both
 Expunge Both
 
@@ -62,7 +62,7 @@ Group simonhugh.xyz
 Channel simonhugh.xyz-inbox
 Channel simonhugh.xyz-drafts
 Channel simonhugh.xyz-sent
-Channel simonhugh.xyz-trash
+Channel simonhugh.xyz-deleted
 Channel simonhugh.xyz-spam
 
 
@@ -107,7 +107,14 @@ Slave :gmail.simonhmoore94-local:all
 Create Both
 Expunge Both
 
+Channel gmail.simonhmoore94-deleted
+Master :gmail.simonhmoore94-remote:"[Gmail]/deleted"
+Slave :gmail.simonhmoore94-local:deleted
+Create Both
+Expunge Both
+
 Group gmail.simonhmoore94
 Channel gmail.simonhmoore94-inbox
 channel gmail.simonhmoore94-sent
 channel gmail.simonhmoore94-all
+channel gmail.simonhmoore94-deleted
