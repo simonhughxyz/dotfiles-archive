@@ -26,6 +26,11 @@ _sync_tag() {
     done
 }
 
+# Make sure all files in dir have corresponding tag.
+_tag_dir() {
+    notmuch tag +"$1" -- path"/.*\/$1\/.*/"
+}
+
 _sync_tag "deleted"
 _sync_tag "sent"
     
@@ -50,6 +55,9 @@ notmuch tag -unread -inbox -- tag:sent AND NOT "to:$me"
 
 # tag all messages with 'noreply' in address.
 notmuch tag +noreply -- "from:/^.*noreply.*$/"
+
+_tag_dir "deleted"
+_tag_dir "sent"
 
 # notify of new messages
 if [ $count = 1 ]; then
