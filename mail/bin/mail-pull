@@ -21,6 +21,9 @@ _sync_tag() {
     for file in $( notmuch search --output=files tag:"$1" AND NOT path:"/.*\/$1\/.*/" ); do
         _move "$file" "$1"
     done
+    for file in $( notmuch search --output=files path:"/.*\/$1\/.*/" AND NOT tag:"$1" ); do
+        _move "$file" "INBOX"
+    done
 }
 
 _sync_tag "deleted"
