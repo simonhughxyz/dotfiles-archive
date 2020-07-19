@@ -21,6 +21,10 @@ unset move
 unset mark_old
 unset beep_new
 
+# Mailcap
+alternative_order multipart/mixed text/plain text/html
+auto_view text/html
+
 
 # set edit_headers=yes
 # set mbox=+mbox
