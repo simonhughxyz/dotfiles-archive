@@ -5,6 +5,23 @@
 #
 # Pull and tag mail from server.
 
+maildir=~/.mail
+
+# Move a message file while removing its UID-part
+# within the 'account' maildir.
+_move() {
+    s=${1##*/}
+    s=${s%%,*}
+    prefix=$( echo $1 | grep -o "$maildir/[^/]*" )
+    mv -f $1 $prefix/$2/cur/$s
+}
+
+# move all files tagged 'deleted' to a 'deleted' dir.
+for i in $(notmuch search --output=files tag:deleted AND NOT path:'/.*\/deleted\/.*/' ); do
+    echo "$i"
+    _move $i "deleted"
+done
+
 # Pull all mail
 mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc -a
 
