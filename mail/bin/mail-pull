@@ -16,11 +16,16 @@ _move() {
     mv -f $1 $prefix/$2/cur/$s
 }
 
-# move all files tagged 'deleted' to a 'deleted' dir.
-for i in $(notmuch search --output=files tag:deleted AND NOT path:'/.*\/deleted\/.*/' ); do
-    echo "$i"
-    _move $i "deleted"
-done
+# move all files with a tag to corresponding dir in each account.
+_sync_tag() {
+    for file in $( notmuch search --output=files tag:"$1" AND NOT path:"/.*\/$1\/.*/" ); do
+        _move "$file" "$1"
+    done
+}
+
+_sync_tag "deleted"
+_sync_tag "sent"
+    
 
 # Pull all mail
 mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc -a
