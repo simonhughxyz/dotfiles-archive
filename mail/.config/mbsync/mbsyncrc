@@ -50,6 +50,13 @@ Slave :simonhugh.xyz-local:deleted
 Create Both
 Expunge Both
 
+# Archive
+Channel simonhugh.xyz-archive
+Master :simonhugh.xyz-remote:"archive2"
+Slave :simonhugh.xyz-local:archive
+Create Both
+Expunge Both
+
 # Spam
 Channel simonhugh.xyz-spam
 Master :simonhugh.xyz-remote:"Junk"
@@ -104,6 +111,12 @@ Expunge Master
 Channel gmail.simonhmoore94-deleted
 Master :gmail.simonhmoore94-remote:"deleted"
 Slave :gmail.simonhmoore94-local:deleted
+Create Both
+Expunge Both
+
+Channel gmail.simonhmoore94-archive
+Master :gmail.simonhmoore94-remote:"archive2"
+Slave :gmail.simonhmoore94-local:archive
 Create Both
 Expunge Both
 

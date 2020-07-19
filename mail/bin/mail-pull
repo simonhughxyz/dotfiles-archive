@@ -33,6 +33,7 @@ _tag_dir() {
 
 _sync_tag "deleted"
 _sync_tag "sent"
+_sync_tag "archive"
     
 
 # Pull all mail
@@ -58,6 +59,7 @@ notmuch tag +noreply -- "from:/^.*noreply.*$/"
 
 _tag_dir "deleted"
 _tag_dir "sent"
+_tag_dir "archive"
 
 # notify of new messages
 if [ $count = 1 ]; then
