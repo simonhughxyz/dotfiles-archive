@@ -48,7 +48,8 @@ count=$( notmuch count tag:new )
 # retag all new messages as inbox and unread
 notmuch tag -new +inbox +unread -- tag:new
 
-me="/.*@simonhugh.xyz|simonhugh@mailbox.org|simon.h.moore94@gmail.com/"
+me="/^$( notmuch config get user.other_email | tr '\n' '|' )$( notmuch config get user.primary_email )$/"
+me="$( echo "$me" | sed 's/[.]/[.]/g' )"
 
 # tag all messages from "me" as sent and remove inbox,unread tags unless addressed to me.
 notmuch tag -new +sent -- "from:$me"
