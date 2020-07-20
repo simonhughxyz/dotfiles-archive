@@ -58,6 +58,13 @@ notmuch tag -unread -inbox -- tag:sent AND NOT "to:$me"
 # tag all messages with 'noreply' in address.
 notmuch tag +noreply -- "from:/^.*noreply.*$/"
 
+# tag domain specific messages
+notmuch tag +youtube -- "from:/^.*youtube[.]com/"
+notmuch tag +google -- "from:/^.*google[.]com/"
+notmuch tag +amazon -- "from:/^.*amazon[.]com|.*amazon[.]co[.]uk|.*amazonbusiness[.]co[.]uk/"
+notmuch tag +ebay -- "from:/^.*ebay[.]com|.*ebay[.]co[.]uk/"
+notmuch tag +facebook -- "from:/^.*facebookmail[.]com/"
+
 _tag_dir "deleted"
 _tag_dir "sent"
 _tag_dir "archive"
