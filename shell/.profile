@@ -3,7 +3,7 @@
 # runs once on login.
 
 # path
-export LBIN="$HOME/bin"
+export LBIN="$HOME/.local/bin"
 export PATH="$LBIN:$PATH"
 
 # default programs
