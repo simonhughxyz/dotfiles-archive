@@ -4,9 +4,10 @@
 
 # path
 export GOPATH="$HOME/.local/go"
+export GOBIN="$GOPATH/bin"
 export GOPATH="$GOPATH:$HOME/projects/go"
 export LBIN="$HOME/.local/bin"
-export PATH="$LBIN:$PATH"
+export PATH="$LBIN:$GOBIN:$PATH"
 
 # default programs
 export EDITOR="nvim"
