@@ -3,8 +3,8 @@
 # runs once on login.
 
 # path
-export GOPATH=$HOME/.local/go
-export GOPATH=$GOPATH:$HOME/projects/go
+export GOPATH="$HOME/.local/go"
+export GOPATH="$GOPATH:$HOME/projects/go"
 export LBIN="$HOME/.local/bin"
 export PATH="$LBIN:$PATH"
 
