@@ -1,2 +1,2 @@
-" source neovim's init.vim
-source init.vim
+" Source neovim's 'init.vim'.
+exec 'source'  fnamemodify($MYVIMRC,':p:h') . '/init.vim'
