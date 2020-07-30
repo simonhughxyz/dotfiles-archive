@@ -16,3 +16,6 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Auto run make on write
 " au BufWritePost * :silent make | redraw!
+
+" LSP settings.
+let g:LanguageClient_serverCommands = {'sh': ['bash-language-server', 'start']}
