@@ -792,7 +792,9 @@ nnoremap <silent><Leader>ct :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceall
 " Toggle deadkeys
 nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
 " Toggle GitGutter Highlights
-nnoremap <leader>g :GitGutterLineHighlightsToggle<CR>
+nnoremap <leader>gg :GitGutterLineHighlightsToggle<CR>
+nnoremap <leader>gs :GitGutterStageHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
 " Rainbow toggle
 nnoremap <leader>r :RainbowToggle<CR>
 " Easy Align
