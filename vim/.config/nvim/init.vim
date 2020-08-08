@@ -108,7 +108,7 @@ Plug 'tpope/vim-repeat'     " Allows repeating '.' for many plugins.
 Plug 'tpope/vim-commentary' " Easily un/comment text.
 Plug 'tpope/vim-fugitive'   " Useful git commands.
 Plug 'tpope/vim-unimpaired'     " Adds common bracket mappings.
-Plug 'universal-ctags/ctags', { 'do': './autogen.sh;./configure --prefix=$HOME;make install'}
+Plug 'universal-ctags/ctags', { 'do': './autogen.sh;./configure --prefix=$HOME/.local;make install'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'  " Align text.
