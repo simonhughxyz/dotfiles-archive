@@ -163,6 +163,12 @@ if has('python3')
     let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
 endif
 
+" FZF
+
+if v:version >= 801 || has('nvim-0.4.0')
+    let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+endif
+
 "Grovebox
 let g:gruvbox_italic=1
 
