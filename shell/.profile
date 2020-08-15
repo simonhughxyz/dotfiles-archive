@@ -38,6 +38,9 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 # # LESS
 export LESS=-R
 
+## WEECHAT
+export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
+
 # paths
 export DOTFILES="$HOME/.dotfiles"
 export WH="/mnt/wh"
