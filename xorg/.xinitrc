@@ -1,7 +1,7 @@
 #!/bin/sh
 xrdb -merge ~/.Xresources
 
-setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin"
+setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin" -option "altwin:menu_win"
 
 # xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min.
