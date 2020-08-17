@@ -58,24 +58,18 @@ super + s
     selsearchmenu
 super + shift + backslash
     streammenu
-super + Prior
-    bukumenu -t star - x,p
-super + Menu
-    bukumenu -t star - x,p
-super + shift + Menu
-    bukumenu -t - star,x,p
-super + slash
-    bukutagmenu
-super + shift + slash
-    bukumenu -t x,p
-super + z ; {l,p,d,s,y,f,g}
-    bukumenu -t {linux,p,docs,shop,yt,follow,git}
-super + {_,shift +} period
-    bukuadd{_,title}menu
 super + shift + p
     pass menu
 super + {_,shift +} h
     mpv-history -{t,p} -d
+
+# bookmaks
+super + slash
+    bukumenu -t star - x,pi
+super + shift + slash
+    bukutagmenu
+super + alt + b ; {l,p,d,s,y,f,g}
+    bukumenu -t {linux,p,docs,shop,yt,follow,git}
 
 
 
