@@ -119,7 +119,7 @@ Plug 'majutsushi/tagbar'    " Shows list of tags in a sidebar.
 Plug 'AndrewRadev/splitjoin.vim'    " Split single lines or join multiple lines.
 Plug 'airblade/vim-gitgutter'   " Show git diff in sign column.
 Plug 'Yggdroot/indentLine'  " Show a line marking indents.
-Plug 'frazrepo/vim-rainbow' " Color matching brackets.
+Plug 'luochen1990/rainbow' " Color matching brackets.
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
