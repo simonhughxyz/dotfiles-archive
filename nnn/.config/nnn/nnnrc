@@ -33,7 +33,7 @@ R:~/rec\
 export NNN_PLUG='d:dups;m:nmount;C:chksum;c:fzcd;f:fzopen;S:suedit'
 
 # context colors [default: '4444' (blue)]
-export NNN_COLORS='0253'
+export NNN_COLORS='3256'
 
 # archives [default: bzip2, (g)zip, tar]
 # export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
