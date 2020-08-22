@@ -49,3 +49,8 @@ export NNN_COLORS='3256'
 
 # key emulated by middle mouse click
 # export NNN_MCLICK='^R'
+
+# Path path of named pipe to write the hovered file path.
+export NNN_RUNTIME="$XDG_RUNTIME_DIR/nnn"
+mkdir -p $NNN_RUNTIME
+export NNN_FIFO="$NNN_RUNTIME/pipe"
