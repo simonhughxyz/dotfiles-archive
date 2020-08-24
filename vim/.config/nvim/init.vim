@@ -774,6 +774,9 @@ nnoremap <C-B> :Buffers<cr>   " Open FZF search
 nnoremap z\ za  " Toggle Folding
 nnoremap z[ zR  " Open all Folds
 nnoremap z] zM  " Close all folds
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
 " FZF completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <C-O>:call fzf#vim#complete#path("eval $FZF_DEFAULT_COMMAND")<return>
