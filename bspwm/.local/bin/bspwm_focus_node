@@ -47,7 +47,7 @@ if [ "$window_state" = "floating" ]; then
 fi
 
 # wrapper function for bspwm focus command.
-_bf() { bspc node "$opt" $2.local; }
+_bf() { bspc node "$opt" $2.local.!hidden.window; }
 
 # get direction of focus.
 case "$2" in
