@@ -42,7 +42,7 @@ autocmd DocStart .* tabdetach
 "
 " Zoom levels
 "
-autocmd DocStart .* zoom 170
+autocmd DocStart .* zoom 150
 autocmd DocStart .*youtube\.com.* zoom 180
 autocmd DocStart .*startpage\.com.* zoom 220
 autocmd DocStart .*duckduckgo\.com.* zoom 200
