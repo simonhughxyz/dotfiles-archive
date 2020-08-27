@@ -37,6 +37,10 @@ super + {_, shift +} z
 super + alt + {_,shift +} {Left,Down,Up,Right}
     bspwm_resize_node -{a,z} {left,down,up,right}
 
+# Swap current node with biggest window
+super + grave
+    bspc node -s biggest.window.local
+
 ### PRESELECT ###
 
 # preselect the direction.
