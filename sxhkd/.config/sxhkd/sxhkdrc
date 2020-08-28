@@ -1,5 +1,5 @@
 # Basic Binds
-super + shift + s
+super + shift + Delete
     pkill -USR1 -x sxhkd
 super + {_,shift +} Return
     $TERMINAL {_,-e nnn}
