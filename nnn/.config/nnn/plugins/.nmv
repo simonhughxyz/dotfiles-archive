@@ -3,6 +3,8 @@
 # Description: An almost fully POSIX compliant batch file renamer
 #
 # Note: nnn auto-detects and invokes this plugin if available
+#       Whitespace is used as delimiter for read.
+#       The plugin doesn't support filenames with leading or trailing whitespace
 #
 # Capabilities:
 #    1. Basic file rename
@@ -17,8 +19,9 @@
 EDITOR="${EDITOR:-vi}"
 TMPDIR="${TMPDIR:-/tmp}"
 INCLUDE_HIDDEN="${INCLUDE_HIDDEN:-0}"
+VERBOSE="${VERBOSE:-0}"
 
-selection=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.selection
+selection=${NNN_SEL:-${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.selection}
 exit_status=0
 
 dst_file=$(mktemp "$TMPDIR/.nnnXXXXXX")
@@ -42,7 +45,10 @@ else
 	fi
 fi
 
-printf "%s" "$arr" | awk '{print NR " " $0}' > "$dst_file"
+lines=$(printf "%s\n" "$arr" | wc -l)
+width=${#lines}
+
+printf "%s" "$arr" | awk '{printf("%'"${width}"'d %s\n", NR, $0)}' > "$dst_file"
 
 items=("~")
 while IFS='' read -r line; do
@@ -95,7 +101,9 @@ while read -r num name; do
 			done
 
 			if mv "$name" "$tmp"; then
-				printf "'%s' -> '%s'\n" "$name" "$tmp"
+				if [ "$VERBOSE" -ne 0 ]; then
+					printf "'%s' -> '%s'\n" "$name" "$tmp"
+				fi
 			else
 				printf "%s: failed to rename %s to %s: %s\n" "$0" "$name" "$tmp" "$!" > /dev/stderr
 				exit_status=1
@@ -121,9 +129,14 @@ while read -r num name; do
 					items[$key]=$(printf "%s" "${items[$key]}" | sed "s|^$src\(\$\|\/\)|$name\1|")
 				done
 
-				printf "'%s' => '%s'\n" "$src" "$name"
+				if [ "$VERBOSE" -ne 0 ]; then
+					printf "'%s' => '%s'\n" "$src" "$name"
+				fi
 			else
-				printf "'%s' -> '%s'\n" "$src" "$name"
+				true
+				if [ "$VERBOSE" -ne 0 ]; then
+					printf "'%s' -> '%s'\n" "$src" "$name"
+				fi
 			fi
 		fi
 	fi

@@ -32,7 +32,7 @@
 #   3. Start GUI apps in bg to unblock. Redirect stdout and strerr if required.
 #   4. Some CLI utilities are piped to the $PAGER, to wait and quit uniformly.
 #   5. If the output cannot be paged use "read -r _" to wait for user input.
-#   6. On a DE, try 'xdg-open' in handle_fallback() as last resort.
+#   6. On a DE, try 'xdg-open' or 'open' in handle_fallback() as last resort.
 #
 #   Feel free to change the utilities to your favourites and add more mimes.
 #
@@ -42,18 +42,18 @@
 #      rar: list with unrar
 #      7-zip: list with 7z
 #      pdf: zathura (GUI), pdftotext, mutool, exiftool
-#      audio: mocplay (nnn plugin using MOC), mpv, mediainfo, exiftool
+#      audio: mocplay (nnn plugin using MOC), mpv, media_client (Haiku), mediainfo, exiftool
 #      avi|mkv|mp4: smplayer, mpv (GUI), ffmpegthumbnailer, mediainfo, exiftool
 #      log: vi
 #      torrent: rtorrent, transmission-show
 #      odt|ods|odp|sxw: odt2txt
-#      md: glow (https://github.com/charmbracelet/glow)
+#      md: glow (https://github.com/charmbracelet/glow), lowdown (https://kristaps.bsd.lv/lowdown)
 #      htm|html|xhtml: w3m, lynx, elinks
 #      json: jq, python (json.tool module)
 #   Multimedia by mime:
-#      image/*: sxiv (GUI), viu (https://github.com/atanunq/viu), img2txt, exiftool
+#      image/*: imv/sxiv (GUI), viu (https://github.com/atanunq/viu), img2txt, exiftool
 #      video/*: smplayer, mpv (GUI), ffmpegthumbnailer, mediainfo, exiftool
-#      audio/*: mocplay (nnn plugin using MOC), mpv, mediainfo, exiftool
+#      audio/*: mocplay (nnn plugin using MOC), mpv, media_client (Haiku), mediainfo, exiftool
 #      application/pdf: zathura (GUI), pdftotext, mutool, exiftool
 #   Other mimes:
 #      text/troff: man -l
@@ -76,24 +76,33 @@ IMAGE_CACHE_PATH="$(dirname "$1")"/.thumbs
 
 FPATH="$1"
 FNAME=$(basename "$1")
+EDITOR="${EDITOR:-vi}"
+PAGER="${PAGER:-less -R}"
 ext="${FNAME##*.}"
-if ! [ -z "$ext" ]; then
+if [ -n "$ext" ]; then
     ext="$(printf "%s" "${ext}" | tr '[:upper:]' '[:lower:]')"
 fi
 
+is_mac() {
+    uname | grep -q "Darwin"
+}
+
 handle_pdf() {
-    if [ "$GUI" -ne 0 ] && which zathura >/dev/null 2>&1; then
+    if [ "$GUI" -ne 0 ] && is_mac; then
+        open "${FPATH}" >/dev/null 2>&1 &
+        exit 0
+    elif [ "$GUI" -ne 0 ] && which zathura >/dev/null 2>&1; then
         zathura "${FPATH}" >/dev/null 2>&1 &
         exit 0
     elif which pdftotext >/dev/null 2>&1; then
         ## Preview as text conversion
-        pdftotext -l 10 -nopgbrk -q -- "${FPATH}" - | less -R
+        pdftotext -l 10 -nopgbrk -q -- "${FPATH}" - | eval "$PAGER"
         exit 0
     elif which mutool >/dev/null 2>&1; then
-        mutool draw -F txt -i -- "${FPATH}" 1-10
+        mutool draw -F txt -i -- "${FPATH}" 1-10 | eval "$PAGER"
         exit 0
     elif which exiftool >/dev/null 2>&1; then
-        exiftool "${FPATH}" | less -R
+        exiftool "${FPATH}" | eval "$PAGER"
         exit 0
     fi
 }
@@ -105,17 +114,23 @@ handle_audio() {
     elif which mpv >/dev/null 2>&1; then
         mpv "${FPATH}" >/dev/null 2>&1 &
         exit 0
+    elif which media_client >/dev/null 2>&1; then
+        media_client play "${FPATH}" >/dev/null 2>&1 &
+        exit 0
     elif which mediainfo >/dev/null 2>&1; then
-        mediainfo "${FPATH}" | less -R
+        mediainfo "${FPATH}" | eval "$PAGER"
         exit 0
     elif which exiftool >/dev/null 2>&1; then
-        exiftool "${FPATH}"| less -R
+        exiftool "${FPATH}"| eval "$PAGER"
         exit 0
     fi
 }
 
 handle_video() {
-    if [ "$GUI" -ne 0 ] && which smplayer >/dev/null 2>&1; then
+    if [ "$GUI" -ne 0 ] && is_mac; then
+        open "${FPATH}" >/dev/null 2>&1 &
+        exit 0
+    elif [ "$GUI" -ne 0 ] && which smplayer >/dev/null 2>&1; then
         smplayer "${FPATH}" >/dev/null 2>&1 &
         exit 0
     elif [ "$GUI" -ne 0 ] && which mpv >/dev/null 2>&1; then
@@ -125,13 +140,13 @@ handle_video() {
         # Thumbnail
         [ -d "${IMAGE_CACHE_PATH}" ] || mkdir "${IMAGE_CACHE_PATH}"
         ffmpegthumbnailer -i "${FPATH}" -o "${IMAGE_CACHE_PATH}/${FNAME}.jpg" -s 0
-        viu -n "${IMAGE_CACHE_PATH}/${FNAME}.jpg" | less -R
+        viu -n "${IMAGE_CACHE_PATH}/${FNAME}.jpg" | eval "$PAGER"
         exit 0
     elif which mediainfo >/dev/null 2>&1; then
-        mediainfo "${FPATH}" | less -R
+        mediainfo "${FPATH}" | eval "$PAGER"
         exit 0
     elif which exiftool >/dev/null 2>&1; then
-        exiftool "${FPATH}"| less -R
+        exiftool "${FPATH}"| eval "$PAGER"
         exit 0
     fi
 }
@@ -143,23 +158,23 @@ handle_extension() {
         a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
         rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
             if which atool >/dev/null 2>&1; then
-                atool --list -- "${FPATH}" | less -R
+                atool --list -- "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which bsdtar >/dev/null 2>&1; then
-                bsdtar --list --file "${FPATH}" | less -R
+                bsdtar --list --file "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             exit 1;;
         rar)
             if which unrar >/dev/null 2>&1; then
                 ## Avoid password prompt by providing empty password
-                unrar lt -p- -- "${FPATH}" | less -R
+                unrar lt -p- -- "${FPATH}" | eval "$PAGER"
             fi
             exit 1;;
         7z)
             if which 7z >/dev/null 2>&1; then
                 ## Avoid password prompt by providing empty password
-                7z l -p -- "${FPATH}" | less -R
+                7z l -p -- "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             exit 1;;
@@ -181,7 +196,7 @@ handle_extension() {
 
         ## Log files
         log)
-            vi "${FPATH}"
+            "$EDITOR" "${FPATH}"
             exit 0;;
 
         ## BitTorrent
@@ -199,7 +214,7 @@ handle_extension() {
         odt|ods|odp|sxw)
             if which odt2txt >/dev/null 2>&1; then
                 ## Preview as text conversion
-                odt2txt "${FPATH}" | less -R
+                odt2txt "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             exit 1;;
@@ -207,7 +222,10 @@ handle_extension() {
         ## Markdown
         md)
             if which glow >/dev/null 2>&1; then
-                glow -sdark "${FPATH}" | less -R
+                glow -sdark "${FPATH}" | eval "$PAGER"
+                exit 0
+            elif which lowdown >/dev/null 2>&1; then
+                lowdown -Tterm "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             ;;
@@ -216,13 +234,13 @@ handle_extension() {
         htm|html|xhtml)
             ## Preview as text conversion
             if which w3m >/dev/null 2>&1; then
-                w3m -dump "${FPATH}" | less -R
+                w3m -dump "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which lynx >/dev/null 2>&1; then
-                lynx -dump -- "${FPATH}" | less -R
+                lynx -dump -- "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which elinks >/dev/null 2>&1; then
-                elinks -dump "${FPATH}" | less -R
+                elinks -dump "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             ;;
@@ -230,10 +248,10 @@ handle_extension() {
         ## JSON
         json)
             if which jq >/dev/null 2>&1; then
-                jq --color-output . "${FPATH}" | less -R
+                jq --color-output . "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which python >/dev/null 2>&1; then
-                python -m json.tool -- "${FPATH}" | less -R
+                python -m json.tool -- "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             ;;
@@ -249,17 +267,18 @@ abspath() {
 
 listimages() {
     find -L "$(dirname "$target")" -maxdepth 1 -type f -iregex \
-      '.*\(jpe?g\|bmp\|png\|gif\)$' -print0 | sort -z
+      '.*\(jpe?g\|bmp\|webp\|png\|gif\)$' -print0 | sort -z
 }
 
-sxiv_load_dir() {
-    target="$(abspath "$1")"
+load_dir() {
+    target="$(abspath "$2")"
     count="$(listimages | grep -a -m 1 -ZznF "$target" | cut -d: -f1)"
 
     if [ -n "$count" ]; then
-        listimages | xargs -0 sxiv -n "$count" --
+        listimages | xargs -0 "$1" -n "$count" --
     else
-        sxiv -- "$@" # fallback
+        shift
+        "$1" -- "$@" # fallback
     fi
 }
 
@@ -285,17 +304,23 @@ handle_multimedia() {
 
         ## Image
         image/*)
-            if [ "$GUI" -ne 0 ] && which sxiv >/dev/null 2>&1; then
-                sxiv_load_dir "${FPATH}" >/dev/null 2>&1 &
+            if [ "$GUI" -ne 0 ] && is_mac; then
+                open "${FPATH}" >/dev/null 2>&1 &
+                exit 0
+            elif [ "$GUI" -ne 0 ] && which imvr >/dev/null 2>&1; then
+                load_dir imvr "${FPATH}" >/dev/null 2>&1 &
+                exit 0
+            elif [ "$GUI" -ne 0 ] && which sxiv >/dev/null 2>&1; then
+                load_dir sxiv "${FPATH}" >/dev/null 2>&1 &
                 exit 0
             elif which viu >/dev/null 2>&1; then
-                viu -n "${FPATH}" | less -R
+                viu -n "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which img2txt >/dev/null 2>&1; then
-                img2txt --gamma=0.6 -- "${FPATH}" | less -R
+                img2txt --gamma=0.6 -- "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which exiftool >/dev/null 2>&1; then
-                exiftool "${FPATH}" | less -R
+                exiftool "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             # local orientation
@@ -307,7 +332,7 @@ handle_multimedia() {
                 # convert -- "${FPATH}" -auto-orient "${IMAGE_CACHE_PATH}" && exit 6
             # fi
 
-            ## `w3mimgdisplay` will be called for all images (unless overriden
+            ## `w3mimgdisplay` will be called for all images (unless overridden
             ## as above), but might fail for unsupported types.
             exit 7;;
 
@@ -415,7 +440,7 @@ handle_mime() {
 
         ## Text
         text/* | */xml)
-            vi "${FPATH}"
+            "$EDITOR" "${FPATH}"
             exit 0;;
             ## Syntax highlight
             # if [[ "$( stat --printf='%s' -- "${FPATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]]; then
@@ -439,10 +464,10 @@ handle_mime() {
         image/vnd.djvu)
             if which djvutxt >/dev/null 2>&1; then
                 ## Preview as text conversion (requires djvulibre)
-                djvutxt "${FPATH}" | less -R
+                djvutxt "${FPATH}" | eval "$PAGER"
                 exit 0
             elif which exiftool >/dev/null 2>&1; then
-                exiftool "${FPATH}" | less -R
+                exiftool "${FPATH}" | eval "$PAGER"
                 exit 0
             fi
             exit 1;;
@@ -450,8 +475,11 @@ handle_mime() {
 }
 
 handle_fallback() {
-    if [ "$GUI" -ne 0 ]; then
+    if [ "$GUI" -ne 0 ] && which xdg-open >/dev/null 2>&1; then
         xdg-open "${FPATH}" >/dev/null 2>&1 &
+        exit 0
+    elif [ "$GUI" -ne 0 ] && which open >/dev/null 2>&1; then
+        open "${FPATH}" >/dev/null 2>&1 &
         exit 0
     fi
 
@@ -472,14 +500,17 @@ handle_blocked() {
 
         application/x-shellscript)
             exit 0;;
+
+        application/octet-stream)
+            exit 0;;
     esac
 }
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FPATH}" )"
-handle_blocked "${MIMETYPE}"
 handle_extension
 handle_multimedia "${MIMETYPE}"
 handle_mime "${MIMETYPE}"
+handle_blocked "${MIMETYPE}"
 handle_fallback
 
 exit 1
