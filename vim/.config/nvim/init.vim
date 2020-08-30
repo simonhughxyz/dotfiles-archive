@@ -264,6 +264,13 @@ highlight ColorColumn ctermbg=0 guibg=#303030
 " change color of cursor line
 highlight CursorLine ctermbg=0 guibg=#000000
 highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000
+
+" Vim Diff colors
+highlight DiffAdd ctermbg=2 ctermfg=0 guibg=#000000 guifg=#00c000
+highlight DiffChange ctermbg=2 ctermfg=0 guibg=#000000 guifg=#c0c000
+highlight DiffDelete ctermbg=2 ctermfg=0 guibg=#000000 guifg=#c00000
+highlight DiffText ctermbg=2 ctermfg=0 guibg=#ffffff guifg=#3000a0
+
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4           " 4 space tab
