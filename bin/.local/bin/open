@@ -28,10 +28,10 @@ case "$1" in
     *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice "$1" ;;
 
     # text
-    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term "vim" "$1" ;;
+    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term "nvim" "$1" ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term "vim" "$1" ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term "nvim" "$1" ;;
 
     *) xdg-open "$1" ;; # see `man xdg-open` and `man xdg-mime`.
 esac
