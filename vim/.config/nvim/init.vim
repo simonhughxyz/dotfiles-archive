@@ -63,6 +63,8 @@ set undodir=~/.vim/undodir
 set conceallevel=2
 " don't conceal on line when in visual, insert or normal mode.
 set concealcursor=c
+" time in milliseconds for key sequence to complete
+set timeoutlen=500
 " }}}
 " Folding {{{
 "=== folding ===
