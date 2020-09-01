@@ -43,14 +43,14 @@ autocmd DocStart .* tabdetach
 " Zoom levels
 "
 autocmd DocStart .* zoom 150
-autocmd DocStart .*youtube\.com.* zoom 180
-autocmd DocStart .*startpage\.com.* zoom 220
-autocmd DocStart .*duckduckgo\.com.* zoom 200
-autocmd DocStart .*github\.com.* zoom 200
-autocmd DocStart .*gitlab\.com.* zoom 150
-autocmd DocStart .*archlinux\.org.* zoom 200
-autocmd DocStart .*amazon\.co\.uk.* zoom 150
-autocmd DocStart .*wikipedia\.org.* zoom 200
+autocmd BeforeRequest .*youtube\.com.* zoom 180
+autocmd BeforeRequest .*startpage\.com.* zoom 220
+autocmd BeforeRequest .*duckduckgo\.com.* zoom 200
+autocmd BeforeRequest .*github\.com.* zoom 200
+autocmd BeforeRequest .*gitlab\.com.* zoom 150
+autocmd BeforeRequest .*archlinux\.org.* zoom 200
+autocmd BeforeRequest .*amazon\.co\.uk.* zoom 150
+autocmd BeforeRequest .*wikipedia\.org.* zoom 200
 
 "
 " Other site optimizations
