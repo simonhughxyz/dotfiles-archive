@@ -797,6 +797,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " }}}
 " Leader Shortcuts {{{
 let mapleader=" "
+let maplocalleader=","
 " re-source .vimrc
 nnoremap <leader>R :so $MYVIMRC<CR>
 " Buffer Commands
