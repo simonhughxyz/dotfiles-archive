@@ -33,6 +33,8 @@ super + shift + bracket{left,right}
 
 super + {_, shift +} z
     bspwm_current_window_menu {_,-a}
+super + {_, shift +} n
+    bspwm_current_window_menu {_,-a}
 
 super + alt + {_,shift +} {Left,Down,Up,Right}
     bspwm_resize_node -{a,z} {left,down,up,right}
