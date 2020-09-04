@@ -14,7 +14,7 @@ tmux has-session -t $session_name > /dev/null 2>&1 && exit 1
 # create session with first window called list and run watch command.
 # Set session dir as well.
 tmux new-session -c $session_dir -d -s $session_name -n list
-tmux send-keys -t $session_name "watch 'tm -l | tail -n 30'" C-m 
+tmux send-keys -t $session_name "watch 'tm list -n stopped'" C-m 
 
 # window 2 is a shell.
 tmux new-window -c $session_dir -t $session_name:2 -n files
