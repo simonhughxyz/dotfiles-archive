@@ -39,14 +39,14 @@ _list(){
         eval  "_tl | awk -F'[[:space:]][[:space:]]+' 'NR==1 || \$$1 $3~ \"$2\"'" 
     }
 
-    [ -n "$2" ] && [ "$2" != "!" ] && { echo "Use: $(basename "$0") COMMAND [!]"; return 1; }
+    [ "$1" = "-n" ] && shift && not="!"
 
     case "$1" in
-        s*) _filter_list "8" "Stopped" "$2" ;;
-        d*) _filter_list "8" "Downloading|Up & Down" "$2";;
-        u*) _filter_list "8" "Seeding" "$2" ;;
-        c*) _filter_list "2" "100%" "$2";;
-        f*) _filter_list "8" "Idle|Seeding" "$2" ;;
+        s*) _filter_list "8" "Stopped" "$not" ;;
+        d*) _filter_list "8" "Downloading|Up & Down" "$not";;
+        u*) _filter_list "8" "Seeding" "$not" ;;
+        c*) _filter_list "2" "100%" "$not";;
+        f*) _filter_list "8" "Idle|Seeding" "$not" ;;
         h*) echo "$help" ;;
         *|all|a) _tl  ;;
      esac
