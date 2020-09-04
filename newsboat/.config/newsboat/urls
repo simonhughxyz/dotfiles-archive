@@ -1,5 +1,6 @@
 # Linux
 https://www.archlinux.org/feeds/news/                                           "~Arch Linux" "linux"
+https://fedoramagazine.org/feed/    "~Fedora Magazine" "linux" "news"
 
 # News
 https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en   "~Google News - Top Stories" "news"
@@ -18,3 +19,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC8uT9cgJorJPWu7ITLGo9Ww    
 https://www.youtube.com/feeds/videos.xml?channel_id=UCXgNowiGxwwnLeQ7DXTwXPg    "~YouTube The Science Asylum" "youtube"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCnxGkOGNMqQEUMvroOWps6Q    "~YouTube Joe Rogan Experiance Clips" "youtube"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCR1D15p_vdP3HkrH8wgjQRw    "~YouTube Internet Historian" "youtube"
+https://www.youtube.com/feeds/videos.xml?user=spacexchannel     "~YouTube SpaceXChannel" "youtube"
+
+# Fun
+https://xkcd.com/rss.xml                "~XKCD" "comic" "fun" "meme"
