@@ -1,4 +1,5 @@
 auto-reload yes
+reload-threads 100
 
 # Format
 datetime-format "%d %b %y"
