@@ -27,6 +27,8 @@ super + p
     $TERMINAL -c pulsemixer -n pulsemixer -e pulsemixer
 super + shift + m
     $TERMINAL -t Mail -n mail -c mail -e mail -a
+super + b
+    $TERMINAL -t newsboat -n newsboat -c newsboat -e newsboat
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
