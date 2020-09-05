@@ -1,5 +1,10 @@
-auto-reload yes
-reload-threads 100
+auto-reload yes               # Auto reload on startup.
+reload-threads 100            # Number of threads to reload in parallel.
+reload-time 60                # Number of minutes between reload.
+download-full-page yes        # Download full page if available.
+keep-articles-days 0          # Keep articles forever.
+max-items 0                   # Keep all articles.
+external-url-viewer "urlscan" # Use 'urlscan'.
 
 # Format
 datetime-format "%d %b %y"
