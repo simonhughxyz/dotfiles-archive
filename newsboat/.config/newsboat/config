@@ -6,6 +6,7 @@ keep-articles-days 0          # Keep articles forever.
 max-items 0                   # Keep all articles.
 external-url-viewer "urlscan" # Use 'urlscan'.
 save-path "~/articles"        # Path to save articles to.
+text-width 80                 # Max text width.
 
 # Format
 datetime-format "%d %b %y"
