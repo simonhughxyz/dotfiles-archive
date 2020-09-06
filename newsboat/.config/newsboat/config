@@ -22,6 +22,9 @@ color info red black bold
 color article color214 default
 color background default default
 
+# highlight
+highlight article "^(Feed|Title|Author|Link|Date):" color10 default
+
 # Key Bindings
 
 bind-key j down
