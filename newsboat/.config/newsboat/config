@@ -50,6 +50,8 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 bind-key ^t next-unread
+unbind-key SPACE
+bind-key SPACE macro-prefix
 
 # macros
 macro v set browser "mpv %u"; open-in-browser ; set browser "w3m %u"
