@@ -4,6 +4,7 @@
 # Linux
 https://www.archlinux.org/feeds/news/                                           "~Arch Linux" "linux"
 https://fedoramagazine.org/feed/    "~Fedora Magazine" "linux" "news"
+"query:Linux:tags # \"linux\""  # list all 'linux' tagged articles.
 
 # News
 https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en   "~Google News - Top Stories" "news"
@@ -14,6 +15,7 @@ http://feeds.bbci.co.uk/news/uk/rss.xml                                         
 http://feeds.bbci.co.uk/news/technology/rss.xml                                 "_BBC Technology" "news"
 http://feeds.bbci.co.uk/news/science_and_environment/rss.xml                    "~BBC Science" "news"
 https://www.google.com/alerts/feeds/03110445379872895070/6388017694547312051    "~News Brexit" "news"
+"query:News:tags # \"news\""  # list all 'linux' tagged articles.
 
 # Youtube
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA    "~YouTube LukeSith" "youtube"
