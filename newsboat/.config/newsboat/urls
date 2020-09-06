@@ -1,3 +1,6 @@
+# Uread articles
+"query:Unread Articles:unread = \"yes\""
+
 # Linux
 https://www.archlinux.org/feeds/news/                                           "~Arch Linux" "linux"
 https://fedoramagazine.org/feed/    "~Fedora Magazine" "linux" "news"
