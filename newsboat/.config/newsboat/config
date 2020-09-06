@@ -14,12 +14,13 @@ datetime-format "%d %b %y"
 
 # colors
 
-color listnormal green default
-color listfocus green black bold
+color listnormal color106 default
+color listfocus white color22 bold
 color listnormal_unread yellow default
-color listfocus_unread yellow black bold
+color listfocus_unread white color22 bold
 color info red black bold
-color article cyan default
+color article color214 default
+color background default default
 
 # Key Bindings
 
