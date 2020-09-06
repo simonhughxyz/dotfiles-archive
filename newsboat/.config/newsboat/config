@@ -24,6 +24,7 @@ color background default default
 
 # highlight
 highlight article "^(Feed|Title|Author|Link|Date):" color10 default
+highlight all "https?://[^ ]+" color6 default bold
 
 # Key Bindings
 
