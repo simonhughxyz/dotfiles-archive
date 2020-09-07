@@ -9,19 +9,24 @@ wid=$1
 class=$2
 instance=$3
 
-if [ "$class" = "st" ]; then
-    if [ "$instance" = "dropdown" ]; then
-        xdo move -x 10 -y 10 $wid
-        xdo resize -w 1900 -h 200 $wid
+case "$class" in
+    st)
+        case "$instance" in
+            dropdown)
+                xdo move -x 10 -y 10 $wid
+                xdo resize -w 1900 -h 200 $wid
 
-        echo "state=floating"
-        echo "sticky=on"
-        # echo "hidden=off"
-    elif [ "$instance" = "calc" ]; then
-        xdo resize -w 1200 -h 400 $wid
+                echo "state=floating"
+                echo "sticky=on"
+                # Vecho "hidden=off"
+            ;;
+            calc)
+                xdo resize -w 1200 -h 400 $wid
 
-        echo "state=floating"
-        echo "sticky=on"
-        # echo "hidden=off"
-    fi
-fi
+                echo "state=floating"
+                echo "sticky=on"
+                # echo "hidden=off"
+            ;;
+        esac
+    ;;
+esac
