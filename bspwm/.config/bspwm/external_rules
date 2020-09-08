@@ -10,23 +10,19 @@ class=$2
 instance=$3
 
 case "$class" in
-    st)
-        case "$instance" in
-            dropdown)
-                xdo move -x 10 -y 10 $wid
-                xdo resize -w 1900 -h 200 $wid
+    dropdown)
+        xdo move -x 10 -y 10 $wid
+        xdo resize -w 1900 -h 200 $wid
 
-                echo "state=floating"
-                echo "sticky=on"
-                # Vecho "hidden=off"
-            ;;
-            calc)
-                xdo resize -w 1200 -h 400 $wid
+        echo "state=floating"
+        echo "sticky=on"
+        # Vecho "hidden=off"
+    ;;
+    calc)
+        xdo resize -w 1200 -h 400 $wid
 
-                echo "state=floating"
-                echo "sticky=on"
-                # echo "hidden=off"
-            ;;
-        esac
+        echo "state=floating"
+        echo "sticky=on"
+        # echo "hidden=off"
     ;;
 esac
