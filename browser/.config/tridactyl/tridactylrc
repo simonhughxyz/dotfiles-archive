@@ -64,6 +64,9 @@ autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 " Bind Keys
 "
 
+" Go to last active tab
+bind <Tab> tab #
+
 " Close windows and tabs
 bind q tabclose
 bind Q winclose
