@@ -42,7 +42,7 @@ autocmd DocStart .* tabdetach
 "
 " Zoom levels
 "
-autocmd DocStart .* zoom 150
+autocmd BeforeRequest .* zoom 150
 autocmd BeforeRequest .*youtube\.com.* zoom 180
 autocmd BeforeRequest .*startpage\.com.* zoom 220
 autocmd BeforeRequest .*duckduckgo\.com.* zoom 200
