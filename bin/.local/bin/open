@@ -14,6 +14,7 @@ DOCUMENT="zathura"
 FALLBACK_DOCUMENT="libreoffice"
 FALLBACK="xdg-open"
 TEXT="nvim"
+CODE="nvim"
 
 
 term() { ${TERMINAL:-st} -e "$1" "$2" || (echo "Can't find terminal" & exit 1); }
@@ -42,7 +43,7 @@ case "$1" in
     *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term $TEXT "$1" ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term $TEXT "$1" ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term $CODE "$1" ;;
 
     *) $FALLBACK "$1" ;;
 esac
