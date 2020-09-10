@@ -7,6 +7,7 @@
 
 # Default applications
 VIDEO="mpv"
+AUDIO="mpv"
 IMAGE="sxiv"
 TORRENT="transmission-remote --add"
 DOCUMENT="zathura"
@@ -25,7 +26,7 @@ case "$1" in
     *.mkv|*.mp[4gv]|*.mpeg|*.webm|*.m4[pv]|*.ogv|*.avi|*.wmv|*.mov|*.qt|*.flv|*.swf|*.h264|*.hevc) $VIDEO "$1" ;;
 
     # audio
-    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) $VIDEO "$1" ;;
+    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) $AUDIO "$1" ;;
 
     # documents
     *.pdf|*.ps|*.epub) $DOCUMENT "$1" ;;
