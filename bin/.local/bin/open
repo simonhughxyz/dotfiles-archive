@@ -5,33 +5,42 @@
 #
 # Opens files with the default app.
 
+# Default applications
+VIDEO="mpv"
+IMAGE="sxiv"
+TORRENT="transmission-remote --add"
+DOCUMENT="libreoffice"
+FALLBACK="xdg-open"
+TEXT="nvim"
+
+
 term() { ${TERMINAL:-st} -e "$1" "$2" || (echo "Can't find terminal" & exit 1); }
 
 case "$1" in
     # image
-    *.png|*.jpg|*.jpeg|*.gif|*.tif|*.tiff|*.bmp|*.ico) sxiv "$1" ;;
+    *.png|*.jpg|*.jpeg|*.gif|*.tif|*.tiff|*.bmp|*.ico) $IMAGE "$1" ;;
 
     # video
-    *.mkv|*.mp[4gv]|*.mpeg|*.webm|*.m4[pv]|*.ogv|*.avi|*.wmv|*.mov|*.qt|*.flv|*.swf|*.h264|*.hevc) mpv "$1" ;;
+    *.mkv|*.mp[4gv]|*.mpeg|*.webm|*.m4[pv]|*.ogv|*.avi|*.wmv|*.mov|*.qt|*.flv|*.swf|*.h264|*.hevc) $VIDEO "$1" ;;
 
     # audio
-    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) mpv "$1" ;;
+    *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) $VIDEO "$1" ;;
 
     # documents
     *.pdf|*.ps|*.epub) zathura "$1" ;;
-    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) libreoffice "$1" ;;
+    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) $DOCUMENT "$1" ;;
 
     # spreadsheet
-    *.o[dt]s|*.fodts|*.xl[st]|*.xls[xm]|*.xltx) libreoffice "$1" ;;
+    *.o[dt]s|*.fodts|*.xl[st]|*.xls[xm]|*.xltx) $DOCUMENT "$1" ;;
 
     # presentation
-    *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) libreoffice "$1" ;;
+    *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) $DOCUMENT "$1" ;;
 
     # text
-    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term "nvim" "$1" ;;
+    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term $TEXT "$1" ;;
 
     # code
-    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term "nvim" "$1" ;;
+    *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term $TEXT "$1" ;;
 
-    *) xdg-open "$1" ;; # see `man xdg-open` and `man xdg-mime`.
+    *) $FALLBACK "$1" ;;
 esac
