@@ -45,5 +45,8 @@ case "$1" in
     # code
     *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term $CODE "$1" ;;
 
+    # Torrent
+    magnet:*|*.torrent) $TORRENT "$1" ;;
+
     *) $FALLBACK "$1" ;;
 esac
