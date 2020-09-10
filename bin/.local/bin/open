@@ -9,7 +9,8 @@
 VIDEO="mpv"
 IMAGE="sxiv"
 TORRENT="transmission-remote --add"
-DOCUMENT="libreoffice"
+DOCUMENT="zathura"
+FALLBACK_DOCUMENT="libreoffice"
 FALLBACK="xdg-open"
 TEXT="nvim"
 
@@ -27,8 +28,8 @@ case "$1" in
     *.mp[321a]|*.og[ga]|*.wav|*wave|*.wma|*.flac|*.m4a|*.aac|*.aif|*.aif[fc]) $VIDEO "$1" ;;
 
     # documents
-    *.pdf|*.ps|*.epub) zathura "$1" ;;
-    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) $DOCUMENT "$1" ;;
+    *.pdf|*.ps|*.epub) $DOCUMENT "$1" ;;
+    *.o[dt]t|*.fodt|*.do[ct]|*.do[ct]x|*.docm) $FALLBACK_DOCUMENT "$1" ;;
 
     # spreadsheet
     *.o[dt]s|*.fodts|*.xl[st]|*.xls[xm]|*.xltx) $DOCUMENT "$1" ;;
