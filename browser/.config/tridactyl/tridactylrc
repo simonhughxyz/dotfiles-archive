@@ -118,6 +118,7 @@ bindurl youtube.com t hint -J
 
 " Yank with hint
 bind Y hint -y
+bind gy hint -p
 
 " Play video with mpv
 unbind v
