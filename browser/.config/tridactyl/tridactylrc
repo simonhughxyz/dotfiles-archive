@@ -138,3 +138,7 @@ bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//
 " Autocontain
 " autocontain google\.(co\.uk|com) google
 " autocontain gmail.com google
+
+" Sometimes the status bar in the bottom left corner overlaps the Tridactyl
+" command line, so set an option to move the status bar to the right.
+guiset_quiet hoverlink right
