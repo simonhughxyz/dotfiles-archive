@@ -69,6 +69,9 @@ autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 bind [ tabprev
 bind ] tabnext
 
+bind { followpage prev
+bind } followpage next
+
 " Go to last active tab
 bind <Tab> tab #
 
