@@ -79,6 +79,7 @@ bind O composite get_current_url | tabopen
 
 
 " Find
+set findcase smart
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
