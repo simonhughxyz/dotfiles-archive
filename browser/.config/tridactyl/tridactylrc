@@ -66,6 +66,9 @@ autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 
 " TAB AND WINDOWS
 
+bind [ tabprev
+bind ] tabnext
+
 " Go to last active tab
 bind <Tab> tab #
 
