@@ -83,6 +83,8 @@ bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
+" Remove search highlighting.
+bind <Space>h nohlsearch
 
 " Mute
 bind m mute toggle
