@@ -96,7 +96,7 @@ bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
 " Remove search highlighting.
-bind <Space>h nohlsearch
+bind gh nohlsearch
 " Ctrl-F should use the browser's native 'find' functionality.
 unbind <C-f>
 
