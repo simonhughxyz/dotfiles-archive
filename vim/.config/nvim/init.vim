@@ -153,6 +153,7 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tridactyl/vim-tridactyl', { 'for': 'trydactyl' }
 Plug 'neomutt/neomutt.vim', { 'for': 'muttrc' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 " Neovim Plugins
 if has('nvim')
