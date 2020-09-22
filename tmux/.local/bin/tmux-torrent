@@ -16,8 +16,12 @@ tmux has-session -t $session_name > /dev/null 2>&1 && exit 1
 tmux new-session -c $session_dir -d -s $session_name -n list
 tmux send-keys -t $session_name "watch 'tm list -n stopped'" C-m 
 
-# window 2 is a shell.
+# window 2 is a file browser.
 tmux new-window -c $session_dir -t $session_name:2 -n files
+tmux send-keys -t $session_name "nnn" C-m 
+
+# window 3 is a shell.
+tmux new-window -c $session_dir -t $session_name:3 -n shell
 
 # start transmission-daemon
 transmission-daemon
