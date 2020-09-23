@@ -20,7 +20,7 @@ alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclai
 " Set default zoom
 autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
 " Import other zoom levels
-source $XDG_CONFIG_HOME/tridactyl/zoom.tridactylrc
+source_quiet $XDG_CONFIG_HOME/tridactyl/zoom.tridactylrc
 
 "
 " Settings
