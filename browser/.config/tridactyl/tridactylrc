@@ -49,7 +49,7 @@ set editorcmd xst -e nvim -c 'set filetype=tridactyl-edit'
 
 " Skip 'home' page for youtube channel and go straight to 'video'
 autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
-autocmd DocStart .* js -r zoom.js
+autocmd DocStart .* js -r zoom.ts
 
 
 "
