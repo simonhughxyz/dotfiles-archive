@@ -1,19 +1,16 @@
-var img = document.images[0];
-var iw = img.width;
-var ih = img.height;
-var ir = iw / ih;
-
-function togglezoom() {
+function togglezoom(img) {
 	if (img.width==iw&&img.height==ih) {
-		zoom();
+		zoom(img);
+        // alert("hello world");
 	}else{
-    img.width = iw;
+        img.width = iw;
 		img.height = ih;
 		img.setAttribute("style","cursor:-moz-zoom-out");
+        // alert("cool");
   }
 }
 
-function zoom() {
+function zoom(img) {
 	var ww = window.innerWidth;
 	var wh = window.innerHeight;
   
@@ -28,5 +25,23 @@ function zoom() {
 	}
 }
 
-img.addEventListener("click", togglezoom, false);
-img.setAttribute("style","cursor:-moz-zoom-in");
+var iw = 0;
+var ih = 0;
+var ir = 0;
+
+Array.prototype.forEach.call(document.images, function (img) {
+    iw = img.width;
+    ih = img.height;
+    ir = iw / ih;
+    img.addEventListener("click", () => { togglezoom(img); }, false);
+    img.setAttribute("style","cursor:-moz-zoom-in");
+});
+
+// for (var img in imgs) {
+//     var iw = img.width;
+//     var ih = img.height;
+//     var ir = iw / ih;
+//     // alert(iw);
+//     // img.addEventListener("click", togglezoom(img), false);
+//     // img.setAttribute("style","cursor:-moz-zoom-in");
+// }
