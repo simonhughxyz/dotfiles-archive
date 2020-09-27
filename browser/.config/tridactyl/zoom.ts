@@ -1,12 +1,10 @@
 function togglezoom(img) {
 	if (img.width==iw&&img.height==ih) {
 		zoom(img);
-        // alert("hello world");
 	}else{
         img.width = iw;
 		img.height = ih;
 		img.setAttribute("style","cursor:-moz-zoom-out");
-        // alert("cool");
   }
 }
 
