@@ -7,7 +7,7 @@
 // It is meant to be used with pages that only show one image.
 
 // Toggle zoom to fit window or back to native size.
-function toggleZoom() {
+window.toggleZoom = function toggleZoom() {
 	if (img.width==iw&&img.height==ih) {
 		zoomToFit(img);
 	}else{
@@ -42,6 +42,3 @@ var ir = iw / ih;
 // toggle zoom on click.
 img.addEventListener("click", () => { toggleZoom(img); }, false);
 img.setAttribute("style","cursor:-moz-zoom-in");
-
-// Zoom to fit window by deault.
-toggleZoom();
