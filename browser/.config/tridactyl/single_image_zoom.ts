@@ -33,12 +33,14 @@ function zoomToFit() {
 	}
 }
 
-// Only works on first image.
-var img = document.images[0];
-var iw = img.width;
-var ih = img.height;
-var ir = iw / ih;
+if (document.images.length > 0){
+    // Only works on first image.
+    var img = document.images[0];
+    var iw = img.width;
+    var ih = img.height;
+    var ir = iw / ih;
 
-// toggle zoom on click.
-img.addEventListener("click", () => { toggleZoom(img); }, false);
-img.setAttribute("style","cursor:-moz-zoom-in");
+    // toggle zoom on click.
+    img.addEventListener("click", () => { toggleZoom(img); }, false);
+    img.setAttribute("style","cursor:-moz-zoom-in");
+}
