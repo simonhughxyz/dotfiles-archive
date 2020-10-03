@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Search using various search engines
+# Can search using primary search_term
+
+# file to save search history to
+# keep it in /run to make it non persistant
+hfile="$XDG_RUNTIME_DIR/searchhistory"
+
+# if hfile file doesent exist make it
+# [ -f "$hfile" ] || touch "$hfile"
+
+# get primary search_term and search history from $hfile and pass into dmenu
+search_term=$(echo "$(xclip -o)" | tac - $hfile | awk 'NF' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' ) || exit 1
+
+search_list="$( sr -elvi | awk '{print $1}' )"
+
+search_engine="$( echo "$search_list" | dmenu -p "Search " )"
+
+echo "$search_engine"
+
+surfraw "$search_engine" "$search_term"
+
+# # append searchterm to history file
+echo "$search_term" >> $hfile
