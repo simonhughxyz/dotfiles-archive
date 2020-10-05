@@ -13,7 +13,8 @@ hfile="$XDG_RUNTIME_DIR/searchhistory"
 # get primary search_term and search history from $hfile and pass into dmenu
 search_term=$(echo "$(xclip -o)" | tac - $hfile | awk 'NF' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' ) || exit 1
 
-search_list="$( sr -elvi | awk '{print $1}' )"
+fav_elvi="startpage\nyoutube" # show most common used elvi first.
+search_list="$( sr -elvi | awk -v fav="$fav_elvi" 'BEGIN{print fav}{print $1}' )"
 
 search_engine="$( echo "$search_list" | dmenu -p "Search " )"
 
