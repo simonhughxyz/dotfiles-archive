@@ -3,24 +3,26 @@
 # Search using various search engines
 # Can search using primary search_term
 
+elvi_hnumber=5 # number of elvi to remember.
+
 # file to save search history to
 # keep it in /run to make it non persistant
-hfile="$XDG_RUNTIME_DIR/searchhistory"
+runtime_dir="$XDG_RUNTIME_DIR/surfraw"
+hfile="$runtime_dir/searchhistory"
+elvi_hfile="$runtime_dir/elvihistory"
 
-# if hfile file doesent exist make it
-# [ -f "$hfile" ] || touch "$hfile"
+mkdir -p $runtime_dir
+
 
 # get primary search_term and search history from $hfile and pass into dmenu
 search_term=$(echo "$(xclip -o)" | tac - $hfile | awk 'NF' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' ) || exit 1
 
-fav_elvi="startpage\nyoutube" # show most common used elvi first.
-search_list="$( sr -elvi | awk -v fav="$fav_elvi" 'BEGIN{print fav}{print $1}' )"
+elvi_list="$( sr -elvi | awk -v fav="$( tail -n $elvi_hnumber $elvi_hfile )" 'BEGIN{print fav}{print $1}' )"
 
-search_engine="$( echo "$search_list" | dmenu -p "Search " )"
+elvi="$( echo "$elvi_list" | dmenu -p "Search " )"
 
-echo "$search_engine"
+surfraw "$elvi" "$search_term"
 
-surfraw "$search_engine" "$search_term"
-
-# # append searchterm to history file
+# # append searchterm and elvi to history files.
 echo "$search_term" >> $hfile
+echo "$elvi" >> $elvi_hfile
