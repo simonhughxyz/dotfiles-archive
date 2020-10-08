@@ -15,7 +15,7 @@ mkdir -p $runtime_dir
 
 
 # get primary selection and search history from $hfile and pass into dmenu
-search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' )
+search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " )
 [ "$search_term" = "" ] && exit 1
 
 elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist}{print $1}' )"
