@@ -57,7 +57,7 @@ ctrl + alt + Delete
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
-    selsearchmenu
+    srmenu
 super + shift + backslash
     streammenu
 super + shift + p
