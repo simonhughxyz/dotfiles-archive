@@ -6,7 +6,7 @@
 elvi_hnumber=5 # number of elvi to remember.
 
 # file to save search history to
-# keep it in /run to make it non persistant
+# keep it in /run to make it non persistent
 runtime_dir="$XDG_RUNTIME_DIR/surfraw"
 hfile="$runtime_dir/searchhistory"
 elvi_hfile="$runtime_dir/elvihistory"
@@ -14,15 +14,15 @@ elvi_hfile="$runtime_dir/elvihistory"
 mkdir -p $runtime_dir
 
 
-# get primary search_term and search history from $hfile and pass into dmenu
-search_term=$(echo "$(xclip -o)" | tac - $hfile | awk 'NF' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' ) || exit 1
+# get primary selection and search history from $hfile and pass into dmenu
+search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " | tr ' ' '+' ) || exit 1
 
-elvi_list="$( sr -elvi | awk -v fav="$( tail -n $elvi_hnumber $elvi_hfile )" 'BEGIN{print fav}{print $1}' )"
+elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist}{print $1}' )"
 
-elvi="$( echo "$elvi_list" | dmenu -p "Search " )"
+elvi="$( echo "$elvi_list" | dmenu -p "Elvi: " )"
 
 surfraw "$elvi" "$search_term"
 
-# # append searchterm and elvi to history files.
+# # append to history files.
 echo "$search_term" >> $hfile
 echo "$elvi" >> $elvi_hfile
