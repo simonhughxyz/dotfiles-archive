@@ -11,8 +11,12 @@
 # login: user_name
 
 get(){
-    # Get the data and trim surrounding whitespace.
-    pass show "$2" | grep -i "$1:" | sed 's/^[^:]*:[[:space:]]*//;s/[[:space:]]*$//'
+    if [ "$1" = "pass" ]; then
+        pass show "$2" | head -n 1
+    else
+        # Get the data and trim surrounding whitespace.
+        pass show "$2" | grep -i "$1:" | sed 's/^[^:]*:[[:space:]]*//;s/[[:space:]]*$//'
+    fi
 }
 
 case "$2" in
