@@ -39,7 +39,7 @@ auto_login(){
 # Gets the nth chars from password.
 # Some idiotic login field require the nth password.
 _nth() {
-    pass nth "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
+    pass nth get "$1" "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
 }
 
 # got to password-store directory and get a list of files.
@@ -49,17 +49,20 @@ password_files="$(find * -type f)"
 # get pass file using dmenu
 password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
 
+# get options from pass file
+options="*\npass\n$( pass $password | awk -F ':' '/^[0-9a-zA-Z]*: .*$/{printf "%s\n", $1}' )"
+
 # choose what to get from pass file using dmenu
-choice=$(printf '*\nURL\nOTP\nPass\nLogin\nnth' | dmenu -i) || exit
+choice=$(printf "$options" | dmenu -i) || exit
 
 # store the chosen pass file name in lastpass file
 echo "$password" > "$lastpass"
 
 case "$choice" in
     "*") auto_login;;                                   # Writes both login and pass
-    Pass) write "$(get_pass)";;                           # autotype pass
-    Login) write "$(get_login)";;                         # autotype login
+    pass) write "$(get_pass)";;                           # autotype pass
+    login) write "$(get_login)";;                         # autotype login
     OTP) write "$(pass otp show "$password")";;           # autotype OTP
     URL) $BROWSER "$(pass url "$password")";; # Visit URL
-    nth) write "$(_nth)";;
+    nth*) write "$(_nth $choice )";;
 esac
