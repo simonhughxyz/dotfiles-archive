@@ -50,13 +50,17 @@ password_files="$(find * -type f)"
 password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
 
 # get options from pass file
-options="pass\n$( pass $password | awk -F ':' '/^[0-9a-zA-Z]*: .*$/{printf "%s\n", $1}' )"
+options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z]*: .*$/{printf "%s\n", $1}' )"
 
-# if login exists then provide auto_login option
-echo $options | grep 'login' > /dev/null && auto="*\n"
+if [ "$options" != "" ]; then
+    # if login exists then provide auto_login option
+    echo $options | grep 'login' > /dev/null && auto="*\n"
 
-# choose what to get from pass file using dmenu
-choice=$(printf "${auto}${options}" | dmenu -i) || exit
+    # choose what to get from pass file using dmenu
+    choice=$(printf "${auto}pass\n${options}" | dmenu -i) || exit
+else
+    choice="pass"
+fi
 
 # store the chosen pass file name in lastpass file
 echo "$password" > "$lastpass"
