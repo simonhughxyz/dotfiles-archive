@@ -5,7 +5,7 @@
 # DATE: Wed Oct 07 2020
 #
 # DESC: Elvi to search StartPage
-# elvis: startpage		-- Search StartPage (www.startpage.com)
+# elvis: startpage	-- Search StartPage (www.startpage.com)
 . surfraw || exit 1
 
 w3_usage_hook () {
