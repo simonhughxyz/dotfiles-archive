@@ -5,7 +5,7 @@
 # DATE: Tue Oct 13 2020
 #
 # DESC: Elvi to search images
-# elvis: images	-- Search images using searx metasearch engine (searx.me and others)
+# elvis: images		-- Search images using searx metasearch engine (searx.me and others)
 . surfraw || exit 1
 
 surfraw searx -category=img $@
