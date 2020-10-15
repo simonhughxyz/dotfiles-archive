@@ -5,7 +5,7 @@
 # DATE: Wed Oct 15 2020
 #
 # DESC: Elvi to search thepiratebay
-# elvis: thepiratebay		-- Search thepiratebay (www.thepiratebay.org)
+# elvis: thepiratebay	-- Search thepiratebay (www.thepiratebay.org)
 . surfraw || exit 1
 
 w3_usage_hook () {
