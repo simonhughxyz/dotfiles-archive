@@ -38,8 +38,14 @@ auto_login(){
 
 # Gets the nth chars from password.
 # Some idiotic login field require the nth password.
+# 
+# If the the value in the key:value pair begins with '__'
+# then use the rest of the string as a key.
+# For example: `nth_login: __login` would look for `login: ...` to get the value.
 _nth() {
-    pass nth get "$1" "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
+    key="$( pass get "$choice" "$password" )"
+    [ "${key:0:2}" == "__" ] && key="${key:2}" || key="$1"
+    pass nth get "$key" "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
 }
 
 # got to password-store directory and get a list of files.
@@ -50,7 +56,7 @@ password_files="$(find * -type f)"
 password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
 
 # get options from pass file
-options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z]*: .*$/{printf "%s\n", $1}' )"
+options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z_]*: .*$/{printf "%s\n", $1}' )"
 
 if [ "$options" != "" ]; then
     # if login exists then provide auto_login option
@@ -66,10 +72,11 @@ fi
 echo "$password" > "$lastpass"
 
 case "$choice" in
-    "*") auto_login;;                                   # Writes both login and pass
-    pass) write "$(get_pass)";;                           # autotype pass
-    login) write "$(get_login)";;                         # autotype login
-    OTP) write "$(pass otp show "$password")";;           # autotype OTP
-    URL) $BROWSER "$(pass url "$password")";; # Visit URL
-    nth*) write "$(_nth $choice )";;
+    "*") auto_login;;                                        # autotype both login and pass
+    pass) write "$(get_pass)";;                              # autotype pass
+    login) write "$(get_login)";;                            # autotype login
+    OTP) write "$(pass otp show "$password")";;              # autotype OTP
+    URL) $BROWSER "$(pass url "$password")";;                # visit URL
+    nth*) write "$(_nth "$choice")";;                        # autotype the nth char
+    Nth*) notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
 esac
