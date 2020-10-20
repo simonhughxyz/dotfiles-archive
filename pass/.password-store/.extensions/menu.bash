@@ -56,7 +56,7 @@ password_files="$(find * -type f)"
 password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
 
 # get options from pass file
-options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z_]*: .*$/{printf "%s\n", $1}' )"
+options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z_]*:.*$/{printf "%s\n", $1}' | sed 's/otpauth/OTP/')"
 
 if [ "$options" != "" ]; then
     # if login exists then provide auto_login option
