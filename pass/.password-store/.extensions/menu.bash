@@ -13,25 +13,15 @@ write(){
     xdotool type --clearmodifiers "$1"
 }
 
-# gets pass from password-store
-get_pass(){
-    pass show "$password" | head -n1
-}
-
-# gets login from password-store, login must have a prefix of `login: `
-get_login(){
-    pass show "$password" | grep "login: " | cut -d' ' -f 2
-}
-
 # Exploits a common design pattern in login fields to
 # auto login by following the pattern of:
 # type login --> press tab key --> type pass --> press return
 auto_login(){
-    write $(get_login)
+    write $(pass get login "$password")
     sleep 0.1
     xdotool key Tab
     sleep 0.1
-    write $(get_pass)
+    write $(pass get pass "$password")
     sleep 0.1
     xdotool key Return
 }
@@ -73,10 +63,9 @@ echo "$password" > "$lastpass"
 
 case "$choice" in
     "*") auto_login;;                                        # autotype both login and pass
-    pass) write "$(get_pass)";;                              # autotype pass
-    login) write "$(get_login)";;                            # autotype login
     OTP) write "$(pass otp show "$password")";;              # autotype OTP
     URL) $BROWSER "$(pass url "$password")";;                # visit URL
     nth*) write "$(_nth "$choice")";;                        # autotype the nth char
     Nth*) notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
+    *) write "$(pass get "$choice" "$password")";;
 esac
