@@ -5,8 +5,13 @@
 #
 # Show a menu
 
+history_nr=5    # number of history to display.
+
 pass_dir="$HOME/.password-store"
-lastpass="$XDG_RUNTIME_DIR/lastpass" # store last pass accessed (pun intended)
+runtime_dir="$XDG_RUNTIME_DIR/pass"
+lastpass="$runtime_dir/lastpass" # store last pass accessed (pun intended)
+
+mkdir -p $runtime_dir
 
 # type out using xdotool
 write(){
@@ -43,7 +48,7 @@ cd $pass_dir
 password_files="$(find * -type f)"
 
 # get pass file using dmenu
-password=$(printf '%s\n' "$(cat $lastpass)" "${password_files}" | sed 's|.gpg||g' | dmenu -i) || exit
+password=$( printf '%s\n' "$(tac "$lastpass" | awk 'NF' | awk '!x[$0]++' |head -n $history_nr)" "${password_files}" | sed 's|.gpg||' | dmenu -i ) || exit
 
 # get options from pass file
 options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z_]*:.*$/{printf "%s\n", $1}' | sed 's/otpauth/OTP/')"
@@ -59,7 +64,7 @@ else
 fi
 
 # store the chosen pass file name in lastpass file
-echo "$password" > "$lastpass"
+echo "$password" >> "$lastpass"
 
 case "$choice" in
     "*") auto_login;;                                        # autotype both login and pass
