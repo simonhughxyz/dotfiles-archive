@@ -38,7 +38,7 @@ auto_login(){
 # then use the rest of the string as a key.
 # For example: `nth_login: __login` would look for `login: ...` to get the value.
 _nth() {
-    key="$( pass get "$choice" "$password" )"
+    key="$( pass get "$1" "$password" )"
     [ "${key:0:2}" == "__" ] && key="${key:2}" || key="$1"
     pass nth get "$key" "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
 }
