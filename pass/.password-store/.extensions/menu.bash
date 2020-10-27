@@ -40,7 +40,7 @@ auto_login(){
 _nth() {
     key="$( pass get "$1" "$password" )"
     [ "${key:0:2}" == "__" ] && key="${key:2}" || key="$1"
-    pass nth get "$key" "$( echo "" | dmenu -p "Input the char numbers you want: " )" "$password"
+    pass nth get "$key" $( echo "" | dmenu -p "Input the char numbers you want: " ) "$password"
 }
 
 # got to password-store directory and get a list of files.
