@@ -57,6 +57,9 @@ if [ "$options" != "" ]; then
     # if login exists then provide auto_login option
     echo $options | grep 'login' > /dev/null && auto="*\n"
 
+    # for each 'URL*' give a equivilant 'url*' option to write out the url instead
+    options=$(echo "$options" | sed 's/^URL.*$/&\n\L&/g')
+
     # choose what to get from pass file using dmenu
     choice=$(printf "${auto}pass\n${options}" | dmenu -i) || exit
 else
@@ -69,6 +72,7 @@ echo "$password" >> "$lastpass"
 case "$choice" in
     "*") auto_login;;                                        # autotype both login and pass
     OTP) write "$(pass otp show "$password")";;              # autotype OTP
+    url*) write "$(pass get "$choice" "$password")";;        # autotype URL
     URL*) $BROWSER "$(pass get "$choice" "$password")";;     # visit URL
     nth*) write "$(_nth "$choice")";;                        # autotype the nth char
     Nth*) notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
