@@ -69,7 +69,7 @@ echo "$password" >> "$lastpass"
 case "$choice" in
     "*") auto_login;;                                        # autotype both login and pass
     OTP) write "$(pass otp show "$password")";;              # autotype OTP
-    URL) $BROWSER "$(pass url "$password")";;                # visit URL
+    URL*) $BROWSER "$(pass get "$choice" "$password")";;     # visit URL
     nth*) write "$(_nth "$choice")";;                        # autotype the nth char
     Nth*) notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
     *) write "$(pass get "$choice" "$password")";;
