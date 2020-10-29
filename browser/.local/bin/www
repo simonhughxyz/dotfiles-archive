@@ -30,5 +30,6 @@ _save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$t
 case $1 in
     -f|firefox) _firefox $@ ;;
     -s|save) _save_firefox_profiles ;;
+    -r|rm|remove) rm -rf "$tmp_profiles" ;;
     *) _firefox $@ ;;
 esac
