@@ -208,7 +208,39 @@ let g:vim_markdown_folding_style_pythonic = 1
 
 " Vim rainbow
 let g:rainbow_active = 1
-
+let g:rainbow_conf = {
+\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'guis': [''],
+\	'cterms': [''],
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\		'vimwiki': {
+\			'parentheses_options': 'containedin=VimwikiCode contained',
+\		},
+\		'markdown': {
+\			'parentheses_options': 'containedin=markdownCode contained',
+\		},
+\		'lisp': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\		},
+\		'haskell': {
+\			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold'],
+\		},
+\		'vim': {
+\			'parentheses_options': 'containedin=vimFuncBody',
+\		},
+\		'perl': {
+\			'syn_name_prefix': 'perlBlockFoldRainbow',
+\		},
+\		'stylus': {
+\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'],
+\		},
+\		'css': 0,
+\	}
+\}
 " vim-after-object
 autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', '_', '$')
 
