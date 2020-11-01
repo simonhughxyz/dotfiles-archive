@@ -25,7 +25,7 @@ function! SetFileType()
     endif
 endfu!
 " get filetype on write
-autocmd BufWritePost * call SetFileType()
+" autocmd BufWritePost * call SetFileType()
 
 autocmd BufWritePost statusbar call system("reloadbar")
 
