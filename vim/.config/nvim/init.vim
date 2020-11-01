@@ -163,6 +163,7 @@ call plug#end()
 " }}}
 " Plugin Settings {{{
 let g:vimwiki_auto_header=1
+let g:vimwiki_folding='custom'
 let g:vimwiki_list = [{'path': '~/Documents/notes/', 'path_html': '~/Documents/notes/html/', 'syntax': 'markdown', 'ext': '.md', 'links_space_char':'_'}]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 set rtp+=~/.fzf
