@@ -148,7 +148,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'baskerville/vim-sxhkdrc', { 'for': 'sxhkdrc' }
 Plug 'fourjay/vim-password-store', { 'for': 'pass' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+" Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tridactyl/vim-tridactyl', { 'for': 'trydactyl' }
 Plug 'neomutt/neomutt.vim', { 'for': 'muttrc' }
