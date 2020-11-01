@@ -19,6 +19,8 @@ super + shift + {1-9,0,v}
 # Go back to previous desktop
 super + Tab
     bspc desktop -f last.local
+super + BackSpace
+    bspc desktop -f last.local
 
 super + bracket{left,right}
     bspc desktop -f {prev,next}.local
