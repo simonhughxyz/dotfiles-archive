@@ -48,9 +48,14 @@ _time(){
     notify-send "$( date '+%H:%M:%S' )" "$message"
 }
 
+_battery(){
+    acpi -b    
+}
+
 case $1 in
     memory) _memory ;;
     uptime) _uptime ;;
     date) _date ;;
     time) _time ;;
+    battery) _battery ;;
 esac
