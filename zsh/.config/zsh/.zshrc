@@ -139,6 +139,9 @@ _source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Load zsh-syntax-highlighting; should be last.
 _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
+#gpg
+export GPG_TTY=$(tty)
+
 # Run tmux if:
 # - tmux is installed.
 # - not already running.
