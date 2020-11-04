@@ -154,6 +154,7 @@ Plug 'tridactyl/vim-tridactyl', { 'for': 'trydactyl' }
 Plug 'neomutt/neomutt.vim', { 'for': 'muttrc' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'jamessan/vim-gnupg'
 
 " Neovim Plugins
 if has('nvim')
@@ -162,6 +163,13 @@ endif
 call plug#end()
 " }}}
 " Plugin Settings {{{
+
+" GPG
+let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.*\)\='
+let g:GPGPreferArmor=1
+let g:GPGDefaultRecipients=["pass@pass"]
+
+" VIMWIKI
 let g:vimwiki_auto_header=1
 let g:vimwiki_folding='custom'
 let g:vimwiki_list = [{'path': '~/Documents/notes/', 'path_html': '~/Documents/notes/html/', 'syntax': 'markdown', 'ext': '.md', 'links_space_char':'_'}]
