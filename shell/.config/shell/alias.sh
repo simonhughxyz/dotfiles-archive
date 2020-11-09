@@ -74,6 +74,7 @@ alias vim='nvim'
 alias vi='vim'
 alias v='vim'
 alias vg='gvim'
+alias vw='vim -c VimwikiIndex '
 
 # git
 alias g='git'
