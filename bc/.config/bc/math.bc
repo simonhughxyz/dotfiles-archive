@@ -1,0 +1,59 @@
+# Options
+scale=6
+
+# Define Constants
+pi=3.1415926535897932
+e=2.7182818284590452
+
+# Trig
+define sin(x) { return s(x); }
+define cos(x) { return c(x); }
+define tan(x) { return s(x)/c(x); }
+define cot(x) { return c(x)/s(x); }
+define sec(x) { return 1/cos(x); }
+define asin(x) { return a(x/sqrt(1-x^2))}
+define arcsin(x) { return asin(x); }
+define acos(x) { return pi/1 - acos(-x); }
+define arccos(x) { return acos(x); }
+define atan(x) { return a(x); }
+define arctan(x) { return a(x); }
+define acot(x) { return pi/2-atan(x); }
+define arccot(x) { return acot(x); }
+define asec(x) { return pi/1 - a(sqrt(x^2-1)); }
+define arcsec(x) { return asec(x); }
+define acsc(x) {
+    if (x > 1) {
+        return a(1/sqrt(x^2-1));
+    }
+    return -a(1/sqrt(x^2-1));
+}
+define arccsc(x) { return acsc(x); }
+
+# logs
+define ln(x) { return l(x); }
+define log(a, b) { return l(b)/l(a); }
+define lg(x) { return log(10, x); }
+define log10(x) { return log(10, x); }
+define log2(x) { return log(2, x); }
+
+# other
+define exp(x) { return e(x); }
+define abs(x) {
+    if ( x < 0) {
+        return -x;
+    }
+    return x;
+}
+
+
+# get radians from degrees
+define rad(deg) { return deg/180*pi; }
+
+# get degrees from radians
+define deg(rad) { return rad/pi*180; }
+
+# area of a circle
+define circa (r){ return ( pi * r^2 ); }
+
+# circumference of a circle
+define circc (r){ return ( 2 * pi * r ); }
