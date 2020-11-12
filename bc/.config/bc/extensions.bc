@@ -94,6 +94,8 @@
                                 where the hypotenuse is the longest side
 5.- rtri(h,b)               :   returns leg of triangle given the hypotenuse and other leg
                                 where the hypotenuse is the longest side
+6.- cyla(r,h)               :   returns surface area of a cylinder given radius and height
+6.- cylv(r,h)               :   returns volume of a cylinder given radius and height
 
 ************************************************/
 
@@ -325,3 +327,8 @@ define circc (r){ return ( 2 * pi * r ) }
 /* sides of a right angles triangle */
 define rtrih(a,b) { return sqrt( a^2 + b^2) }
 define rtri(h,b) { return sqrt( h^2 - b^2) }
+
+/* surface area of cylinder */
+define cyla(r,h) { return (2 * circa(r)) + (h *circc(r)) }
+/* volume of cylinder */
+define cylv(r,h) { return h * circa(r) }
