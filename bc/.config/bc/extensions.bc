@@ -90,6 +90,10 @@
 2.- deg(rad)                :   returns degrees from radians
 3.- circa(r)                :   returns area of circle from radius
 3.- circc(r)                :   returns circumference of circle from radius
+4.- rtrih(a,b)              :   returns the hypotenuse of a right angles triangle
+                                where the hypotenuse is the longest side
+5.- rtri(h,b)               :   returns leg of triangle given the hypotenuse and other leg
+                                where the hypotenuse is the longest side
 
 ************************************************/
 
@@ -307,13 +311,17 @@ define bessel(n,x){ return(j(n,x)) }
 /************************/
 
 /* get radians from degrees */
-define rad(deg) { return deg/180*pi; }
+define rad(deg) { return deg/180*pi }
 
 /* get degrees from radians */
-define deg(rad) { return rad/pi*180; }
+define deg(rad) { return rad/pi*180 }
 
 /* area of a circle */
-define circa (r){ return ( pi * r^2 ); }
+define circa (r){ return ( pi * r^2 ) }
 
 /* circumference of a circle */
-define circc (r){ return ( 2 * pi * r ); }
+define circc (r){ return ( 2 * pi * r ) }
+
+/* sides of a right angles triangle */
+define rtrih(a,b) { return sqrt( a^2 + b^2) }
+define rtri(h,b) { return sqrt( h^2 - b^2) }
