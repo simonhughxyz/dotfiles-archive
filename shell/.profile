@@ -24,6 +24,7 @@ export WINEARCH="win64"
 export WINEPREFIX="/home/simon/.wine/lutris64 setup_dxvk64"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 export LIBVA_DRIVER_NAME="radeonsi"
+export BC_ENV_ARGS="-q -l $XDG_CONFIG_HOME/bc/extensions.bc"
 
 # XDG
 export XDG_CONFIG_HOME="$HOME/.config"
