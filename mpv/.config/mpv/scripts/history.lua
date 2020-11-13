@@ -9,6 +9,10 @@ local utils = require("mp.utils")
 local HISTFILE = (os.getenv('APPDATA') or os.getenv('HOME')..'/.local/share')..'/mpv/history.log';
 
 local TMP_HISTFILE = os.getenv('XDG_RUNTIME_DIR')..'/mpv/history.log'
+local TMP_ERRORFILE = os.getenv('XDG_RUNTIME_DIR')..'/mpv/load_error.log'
+
+local path
+local title
 
 function write_to_log(file, log)
     logfile = io.open(file, 'a+');
@@ -16,15 +20,21 @@ function write_to_log(file, log)
     logfile:close();
 end
 
+
+mp.register_event('start-file', function(event) 
+    title = mp.get_property('media-title');  
+    path = mp.get_property('path')
+end)
+
 mp.register_event('file-loaded', function()
-    local title, path, logfile;
+    -- local title, path, logfile;
 
     -- get title or use '---'.
-    title = mp.get_property('media-title');  
+    -- title = mp.get_property('media-title');  
     -- title = (title == mp.get_property('filename') and '---' or title);
     
     -- get full path if local file.
-    path = mp.get_property('path')
+    -- path = mp.get_property('path')
     if not path:find("http.?://") or path:find("magnet:%?") then
         path = utils.join_path(mp.get_property("working-directory"), path)
     end
@@ -33,4 +43,17 @@ mp.register_event('file-loaded', function()
 
     write_to_log(TMP_HISTFILE, log)
     write_to_log(HISTFILE, log)
+end)
+
+-- log files that failed to load
+mp.register_event('end-file', function(event) 
+    if event.reason == "error" then
+        if not path:find("http.?://") or path:find("magnet:%?") then
+            path = utils.join_path(mp.get_property("working-directory"), path)
+        end
+
+        log = ('%s\t%s\t%s\n'):format(os.date('%Y-%m-%d %H:%M:%S'), path, title)
+
+        write_to_log(TMP_ERRORFILE, log)
+    end
 end)
