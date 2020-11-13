@@ -1,7 +1,7 @@
 -- history
--- Kepps a history log of all files played with mpv.
+-- Keeps a history log of all files played with mpv.
 --
--- Format: "Date Time Path Title" each seperated by 3 spaces.
+-- Format: "Date Time Path Title" each separated by 3 spaces.
 -- Lack of title is indicated by '---'.
 
 local utils = require("mp.utils")
@@ -26,15 +26,8 @@ mp.register_event('start-file', function(event)
     path = mp.get_property('path')
 end)
 
+-- log files that successfully loaded
 mp.register_event('file-loaded', function()
-    -- local title, path, logfile;
-
-    -- get title or use '---'.
-    -- title = mp.get_property('media-title');  
-    -- title = (title == mp.get_property('filename') and '---' or title);
-    
-    -- get full path if local file.
-    -- path = mp.get_property('path')
     if not path:find("http.?://") or path:find("magnet:%?") then
         path = utils.join_path(mp.get_property("working-directory"), path)
     end
