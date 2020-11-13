@@ -8,6 +8,8 @@ export GOBIN="$GOPATH/bin"
 export GOPATH="$GOPATH:$HOME/projects/go"
 export LBIN="$HOME/.local/bin"
 export PATH="$LBIN:$GOBIN:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # default programs
 export EDITOR="nvim"
@@ -25,10 +27,6 @@ export WINEPREFIX="/home/simon/.wine/lutris64 setup_dxvk64"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 export LIBVA_DRIVER_NAME="radeonsi"
 export BC_ENV_ARGS="-q -l $XDG_CONFIG_HOME/bc/extensions.bc"
-
-# XDG
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
 
 # Program settings
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
