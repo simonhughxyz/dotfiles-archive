@@ -145,6 +145,7 @@ bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//
 autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s amazon\.(co\.uk|com) amazon
+autocontain -s github\.com git
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
