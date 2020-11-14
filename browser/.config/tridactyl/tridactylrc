@@ -142,8 +142,8 @@ bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
 " Autocontain
-autocontain google\.(co\.uk|com) google
-autocontain youtube\.com google
+autocontain -s google\.(co\.uk|com) google
+autocontain -s youtube\.com google
 autocontain -s amazon\.(co\.uk|com) amazon
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
