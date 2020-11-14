@@ -18,7 +18,7 @@ alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_q
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 
 " Set default zoom
-autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
+" autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
 " Import other zoom levels
 source_quiet $XDG_CONFIG_HOME/tridactyl/zoom.tridactylrc
 
