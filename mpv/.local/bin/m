@@ -35,7 +35,7 @@ _tmux(){
     arg=$1
     [ -z "$2" ] || arg="$1 '$2'"
     tmux new -s mpv -d
-    tmux send-keys -t mpv "cd '$PWD'; mpv $arg &> /dev/null &" ENTER
+    tmux send-keys -t mpv "cd '$PWD'; m $arg &> /dev/null &" ENTER
 }
 
 _mpv(){ 
