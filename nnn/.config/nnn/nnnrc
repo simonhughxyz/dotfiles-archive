@@ -50,6 +50,9 @@ export NNN_TRASH=1
 # key emulated by middle mouse click
 # export NNN_MCLICK='^R'
 
+# absolute path to custom selection file
+export NNN_SEL="$XDG_CACHE_HOME/nnn/selection"
+
 # Path path of named pipe to write the hovered file path.
 export NNN_RUNTIME="$XDG_RUNTIME_DIR/nnn"
 mkdir -p $NNN_RUNTIME
