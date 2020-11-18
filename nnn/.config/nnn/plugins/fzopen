@@ -29,10 +29,5 @@ case "$(file -biL "$entry")" in
     *text*)
         "${VISUAL:-$EDITOR}" "$entry" ;;
     *)
-        if uname | grep -q "Darwin"; then
-            open "$entry" >/dev/null 2>&1
-        else
-            xdg-open "$entry" >/dev/null 2>&1
-        fi
-        ;;
+        xdg-open "$entry" >/dev/null 2>&1 ;;
 esac
