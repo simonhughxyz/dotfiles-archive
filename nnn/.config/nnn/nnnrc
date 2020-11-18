@@ -45,7 +45,7 @@ export NNN_COLORS='3256'
 # export NNN_RCLONE='rclone mount --read-only'
 
 # use desktop Trash [default: delete]
-# export NNN_TRASH=1
+export NNN_TRASH=1
 
 # key emulated by middle mouse click
 # export NNN_MCLICK='^R'
