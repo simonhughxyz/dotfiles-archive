@@ -30,12 +30,20 @@ mkdir -p "$runtime_dir"
 # create profile file
 touch -a "$profile"
 
+# helper function to trim leading and trailing whitespace
+trim() {
+    local var="$*"
+    # remove leading whitespace characters
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"   
+    printf '%s' "$var"
+}
+
 # Run mpv in a tmux session so that its independent from parent shell.
 _tmux(){ 
-    arg=$1
-    [ -z "$2" ] || arg="$1 '$2'"
     tmux new -s mpv -d
-    tmux send-keys -t mpv "cd '$PWD'; m $arg &> /dev/null &" ENTER
+    tmux send-keys -t mpv "cd '$PWD'; mpv $1 &> /dev/null &" ENTER
 }
 
 _mpv(){ 
@@ -62,4 +70,5 @@ while test $# -gt 0; do
     esac
     shift
 done
-_mpv "$arg $file"
+[ "$file" = "" ] || arg="$arg '$file'"
+_mpv $(trim "$arg")
