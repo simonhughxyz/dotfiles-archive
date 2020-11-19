@@ -40,8 +40,7 @@ _tmux(){
 
 _mpv(){ 
     [ "$detached" = "true" ] && _tmux "$1" "$file" && exit
-    mpv $1 "$file"
-    exit
+    mpv $1
 }
 
 # get profile choice and write in file.
@@ -63,4 +62,4 @@ while test $# -gt 0; do
     esac
     shift
 done
-_mpv "$arg"
+_mpv "$arg $file"
