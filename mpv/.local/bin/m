@@ -39,8 +39,6 @@ _tmux(){
 }
 
 _mpv(){ 
-    pf="--profile=$(head -n 1 $profile)"
-    [ -n "$pf" ] || pf=""
     [ "$detached" = "true" ] && _tmux "$1" "$file" && exit
     mpv $1 "$file"
     exit
