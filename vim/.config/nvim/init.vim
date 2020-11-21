@@ -443,6 +443,7 @@ function! ChangeStatuslineColor()
 
   return ''
 endfunction
+call ChangeStatuslineColor()
 
 " Fix for delay in color change
 " so far only works with insert mode.
@@ -470,13 +471,6 @@ nnoremap <script> <C-v> <C-v><SID>ChangeStatuslineColor
 " main statusline color
 " background and foreground are swapped out of some reason.
 exe 'hi statusline ctermfg=232 ctermbg=2 guibg=' . g:colors.white . ' guifg=#101010'
-
-"define 3 custom highlight groups
-exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
-exe 'hi User2 ctermbg=5 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
-exe 'hi User3 ctermbg=4 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
-exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
-exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.black
 
 set laststatus=2
 set statusline=
