@@ -455,6 +455,8 @@ if version >= 700
         au CmdlineLeave * redrawstatus
         au CmdwinEnter * call ChangeStatuslineColor()
         au CmdwinLeave * call ChangeStatuslineColor()
+        au BufEnter * call ChangeStatuslineColor()
+        au BufLeave * call ChangeStatuslineColor()
         if has('nvim')
             au TermEnter * call ChangeStatuslineColor()
             au TermLeave * call ChangeStatuslineColor()
