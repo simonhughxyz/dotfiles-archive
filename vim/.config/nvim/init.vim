@@ -406,7 +406,7 @@ let g:colors = {
     \ 'black':  '#000000',
     \ 'white':  '#ffffff',
     \ 'normal': '#005000',
-    \ 'visual': '#505000',
+    \ 'visual': '#706000',
     \ 'insert': '#004090',
     \ 'else':   '#800000',
 \}
