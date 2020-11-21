@@ -167,6 +167,7 @@ call plug#end()
 " NNN
 let g:nnn#layout = { 'left': '~20%' }
 let g:nnn#replace_netrw=1
+let g:nnn#statusline=0
 
 " GPG
 let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.*\)\='
