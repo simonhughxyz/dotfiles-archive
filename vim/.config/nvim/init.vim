@@ -377,7 +377,7 @@ endfunction
 
 " Get current vim mode
 function! GetMode()
-let l:currentmode={
+    let l:currentmode={
             \ 'n'  : 'Normal',
             \ 'no' : 'N·Operator Pending',
             \ 'v'  : 'Visual',
@@ -404,39 +404,39 @@ endfunctio
 " define statusline and line number color for the vim modes
 let g:colors = {
     \ 'black':  '#000000',
-    \ 'white':  '#eeeeee',
-    \ 'normal': '#008000',
-    \ 'visual': '#808000',
-    \ 'insert': '#00a0a0',
+    \ 'white':  '#ffffff',
+    \ 'normal': '#005000',
+    \ 'visual': '#505000',
+    \ 'insert': '#004090',
     \ 'else':   '#800000',
 \}
 
 " Automatically change the statusline color depending on mode
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
-    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=2'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=' . g:colors.black . ' guifg=' . g:colors.normal
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=' . g:colors.normal . ' guifg=' . g:colors.white
     exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.black
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.black
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.white
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.white
   elseif (mode() =~# '\v(v|V|)')
-    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=' . g:colors.visual . ' guifg=' . g:colors.black
+    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=' . g:colors.visual . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=3'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=3 guifg=' . g:colors.visual
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.visual . ' guifg=' . g:colors.black
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.visual . ' guifg=' . g:colors.black
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.visual . ' guifg=' . g:colors.white
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.visual . ' guifg=' . g:colors.white
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.visual . ' guifg=' . g:colors.white
   elseif (mode() ==# 'i')
-    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=' . g:colors.insert . ' guifg=' . g:colors.black
+    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=' . g:colors.insert . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=6'
-    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.black . ' guifg=' . g:colors.insert
-    exe 'hi CursorLine ctermbg=16 guibg=' . g:colors.black
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.insert . ' guifg=' . g:colors.black
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.insert . ' guifg=' . g:colors.black
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.insert . ' guifg=' . g:colors.white
+    exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
+    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.insert . ' guifg=' . g:colors.white
+    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.insert . ' guifg=' . g:colors.white
   else
     exe 'hi User1 ctermbg=1 ctermfg=255  guibg=' . g:colors.else . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=1'
-    exe 'hi CursorLineNr ctermfg=1 guifg=' . g:colors.else
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=1 guibg=' . g:colors.else . ' guifg=' . g:colors.white
     exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.else . ' guifg=' . g:colors.white
     exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.else . ' guifg=' . g:colors.white
   endif
