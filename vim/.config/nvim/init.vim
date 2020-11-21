@@ -474,7 +474,10 @@ nnoremap <script> <C-v> <C-v><SID>ChangeStatuslineColor
 
 " main statusline color
 " background and foreground are swapped out of some reason.
-exe 'hi statusline ctermfg=232 ctermbg=2 guibg=' . g:colors.white . ' guifg=#101010'
+exe 'hi statusline ctermfg=15 ctermbg=0 guibg=' . g:colors.white . ' guifg=#101010'
+
+" Paste Toggle Color
+exe 'hi user2 ctermfg=15 ctermbg=5 guifg=' . g:colors.white . ' guibg=#5518ab'
 
 set laststatus=2
 set statusline=
