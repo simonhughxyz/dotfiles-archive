@@ -180,7 +180,7 @@ let g:nnn#action = {
     \ '<c-t>': 'tab split',
     \ '<c-x>': 'split',
     \ '<c-v>': 'vsplit',
-    \ '<c-o>': function('CopyLinestoRegister') }
+    \ '<c-y>': function('CopyLinestoRegister') }
 
 " GPG
 let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.*\)\='
