@@ -428,7 +428,7 @@ let g:colors = {
 \}
 
 " Automatically change the statusline color depending on mode
-function! ChangeStatuslineColor()
+function! ChangeModeColor()
   if (mode() =~# '\v(n|no)')
     exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=2'
@@ -459,34 +459,34 @@ function! ChangeStatuslineColor()
 
   return ''
 endfunction
-call ChangeStatuslineColor()
+call ChangeModeColor()
 
 " Fix for color sometimes not changeing or being delayed
 if version >= 700
     augroup ColorSwapFix
-        au InsertEnter * call ChangeStatuslineColor()
-        au InsertLeave * call ChangeStatuslineColor()
+        au InsertEnter * call ChangeModeColor()
+        au InsertLeave * call ChangeModeColor()
         au CmdlineEnter * redrawstatus
         au CmdlineLeave * redrawstatus
-        au CmdwinEnter * call ChangeStatuslineColor()
-        au CmdwinLeave * call ChangeStatuslineColor()
-        au BufEnter * call ChangeStatuslineColor()
-        au BufLeave * call ChangeStatuslineColor()
+        au CmdwinEnter * call ChangeModeColor()
+        au CmdwinLeave * call ChangeModeColor()
+        au BufEnter * call ChangeModeColor()
+        au BufLeave * call ChangeModeColor()
         if has('nvim')
-            au TermEnter * call ChangeStatuslineColor()
-            au TermLeave * call ChangeStatuslineColor()
+            au TermEnter * call ChangeModeColor()
+            au TermLeave * call ChangeModeColor()
         else " Fix to change color cmdline for regular vim
-            au CmdlineEnter * call ChangeStatuslineColor()
-            au CmdlineLeave * call ChangeStatuslineColor()
+            au CmdlineEnter * call ChangeModeColor()
+            au CmdlineLeave * call ChangeModeColor()
         endif
     augroup END
 endif
 
 " Fix for delay in color change for visual modes
-vnoremap <expr> <SID>ChangeStatuslineColor ChangeStatuslineColor()
-nnoremap <script> v v<SID>ChangeStatuslineColor
-nnoremap <script> V V<SID>ChangeStatuslineColor
-nnoremap <script> <C-v> <C-v><SID>ChangeStatuslineColor
+vnoremap <expr> <SID>ChangeModeColor() ChangeModeColor()
+nnoremap <script> v v<SID>ChangeModeColor()
+nnoremap <script> V V<SID>ChangeModeColor()
+nnoremap <script> <C-v> <C-v><SID>ChangeModeColor()
 
 " main statusline color
 " background and foreground are swapped out of some reason.
@@ -500,7 +500,7 @@ set statusline=
 
 " LEFT SIDE
 " Used for color change
-set statusline+=%{ChangeStatuslineColor()}
+set statusline+=%{ChangeModeColor()}
 set statusline+=%1*
 " show vim mode
 set statusline+=\ %{GetMode()}
