@@ -445,8 +445,7 @@ function! ChangeStatuslineColor()
 endfunction
 call ChangeStatuslineColor()
 
-" Fix for delay in color change
-" so far only works with insert mode.
+" Fix for color sometimes not changeing or being delayed
 if version >= 700
     augroup ColorSwapFix
         au InsertEnter * call ChangeStatuslineColor()
@@ -460,6 +459,9 @@ if version >= 700
         if has('nvim')
             au TermEnter * call ChangeStatuslineColor()
             au TermLeave * call ChangeStatuslineColor()
+        else " Fix to change color cmdline for regular vim
+            au CmdlineEnter * call ChangeStatuslineColor()
+            au CmdlineLeave * call ChangeStatuslineColor()
         endif
     augroup END
 endif
