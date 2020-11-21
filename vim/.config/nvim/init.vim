@@ -447,17 +447,25 @@ endfunction
 " Fix for delay in color change
 " so far only works with insert mode.
 if version >= 700
-    au InsertEnter * call ChangeStatuslineColor()
-    au InsertLeave * call ChangeStatuslineColor()
-    au CmdlineEnter * redrawstatus
-    au CmdlineLeave * redrawstatus
-    au CmdwinEnter * call ChangeStatuslineColor()
-    au CmdwinLeave * call ChangeStatuslineColor()
-    if has('nvim')
-        au TermEnter * call ChangeStatuslineColor()
-        au TermLeave * call ChangeStatuslineColor()
-    endif
+    augroup ColorSwapFix
+        au InsertEnter * call ChangeStatuslineColor()
+        au InsertLeave * call ChangeStatuslineColor()
+        au CmdlineEnter * redrawstatus
+        au CmdlineLeave * redrawstatus
+        au CmdwinEnter * call ChangeStatuslineColor()
+        au CmdwinLeave * call ChangeStatuslineColor()
+        if has('nvim')
+            au TermEnter * call ChangeStatuslineColor()
+            au TermLeave * call ChangeStatuslineColor()
+        endif
+    augroup END
 endif
+
+" Fix for delay in color change for visual modes
+vnoremap <expr> <SID>ChangeStatuslineColor ChangeStatuslineColor()
+nnoremap <script> v v<SID>ChangeStatuslineColor
+nnoremap <script> V V<SID>ChangeStatuslineColor
+nnoremap <script> <C-v> <C-v><SID>ChangeStatuslineColor
 
 " main statusline color
 " background and foreground are swapped out of some reason.
