@@ -164,6 +164,9 @@ call plug#end()
 " }}}
 " Plugin Settings {{{
 
+" NNN
+let g:nnn#layout = { 'left': '~20%' }
+
 " GPG
 let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.*\)\='
 let g:GPGPreferArmor=1
