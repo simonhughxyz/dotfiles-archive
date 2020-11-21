@@ -173,7 +173,7 @@ function! CopyLinestoRegister(lines)
     echom joined_lines
     let @* = joined_lines
 endfunction
-let g:nnn#command='nnn -H'
+let g:nnn#command='nnn -HR'
 let g:nnn#layout = { 'left': '~20%' }
 let g:nnn#replace_netrw=1
 let g:nnn#statusline=0
