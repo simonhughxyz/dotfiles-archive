@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# SSH-GET-PASS
+# Simon H Moore
+# 
+# Print ssh pass from password store to stdout
+
+pass show ssh/main | head -n1
