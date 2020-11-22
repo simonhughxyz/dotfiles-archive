@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# SEC
+# Simon H Moore
+# 
+# Get ssh passwords from pass, decrypt and add to agent.
+# Mount various sshfs.
+
+ssh_home=~/.ssh
+ssh_key="id_ed25519"
+
+
+_ssh_add() {
+    cat "$ssh_home/${1:-$ssh_key}" | SSH_ASKPASS="$PWD/ssh-get-pass" ssh-add -
+}
+
+case $1 in
+    add) _ssh_add ${2};; 
+    *) _ssh_add ${2};; 
+esac
