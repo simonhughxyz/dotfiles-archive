@@ -421,7 +421,7 @@ endfunctio
 let g:colors = {
     \ 'black':      '#000000',
     \ 'white':      '#ffffff',
-    \ 'background': '#101010',
+    \ 'background': '#0c0c0c',
     \ 'normal':     '#005000',
     \ 'visual':     '#706000',
     \ 'insert':     '#004090',
