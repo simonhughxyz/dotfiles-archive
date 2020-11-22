@@ -419,13 +419,14 @@ endfunctio
 
 " define statusline and line number color for the vim modes
 let g:colors = {
-    \ 'black':  '#000000',
-    \ 'white':  '#ffffff',
-    \ 'normal': '#005000',
-    \ 'visual': '#706000',
-    \ 'insert': '#004090',
-    \ 'paste':  '#5518ab',
-    \ 'else':   '#800000',
+    \ 'black':      '#000000',
+    \ 'white':      '#ffffff',
+    \ 'background': '#101010',
+    \ 'normal':     '#005000',
+    \ 'visual':     '#706000',
+    \ 'insert':     '#004090',
+    \ 'paste':      '#5518ab',
+    \ 'else':       '#800000',
 \}
 
 " Automatically change the statusline color depending on mode
@@ -483,7 +484,7 @@ nnoremap <script> <C-v> <C-v><SID>ChangeModeColor()
 
 " main statusline color
 " background and foreground are swapped out of some reason.
-exe 'hi statusline ctermfg=15 ctermbg=0 guibg=' . g:colors.white . ' guifg=#101010'
+exe 'hi statusline ctermfg=15 ctermbg=0 guibg=' . g:colors.white . ' guifg= ' . g:colors.background
 
 " Paste Toggle Color
 exe 'hi user2 ctermfg=15 ctermbg=5 guifg=' . g:colors.white . ' guibg=' . g:colors.paste
