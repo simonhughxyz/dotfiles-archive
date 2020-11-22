@@ -424,6 +424,7 @@ let g:colors = {
     \ 'normal': '#005000',
     \ 'visual': '#706000',
     \ 'insert': '#004090',
+    \ 'paste':  '#5518ab',
     \ 'else':   '#800000',
 \}
 
@@ -485,7 +486,7 @@ nnoremap <script> <C-v> <C-v><SID>ChangeModeColor()
 exe 'hi statusline ctermfg=15 ctermbg=0 guibg=' . g:colors.white . ' guifg=#101010'
 
 " Paste Toggle Color
-exe 'hi user2 ctermfg=15 ctermbg=5 guifg=' . g:colors.white . ' guibg=#5518ab'
+exe 'hi user2 ctermfg=15 ctermbg=5 guifg=' . g:colors.white . ' guibg=' . g:colors.paste
 
 set laststatus=2
 set statusline=
