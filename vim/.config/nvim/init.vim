@@ -434,27 +434,19 @@ function! ChangeModeColor()
     exe 'hi statusline ctermbg=2'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=' . g:colors.normal . ' guifg=' . g:colors.white
     exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.normal . ' guifg=' . g:colors.white
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.normal . ' guifg=' . g:colors.white
   elseif (mode() =~# '\v(v|V|)')
     exe 'hi User1 ctermbg=3 ctermfg=0  guibg=' . g:colors.visual . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=3'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.visual . ' guifg=' . g:colors.white
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.visual . ' guifg=' . g:colors.white
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.visual . ' guifg=' . g:colors.white
   elseif (mode() ==# 'i')
     exe 'hi User1 ctermbg=6 ctermfg=0  guibg=' . g:colors.insert . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=6'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.insert . ' guifg=' . g:colors.white
     exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.insert . ' guifg=' . g:colors.white
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.insert . ' guifg=' . g:colors.white
   else
     exe 'hi User1 ctermbg=1 ctermfg=255  guibg=' . g:colors.else . ' guifg=' . g:colors.white
     exe 'hi statusline ctermbg=1'
     exe 'hi CursorLineNr ctermbg=0 ctermfg=1 guibg=' . g:colors.else . ' guifg=' . g:colors.white
-    exe 'hi User8 ctermbg=234 ctermfg=248  guibg=' . g:colors.else . ' guifg=' . g:colors.white
-    exe 'hi User9 ctermbg=236 ctermfg=248 guibg=' . g:colors.else . ' guifg=' . g:colors.white
   endif
 
   return ''
@@ -531,11 +523,9 @@ set statusline+=\ \|
 " show character code user cursor
 set statusline+=\ 0x%B
 " gray section
-set statusline+=\ %8*
+set statusline+=\ %1*
 " show file percentage
 set statusline+=\ %p%%
-set statusline+=\ %*
-set statusline+=%9*
 " show column:line / total lines
 set statusline+=\ %v:%l
 set statusline+=\ \/\ %L
