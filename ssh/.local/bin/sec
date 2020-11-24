@@ -8,13 +8,23 @@
 
 ssh_home=~/.ssh
 ssh_key="id_ed25519"
-
+default_user="simon"
+mount_dir=/mnt
 
 _ssh_add() {
     cat "$ssh_home/${1:-$ssh_key}" | SSH_ASKPASS="$PWD/ssh-get-pass" ssh-add -
 }
 
+_sshfs_mnt() { 
+    dir=$1
+    [ -z $2 ] || dir=${2}_${1}
+    dir=$mount_dir/$dir
+    [ ! -d $dir ] && echo "Missing directory '$dir'" && exit
+    sshfs ${2:-$default_user}@$1: $dir
+}
+
 case $1 in
-    add) _ssh_add ${2};; 
-    *) _ssh_add ${2};; 
+    -a|add) _ssh_add $2 ;; 
+    -m|mount) _sshfs_mnt $2 $3 ;;
+    *) _ssh_add $2 ;; 
 esac
