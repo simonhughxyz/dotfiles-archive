@@ -23,8 +23,17 @@ _sshfs_mnt() {
     sshfs ${2:-$default_user}@$1: $dir
 }
 
+_sshfs_umnt() {
+    dir=$1
+    [ -z $2 ] || dir=${2}_${1}
+    dir=$mount_dir/$dir
+    [ ! -d $dir ] && echo "Missing directory '$dir'" && exit
+    umount $dir
+}
+
 case $1 in
     -a|add) _ssh_add $2 ;; 
-    -m|mount) _sshfs_mnt $2 $3 ;;
+    -m|mnt|mount) _sshfs_mnt $2 $3 ;;
+    -u|umnt|umount) _sshfs_umnt $2 $3 ;;
     *) _ssh_add $2 ;; 
 esac
