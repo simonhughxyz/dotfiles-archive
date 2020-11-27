@@ -317,7 +317,18 @@ if (has("termguicolors"))
 
     " nvim-colorizer only works with termguicolors and neovim
     if has('nvim')
-        lua require 'colorizer'.setup(nil, { css = true; })
+        lua require 'colorizer'.setup({'*';},
+            \{
+            \   RGB      = true;
+            \   RRGGBB   = true;
+            \   names    = true;
+            \   RRGGBBAA = true;
+            \   rgb_fn   = true;
+            \   hsl_fn   = true;
+            \   css      = true;
+            \   css_fn   = true;
+            \   mode = 'background';
+            \})
     endif
 endif
 syntax enable           " enable syntax processing
