@@ -6,30 +6,22 @@
 # Wrapper for firefox setting up all the correct profiles.
 
 # Location of profiles to manage.
-profiles=~/sync/firefox-profiles
-
-# tmp path for profiles (best to keep it in memory).
-tmp_profiles=${XDG_RUNTIME_DIR}/firefox-profiles
+profiles=~/projects/firefox-profiles
 
 # Path where firefox stores its profiles.
 firefox_profiles=~/.mozilla/firefox
 
 _firefox(){ 
-    #  Copy firefox profile to tmp_dir if tmp_dir does not already exist
-    mkdir $tmp_profiles && rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$tmp_profiles"
-    
-    # create symlink to firefox profiles folder
-    ln -sf "$tmp_profiles" "$firefox_profiles"
-
     # Run firefox always in new window with timezone set to UTC.
     TZ=UTC firefox --new-window $@
 }
 
-_save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$tmp_profiles/" "$profiles"; }
+_save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$firefox_profiles/" "$profiles"; }
+_load_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$firefox_profiles"; }
 
 case $1 in
     -f|firefox) _firefox $@ ;;
     -s|save) _save_firefox_profiles ;;
-    -r|rm|remove) rm -rf "$tmp_profiles" ;;
+    -l|load) _load_firefox_profiles ;;
     *) _firefox $@ ;;
 esac
