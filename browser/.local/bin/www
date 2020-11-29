@@ -20,8 +20,8 @@ _save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$f
 _load_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$firefox_profiles"; }
 
 case $1 in
-    -f|firefox) _firefox $@ ;;
+    -f|firefox) shift; _firefox $@ ;;
     -s|save) _save_firefox_profiles ;;
     -l|load) _load_firefox_profiles ;;
-    *) _firefox $@ ;;
+    *) shift; _firefox $@ ;;
 esac
