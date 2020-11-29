@@ -18,10 +18,12 @@ _firefox(){
 
 _save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$firefox_profiles/" "$profiles"; }
 _load_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$firefox_profiles"; }
+_git() { git -C "$profiles" $@; }
 
 case $1 in
     -f|firefox) shift; _firefox $@ ;;
     -s|save) _save_firefox_profiles ;;
     -l|load) _load_firefox_profiles ;;
+    -g|git) shift; _git $@ ;;
     *) shift; _firefox $@ ;;
 esac
