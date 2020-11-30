@@ -141,13 +141,19 @@ bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
-" Autocontain
+" CONTAINERS
+containercreate google yellow fingerprint
+containercreate amazon orange cart
+containercreate github purple circle
+containercreate halifax green dollar
+containercreate natwest green dollar
+containercreate netflix red circle
 autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s amazon\.(co\.uk|com) amazon
-autocontain -s github\.com git
-autocontain -s halifax-online\.co\.uk money
-autocontain -s nwolb\.com money
+autocontain -s github\.com github
+autocontain -s halifax-online\.co\.uk halifax
+autocontain -s nwolb\.com natwest
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
