@@ -28,6 +28,9 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
 export LIBVA_DRIVER_NAME="radeonsi"
 export BC_ENV_ARGS="-q -l $XDG_CONFIG_HOME/bc/extensions.bc"
 
+# LS & EXA
+export EXA_GRID_ROWD=2
+
 # Program settings
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
