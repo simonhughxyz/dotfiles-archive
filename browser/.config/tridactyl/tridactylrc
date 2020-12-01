@@ -145,6 +145,7 @@ bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//
 containercreate google yellow fingerprint
 containercreate facebook blue fingerprint
 containercreate twitter blue fingerprint
+containercreate reddit pink fingerprint
 containercreate amazon orange cart
 containercreate github purple circle
 containercreate halifax green dollar
@@ -154,6 +155,7 @@ autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s facebook\.com facebook
 autocontain -s twitter\.com twitter
+autocontain -s reddit\.com twitter
 autocontain -s amazon\.(co\.uk|com) amazon
 autocontain -s github\.com github
 autocontain -s halifax-online\.co\.uk halifax
