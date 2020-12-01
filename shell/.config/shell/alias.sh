@@ -23,10 +23,11 @@ alias bt='bluetoothctl'
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc'
 
 # ls
-alias ls='ls --color=auto --group-directories-first'
+# alias ls='ls --color=auto --group-directories-first'
+alias ls='exa --icons --group-directories-first'
 alias l='ls'
 alias l.='ls -d .*'
-alias l,='ls -A'
+alias l,='ls -a'
 # ls only directories
 alias ld='ls -d */'
 alias ld.='ls -d .*/'
@@ -34,7 +35,7 @@ alias ld,='ls -d */ .*/'
 # ls in list format
 alias ll='ls -lh'
 alias ll.='ll -d .*'
-alias ll,='ll -A'
+alias ll,='ll -a'
 # ls directories in list format
 alias lld='ll -d */'
 alias lld.='ll -d .*/'
