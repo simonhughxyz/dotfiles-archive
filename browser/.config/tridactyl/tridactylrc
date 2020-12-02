@@ -146,6 +146,7 @@ containercreate simonhugh.xyz purple fingerprint
 containercreate google yellow fingerprint
 containercreate facebook blue fingerprint
 containercreate twitter blue fingerprint
+containercreate yahoo purple fingerprint
 containercreate reddit pink fingerprint
 containercreate outlook turquiose fingerprint
 containercreate amazon orange cart
@@ -169,6 +170,7 @@ autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s facebook\.com facebook
 autocontain -s twitter\.com twitter
+autocontain -s yahoo\.(co\.uk|com|net) yahoo
 autocontain -s reddit\.com reddit
 autocontain -s amazon\.(co\.uk|com) amazon
 autocontain -s ebay\.(co\.uk|com) ebay
