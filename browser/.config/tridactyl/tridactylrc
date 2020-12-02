@@ -146,6 +146,7 @@ containercreate google yellow fingerprint
 containercreate facebook blue fingerprint
 containercreate twitter blue fingerprint
 containercreate reddit pink fingerprint
+containercreate outlook turquiose fingerprint
 containercreate amazon orange cart
 containercreate ebay yellow cart
 containercreate github purple circle
@@ -172,6 +173,7 @@ autocontain -s netflix\.com netflix
 autocontain -s bbc\.(co\.uk|com) bbc
 autocontain -s gov\.uk gov
 autocontain -s just-eat\.co\.uk justeat
+autocontain -s live\.com outlook
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
