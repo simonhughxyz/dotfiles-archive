@@ -16,8 +16,12 @@ _firefox(){
     TZ=UTC firefox --new-window $@
 }
 
-_save_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$firefox_profiles/" "$profiles"; }
-_load_firefox_profiles() { rsync -r --exclude-from "$profiles/.rsync_ignore" "$profiles/" "$firefox_profiles"; }
+_sync() {
+    rsync -r --exclude-from "$profiles/.rsync_ignore" "$1/" "$2"; 
+}
+
+_save_firefox_profiles() { _sync "$firefox_profiles/" "$profiles"; }
+_load_firefox_profiles() { _sync "$profiles/" "$firefox_profiles"; }
 _git() { git -C "$profiles" $@; }
 
 case $1 in
