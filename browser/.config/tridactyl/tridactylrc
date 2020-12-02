@@ -168,3 +168,6 @@ autocontain -s bbc\.(co\.uk|com) bbc
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
 guiset_quiet hoverlink right
+
+" Import other local to the machine  configs
+source_quiet $XDG_CONFIG_HOME/tridactyl/local.tridactylrc
