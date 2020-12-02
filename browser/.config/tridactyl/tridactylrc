@@ -165,6 +165,7 @@ autocontain -s github\.com github
 autocontain -s gitlab\.com gitlab
 autocontain -s halifax-online\.co\.uk halifax
 autocontain -s nwolb\.com natwest
+autocontain -s netflix\.com netflix
 autocontain -s bbc\.(co\.uk|com) bbc
 autocontain -s gov\.uk gov
 
