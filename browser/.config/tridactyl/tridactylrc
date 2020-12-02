@@ -152,6 +152,7 @@ containercreate gitlab purple circle
 containercreate halifax green dollar
 containercreate natwest green dollar
 containercreate netflix red circle
+containercreate bbc red circle
 autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s facebook\.com facebook
@@ -162,6 +163,7 @@ autocontain -s github\.com github
 autocontain -s gitlab\.com gitlab
 autocontain -s halifax-online\.co\.uk halifax
 autocontain -s nwolb\.com natwest
+autocontain -s bbc\.(co\.uk|com) bbc
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
