@@ -17,6 +17,7 @@ _firefox(){
 }
 
 _sync() {
+    [ $( ls "$firefox_profiles"/*/lock 2> /dev/null ) ] && echo "Firefox is running!\nClose firefox before syncing!" && exit 1
     rsync -r --exclude-from "$profiles/.rsync_ignore" "$1/" "$2"; 
 }
 
