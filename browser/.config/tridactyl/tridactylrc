@@ -160,7 +160,9 @@ containercreate bbc red circle
 containercreate gov red fingerprint
 containercreate justeat red food
 containercreate namecheap orange briefcase
+containercreate three blue briefcase
 containercreate protonmail turquiose fingerprint
+containercreate skype turquiose fingerprint
 
 autocontain -s simonhugh\.xyz simonhugh.xyz
 autocontain -s google\.(co\.uk|com) google
@@ -182,6 +184,8 @@ autocontain -s just-eat\.co\.uk justeat
 autocontain -s live\.com outlook
 autocontain -s namecheap\.com namecheap
 autocontain -s protonmail\.com protonmail
+autocontain -s skype\.com skype
+autocontain -s three\.co\.uk three
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
