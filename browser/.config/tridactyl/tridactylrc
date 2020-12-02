@@ -148,6 +148,7 @@ containercreate twitter blue fingerprint
 containercreate reddit pink fingerprint
 containercreate amazon orange cart
 containercreate github purple circle
+containercreate gitlab purple circle
 containercreate halifax green dollar
 containercreate natwest green dollar
 containercreate netflix red circle
@@ -158,6 +159,7 @@ autocontain -s twitter\.com twitter
 autocontain -s reddit\.com reddit
 autocontain -s amazon\.(co\.uk|com) amazon
 autocontain -s github\.com github
+autocontain -s gitlab\.com gitlab
 autocontain -s halifax-online\.co\.uk halifax
 autocontain -s nwolb\.com natwest
 
