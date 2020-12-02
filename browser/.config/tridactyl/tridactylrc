@@ -155,6 +155,7 @@ containercreate natwest green dollar
 containercreate netflix red circle
 containercreate bbc red circle
 containercreate gov red fingerprint
+containercreate justeat red food
 
 autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
@@ -170,6 +171,7 @@ autocontain -s nwolb\.com natwest
 autocontain -s netflix\.com netflix
 autocontain -s bbc\.(co\.uk|com) bbc
 autocontain -s gov\.uk gov
+autocontain -s just-eat\.co\.uk justeat
 
 " Sometimes the status bar in the bottom left corner overlaps the Tridactyl
 " command line, so set an option to move the status bar to the right.
