@@ -142,6 +142,7 @@ bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
 " CONTAINERS
+containercreate simonhugh.xyz purple fingerprint
 containercreate google yellow fingerprint
 containercreate facebook blue fingerprint
 containercreate twitter blue fingerprint
@@ -158,6 +159,7 @@ containercreate bbc red circle
 containercreate gov red fingerprint
 containercreate justeat red food
 
+autocontain -s simonhugh\.xyz simonhugh.xyz
 autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s facebook\.com facebook
