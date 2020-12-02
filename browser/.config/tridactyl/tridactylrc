@@ -154,6 +154,7 @@ containercreate github purple circle
 containercreate gitlab purple circle
 containercreate halifax green dollar
 containercreate natwest green dollar
+containercreate pension green dollar
 containercreate netflix red circle
 containercreate bbc red circle
 containercreate gov red fingerprint
@@ -173,6 +174,7 @@ autocontain -s github\.com github
 autocontain -s gitlab\.com gitlab
 autocontain -s halifax-online\.co\.uk halifax
 autocontain -s nwolb\.com natwest
+autocontain -s bandce\.co\.uk pension
 autocontain -s netflix\.com netflix
 autocontain -s bbc\.(co\.uk|com) bbc
 autocontain -s gov\.uk gov
