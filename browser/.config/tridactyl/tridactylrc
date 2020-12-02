@@ -155,7 +155,7 @@ autocontain -s google\.(co\.uk|com) google
 autocontain -s youtube\.com google
 autocontain -s facebook\.com facebook
 autocontain -s twitter\.com twitter
-autocontain -s reddit\.com twitter
+autocontain -s reddit\.com reddit
 autocontain -s amazon\.(co\.uk|com) amazon
 autocontain -s github\.com github
 autocontain -s halifax-online\.co\.uk halifax
