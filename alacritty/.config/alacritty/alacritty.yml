@@ -5,8 +5,9 @@
 # These configuration files will be loaded in order, replacing values in files
 # loaded earlier with those loaded later in the chain. The file itself will
 # always be loaded last.
-#import:
+import:
 #  - /path/to/alacritty.yml
+    - /home/simon/.config/alacritty/themes/gruvbox_mod_dark.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
