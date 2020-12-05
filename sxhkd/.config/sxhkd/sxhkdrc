@@ -20,15 +20,15 @@ super + space; m
 
 # Apps
 super + t
-    $TERMINAL -c htop -n htop -e htop
+    $TERMINAL --class htop -t htop -e htop
 super + w
     $BROWSER
 super + p
-    $TERMINAL -c pulsemixer -n pulsemixer -e pulsemixer
+    $TERMINAL --class pulsemixer -t pulsemixer -e pulsemixer
 super + shift + m
-    $TERMINAL -t Mail -n mail -c mail -e mail -a
+    $TERMINAL --class mail  -t mail -e mail -a
 super + b
-    $TERMINAL -t newsboat -n newsboat -c newsboat -e newsboat
+    $TERMINAL --class newsboat -t newsboat -e newsboat
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
