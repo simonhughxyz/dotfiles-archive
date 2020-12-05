@@ -3,7 +3,7 @@ st.termName:     st-256color
 st.opacity:      200
 st.font:         Mono:pixelsize=26:antialias=true:autohint=true;
 URxvt.termName:  rxvt
-URxvt.font:      xft:monospace:size=18
+URxvt.font:      xft:monospace:size=16
 emacs.font:      Mono-20:antialias=true
 *.borderLess:    false
 *.letterSpace:   0
