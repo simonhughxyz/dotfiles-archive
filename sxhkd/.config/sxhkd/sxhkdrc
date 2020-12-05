@@ -2,7 +2,7 @@
 super + shift + Delete
     pkill -USR1 -x sxhkd
 super + {_,shift +} Return
-    $TERMINAL {_,-e nnn}
+    $TERMINAL {_,--class nnn -t nnn -e nnn}
 super + x
     lock
 super + shift + w
