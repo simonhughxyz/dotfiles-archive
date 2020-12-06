@@ -35,7 +35,7 @@ colors dark
 set hintchars hjklgftyuvbiondsrcm
 
 " Editor
-set editorcmd xst -e nvim -c 'set filetype=tridactyl-edit'
+set editorcmd $TERMINAL -e nvim -c 'set filetype=tridactyl-edit'
 
 " Always open in new window
 " autocmd DocStart .* tabdetach
