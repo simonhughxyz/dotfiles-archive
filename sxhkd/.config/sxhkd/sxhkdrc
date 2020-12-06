@@ -29,6 +29,8 @@ super + shift + m
     $TERMINAL --class mail  -t mail -e mail -a
 super + b
     $TERMINAL --class newsboat -t newsboat -e newsboat
+super + shift + c
+    $TERMINAL --class calc,calc -t calc -e bc
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
