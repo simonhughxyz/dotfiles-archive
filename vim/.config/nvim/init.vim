@@ -855,6 +855,9 @@ nnoremap <C-Right> <C-W><C-L> " Move to the right pane in split screen
 " inoremap <Down> <C-o>gj
 " inoremap <Up> <C-o>gk
 
+" Set exit terminal mode
+tnoremap <Esc><Esc> <c-\><c-n>
+
 nnoremap <C-O> :Files<cr>   " Open FZF search
 nnoremap <C-B> :Buffers<cr>   " Open FZF search
 " FOLDING
