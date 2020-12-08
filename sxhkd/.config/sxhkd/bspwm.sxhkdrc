@@ -10,10 +10,10 @@ super + {_,shift +} f
     bspc {desktop --layout next,node -t \~fullscreen}
 
 # DESKTOP
-super + {1-9,0,v,F1,F2,F3,F4}
+super + {1-9,0,v,F9,F10,F11,F12}
     desktop={1-9,10,V,11,12,13,14}; \
     bspc query -D -d "$desktop.focused" && bspc desktop -f last.local || bspc desktop -f "$desktop.local"
-super + shift + {1-9,0,v,F1,F2,F3,F4}
+super + shift + {1-9,0,v,F9,F10,F11,F12}
     bspc node -d {1-9,10,V,11,12,13,14}
 
 # Go back to previous desktop
