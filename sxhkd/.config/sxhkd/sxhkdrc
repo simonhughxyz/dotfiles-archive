@@ -112,26 +112,14 @@ super + Print
     screenshotsmenu
 super + shift + Print
     shotmenu
-# super + F12
-#     recordmenu listmenu
-# super + shift + F12
-    recordmenu
 
 # F Keys
-# super + F1
-#     autotypemenu
-# super + F2
-#     htmltopdfmenu
-# super + F3
-#     shot
-# super + shift + F11
-#     ytp rhistory
-# super + shift + F10
-#     fontawesomemenu
-# super + shift + F10
-#     setxkb gb
-# super + shift + F11 ; {a-z} ; {a-z}
-#     setxkb {a-z}{a-z}
+super + {_,shift +}  F1
+    {shot, shotmenu}
+super + F2
+    recordmenu
+super + F3
+    autotypemenu
 
 #Bluetooth
 XF86Bluetooth
