@@ -118,6 +118,10 @@ bindurl youtube.com t hint -J
 bind Y hint -y
 bind gy hint -p
 
+" View images
+bind i hint -I
+bind I hint -i
+
 " Play video with mpv
 unbind v
 unbind V
