@@ -98,12 +98,17 @@ bind m mute toggle
 bind M mute all toggle
 
 " Follow link
-bind f hint -w
+unbind f
+bind f hint
+" Open link in new tab
 unbind t
-bind t hint
-" Open ling in new tab
+bind t hint -b
+" Open link in foreground tab
 unbind T
-bind T hint -b
+bind T hint -t
+" Open link in new window
+unbind w
+bind w hint -w
 
 " Optomize follow link for URL's.
 bindurl youtube.com f hint -Jw
