@@ -6,8 +6,15 @@
 # Auto hides/shows a window.
     
 _main(){
-    pids=$(xdotool search --classname ${class})
-    if [ "${pids}" = "" ]; then
+    if xdotool search --classname "${class}" ; then
+        echo "${class}"
+        if [ "${close}" = "true" ]; then
+            # bspc node $pid -c
+            xdotool search --classname ${class} windowclose
+        else
+            xdotool search --onlyvisible --classname ${class} windowunmap || xdotool search --classname ${class} windowmap
+        fi
+    else
         echo "Class not found"
         if [ "${exe}" = "" ]; then
             echo "Please provide a command to execute"
@@ -19,15 +26,6 @@ _main(){
                 $TERMINAL --class "${class}" -t "${title}" -e "${exe}"
             fi
         fi
-    else
-        for pid in ${pids}; do
-            echo "Toggle $pid"
-            if [ "${close}" = "true" ]; then
-                bspc node $pid -c
-            else
-                bspc node $pid --flag hidden -f
-            fi
-        done
     fi
 }
 
