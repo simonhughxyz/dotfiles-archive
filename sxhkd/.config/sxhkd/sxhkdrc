@@ -30,7 +30,7 @@ super + shift + m
 super + b
     $TERMINAL --class newsboat -t newsboat -e newsboat
 super + shift + c
-    $TERMINAL --class calc,calc -t calc -e bc
+    bspwm_scratchpad -c calc -t calc -e bc
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
