@@ -4,14 +4,44 @@
 # Simon Hugh Moore
 #
 # Auto hides/shows a window.
+    
+_main(){
+    pids=$(xdotool search --classname ${class})
+    if [ "${pids}" = "" ]; then
+        echo "Class not found"
+        if [ "${exe}" = "" ]; then
+            echo "Please provide a command to execute"
+        else
+            echo "Creating new scratchpad"
+            if [ "${title}" = "" ]; then
+                $TERMINAL --class "${class}" -e "${exe}"
+            else
+                $TERMINAL --class "${class}" -t "${title}" -e "${exe}"
+            fi
+        fi
+    else
+        for pid in ${pids}; do
+            echo "Toggle $pid"
+            bspc node $pid --flag hidden -f
+        done
+    fi
+}
 
-if [ -z $1 ]; then
-	echo "Usage: $0 <name of hidden scratchpad window>"
+
+while test $# -gt 0; do
+    case "$1" in
+        # -h|--help) echo "$__usage"; exit ;;
+        -t|--title) shift; title=${1} ;;
+        -e|--exe) shift; exe=${1} ;;
+        -c|--class) shift; class=${1} ;;
+        *) class="$1" ;;
+    esac
+    shift
+done
+
+if [ -z $class ]; then
+    echo "Usage: $( basename $0 ) <name of hidden scratchpad window>"
 	exit 1
 fi
-    
-pids=$(xdotool search --classname ${1})
-for pid in $pids; do
-	echo "Toggle $pid"
-	bspc node $pid --flag hidden -f
-done
+
+_main
