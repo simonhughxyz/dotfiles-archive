@@ -55,7 +55,7 @@ super + alt + p
 super + a
     dmenu_run
 ctrl + alt + Delete
-    powermenu
+    bspwm_scratchpad -c powermenu -t Power -e powermenu -C
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
