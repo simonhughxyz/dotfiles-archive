@@ -9,8 +9,8 @@ wid=$1
 class=$2
 instance=$3
 
-case "$class" in
-    dropdown)
+case "$instance" in
+    dropdown*)
         xdo move -x 10 -y 10 $wid
         xdo resize -w 1900 -h 200 $wid
 
