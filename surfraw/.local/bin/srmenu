@@ -13,14 +13,19 @@ elvi_hfile="$runtime_dir/elvihistory"
 
 mkdir -p $runtime_dir
 
+_fzf(){
+    fzf --cycle --reverse --info=hidden --border --padding=0 --margin=0 --color='bw,border:129,fg+:129:bold' "$@"
+}
 
 # get primary selection and search history from $hfile and pass into dmenu
-search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " )
+# search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " )
+search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' |  _fzf --prompt="Search: " )
 [ "$search_term" = "" ] && exit 1
 
 elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist} $1 ~ /^[^A-Z]/{print $1}' )"
 
-elvi="$( echo "$elvi_list" | dmenu -p "Elvi: " )"
+# elvi="$( echo "$elvi_list" | dmenu -p "Elvi: " )"
+elvi="$( echo "$elvi_list" | _fzf )"
 [ "$elvi" = "" ] && exit 1
 
 surfraw "$elvi" $search_term
