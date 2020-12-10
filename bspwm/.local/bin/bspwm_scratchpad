@@ -22,7 +22,11 @@ _main(){
     else
         for pid in ${pids}; do
             echo "Toggle $pid"
-            bspc node $pid --flag hidden -f
+            if [ "${close}" = "true" ]; then
+                bspc node $pid -c
+            else
+                bspc node $pid --flag hidden -f
+            fi
         done
     fi
 }
