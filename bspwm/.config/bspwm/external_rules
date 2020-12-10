@@ -18,6 +18,13 @@ case "$instance" in
         echo "sticky=on"
         # echo "hidden=off"
     ;;
+    powermenu)
+        xdo move -x 10 -y 10 $wid
+        xdo resize -w 280 -h 280 $wid
+        echo "state=floating"
+        echo "sticky=on"
+        echo "border=off"
+    ;;
     calc)
         xdo resize -w 1200 -h 400 $wid
 
