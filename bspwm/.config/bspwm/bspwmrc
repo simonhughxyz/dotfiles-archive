@@ -39,6 +39,6 @@ bspc rule -a Emacs state=tiled   # open emacs in tiled mode.
 bspc rule -a Sype state=tiled   # open skype in tiled mode.
 
 # run bspwm specific sxhkd config.
-sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" &
+sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" > ~/.local/share/sxhkd/bspwm.sxhkd.log 2>&1 & # keybindings.
 # run lemonbar panel after sleep to give system time to catch up.
 sleep 1 && melonbar run &
