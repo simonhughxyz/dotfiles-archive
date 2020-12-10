@@ -10,7 +10,8 @@
 choices="Hibernate\nSleep\nExit\nShutdown\nReboot"
 
 # get choice form dmenu
-choice=$(echo -e "$choices" | dmenu -sb "#ad1616" -p "Power Menu: ")
+# choice=$(echo -e "$choices" | dmenu -sb "#ad1616" -p "Power Menu: ")
+choice=$(echo -e "$choices" | fzf --cycle --color=bw --reverse --border --info=hidden)
 
 case "$choice" in 
     Hibernate) sudo ZZZ;;
