@@ -30,7 +30,7 @@ super + shift + m
 super + b
     $TERMINAL --class newsboat -t newsboat -e newsboat
 super + shift + c
-    bspwm_scratchpad -c calc -t calc -e bc
+    scratchpad -c calc -t calc -e bc
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
@@ -55,7 +55,7 @@ super + alt + p
 super + a
     dmenu_run
 ctrl + alt + Delete
-    bspwm_scratchpad -c powermenu -t Power -e powermenu -C
+    scratchpad -c powermenu -t Power -e powermenu -C
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
