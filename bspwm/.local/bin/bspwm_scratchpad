@@ -38,6 +38,7 @@ while test $# -gt 0; do
         -t|--title) shift; title=${1} ;;
         -e|--exe) shift; exe=${1} ;;
         -c|--class) shift; class=${1} ;;
+        -C|--close) close="true" ;;
         *) class="$1" ;;
     esac
     shift
