@@ -4,6 +4,9 @@
 # Simon Hugh Moore
 #
 # Auto hides/shows a window.
+
+# check for dependencies
+command -v xdotool > /dev/null || { echo "xdotool not found"; exit 1; }
     
 _main(){
     if xdotool search --classname "${class}" ; then
