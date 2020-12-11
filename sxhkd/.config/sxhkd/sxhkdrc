@@ -59,7 +59,7 @@ ctrl + alt + Delete
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
 super + s
-    srmenu
+    scratchpad -c dropdown_srmenu -t Search -e srmenu -C
 super + shift + backslash
     streammenu
 super + shift + p
