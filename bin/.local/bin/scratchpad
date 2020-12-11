@@ -13,7 +13,7 @@ _main(){
         echo "${class}"
         if [ "${close}" = "true" ]; then
             # bspc node $pid -c
-            xdotool search --classname ${class} windowclose
+            xdotool search --classname ${class} windowkill
         else
             xdotool search --onlyvisible --classname ${class} windowunmap || xdotool search --classname ${class} windowmap
         fi
