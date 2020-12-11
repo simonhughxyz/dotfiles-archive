@@ -16,7 +16,7 @@ case "$instance" in
 
         echo "state=floating"
         echo "sticky=on"
-        # echo "hidden=off"
+        echo "border=off"
     ;;
     powermenu)
         xdo move -x 10 -y 10 $wid
