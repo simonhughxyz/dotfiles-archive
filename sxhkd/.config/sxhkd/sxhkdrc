@@ -63,7 +63,7 @@ super + s
 super + shift + backslash
     streammenu
 super + shift + p
-    scratchpad -c dropdown_passmenu -t Pass -e "pass menu" -C
+    scratchpad -c passmenu -t Pass -e "pass menu" -C
 super + {_,shift +} h
     mpv-history -{t,p} -d
 
