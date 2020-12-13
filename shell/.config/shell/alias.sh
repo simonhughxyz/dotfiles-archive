@@ -91,8 +91,6 @@ alias gf='git fetch'
 alias gm='git merge'
 alias gd='git diff'
 
-# find
-alias find='fd'
 
 # stardict
 alias def='sdcv --color'
