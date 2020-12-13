@@ -19,8 +19,8 @@ case "$instance" in
         echo "border=off"
     ;;
     powermenu)
-        xdotool windowmove $wid 5 5
-        xdotool windowsize $wid 280 280
+        xdotool windowmove $wid 35% 35%
+        xdotool windowsize $wid 500 300
         echo "state=floating"
         echo "sticky=on"
         echo "border=off"
