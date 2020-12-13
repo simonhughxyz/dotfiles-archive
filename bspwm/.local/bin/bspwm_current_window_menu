@@ -14,7 +14,7 @@ windows=$( bspc query -N -n .window.local )
 [ "$1" = "-a" ] && windows=$( bspc query -N -n .window )
 
 # get choice of window as title.
-choice="$( echo $windows | xargs -d ' ' -I {} xdotool getwindowname {} | dmenu -i -l 10 )"
+choice="$( echo $windows | xargs -d ' ' -I {} xdotool getwindowname {} | fzf )"
 
 # switch to window.
 # bspc node -f $( xdotool search --name "$choice" )
