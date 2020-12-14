@@ -6,15 +6,19 @@ prefix="$XDG_RUNTIME_DIR/record"
 # pipe to message record.
 pipe="$prefix/pipe"
 
+_fzf(){
+    fzf "$@"
+}
+
 asktoend() { \
-    response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?")
+    response=$(printf "No\\nYes" | _fzf --prompt "Recording still active. End recording?")
 	[ "$response" = "Yes" ] && echo "kill" > $pipe
     sleep 1 # no idea why but wont exit without sleep
     exit
 }
 
 askrecording() { \
-    choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Record: ")
+    choice=$(printf "screencast\\nvideo\\naudio" | _fzf --prompt "Record: ")
 	case "$choice" in
 		screencast) record -r screencast;;
 		audio) record -r audio;;
@@ -26,7 +30,7 @@ askrecording() { \
 }
 
 listmenu() {
-    choice="$( record list | dmenu -i -l 10 )"
+    choice="$( record list | _fzf )"
 
     # if nothing is chosen then exit
     [ "$choice" != "" ] || exit
