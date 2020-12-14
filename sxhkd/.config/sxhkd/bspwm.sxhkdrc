@@ -43,7 +43,7 @@ super + alt + {_,shift +} {Left,Down,Up,Right}
 
 # Swap current node with biggest window
 super + grave
-    bspc node -s biggest.window.local
+    bspc node -s biggest.\!focused.local
 
 ### PRESELECT ###
 
