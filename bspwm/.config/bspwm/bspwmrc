@@ -18,9 +18,10 @@ bspc config borderless_monocle    true  # no borders in monocle layout.
 bspc config gapless_monocle       true  # no gaps in monocle layout.
 bspc config single_monocle        true  # use monocle layout if there is only 1 window.
 
-# bspc config focus_follows_pointer true  # focus the window under the pointer.
-# bspc config pointer_follows_focus true  # move pointer to focused window.
-bspc config ignore_ewmh_focus     true  # prevent apps from stealing focus.
+# bspc config focus_follows_pointer true # focus the window under the pointer.
+# bspc config pointer_follows_focus true # move pointer to focused window.
+bspc config pointer_modifier mod1      # modifier to move/resize window with pointer
+bspc config ignore_ewmh_focus     true # prevent apps from stealing focus.
 
 # Color
 bspc config normal_border_color   "#333333"
