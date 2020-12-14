@@ -23,6 +23,7 @@ _sync() {
 
 _save_firefox_profiles() { _sync "$firefox_profiles/" "$profiles"; }
 _load_firefox_profiles() { _sync "$profiles/" "$firefox_profiles"; }
+_remove_firefox_profiles() { rm -rf "$firefox_profiles"; }
 _git() { git -C "$profiles" $@; }
 
 case $1 in
@@ -30,5 +31,6 @@ case $1 in
     -s|save) _save_firefox_profiles ;;
     -l|load) _load_firefox_profiles ;;
     -g|git) shift; _git $@ ;;
+    -r|rm) _remove_firefox_profiles ;;
     *) _firefox $@ ;;
 esac
