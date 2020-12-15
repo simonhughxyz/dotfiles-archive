@@ -56,7 +56,7 @@ nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
 
 # Source local profile
-local_profile=$HOME/.config/local_profile
+local_profile=$HOME/.config/local.profile
 [ -f $local_profile ] && source $local_profile
 
 # Start ssh-agent if its not already running
