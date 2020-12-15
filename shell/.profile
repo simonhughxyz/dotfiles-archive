@@ -51,9 +51,13 @@ export DOTFILES="$HOME/.dotfiles"
 export WH="/mnt/wh"
 
 
-# Get NNN config
+# Source NNN config
 nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
+
+# Source local profile
+local_profile=$HOME/.config/local_profile
+[ -f $local_profile ] && source $local_profile
 
 # Start ssh-agent if its not already running
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
