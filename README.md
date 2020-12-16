@@ -10,7 +10,7 @@ I use GNU stow to install my dotfiles, it will create the required symlinks for 
 Clone the repository wherever you want (I like to keep it in `~/.dotfiles`).
 
 ```bash
-git clone https://github.com/simonhughcom/dotfiles.git && cd dotfiles && stow */
+git clone https://github.com/simonhughcom/dotfiles.git && cd dotfiles && stow -t ~/ */
 ```
 
 
