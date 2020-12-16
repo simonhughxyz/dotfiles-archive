@@ -14,9 +14,9 @@ choices="Hibernate\nSleep\nExit\nShutdown\nReboot"
 choice=$(echo -e "$choices" | fzf --cycle --reverse --info=hidden --border --padding=0 --margin=0 --color='bw,border:1,fg+:1:bold' )
 
 case "$choice" in 
-    Hibernate) sudo ZZZ;;
-    Sleep) sudo zzz;;
-    Exit) killall xinit;;
-    Shutdown) sudo shutdown -h now & ;;
-    Reboot) sudo reboot & ;;
+    Hibernate) sudo ZZZ ;;
+    Sleep) sudo zzz ;;
+    Exit) killall xinit ;;
+    Shutdown) sudo shutdown -h now ;;
+    Reboot) sudo reboot ;;
 esac
