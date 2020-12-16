@@ -1,1 +1,0 @@
-../accounts/simonhmoore94@gmail.com.muttrc
