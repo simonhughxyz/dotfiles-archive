@@ -55,6 +55,11 @@ export WH="/mnt/wh"
 nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
 
+# Host specific config
+if [ "$HOST" == "voidtower"]; then
+    export LIBVA_DRIVER_NAME="radeonsi"
+fi
+
 # Start ssh-agent if its not already running
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     mkdir -p "$XDG_RUNTIME_DIR/ssh"
