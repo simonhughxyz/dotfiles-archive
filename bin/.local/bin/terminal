@@ -5,9 +5,16 @@
 #
 # Wrapper script for launching terminal
 
-# check for dependencies
-command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
+_alacritty(){
+    # check for dependencies
+    command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
 
+    if [ "$HOST" = "mumtop" ]; then
+        eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $1"
+    else
+        eval "alacritty $1"
+    fi
+}
 
 while test $# -gt 0; do
     case "$1" in
@@ -21,4 +28,4 @@ while test $# -gt 0; do
     command="$command $arg"
 done
 
-eval "alacritty $command"
+_alacritty "$command"
