@@ -55,10 +55,6 @@ export WH="/mnt/wh"
 nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
 
-# Source local profile
-local_profile=$HOME/.config/local.profile
-[ -f $local_profile ] && source $local_profile
-
 # Start ssh-agent if its not already running
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     mkdir -p "$XDG_RUNTIME_DIR/ssh"
