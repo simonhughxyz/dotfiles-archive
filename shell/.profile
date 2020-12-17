@@ -56,7 +56,7 @@ nnn_config=$HOME/.config/nnn/nnnrc
 [ -f $nnn_config ] && source $nnn_config
 
 # Host specific config
-if [ "$HOST" = "voidtower"]; then
+if [ "$HOST" = "voidtower" ]; then
     export LIBVA_DRIVER_NAME="radeonsi"
 fi
 
