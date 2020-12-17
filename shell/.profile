@@ -2,6 +2,9 @@
 # set environment variables here
 # runs once on login.
 
+# try and set HOST
+command -v hostname > /dev/null && export HOST="$( hostname )"
+
 # path
 export GOPATH="$HOME/.local/go"
 export GOBIN="$GOPATH/bin"
