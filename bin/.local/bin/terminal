@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# TERMINAL
+# Simon Hugh Moore
+#
+# Wrapper script for launching terminal
+
+# check for dependencies
+command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
+
+
+while test $# -gt 0; do
+    case "$1" in
+        # -h|--help) echo "$__usage"; exit ;;
+        -t|--title) arg="-t" ;;
+        -e|--exe) arg="-e" ;;
+        -c|--class) arg="--class" ;;
+        *) arg="$1" ;;
+    esac
+    shift
+    command="$command $arg"
+done
+
+eval "alacritty $command"
