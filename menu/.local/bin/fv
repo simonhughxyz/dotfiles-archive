@@ -6,7 +6,7 @@
 # Find files and open them in your editor (vim is used if $EDITOR not set).
 # 
 # You can choose max depth of directory in first argument.
-# Default max depth is 5.
+# Default max depth is 10.
 # 
 # Will use the fantastic fd (https://github.com/sharkdp/fd) utility if available
 # otherwise it will default back to find.
