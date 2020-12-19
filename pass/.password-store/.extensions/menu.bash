@@ -82,6 +82,6 @@ case "$choice" in
     url*) _hide; write "$(pass get "$choice" "$password")";;        # autotype URL
     URL*) _hide; $BROWSER "$(pass get "$choice" "$password")";;     # visit URL
     nth*) write "$(_nth "$choice"; _hide)";;                        # autotype the nth char
-    Nth*) _hide; notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
+    Nth*) notify-send -u normal "Pass" "$(_nth "$choice"; _hide)";; # display nth chars in notification
     *) _hide; write "$(pass get "$choice" "$password")";;
 esac
