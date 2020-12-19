@@ -33,10 +33,17 @@ _urxvt(){
     eval "urxvt $cmd"
 }
 
+_xst(){
+    _dep "xst"
+    cmd="$( echo "$@" | _replace "-c" "-n" )"
+    eval "xst $cmd"
+}
+
 while test $# -gt 0; do
     case "$1" in
         # -h|--help) echo "$__usage"; exit ;;
         urxvt) shift; _urxvt "$@"; exit ;;
+        xst) shift; _xst "$@"; exit ;;
         *) _alacritty "$@"; exit ;;
     esac
     shift
