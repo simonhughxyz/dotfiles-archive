@@ -5,14 +5,18 @@
 #
 # Wrapper script for launching terminal
 
+# check for dependency
+_dep() {
+    command -v "$1" > /dev/null || { echo "$1 not found"; exit 1; }
+}
+
 # Replace one cli command with another
 _replace(){
     sed "s/[[:blank:]]*$1[[:blank:]][[:blank:]]*/ $2 /"
 }
 
 _alacritty(){
-    # check for dependencies
-    command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
+    _dep "alacritty"
 
     # cmd="$( echo "$@" | sed 's/[[:blank:]]*-c[[:blank:]][[:blank:]]*/ --class /' )"
     cmd="$( echo "$@" | _replace "-c" "--class" )"
@@ -24,8 +28,7 @@ _alacritty(){
 }
 
 _urxvt(){
-    # check for dependencies
-    command -v urxvt > /dev/null || { echo "urxvt not found"; exit 1; }
+    _dep "urxvt"
     
     cmd="$( echo "$@" | _replace "-t" "-title" | _replace "-c" "-name" )"
     eval "urxvt $cmd"
