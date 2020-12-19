@@ -44,6 +44,7 @@ while test $# -gt 0; do
         # -h|--help) echo "$__usage"; exit ;;
         urxvt) shift; _urxvt "$@"; exit ;;
         xst) shift; _xst "$@"; exit ;;
+        alacritty) _alacritty "$@"; exit ;;
         *) _alacritty "$@"; exit ;;
     esac
     shift
