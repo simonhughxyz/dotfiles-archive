@@ -8,24 +8,22 @@
 _alacritty(){
     # check for dependencies
     command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
-
+    
+    cmd="$( echo "$@" | sed 's/ -c / --class /' )"
+    
     if [ "$HOST" = "mumtop" ]; then
-        eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $1"
+        eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd"
     else
-        eval "alacritty $1"
+        eval "alacritty $cmd"
     fi
 }
 
-while test $# -gt 0; do
-    case "$1" in
-        # -h|--help) echo "$__usage"; exit ;;
-        -t|--title) arg="-t" ;;
-        -e|--exe) arg="-e" ;;
-        -c|--class) arg="--class" ;;
-        *) arg="$1" ;;
-    esac
-    shift
-    command="$command $arg"
-done
+# while test $# -gt 0; do
+#     case "$1" in
+#         # -h|--help) echo "$__usage"; exit ;;
+#         *) _alacritty "$@"; exit ;;
+#     esac
+#     shift
+# done
 
-_alacritty "$command"
+_alacritty "$@"
