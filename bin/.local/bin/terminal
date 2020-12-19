@@ -23,12 +23,21 @@ _alacritty(){
     fi
 }
 
-# while test $# -gt 0; do
-#     case "$1" in
-#         # -h|--help) echo "$__usage"; exit ;;
-#         *) _alacritty "$@"; exit ;;
-#     esac
-#     shift
-# done
+_urxvt(){
+    # check for dependencies
+    command -v urxvt > /dev/null || { echo "urxvt not found"; exit 1; }
+    
+    cmd="$( echo "$@" | _replace "-t" "-title" | _replace "-c" "-name" )"
+    eval "urxvt $cmd"
+}
+
+while test $# -gt 0; do
+    case "$1" in
+        # -h|--help) echo "$__usage"; exit ;;
+        urxvt) shift; _urxvt "$@"; exit ;;
+        *) _alacritty "$@"; exit ;;
+    esac
+    shift
+done
 
 _alacritty "$@"
