@@ -5,12 +5,17 @@
 #
 # Wrapper script for launching terminal
 
+# Replace one cli command with another
+_replace(){
+    sed "s/[[:blank:]]*$1[[:blank:]][[:blank:]]*/ $2 /"
+}
+
 _alacritty(){
     # check for dependencies
     command -v alacritty > /dev/null || { echo "alacritty not found"; exit 1; }
-    
-    cmd="$( echo "$@" | sed 's/ -c / --class /' )"
-    
+
+    # cmd="$( echo "$@" | sed 's/[[:blank:]]*-c[[:blank:]][[:blank:]]*/ --class /' )"
+    cmd="$( echo "$@" | _replace "-c" "--class" )"
     if [ "$HOST" = "mumtop" ]; then
         eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd"
     else
