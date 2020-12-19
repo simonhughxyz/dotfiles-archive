@@ -18,7 +18,6 @@ _replace(){
 _alacritty(){
     _dep "alacritty"
 
-    # cmd="$( echo "$@" | sed 's/[[:blank:]]*-c[[:blank:]][[:blank:]]*/ --class /' )"
     cmd="$( echo "$@" | _replace "-c" "--class" )"
     if [ "$HOST" = "mumtop" ]; then
         eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd"
