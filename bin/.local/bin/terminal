@@ -45,12 +45,19 @@ _st(){
     eval "st $cmd"
 }
 
+_xterm(){
+    _dep "xterm"
+    cmd="$( echo "$@" | _replace "-c" "-name" | _replace "-t" "-title" )"
+    eval "xterm $cmd"
+}
+
 while test $# -gt 0; do
     case "$1" in
         # -h|--help) echo "$__usage"; exit ;;
         urxvt) shift; _urxvt "$@"; exit ;;
         st) shift; _st "$@"; exit ;;
         xst) shift; _xst "$@"; exit ;;
+        xterm) shift; _xterm "$@"; exit ;;
         alacritty) _alacritty "$@"; exit ;;
         *) _alacritty "$@"; exit ;;
     esac
