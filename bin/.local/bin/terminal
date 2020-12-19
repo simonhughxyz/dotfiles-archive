@@ -5,6 +5,19 @@
 #
 # Wrapper script for launching terminal
 
+__usage="
+Usage: $(basename "$0") [terminal] [OPTIONS]
+Common command line arguments for terminal emulators
+
+Options:
+  [terminal]                terminal emulator to launch.
+  -c                        set class/instace name
+  -t                        set title
+  -e                        command to run in terminal
+  -h, help                  Print this help message.
+  *                         Any other command will be passed on to the terminal emulator
+"
+
 # check for dependency
 _dep() {
     command -v "$1" > /dev/null || { echo "$1 not found"; exit 1; }
@@ -53,7 +66,7 @@ _xterm(){
 
 while test $# -gt 0; do
     case "$1" in
-        # -h|--help) echo "$__usage"; exit ;;
+        -h|--help) echo "$__usage"; exit ;;
         urxvt) shift; _urxvt "$@"; exit ;;
         st) shift; _st "$@"; exit ;;
         xst) shift; _xst "$@"; exit ;;
