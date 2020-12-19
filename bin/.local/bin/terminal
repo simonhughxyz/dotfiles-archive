@@ -39,10 +39,17 @@ _xst(){
     eval "xst $cmd"
 }
 
+_st(){
+    _dep "st"
+    cmd="$( echo "$@" | _replace "-c" "-n" )"
+    eval "st $cmd"
+}
+
 while test $# -gt 0; do
     case "$1" in
         # -h|--help) echo "$__usage"; exit ;;
         urxvt) shift; _urxvt "$@"; exit ;;
+        st) shift; _st "$@"; exit ;;
         xst) shift; _xst "$@"; exit ;;
         alacritty) _alacritty "$@"; exit ;;
         *) _alacritty "$@"; exit ;;
