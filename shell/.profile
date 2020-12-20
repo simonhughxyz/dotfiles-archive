@@ -5,6 +5,10 @@
 # try and set HOST
 command -v hostname > /dev/null && export HOST="$( hostname )"
 
+# Set runtime dir
+export XDG_RUNTIME_DIR="/tmp/${USER}.runtime"
+mkdir -m 0700 -p $XDG_RUNTIME_DIR
+
 # path
 export GOPATH="$HOME/.local/go"
 export GOBIN="$GOPATH/bin"
