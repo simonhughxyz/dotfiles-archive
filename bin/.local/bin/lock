@@ -24,7 +24,7 @@ else
     # delete pid file when exiting
     trap _cleanup INT TERM EXIT
     # create runtime dir
-    mkdir -p "$runtime"
+    mkdir -m 0700 -p "$runtime"
     echo $$ > "$pid"
 fi
 
