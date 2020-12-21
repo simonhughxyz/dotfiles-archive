@@ -6,7 +6,7 @@
 # Lock the screen
 
 # runtime dir.
-runtime=/tmp/lock
+runtime=$XDG_RUNTIME_DIR/lock
 # PID file
 pid=$runtime/pid
 
