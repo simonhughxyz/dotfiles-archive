@@ -1,7 +1,13 @@
 #!/bin/sh
 xrdb -merge ~/.Xresources
 
-setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin" -option "altwin:menu_win"
+if [ "$HOST" = "voidtower" ]; then
+    setxkbmap -layout gb -option "caps:swapescape" -option "altwin:menu_win"
+elif [ "$HOST" = "voidbook" ]; then
+    setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin"
+else
+    setxkbmap -layout gb -option "altwin:menu_win"
+fi
 
 # xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min.
