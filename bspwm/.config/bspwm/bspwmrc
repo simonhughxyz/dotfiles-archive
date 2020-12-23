@@ -11,6 +11,7 @@ if [ "$USER" = "simon" ]; then
     bspc desktop 'V' --layout monocle
 else
     bspc monitor -d 1
+    bspc desktop 1 --layout monocle
 fi
 
 # config options
