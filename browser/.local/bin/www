@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# WWW
+# Simon Hugh Moore
+#
+# Wrapper for firefox setting up all the correct profiles.
+
+# Location of profiles to manage.
+profiles=~/projects/firefox-profiles
+
+# Path where firefox stores its profiles.
+firefox_profiles=~/.mozilla/firefox
+
+_firefox(){ 
+    # Run firefox always in new window with timezone set to UTC.
+    TZ=UTC firefox --new-window $@
+}
+
+_sync() {
+    [ $( ls "$firefox_profiles"/*/lock 2> /dev/null ) ] && echo "Firefox is running!\nClose firefox before syncing!" && exit 1
+    rsync -r --exclude-from "$profiles/.rsync_ignore" "$1/" "$2"; 
+}
+
+_save_firefox_profiles() { _sync "$firefox_profiles/" "$profiles"; }
+_load_firefox_profiles() { _sync "$profiles/" "$firefox_profiles"; }
+_remove_firefox_profiles() { rm -rf "$firefox_profiles"; }
+_git() { git -C "$profiles" $@; }
+
+case $1 in
+    -f|firefox) shift; _firefox $@ ;;
+    -s|save) _save_firefox_profiles ;;
+    -l|load) _load_firefox_profiles ;;
+    -g|git) shift; _git $@ ;;
+    -r|rm) _remove_firefox_profiles ;;
+    *) _firefox $@ ;;
+esac

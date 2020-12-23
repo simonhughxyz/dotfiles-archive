@@ -1,0 +1,205 @@
+" Tridactyl config
+"
+" Simon H Moore
+"
+" Required tridactly-native to be installed.
+" Run `installnative` in tridactyl.
+
+" Remove any existing settings.
+sanitize tridactyllocal tridactylsync
+
+"
+" Alias
+"
+
+" mpv alias uses a wrapper script called instead of calling mpv directly.a
+alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('m -d --file=' + url))
+alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
+alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
+
+" Set default zoom
+" autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
+
+"
+" Settings
+"
+
+" Color theme to use for menu
+colors dark
+
+" Auto create containers 
+" auconscreatecontainer true
+
+" Characters to use for hints
+" set hintchars hjklasdfgyuiopqwertnmzxcb
+set hintchars hjklgftyuvbiondsrcm
+
+" Editor
+set editorcmd $TERMINAL -e nvim -c 'set filetype=tridactyl-edit'
+
+" Always open in new window
+" autocmd DocStart .* tabdetach
+
+
+"
+" Other site optimizations
+"
+
+" Skip 'home' page for youtube channel and go straight to 'video'
+autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
+autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(c|channel|user)/[^/]*/?$") && tri.excmds.urlmodify("-g", "2", "videos")
+autocmd DocStart .* js -r single_image_zoom.ts
+
+bind z js window.toggleZoom()
+
+
+"
+" Bind Keys
+"
+
+" TAB AND WINDOWS
+
+bind [ tabprev
+bind ] tabnext
+
+bind { followpage prev
+bind } followpage next
+
+" Go to last active tab
+bind <Tab> tab #
+
+" Detach tab from window.
+bind gd tabdetach
+
+" Close windows and tabs
+bind q tabclose
+bind Q winclose
+
+" Duplicate current url in new window
+unbind o
+bind o composite get_current_url | winopen
+unbind O
+bind O composite get_current_url | tabopen
+
+
+" Find
+set findcase smart
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+" Remove search highlighting.
+bind gh nohlsearch
+" Ctrl-F should use the browser's native 'find' functionality.
+unbind <C-f>
+
+" Mute
+bind m mute toggle
+bind M mute all toggle
+
+" Follow link
+unbind f
+bind f hint
+" Open link in new tab
+unbind t
+bind t hint -b
+" Open link in foreground tab
+unbind T
+bind T hint -t
+" Open link in new window
+unbind w
+bind w hint -w
+
+" Optomize follow link for URL's.
+bindurl youtube.com f hint -Jw
+bindurl youtube.com t hint -J
+
+" Yank with hint
+bind Y hint -y
+bind gy hint -p
+
+" View images
+bind i hint -I
+bind I hint -i
+
+" Play video with mpv
+unbind v
+unbind V
+" On current URL
+bind V composite get_current_url | mpv
+" Using hint
+bind v hint -JW mpv
+" On youtube
+bindurl youtube.com v composite hint -Jpipe ytd-thumbnail>a href | mpv
+
+
+" Download video using youtube-dl
+unbind d
+unbind D
+" On current URL
+bind D composite get_current_url | ytdl
+" Using hint
+bind d hint -JW ytdl
+" On Youtube
+bindurl youtube.com d composite hint -Jpipe ytd-thumbnail>a href | ytdl
+" Download playlist
+bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
+
+
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
+
+" CONTAINERS
+containercreate simonhugh.xyz purple fingerprint
+containercreate google yellow fingerprint
+containercreate facebook blue fingerprint
+containercreate twitter blue fingerprint
+containercreate yahoo purple fingerprint
+containercreate reddit pink fingerprint
+containercreate outlook turquiose fingerprint
+containercreate amazon orange cart
+containercreate ebay yellow cart
+containercreate github purple circle
+containercreate gitlab purple circle
+containercreate halifax green dollar
+containercreate natwest green dollar
+containercreate pension green dollar
+containercreate netflix red circle
+containercreate bbc red circle
+containercreate gov red fingerprint
+containercreate justeat red food
+containercreate namecheap orange briefcase
+containercreate three blue briefcase
+containercreate protonmail turquiose fingerprint
+containercreate skype turquiose fingerprint
+
+autocontain -s simonhugh\.xyz simonhugh.xyz
+autocontain -s google\.(co\.uk|com) google
+autocontain -s youtube\.com google
+autocontain -s facebook\.com facebook
+autocontain -s twitter\.com twitter
+autocontain -s yahoo\.(co\.uk|com|net) yahoo
+autocontain -s reddit\.com reddit
+autocontain -s amazon\.(co\.uk|com) amazon
+autocontain -s ebay\.(co\.uk|com) ebay
+autocontain -s github\.com github
+autocontain -s gitlab\.com gitlab
+autocontain -s halifax-online\.co\.uk halifax
+autocontain -s nwolb\.com natwest
+autocontain -s bandce\.co\.uk pension
+autocontain -s netflix\.com netflix
+autocontain -s bbc\.(co\.uk|com) bbc
+autocontain -s gov\.uk gov
+autocontain -s just-eat\.co\.uk justeat
+autocontain -s live\.com outlook
+autocontain -s namecheap\.com namecheap
+autocontain -s protonmail\.com protonmail
+autocontain -s skype\.com skype
+autocontain -s three\.co\.uk three
+
+" Sometimes the status bar in the bottom left corner overlaps the Tridactyl
+" command line, so set an option to move the status bar to the right.
+guiset_quiet hoverlink right
+
+" Import other local to the machine  configs
+source_quiet $XDG_CONFIG_HOME/tridactyl/local.tridactylrc

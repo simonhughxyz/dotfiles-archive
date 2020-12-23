@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# BSPWM_CURRENT_WINDOW_MENU
+# Simon Hugh Moore
+#
+# Lists all windows in current desktop in dmenu.
+# Chosen window is focused.
+# Use -a to list all windows.
+
+# get list of window id's on local desktop.
+windows=$( bspc query -N -n .window.local )
+
+# get list of all windows if -a argument is passed.
+[ "$1" = "-a" ] && windows=$( bspc query -N -n .window )
+
+# get choice of window as title.
+choice="$( echo $windows | xargs -d ' ' -I {} xdotool getwindowname {} | fzf )"
+
+# switch to window.
+# bspc node -f $( xdotool search --name "$choice" )
+# bspc node -f $( wmctrl -lx | awk -v name="$choice" '$0 ~ name {print $1}' )
+bspc node -f $( xwininfo -int -name "$choice" | awk '/Window id:/{print $4}' )

@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# BSPWM_FOCUS_NODE
+# Simon Hugh Moore
+#
+# Correctly focus and move window.
+# 
+# Tiled mode - focus or move window in given direction.
+# Monocle mode - focus or move next/prev window.
+# Floating window - focus next/prev window or move window by set pixels.
+# 
+# Limitation: because of the way BSPWM behaves, this script won't be able to
+# move from a window that is not floating to a window that is floating while
+# in tiled mode.
+# You can however move from floating window to a non-floating
+# window while in tiled mode.
+
+# amount of pixels to move floating window by.
+pixels="30"
+
+# Error message
+_error() { echo "Use: $( basename $0) -f|s left|down|up|right" && exit 1; }
+
+# get focus [-f] / move [-s] option
+opt=${1}
+
+# error if first argument is not -f|s
+[ "$opt" != "-f" -a "$opt" != "-s" ] && _error;
+
+
+# get layout of focused window and window state.
+layout=$( bspc query -T -d | jq -r .layout )
+window_state=$( bspc query -T -n | jq -r .client.state)
+
+# use correct command to focus node depending on layout.
+case "$layout" in
+    tiled) left="west"; down="south"; up="north"; right="east" ;;
+    monocle) left="prev"; down="prev"; up="next"; right="next" ;; 
+esac
+
+# Adjust command if floating window.
+if [ "$window_state" = "floating" ]; then
+    case "$opt" in
+        -f) left="prev"; down="prev"; up="next"; right="next";;
+        -s) left="-$pixels 0"; down="0 $pixels"; up="0 -$pixels"; right="$pixels 0"; opt="-v";;
+    esac
+fi
+
+# wrapper function for bspwm focus command.
+_bf() { bspc node "$opt" $2.local.!hidden.window; }
+
+# get direction of focus.
+case "$2" in
+    l|left) _bf $opt "$left";;
+    d|down) _bf $opt "$down";;
+    u|up) _bf $opt "$up";;
+    r|right) _bf $opt "$right";;
+    *) _error ;;
+esac

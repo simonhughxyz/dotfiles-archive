@@ -1,0 +1,63 @@
+# BSPWM
+super + {_,shift +} q
+    bspc node -{c,k}
+
+super + {_,shift +} numbersign
+    bspc node -t {tiled,\~floating}
+
+# cycle between monocle and tiles moad or fullscreen
+super + {_,shift +} f
+    bspc {desktop --layout next,node -t \~fullscreen}
+
+# DESKTOP
+super + {1-9,0,v,F9,F10,F11,F12}
+    desktop={1-9,10,V,11,12,13,14}; \
+    bspc query -D -d "$desktop.focused" && bspc desktop -f last.local || bspc desktop -f "$desktop.local"
+super + shift + {1-9,0,v,F9,F10,F11,F12}
+    bspc node -d {1-9,10,V,11,12,13,14}
+
+# Go back to previous desktop
+super + Tab
+    bspc desktop -f last.local
+super + BackSpace
+    bspc desktop -f last.local
+
+super + bracket{left,right}
+    bspc desktop -f {prev,next}.occupied.local
+
+super + shift + bracket{left,right}
+    bspc desktop -f {prev,next}.local
+
+# Change focus or swap nodes for both tiled and monocle layout
+super + {_, shift +} {Left,Down,Up,Right}
+    bspwm_focus_node -{f,s} {left,down,up,right}
+
+# cycle through windows
+super + shift + bracket{left,right}
+    bspc node -f {prev,next}.local
+
+super + {_, shift +} z
+    scratchpad -c dropdown_window -t Windows -e "bspwm_current_window_menu {_,-a}"
+super + {_, shift +} n
+    scratchpad -c dropdown_window -t Windows -e "bspwm_current_window_menu {_,-a}"
+
+super + alt + {_,shift +} {Left,Down,Up,Right}
+    bspwm_resize_node -{a,z} {left,down,up,right}
+
+# Swap current node with biggest window
+super + grave
+    bspc node -s biggest.\!focused.local
+
+### PRESELECT ###
+
+# preselect the direction.
+super + ctrl + {Left,Down,Up,Right}
+    bspc node -p {west,south,north,east}
+
+# preselect the ratio.
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# cancel the preselection.
+super + Escape
+    bspc node -p cancel

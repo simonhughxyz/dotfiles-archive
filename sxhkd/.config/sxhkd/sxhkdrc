@@ -1,0 +1,126 @@
+# Basic Binds
+super + shift + Delete
+    pkill -USR1 -x sxhkd
+super + {_,shift +} Return
+    $TERMINAL {_,-c nnn -t nnn -e nnn}
+super + x
+    lock
+super + shift + w
+    feh --bg-fill --randomize ~/Pictures/*/*-ls-*
+super + space; m
+    togglemouse
+
+# Key Locks
+{@}Caps_Lock
+    melonbar update keystate
+{@}Num_Lock
+    melonbar update keystate
+{@}Scroll_Lock
+    melonbar update keystate
+
+# Apps
+super + t
+    $TERMINAL -c htop -t htop -e htop
+super + w
+    $BROWSER
+super + p
+    $TERMINAL -c pulsemixer -t pulsemixer -e pulsemixer
+super + shift + m
+    $TERMINAL -c mail  -t mail -e mail -a
+super + b
+    $TERMINAL -c newsboat -t newsboat -e newsboat
+super + shift + c
+    scratchpad -c calc -t calc -e bc
+
+super + alt + w; {c,g,t} 
+    {chromium,google-chrome-stable,tor-browser}
+super + alt + v
+    virt-manager
+super + alt + s
+    steam
+super + alt + l
+    libreoffice
+super + alt + g
+    gimp
+super + alt + a
+    audacity
+super + alt + o
+    obs
+super + alt + c; {e,f}
+    unicodemenu ~/.config/{emoji,fontawesome}
+super + alt + p
+    pdfmenu
+
+# Dmenu
+super + a
+    scratchpad -c app_menu -t apps -e appmenu -C
+ctrl + alt + Delete
+    scratchpad -c powermenu -t Power -e powermenu -C
+super + {_,shift +} c
+    {clipmenu, clipdel -d ".*"}
+super + s
+    scratchpad -c dropdown_srmenu -t Search -e srmenu -C
+super + shift + backslash
+    streammenu
+super + shift + p
+    scratchpad -c pass_menu -t Pass -e "pass menu" -C
+super + {_,shift +} h
+    mpv-history -{t,p} -d
+
+# bookmaks
+super + slash
+    bukumenu -t star - x,pi
+super + shift + slash
+    bukutagmenu
+super + alt + b ; {l,p,d,s,y,f,g}
+    bukumenu -t {linux,p,docs,shop,yt,follow,git}
+
+
+
+# Audio
+super + m
+    volume mute
+super + {control +,shift +} m; {0-9}
+    volume {_,1}{0-9}0
+super + {_,shift +,control +} equal
+    volume +{5,20,1}
+super + {_,shift +,control +} minus
+    volume -{5,20,1}
+# XF86 Audio
+XF86AudioMute
+    volume mute
+XF86Audio{Raise,Lower}Volume {_,+ shift,+ control}
+    volume {+,-}{5,20,1}
+#XF86Audio{Play,Pause}
+#    playerctl {play,pause}
+#XF86Audio{Next,Prev}
+#    playerctl {next,prev}
+
+
+# Screen Brightness
+super + shift + b ; {0-9}
+    xbacklight -set {0-9}0
+super + shift + b ; {minus,equal}
+    xbacklight {-,+} 5 
+XF86MonBrightness{Up,Down}
+    xbacklight -{inc,dec} 20
+
+# Screen Capture
+Print
+    shot
+super + Print
+    screenshotsmenu
+super + shift + Print
+    shotmenu
+
+# F Keys
+super + {_,shift +}  F1
+    {shot, shotmenu}
+super + F2
+    recordmenu
+super + F3
+    autotypemenu
+
+#Bluetooth
+XF86Bluetooth
+   bluetoothctl power on

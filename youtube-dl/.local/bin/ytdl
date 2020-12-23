@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# YTDL
+# Simon Hugh Moore
+#
+# This script enables you to have separate configs for video and playlist
+# downloading which is useful for having different youtube-dl templates.
+# The script can also provide notifications.
+# 
+# Use:
+# -v    : download video.
+# -p    : download playlist.
+# -n    : turn on notifications.
+
+config_dir=$XDG_CONFIG_HOME/youtube-dl
+video_config=$config_dir/config
+playlist_config=$config_dir/pl.config
+slow_config=$config_dir/slow.config
+config=$video_config
+
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Download video or playlist, with or without notifications.
+Any argument starting with 'http' will be accepted as URL.
+
+Options:
+  -n, --notify                               Turn on notifications.
+  -v, --video                                Download single video.
+  -p, --playlist                             Download playlist.
+  -u, --url=url                              URL to download.
+  -h, --help                                 Print this help message.
+"
+
+
+_error(){
+    echo "$1"    
+    _notify "$1"
+    exit 1
+}
+
+_download(){ 
+    _notify "Starting Download..."
+    youtube-dl --config-location "$config" "$url" $@ || _error "Failed to download!"
+    _notify "Finished Download!"
+    exit
+}
+
+_notify(){
+    [ -z $notify ] && return 0
+    notify-send "Youtube-DL" "$1"
+}
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help) echo "$__usage"; exit ;;
+        -n|--notify) notify="true" ;;
+        -v|--video) config=$video_config ;;
+        -p|--playlist) config=$playlist_config ;;
+        -s|--slow) config=$slow_config ;;
+        -u) shift; url="$1" ;;
+        --url=*) url=${1#*=} ;;
+        http*) url="$1" ;;
+    esac
+    shift
+done
+_download $@

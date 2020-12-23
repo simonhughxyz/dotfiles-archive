@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# M
+# Simon Hugh Moore
+#
+# Wrapper script for mpv to have a persistent profile state.
+# Use mpv -P to choose profile.
+
+# mpv runtime dir.
+runtime_dir=$XDG_RUNTIME_DIR/mpv
+# file to store profile to run.
+profile=$runtime_dir/profile
+
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Download video or playlist, with or without notifications.
+Any argument starting with 'http' will be accepted as URL.
+
+Options:
+  -P                                Use fzf menu to choose profile.
+  -r                                Reset profile.
+  -p profile                        Set as profile.
+  -f, --url=file                    File to play.
+  -h, --help                        Print this help message.
+"
+
+
+# create runtime dir
+mkdir -p "$runtime_dir"
+# create profile file
+touch -a "$profile"
+
+# helper function to trim leading and trailing whitespace
+trim() {
+    local var="$*"
+    # remove leading whitespace characters
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"   
+    printf '%s' "$var"
+}
+
+# Run mpv in a tmux session so that its independent from parent shell.
+_tmux(){ 
+    tmux new -s mpv -d
+    tmux send-keys -t mpv "cd '$PWD'; mpv $1 &> /dev/null &" ENTER
+}
+
+_mpv(){ 
+    [ "$detached" = "true" ] && _tmux "$1" "$file" && exit
+    mpv $1
+}
+
+# get profile choice and write in file.
+_choose_profile() {
+    mpv --profile=help | awk 'NR>1 {print $1}' | fzf > "$profile"
+}
+
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help) echo "$__usage"; exit ;;
+        -P) _choose_profile; exit ;;
+        -p) shift; echo "$1" > "$profile"; exit ;;
+        -r) echo > "$profile"; exit ;;
+        -d) detached="true" ;;
+        -f) shift; file="$1" ;;
+        --file=*) file=${1#*=} ;;
+        *) arg="$arg $1" ;;
+    esac
+    shift
+done
+[ "$file" = "" ] || arg="$arg '$file'"
+_mpv $(trim "$arg")

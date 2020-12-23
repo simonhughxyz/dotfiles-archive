@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# MELONBAR-CLICK
+# Simon Hugh Moore
+#
+# Click events for statusline. 
+
+_memory() {
+    message="$( free -lth | awk 'NR==1 {printf "\t%s\t%s\t%s\n", $1, $2, $3} NR>1 {printf "%s\t%s\t%s\t%s\n", $1, $2, $3, $4}' )"
+    notify-send "Memory Info:" "$message"
+}
+
+_uptime(){
+    message="$( uptime | sed 's/,//g' | awk '{printf "Uptime: %s\nUsers: %s\nLoad Average: %s, %s, %s\n", $3, $4, $8, $9, $10 }' )"
+    notify-send "Uptime info:" "$message"
+}
+
+_date(){
+    # get calender, replaces color code with markup.
+    cal="$( cal --color=always | sed 's/\\[7m/<b><u>/g;s/\\[27m/<\/u><\/b>/g' | tail -n +2 )"
+    # get date info.
+    date="$( date '+Short:\t%d-%m-%Y%nDOW:\t%u (%A)%nDOY:\t%j%nWOY:\t%V%nQOY:\t%q%n' )"
+
+    message="\n$cal\n$date"
+
+    notify-send "$( date '+%A %d %B %Y' )" "$message"
+}
+
+_time(){
+    time="$( date '+%nlocal:\t%I:%M:%S %P%nZone:\t%z %Z%nEpoch:\t%s%n' )"
+
+    # europe
+    london_time="London:\t\t$( TZ=":Europe/London" date '+%H:%M:%S' )"
+    berlin_time="Berlin:\t\t$( TZ=":Europe/Berlin" date '+%H:%M:%S' )"
+    moscow_time="Moscow:\t\t$( TZ=":Europe/Moscow" date '+%H:%M:%S' )"
+    # America
+    new_york_time="New York:\t$( TZ=":America/New_York" date '+%H:%M:%S' )"
+    los_angeles_time="Los Angeles:\t$( TZ=":America/Los_Angeles" date '+%H:%M:%S' )"
+    # Asia
+    tokyo_time="Tokyo:\t\t$( TZ=":Asia/Tokyo" date '+%H:%M:%S' )"
+    hong_kong_time="Hong Kong:\t$( TZ=":Asia/Hong_Kong" date '+%H:%M:%S' )"
+    # Australia
+    sydney_time="Sydney:\t\t$( TZ=":Australia/Sydney" date '+%H:%M:%S' )"
+
+    time_zones="<b>Time Zones:</b>\n$london_time\n$berlin_time\n$moscow_time\n$new_york_time\n$los_angeles_time\n$tokyo_time\n$hong_kong_time\n$sydney_time"
+
+    message="$time\n\n$time_zones"
+    notify-send "$( date '+%H:%M:%S' )" "$message"
+}
+
+_battery(){
+    acpi -b    
+}
+
+case $1 in
+    memory) _memory ;;
+    uptime) _uptime ;;
+    date) _date ;;
+    time) _time ;;
+    battery) _battery ;;
+esac

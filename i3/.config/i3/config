@@ -1,0 +1,288 @@
+# vim: ft=i3
+##--Basic Definitions---##
+set $mod Mod4
+set $amod Mod1
+set $term exec --no-startup-id $TERM
+#set $TERMINAL $term
+
+# border / titlebar
+for_window [class="^.*"] border pixel 2
+smart_gaps on
+gaps inner 10
+gaps outer 0
+new_window normal
+smart_borders on
+hide_edge_borders both
+bindsym Control+Shift+b [class="^.*"] border toggle
+
+# font definitions
+set $font_size_small 8
+set $font_size_normal 12
+set $font_size_large 14
+set $font System San Francisco Display 
+
+# color definitions
+set $focused-color          #0f8706
+set $bg-color               #2f343f
+set $text-color             #f3f4f5
+set $urgent-color           #E53935
+set $inactive-text-color    #676E7D
+
+
+# Screen Brightness Definitions
+#set $bright_up exec xbacklight -inc 20
+#set $bright_down exec xbacklight -dec 20
+
+
+##---MISC---##
+floating_modifier $mod
+bindsym $mod+q kill
+bindsym $mod+$amod+r reload
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+font pango:$font+$font_size_normal
+
+
+##---WINDOW MANIPULATIONS---##
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+# move focus
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+
+# arrow keys change focus 
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# arrow keys move focus
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+#bindsym $mod+space split h
+
+# split in vertical orientation
+#bindsym $mod+v split v
+
+# enter fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+#bindsym $mod+Shift+space floating toggle
+
+# focus the parent container
+bindsym $mod+Shift+a focus parent
+
+
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+##---WORKSPACE SETTINGS---##
+
+# automaticly go back and forth between workspace
+workspace_auto_back_and_forth yes
+
+set $Lmon "HDMI-A-0"
+set $Rmon "DisplayPort-0"
+
+# Define Workspace names
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
+set $workspaceTop "Top"
+
+workspace $workspaceTop output $Lmon
+
+bindsym $mod+space workspace $workspaceTop
+bindsym $mod+shift+space move workspace to output above
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+h workspace prev
+bindsym $mod+Control+Right workspace next
+bindsym $mod+Control+l workspace next
+bindsym $mod+Tab workspace back_and_forth
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+
+# Assigned Workspaces
+
+# htop
+set $workspaceHtop ""
+assign [instance="htop"] $workspaceHtop
+exec --no-startup-id st -n htop -e htop
+bindsym $mod+t workspace $workspaceHtop
+
+# newsboat
+set $workspaceNB ""
+assign [instance="newsboat"] $workspaceNB
+exec --no-startup-id st -n newsboat -e newsboat
+bindsym $mod+n workspace $workspaceNB
+
+# MPV
+set $workspaceMPV ""
+assign [class="mpv"] $workspaceMPV
+for_window [class="mpv"] layout tabbed
+bindsym $mod+v workspace $workspaceMPV
+
+##---Decotations---##
+
+# window colors
+# class                 border              backgr. text        indicator            child_border
+client.focused          $focused-color      $focused-color      $text-color          $focused-color
+client.unfocused        $bg-color           $bg-color           $text-color          $bg-color
+client.focused_inactive $bg-color           $bg-color           $text-color          $bg-color
+client.urgent           $urgent-color       $urgent-color       $text-color          $urgent-color
+
+
+
+
+# bar settings
+bar {
+        font pango:monospace, FontAwesome 14
+        status_command i3blocks 
+        position top        
+        workspace_buttons yes
+        output $Rmon
+        colors {
+                background $bg-color
+                    separator #757575
+                #                  border               background          text
+                focused_workspace  $bg-color            $bg-color           $text-color
+                inactive_workspace $bg-color            $bg-color           $inactive-text-color
+                urgent_workspace   $urgent-color        $urgent-color       $text-color
+        }
+}
+
+
+##---DropDownWindows--##
+
+# General dropdown window traits. The order can matter.
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_*"] resize set 1600 600
+
+for_window [instance="dropdown_htop"] resize set 1500 900
+for_window [instance="dropdown_htop"] border pixel 2
+
+for_window [instance="dropdown_vifm"] resize set 2000 1200
+for_window [instance="dropdown_vifm"] border pixel 2
+
+for_window [instance="dropdown_pycalc"] resize set 800 400
+for_window [instance="dropdown_pycalc"] border pixel 2
+
+for_window [instance="dropdown_calcurse"] resize set 1200 750
+for_window [instance="dropdown_calcurse"] border pixel 2
+
+for_window [instance="dropdown_newsboat"] resize set 1300 700
+for_window [instance="dropdown_newsboat"] border pixel 2
+
+for_window [instance="dropdown_*"] move position center
+
+for_window [instance="pavucontrol"] floating enable
+for_window [instance="pavucontrol"] resize set 900 600
+for_window [instance="pavucontrol"] border pixel 2
+for_window [instance="pavucontrol"] move position center 
+
+
+# Dropdown
+bindsym $mod+Shift+BackSpace move scratchpad
+#bindsym $mod+backslash scratchpad show
+bindsym $mod+$amod+h exec --no-startup-id ddspawn htop
+bindsym $mod+Shift+Return exec --no-startup-id ddspawn vifm
+bindsym $mod+$amod+m exec --no-startup-id ddspawn pycalc
+bindsym $mod+$amod+p exec --no-startup-id appspawn pavucontrol
+bindsym $mod+$amod+c exec --no-startup-id ddspawn calcurse
+bindsym $mod+$amod+n exec --no-startup-id ddspawn newsboat
+
+
+##---KEYBINDINGS---##
+
+
+# Mouse bindings
+#bindsym --whole-window --release button2+button8 kill
+
+# Bar mode toggle
+#bindsym $mod+b bar mode toggle
+
+# Gaps
+bindsym $mod+g gaps inner current set 10
+bindsym $mod+Shift+g gaps inner current set 0
+

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# MPV-HISTORY
+# Simon Hugh Moore
+#
+# Returns mpv's history and shows a fzf/dmenu to select and play them.
+
+# mpv runtime dir.
+runtime_dir=$XDG_RUNTIME_DIR/mpv
+
+# tmp history file
+tmp_history=$runtime_dir/history.log
+
+# Permenant hostory file
+perm_history=~/.local/share/mpv/history.log
+
+_history(){
+    tac $history | cut -f3- | grep -i "$grep"
+}
+
+_url(){
+    grep "$1" $history | cut -f2 | head -n 1
+}
+
+_dmenu(){
+    file="$( _history | dmenu -i -l 10 )"
+    mpv "$( _url "$file" )"
+}
+
+_fzf(){
+    mpv "$file" file="$( _history | fzf | awk '{print $3}' )I"
+}
+
+while test $# -gt 0; do
+    case "$1" in
+        -t|--tmp) history=$tmp_history ;;
+        -p|--perm*) history=$perm_history ;;
+        -f|--fzf) _fzf; exit ;;
+        -g) shift; grep="$1" ;;
+        -d|--dmenu) _dmenu; exit ;;
+    esac
+    shift
+done
+_dmenu
