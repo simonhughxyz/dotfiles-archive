@@ -209,7 +209,7 @@ ac_disconnected_cmd =
 # Separator 1
 separator = new
 separator_background_id = 0
-separator_color = #eeeeee 88
+separator_color = #eeeeee 87
 separator_style = line
 separator_size = 3
 separator_padding = 1 10
