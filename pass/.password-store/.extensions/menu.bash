@@ -18,11 +18,10 @@ _fzf(){
     fzf -i "$@"
 }
 
-_hide(){ xdotool getwindowfocus windowunmap; }
-
 # type out using xdotool
 write(){
-    xdotool type --clearmodifiers "$1"
+    setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
+    sleep 0.0001
 }
 
 # Exploits a common design pattern in login fields to
@@ -77,11 +76,11 @@ fi
 echo "$password" >> "$lastpass"
 
 case "$choice" in
-    "*") _hide; auto_login;;                                        # autotype both login and pass
-    OTP) _hide; write "$(pass otp show "$password")";;              # autotype OTP
-    url*) _hide; write "$(pass get "$choice" "$password")";;        # autotype URL
-    URL*) _hide; $BROWSER "$(pass get "$choice" "$password")";;     # visit URL
-    nth*) write "$(_nth "$choice"; _hide)";;                        # autotype the nth char
-    Nth*) notify-send -u normal "Pass" "$(_nth "$choice"; _hide)";; # display nth chars in notification
-    *) _hide; write "$(pass get "$choice" "$password")";;
+    "*") auto_login;;                                        # autotype both login and pass
+    OTP) write "$(pass otp show "$password")";;              # autotype OTP
+    url*) write "$(pass get "$choice" "$password")";;        # autotype URL
+    URL*) $BROWSER "$(pass get "$choice" "$password")";;     # visit URL
+    nth*) write "$(_nth "$choice")";;                        # autotype the nth char
+    Nth*) notify-send -u normal "Pass" "$(_nth "$choice")";; # display nth chars in notification
+    *) write "$(pass get "$choice" "$password")";;
 esac
