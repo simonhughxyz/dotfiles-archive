@@ -55,7 +55,7 @@ cd $pass_dir
 password_files="$(find * -type f)"
 
 # get pass file using menu
-password=$( printf '%s\n' "$(tac "$lastpass" | awk 'NF' | awk '!x[$0]++' |head -n $history_nr)" "${password_files}" | sed 's|.gpg||' | _fzf ) || exit
+password=$( printf '%s\n' "$(tac "$lastpass" 2> /dev/null | awk 'NF' | awk '!x[$0]++' |head -n $history_nr)" "${password_files}" | sed 's|.gpg||' | _fzf ) || exit
 
 # get options from pass file
 options="$( pass $password | awk -F ':' '/^[0-9a-zA-Z_]*:.*$/{printf "%s\n", $1}' | sed 's/otpauth/OTP/')"
