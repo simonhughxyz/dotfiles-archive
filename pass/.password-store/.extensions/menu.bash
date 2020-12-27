@@ -28,13 +28,14 @@ write(){
 # auto login by following the pattern of:
 # type login --> press tab key --> type pass --> press return
 auto_login(){
-    write $(pass get login "$password")
-    sleep 0.1
-    xdotool key Tab
-    sleep 0.1
-    write $(pass get pass "$password")
-    sleep 0.1
-    xdotool key Return
+    login="$( pass get login "$password" )"
+    pass="$( pass get pass "$password" )"
+
+    setsid sh -c "xdotool sleep 0.1 type --clearmodifiers '$login';
+                xdotool key Tab;
+                xdotool type --clearmodifiers '$pass';
+                xdotool key Return" &
+    sleep 0.0001
 }
 
 # Gets the nth chars from password.
