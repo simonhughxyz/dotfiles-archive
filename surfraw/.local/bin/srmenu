@@ -19,7 +19,7 @@ _fzf(){
 
 # get primary selection and search history from $hfile and pass into dmenu
 # search_term=$( echo "$(xclip -o)" | tac - $hfile | awk 'NF' | awk '!x[$0]++' | dmenu -i -l 10 -p "Search Term: " )
-search_term=$( echo "$(xclip -o)" 2> /dev/null | tac - $hfile | awk 'NF' | awk '!x[$0]++' |  _fzf --prompt="Search: " --bind="enter:replace-query+print-query,ctrl-space:print-query")
+search_term=$( echo "$(xclip -o)" 2> /dev/null | tac - $hfile 2> /dev/null | awk 'NF' | awk '!x[$0]++' |  _fzf --prompt="Search: " --bind="enter:replace-query+print-query,ctrl-space:print-query")
 [ "$search_term" = "" ] && exit 1
 
 elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist} $1 ~ /^[^A-Z]/{print $1}' )"
