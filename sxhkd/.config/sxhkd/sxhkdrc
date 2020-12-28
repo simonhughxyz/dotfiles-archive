@@ -58,6 +58,8 @@ ctrl + alt + Delete
     scratchpad -c powermenu -t Power -e powermenu -C
 super + {_,shift +} c
     {clipmenu, clipdel -d ".*"}
+super + y
+    xclip < /dev/null
 super + s
     scratchpad -c dropdown_srmenu -t Search -e srmenu -C
 super + shift + backslash
