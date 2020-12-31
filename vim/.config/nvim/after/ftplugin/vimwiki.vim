@@ -18,7 +18,6 @@ highlight VimwikiHeader6 guifg=#FFAAAA
 
 " MAPPINGS
 "
-" Need to set 'let g:vimwiki_key_mappings = { 'links': 0, }' for these to work
 " see 'help vimwiki_key_mappings'
 nmap <Tab> <Plug>VimwikiNextLink
     \zMzv
