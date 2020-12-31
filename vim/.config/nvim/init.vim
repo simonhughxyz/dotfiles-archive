@@ -191,7 +191,7 @@ let g:GPGDefaultRecipients=["pass@pass"]
 " VIMWIKI
 let g:vimwiki_auto_header=1
 let g:vimwiki_folding='custom'
-let g:vimwiki_key_mappings = { 'links': 0, }
+" let g:vimwiki_key_mappings = { 'links': 0, }
 let g:vimwiki_list = [{'path': '~/Documents/notes/', 'path_html': '~/Documents/notes/build/', 'syntax': 'markdown', 'ext': '.md', 'links_space_char':'_'}]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 set rtp+=~/.fzf
