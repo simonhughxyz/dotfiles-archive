@@ -19,17 +19,17 @@ highlight VimwikiHeader6 guifg=#FFAAAA
 " MAPPINGS
 "
 " see 'help vimwiki_key_mappings'
-nmap <Tab> <Plug>VimwikiNextLink
-    \zMzv
-nmap <S-Tab> <Plug>VimwikiPrevLink
-    \zMzv
-nmap <CR> <Plug>VimwikiFollowLink
-nmap <Backspace> <Plug>VimwikiGoBackLink
-    \zv
-nmap <Leader>wd <Plug>VimwikiDeleteFile
-nmap <Leader>wr <Plug>VimwikiRenameFile
-nmap + <Plug>VimwikiNormalizeLink
-vmap + <Plug>VimwikiNormalizeLinkVisual
+" nmap <Tab> <Plug>VimwikiNextLink
+"     \zMzv
+" nmap <S-Tab> <Plug>VimwikiPrevLink
+"     \zMzv
+" nmap <CR> <Plug>VimwikiFollowLink
+" nmap <Backspace> <Plug>VimwikiGoBackLink
+"     \zv
+" nmap <Leader>wd <Plug>VimwikiDeleteFile
+" nmap <Leader>wr <Plug>VimwikiRenameFile
+" nmap + <Plug>VimwikiNormalizeLink
+" vmap + <Plug>VimwikiNormalizeLinkVisual
 
 " Folding function for markdown
 function! Fold(lnum)
