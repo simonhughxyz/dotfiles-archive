@@ -80,6 +80,8 @@ unbind o
 bind o composite get_current_url | winopen
 unbind O
 bind O composite get_current_url | tabopen
+unbind p
+bind p composite get_current_url | winopen -private
 
 
 " Find
