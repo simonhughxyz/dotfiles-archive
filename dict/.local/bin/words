@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# WORDS
+# Simon H Moore
+#
+# Find words using fzf
+
+word_list=$XDG_CONFIG_HOME/dict/english-words
+
+# type out using xdotool
+write(){
+    setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
+    sleep 0.0001
+}
+
+# get choice of file from fzf
+choice="$( cat "$word_list" | fzf )" || exit
+
+write "$choice"
