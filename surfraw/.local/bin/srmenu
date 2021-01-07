@@ -14,7 +14,7 @@ elvi_hfile="$runtime_dir/elvihistory"
 mkdir -p $runtime_dir
 
 _fzf(){
-    fzf "$@"
+    fzf --exact "$@"
 }
 
 # get primary selection and search history from $hfile and pass into dmenu
