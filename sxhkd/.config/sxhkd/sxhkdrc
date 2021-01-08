@@ -30,7 +30,7 @@ super + b
 super + shift + c
     scratchpad -c calc -t calc -e bc
 super + shift + w
-    scratchpad -c words -t words -e words
+    scratchpad -c words_menu -t words -e words
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
