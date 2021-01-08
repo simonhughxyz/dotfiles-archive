@@ -31,7 +31,6 @@ _word_menu(){
 }
 
 _write_word(){
-    echo "lol"
     _write "$( _word_menu )" 
 }
 
