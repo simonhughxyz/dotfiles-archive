@@ -21,7 +21,7 @@ _fzf(){
 # type out using xdotool
 write(){
     setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
-    sleep 0.0001
+    sleep 0.001
 }
 
 # Exploits a common design pattern in login fields to
@@ -35,7 +35,7 @@ auto_login(){
                 xdotool key Tab;
                 xdotool type --clearmodifiers '$pass';
                 xdotool key Return" &
-    sleep 0.0001
+    sleep 0.001
 }
 
 # Gets the nth chars from password.
