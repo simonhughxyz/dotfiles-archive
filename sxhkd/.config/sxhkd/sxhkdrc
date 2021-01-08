@@ -5,8 +5,6 @@ super + {_,shift +} Return
     $TERMINAL {_,-c nnn -t nnn -e nnn}
 super + x
     lock
-super + shift + w
-    feh --bg-fill --randomize ~/Pictures/*/*-ls-*
 super + space; m
     togglemouse
 
@@ -31,6 +29,8 @@ super + b
     $TERMINAL -c newsboat -t newsboat -e newsboat
 super + shift + c
     scratchpad -c calc -t calc -e bc
+super + shift + w
+    scratchpad -c words -t words -e words
 
 super + alt + w; {c,g,t} 
     {chromium,google-chrome-stable,tor-browser}
