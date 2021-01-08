@@ -5,15 +5,47 @@
 #
 # Find words using fzf
 
-word_list=$XDG_CONFIG_HOME/dict/english-words
+# directory containing word lists
+dict_dir=$XDG_CONFIG_HOME/dict
+
+# set language/word-list to use
+_set_lang(){
+    case "$1" in
+        en) words=british-english-words ;;
+        am) words=american-english-words ;;
+        de|ger) words=german-words ;;
+        *) words=british-english-words ;;
+    esac
+    words=$dict_dir/$words
+}
 
 # type out using xdotool
-write(){
+_write(){
     setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
     sleep 0.0001
 }
 
-# get choice of file from fzf
-choice="$( cat "$word_list" | fzf )" || exit
+# return choice of word
+_word_menu(){
+    cat "$words" | fzf
+}
 
-write "$choice"
+_write_word(){
+    echo "lol"
+    _write "$( _word_menu )" 
+}
+
+# set default language
+_set_lang
+
+while test $# -gt 0; do
+    case "$1" in
+        # -h|--help) echo "$__usage"; exit ;;
+        -l|lang) shift; _set_lang "$1" ;;
+        -w|write) _write_word; exit ;;
+        *) _write_word; exit ;;
+    esac
+    shift
+done
+
+_write_word
