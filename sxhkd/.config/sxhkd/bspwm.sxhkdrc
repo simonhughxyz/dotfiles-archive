@@ -37,9 +37,11 @@ super + shift + bracket{left,right}
     bspc node -f {prev,next}.local
 
 super + {_, shift +} z
-    scratchpad -c window -t Windows -e "bspwm_current_window_menu {_,-a}"
+    {class=window; flag="",class=window-all; flag="-a"}; \
+    scratchpad -c $class -t Windows -e "bspwm_current_window_menu $flag"
 super + {_, shift +} n
-    scratchpad -c window -t Windows -e "bspwm_current_window_menu {_,-a}"
+    {class=window; flag="",class=window-all; flag="-a"}; \
+    scratchpad -c $class -t Windows -e "bspwm_current_window_menu $flag"
 
 super + alt + {_,shift +} {Left,Down,Up,Right}
     bspwm_resize_node -{a,z} {left,down,up,right}
