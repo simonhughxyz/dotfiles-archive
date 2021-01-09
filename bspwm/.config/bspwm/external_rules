@@ -18,11 +18,17 @@ case "$instance" in
         echo "sticky=on"
         echo "border=off"
     ;;
-    window)
+    window*)
         xdotool windowmove $wid 0 -10
+        
+        # get local of global window count
+        if [ "$instance" = "window-all" ]; then
+        window_count=$( bspc query -N -n .window | wc -l )
+        else
+        window_count=$( bspc query -N -n .window.local | wc -l )
+        fi
 
         # The more windows the larger the window height
-        window_count=$( bspc query -N -n .window.local | wc -l )
         window_height=$(( ($window_count * 38) + 100 ))
         [ $window_height -lt 150 ] && window_height=150
         [ $window_height -gt 500 ] && window_height=500
