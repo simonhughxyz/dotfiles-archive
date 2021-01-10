@@ -65,6 +65,9 @@ nnn_config=$HOME/.config/nnn/nnnrc
 # Host specific config
 if [ "$HOST" = "voidtower" ]; then
     export LIBVA_DRIVER_NAME="radeonsi"
+    export MPV_PROFILE="hq"
+elif [ "$HOST" = "voidbook" ]; then
+    export MPV_PROFILE="hd"
 fi
 
 # Start ssh-agent if its not already running
