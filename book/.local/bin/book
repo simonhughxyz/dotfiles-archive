@@ -3,11 +3,32 @@
 # BOOK
 # Simon Hugh Moore
 #
-# A password store wrapper to make it into a "bookmark store".
+# Store and search for bookmarks
 
-export PASSWORD_STORE_DIR=${BOOK_DIR:-~/.book}
-export PASSWORD_STORE_ENABLE_EXTENSIONS=${BOOK_ENABLE_EXTENSIONS:-"true"}
-export PASSWORD_STORE_EXTENSIONS_DIR=${BOOK_EXTENSIONS_DIR:-$PASSWORD_STORE_DIR/.extensions}
+bookmark_dir=~/Documents/notes/bookmarks
 
-[ "$1" = "generate" ] && echo "generate has been disables!"; exit 1
-pass $@
+_files(){
+    fd .md --base-directory=$bookmark_dir
+}
+
+_main(){
+   _files 
+}
+
+
+while test $# -gt 0; do
+    case "$1" in
+        # -h|--help) echo "$__usage"; exit ;;
+        -t|--title) shift; title=${1} ;;
+        -f|--file) shift; file=${1} ;;
+        *) file="$1" ;;
+    esac
+    shift
+done
+
+if [ -z $file ]; then
+    echo "Usage: $( basename $0 ) <file>"
+	exit 1
+fi
+
+_main
