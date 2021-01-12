@@ -56,6 +56,23 @@ _list(){
     esac
 }
 
+_bm_from_tag(){ sed -n "/^## ${1}$/,/##.*$/{/^-[[:space:]]/p}" | sed 's/-[[:space:]]*//'; }
+
+_tags_menu(){
+    choice="$( _list_tags | fzf )"
+    file="$(  echo "$choice" | awk '{print $1}' )"
+    tag="$(  echo "$choice" | awk -F '#' '{print $2}' )"
+    cat "${file}.md" | _bm_from_tag "$tag"
+}
+
+_menu(){
+    case "$1" in
+        all) _list_bookmarks | fzf ;;
+        tags) _tags_menu ;;
+        *) _list_bookmarks | fzf ;;
+    esac
+}
+
 _main(){
    _files 
 }
@@ -67,6 +84,7 @@ while test $# -gt 0; do
         -a|--add) shift; _add $@; exit ;;
         -e|--edit) shift; title=${1} ;;
         -l|--list) shift; _list $@; exit ;;
+        -m|--menu) shift; _menu $@; exit ;;
         *) file="$1" ;;
     esac
     shift
