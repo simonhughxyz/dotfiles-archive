@@ -7,6 +7,32 @@
 
 bookmark_dir=~/Documents/notes/bookmarks
 
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Store and search for bookmarks
+
+Options:
+  -a|--add                          Add bookmark
+  -e|--edit                         Open bookmark file in editor
+  -h, help                          Print this help message.
+"
+
+_get_html_title(){
+    curl --silent --fail "$1" | awk -vRS="</title>" '/<title.*>/{gsub(/.*<title.*>|\n+/,"");print;exit}' | recode -q html..utf8
+}
+
+_add(){
+    url="$1"
+    file="$2"
+    header="${3:-Misc}"
+    title="$( _get_html_title "$url" )"
+    [ "$title" = "" ] && title="$url"
+
+    grep -c "##[[:space:]]$header" "$file" || echo "\n## $header" >> "$file"
+
+    sed "/^##[[:space:]]$header$/a - [$title]($url)" "$file"
+}
+
 _files(){
     fd .md --base-directory=$bookmark_dir
 }
@@ -18,9 +44,9 @@ _main(){
 
 while test $# -gt 0; do
     case "$1" in
-        # -h|--help) echo "$__usage"; exit ;;
-        -t|--title) shift; title=${1} ;;
-        -f|--file) shift; file=${1} ;;
+        -h|--help) echo "$__usage"; exit ;;
+        -a|--add) shift; _add $@; exit ;;
+        -e|--edit) shift; title=${1} ;;
         *) file="$1" ;;
     esac
     shift
