@@ -34,6 +34,10 @@ _write_word(){
     _write "$( _word_menu )" 
 }
 
+_copy_word(){
+    _word_meny | xclip
+}
+
 # set default language
 _set_lang
 
@@ -42,6 +46,7 @@ while test $# -gt 0; do
         # -h|--help) echo "$__usage"; exit ;;
         -l|lang) shift; _set_lang "$1" ;;
         -w|write) _write_word; exit ;;
+        -c|copy) _copy word; exit ;;
         *) _write_word; exit ;;
     esac
     shift
