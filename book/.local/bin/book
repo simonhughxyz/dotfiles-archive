@@ -6,6 +6,7 @@
 # Store and search for bookmarks
 
 bookmark_dir=~/Documents/notes/bookmarks
+cd $bookmark_dir
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
@@ -14,6 +15,7 @@ Store and search for bookmarks
 Options:
   -a|--add                          Add bookmark
   -e|--edit                         Open bookmark file in editor
+  -l|--list [OPTIONS]               List bookmarks, files, tags
   -h, help                          Print this help message.
 "
 
@@ -33,8 +35,25 @@ _add(){
     sed "/^##[[:space:]]$header$/a - [$title]($url)" "$file"
 }
 
-_files(){
-    fd .md --base-directory=$bookmark_dir
+_list_files(){
+    find . -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//'
+}
+
+_list_bookmarks(){
+    grep -hr --include="*.md" "^-[[:space:]]\[.*\](.*)" | sed 's/^-[[:space:]]*//'
+}
+
+_list_tags(){
+    grep -r --include="*.md" "^##.*$" | sed 's|\.md:##[[:space:]]*| #|g'
+}
+
+_list(){
+    case "$1" in
+        all) _list_bookmarks ;;
+        files) _list_files ;;
+        tags) _list_tags ;;
+        *) _list_bookmarks ;;
+    esac
 }
 
 _main(){
@@ -47,6 +66,7 @@ while test $# -gt 0; do
         -h|--help) echo "$__usage"; exit ;;
         -a|--add) shift; _add $@; exit ;;
         -e|--edit) shift; title=${1} ;;
+        -l|--list) shift; _list $@; exit ;;
         *) file="$1" ;;
     esac
     shift
