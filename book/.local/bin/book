@@ -57,19 +57,27 @@ _list(){
     esac
 }
 
+_get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
+
 _bm_from_tag(){ sed -n "/^## ${1}$/,/##.*$/{/^-[[:space:]]/p}" | sed 's/-[[:space:]]*//'; }
 
-_tags_menu(){
+_tag_menu(){
     choice="$( _list_tags | fzf )"
     file="$(  echo "$choice" | awk '{print $1}' )"
     tag="$(  echo "$choice" | awk -F '#' '{print $2}' )"
     cat "${file}.md" | _bm_from_tag "$tag"
 }
 
+_file_menu(){
+    file="$( _list_files | fzf )"
+    cat "${file}.md" | _get_bm
+}
+
 _menu(){
     case "$1" in
         all) _list_bookmarks | fzf ;;
-        tags) _tags_menu ;;
+        tag) _tag_menu ;;
+        file) _file_menu ;;
         *) _list_bookmarks | fzf ;;
     esac
 }
