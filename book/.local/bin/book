@@ -26,7 +26,7 @@ _get_html_title(){
 
 _add(){
     url="$1"
-    file="$2"
+    file="${2:-Misc}"
     header="${3:-Misc}"
     title="$( _get_html_title "$url" )"
     [ "$title" = "" ] && title="$url"
