@@ -13,10 +13,11 @@ Usage: $(basename "$0") [OPTIONS]
 Store and search for bookmarks
 
 Options:
-  -a|--add                          Add bookmark
-  -e|--edit                         Open bookmark file in editor
-  -l|--list [OPTIONS]               List bookmarks, files, tags
-  -h, help                          Print this help message.
+  -a, --add <url> [file] [tag]       Add bookmark
+  -e, --edit                         Open bookmark file in editor
+  -l, --list [OPTIONS]               List bookmarks, files, tags
+  -m, --menu [OPTIONS]               Find bookmarks using FZF
+  -h, --help                         Print this help message
 "
 
 _get_html_title(){
