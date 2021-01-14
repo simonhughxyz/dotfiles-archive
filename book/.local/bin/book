@@ -94,6 +94,7 @@ while test $# -gt 0; do
         -e|--edit) shift; title=${1} ;;
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
+        -mm) shift; _menu $@ | fzf --sync; exit ;;
         *) file="$1" ;;
     esac
     shift
