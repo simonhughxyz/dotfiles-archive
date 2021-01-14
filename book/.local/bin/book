@@ -98,10 +98,3 @@ while test $# -gt 0; do
     esac
     shift
 done
-
-if [ -z $file ]; then
-    echo "Usage: $( basename $0 ) <file>"
-	exit 1
-fi
-
-_main
