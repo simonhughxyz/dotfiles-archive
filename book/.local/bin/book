@@ -17,6 +17,7 @@ Options:
   -e, --edit                         Open bookmark file in editor
   -l, --list [OPTIONS]               List bookmarks, files, tags
   -m, --menu [OPTIONS]               Find bookmarks using FZF
+  -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
   -h, --help                         Print this help message
 "
 
