@@ -103,7 +103,7 @@ while test $# -gt 0; do
         -e|--edit) shift; _edit $@; exit ;;
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
-        -mm) shift; _menu $@ | fzf --sync; exit ;;
+        -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
         *) file="$1" ;;
     esac
     shift
