@@ -14,7 +14,8 @@ Store and search for bookmarks
 
 Options:
   -a, --add <url> [file] [tag]       Add bookmark
-  -e, --edit                         Open bookmark file in editor
+  -e, --edit [OPTIONS]               Open bookmark file in EDITOR
+  -o, --open [OPTIONS]               Use FZF to open bookmark in BROWSER
   -l, --list [OPTIONS]               List bookmarks, files, tags
   -m, --menu [OPTIONS]               Find bookmarks using FZF
   -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
