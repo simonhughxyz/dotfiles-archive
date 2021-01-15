@@ -115,7 +115,6 @@ while test $# -gt 0; do
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
-        *) file="$1" ;;
     esac
     shift
 done
