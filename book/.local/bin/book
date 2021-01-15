@@ -45,6 +45,15 @@ _edit(){
     fi
 }
 
+_open(){
+    choice="$( _menu $@ )"
+    if [ $( echo "$choice" | wc -l ) -gt 1 ] && [ "$1" != "all" ] && [ ! -z "$1" ]; then
+        echo "$choice" | fzf -m --sync | awk -F'[()]' '{print $2}'
+    else
+        echo "$choice"
+    fi
+}
+
 _list_files(){
     find . -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//'
 }
@@ -101,6 +110,7 @@ while test $# -gt 0; do
         -h|--help) echo "$__usage"; exit ;;
         -a|--add) shift; _add $@; exit ;;
         -e|--edit) shift; _edit $@; exit ;;
+        -o|--open) shift; _open $@; exit ;;
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
