@@ -14,6 +14,7 @@
 
 config_dir=$XDG_CONFIG_HOME/youtube-dl
 video_config=$config_dir/config
+hq_config=$config_dir/hq.config
 playlist_config=$config_dir/pl.config
 slow_config=$config_dir/slow.config
 audio_config=$config_dir/audio.config
@@ -27,6 +28,7 @@ Any argument starting with 'http' will be accepted as URL
 Options:
   -n, --notify                               Turn on notifications
   -v, --video                                Download single video
+  -q, --hq                                   Download single high quality video
   -a, --audio                                Download audio only
   -p, --playlist                             Download playlist
   -s, --slow                                 Don't use aria2
@@ -58,6 +60,7 @@ while test $# -gt 0; do
         -h|--help) echo "$__usage"; exit ;;
         -n|--notify) notify="true" ;;
         -v|--video) config=$video_config ;;
+        -q|--hq) config=$hq_config ;;
         -a|--audio) config=$audio_config ;;
         -p|--playlist) config=$playlist_config ;;
         -s|--slow) config=$slow_config ;;
