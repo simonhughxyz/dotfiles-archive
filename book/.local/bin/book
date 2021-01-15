@@ -37,6 +37,14 @@ _add(){
     sed "/^##[[:space:]]$header$/a - [$title]($url)" "$file"
 }
 
+_edit(){
+    if [ -z "$1" ]; then
+        $EDITOR "$( _list_files | fzf ).md"
+    else
+        $EDITOR "${1}.md"
+    fi
+}
+
 _list_files(){
     find . -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//'
 }
@@ -92,7 +100,7 @@ while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__usage"; exit ;;
         -a|--add) shift; _add $@; exit ;;
-        -e|--edit) shift; title=${1} ;;
+        -e|--edit) shift; _edit $@; exit ;;
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm) shift; _menu $@ | fzf --sync; exit ;;
