@@ -70,8 +70,8 @@ _list_tags(){
 _list(){
     case "$1" in
         all) _list_bookmarks ;;
-        files) _list_files ;;
-        tags) _list_tags ;;
+        file) _list_files ;;
+        tag) _list_tags ;;
         *) _list_bookmarks ;;
     esac
 }
