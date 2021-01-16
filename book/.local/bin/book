@@ -100,8 +100,10 @@ _menu(){
     esac
 }
 
-_grep(){
-    grep -hr -i --color=auto "$@"
+_grep(){ grep -hr -i --color=auto "$@"; }
+
+_search(){
+    grep -hr "^- \[.*\]\(.*\)$" | grep -i --color=auto -E "$@"
 }
 
 _main(){
@@ -119,6 +121,7 @@ while test $# -gt 0; do
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
         -g|--grep) shift; _grep $@; exit ;;
+        -s|--search) shift; _search $@; exit ;;
     esac
     shift
 done
