@@ -12,7 +12,7 @@ instance=$3
 case "$instance" in
     dropdown*)
         xdotool windowmove $wid 0 -10
-        xdotool windowsize $wid 100% 210
+        xdotool windowsize $wid 100% 300
 
         echo "state=floating"
         echo "sticky=on"
