@@ -19,6 +19,8 @@ Options:
   -l, --list [OPTIONS]               List bookmarks, files, tags
   -m, --menu [OPTIONS]               Find bookmarks using FZF
   -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
+  -g, --grep <term>                  Grep files recursively in bookmark directory
+  -s, --search <term>                Search for bookmarks
   -h, --help                         Print this help message
 "
 
