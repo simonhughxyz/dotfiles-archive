@@ -100,6 +100,10 @@ _menu(){
     esac
 }
 
+_grep(){
+    grep -hr -i --color=auto "$@"
+}
+
 _main(){
    _files 
 }
@@ -114,6 +118,7 @@ while test $# -gt 0; do
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
+        -g|--grep) shift; _grep $@; exit ;;
     esac
     shift
 done
