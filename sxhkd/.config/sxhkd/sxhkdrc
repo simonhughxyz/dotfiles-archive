@@ -70,12 +70,8 @@ super + {_,shift +} h
     mpv-history -{t,p} -d
 
 # bookmaks
-super + slash
-    bukumenu -t star - x,pi
-super + shift + slash
-    bukutagmenu
-super + alt + b ; {l,p,d,s,y,f,g}
-    bukumenu -t {linux,p,docs,shop,yt,follow,git}
+super + period
+    scratchpad -c dropdown_bookmenu -t Bookmarks -e "book -o tag" -C
 
 
 
