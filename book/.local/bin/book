@@ -53,7 +53,7 @@ _open(){
     if [ $( echo "$choice" | wc -l ) -gt 1 ] && [ "$1" != "all" ] && [ ! -z "$1" ]; then
         choice="$( echo "$choice" | fzf -m --sync )"
     fi
-    echo "$choice" | awk -F'[()]' '{print $2}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
+    echo "$choice" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
 }
 
 _list_files(){
