@@ -70,8 +70,8 @@ super + {_,shift +} h
     mpv-history -{t,p} -d
 
 # bookmaks
-super + period
-    scratchpad -c dropdown_bookmenu -t Bookmarks -e "book -o tag" -C
+super + {_,shift +} period
+    scratchpad -c dropdown_bookmenu -t Bookmarks -e "book -o {tag,_}" -C
 
 
 
