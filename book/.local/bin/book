@@ -108,6 +108,18 @@ _search(){
     grep -hr "^- \[.*\]\(.*\)$" | grep -i --color=auto -E "$@"
 }
 
+_get(){
+    for arg in "$@"; do
+        file="$( echo "$arg" | cut -d '#' -f 1 )"
+        tag="$( echo "$arg" | cut -d '#' -f 2 )"
+        
+        files="$( tree -fin --prune | grep "$file" )"
+        echo "$tag"
+        echo "$files"
+
+    done
+}
+
 _main(){
    _files 
 }
@@ -122,6 +134,7 @@ while test $# -gt 0; do
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
+        -g|--get) shift; _get $@; exit ;;
         --grep) shift; _grep $@; exit ;;
         -s|--search) shift; _search $@; exit ;;
     esac
