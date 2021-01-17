@@ -19,8 +19,8 @@ Options:
   -l, --list [OPTIONS]               List bookmarks, files, tags
   -m, --menu [OPTIONS]               Find bookmarks using FZF
   -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
-  -g, --grep <term>                  Grep files recursively in bookmark directory
   -s, --search <term>                Search for bookmarks
+  --grep <term>                      Grep files recursively in bookmark directory
   -h, --help                         Print this help message
 "
 
@@ -122,7 +122,7 @@ while test $# -gt 0; do
         -l|--list) shift; _list $@; exit ;;
         -m|--menu) shift; _menu $@; exit ;;
         -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
-        -g|--grep) shift; _grep $@; exit ;;
+        --grep) shift; _grep $@; exit ;;
         -s|--search) shift; _search $@; exit ;;
     esac
     shift
