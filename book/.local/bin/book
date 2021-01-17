@@ -110,13 +110,22 @@ _search(){
 
 _get(){
     for arg in "$@"; do
-        file="$( echo "$arg" | cut -d '#' -f 1 )"
-        tag="$( echo "$arg" | cut -d '#' -f 2 )"
-        
-        files="$( tree -fin --prune | grep "$file" )"
-        echo "$tag"
-        echo "$files"
+        file="${arg%%#*}"
+        tags="${arg##*#}"
 
+        # make sure tags is empty if no tags given
+        [ -z "${arg##*#*}" ] || tags=""
+
+        # For every file search for every tag
+        find . -type f | grep "$file" | while read file; do
+            if [ -z "$tags" ]; then
+                cat "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//'
+            else
+                echo "$tags" | tr '#' '\n' | while read tag; do
+                    cat "$file" | _bm_from_tag "$tag"
+                done
+            fi
+        done
     done
 }
 
