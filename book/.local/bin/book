@@ -167,3 +167,5 @@ while test $# -gt 0; do
     esac
     shift
 done
+
+[ -z "$1" ] && echo "$__usage"
