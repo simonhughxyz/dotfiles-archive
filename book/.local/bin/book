@@ -90,7 +90,7 @@ _bm_from_tag(){ sed -n "/^${1}$/,/##.*$/{/^-[[:space:]]/p}" | sed 's/-[[:space:]
 _tag_menu(){
     choice="$( _list_tags | fzf --exact )"
     file="$(  echo "$choice" | awk '{print $1}' )"
-    tag="$(  echo "$choice" | awk -F '#' '{print $2}' )"
+    tag="$(  echo "$choice" | awk -F '#' '{print $2}' | _format_tag )"
     cat "${file}.md" | _bm_from_tag "$tag"
 }
 
