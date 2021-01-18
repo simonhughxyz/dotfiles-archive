@@ -152,11 +152,6 @@ _get(){
     done
 }
 
-_main(){
-   _files 
-}
-
-
 while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__help"; exit ;;
