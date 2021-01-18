@@ -152,6 +152,7 @@ _get(){
     done
 }
 
+[ -z "$1" ] && echo "$__usage"
 while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__help"; exit ;;
@@ -164,8 +165,7 @@ while test $# -gt 0; do
         -g|--get) shift; _get $@; exit ;;
         --grep) shift; _grep $@; exit ;;
         -s|--search) shift; _search $@; exit ;;
+        *) _get $@; exit ;;
     esac
     shift
 done
-
-[ -z "$1" ] && echo "$__usage"
