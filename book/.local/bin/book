@@ -103,9 +103,20 @@ _file_menu(){
     cat "${file}.md" | _get_bm
 }
 
+_add_menu_fzf(){
+    fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
+}
+
+_add_menu(){
+    tag="$( _list_tags | awk '{print $1}' | _add_menu_fzf "Tag: " )"
+    file="$( _list_files | _add_menu_fzf "File: " )"
+    uri="$( xclip -o 2> /dev/null | _add_menu_fzf "URI: " )"
+}
+
 _menu(){
     case "$1" in
         all) _list_bookmarks | fzf --exact -m ;;
+        add) _add_menu ;;
         tag) _tag_menu ;;
         file) _file_menu ;;
         *) _list_bookmarks | fzf --exact -m ;;
