@@ -35,6 +35,7 @@ _get_html_title(){
 _format_tag(){ sed 's/.*/\L&/;s/^./\u&/;s/[[:space:]]./\U&/g;s/[[:space:]][[:space:]]*/ /g;s/.*/## &/'; }
 
 _add(){
+    [ -z "$1" ] && _error "argument -a/--add: expected at least one argument"
     url="$1"
     file="${2:-Misc}"
     header="${3:-Misc}"
