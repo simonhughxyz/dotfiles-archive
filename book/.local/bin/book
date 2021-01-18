@@ -28,6 +28,10 @@ Options:
 
 _error(){ printf "%s\nerror: %s\n" "$__usage" "$1"; exit 1; }
 
+_get_html_title(){
+    curl --silent --fail "$1" | awk -vRS="</title>" '/<title.*>/{gsub(/.*<title.*>|\n+/,"");print;exit}' | recode -q html..utf8
+}
+
 _format_tag(){ sed 's/.*/\L&/;s/^./\u&/;s/[[:space:]]./\U&/g;s/[[:space:]][[:space:]]*/ /g;s/.*/## &/'; }
 
 _add(){
