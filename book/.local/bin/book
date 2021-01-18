@@ -8,8 +8,9 @@
 bookmark_dir=~/Documents/notes/bookmarks
 cd $bookmark_dir
 
-__usage="
-Usage: $(basename "$0") [OPTIONS]
+__usage="usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
+
 Store and search for bookmarks
 
 Options:
@@ -137,7 +138,7 @@ _main(){
 
 while test $# -gt 0; do
     case "$1" in
-        -h|--help) echo "$__usage"; exit ;;
+        -h|--help) echo "$__help"; exit ;;
         -a|--add) shift; _add $@; exit ;;
         -e|--edit) shift; _edit $@; exit ;;
         -o|--open) shift; _open $@; exit ;;
