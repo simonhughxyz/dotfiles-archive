@@ -14,7 +14,7 @@ __help="$__usage
 Store and search for bookmarks
 
 Options:
-  -a, --add <url> [file] [tag]       Add bookmark
+  -a, --add <uri> [file] [tag]       Add bookmark
   -e, --edit [OPTIONS]               Open bookmark file in EDITOR
   -o, --open [OPTIONS]               Use FZF to open bookmark in BROWSER
   -l, --list [OPTIONS]               List bookmarks, files, tags
