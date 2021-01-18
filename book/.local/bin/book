@@ -26,6 +26,11 @@ Options:
   -h, --help                         Print this help message
 "
 
+_error(){
+    printf "%s\nerror: %s\n" "$__usage" "$1"
+    exit 1
+}
+
 _get_html_title(){
     curl --silent --fail "$1" | awk -vRS="</title>" '/<title.*>/{gsub(/.*<title.*>|\n+/,"");print;exit}' | recode -q html..utf8
 }
