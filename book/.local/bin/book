@@ -43,7 +43,7 @@ _add(){
     [ "$title" = "" ] && title="$url"
 
     # Make tag if it does not exist
-    grep -c "^$tag$" "$file" || echo "\n## $tag" >> "$file"
+    grep -c "^$tag$" "$file" || echo "\n$tag" >> "$file"
 
     # Add bookmark after tag
     sed "/^$tag$/a - [$title]($url)" "$file" > "$file.tmp"
