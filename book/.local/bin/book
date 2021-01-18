@@ -37,14 +37,17 @@ _format_tag(){ sed 's/.*/\L&/;s/^./\u&/;s/[[:space:]]./\U&/g;s/[[:space:]][[:spa
 _add(){
     [ -z "$1" ] && _error "argument -a/--add: expected at least one argument"
     url="$1"
-    file="${2:-Misc}"
-    header="${3:-Misc}"
+    file="${2:-misc}.md"
+    tag="$( echo "${3:-Misc}" | _format_tag )"
     title="$( _get_html_title "$url" )"
     [ "$title" = "" ] && title="$url"
 
-    grep -c "##[[:space:]]$header" "$file" || echo "\n## $header" >> "$file"
+    # Make tag if it does not exist
+    grep -c "^$tag$" "$file" || echo "\n## $tag" >> "$file"
 
-    sed "/^##[[:space:]]$header$/a - [$title]($url)" "$file"
+    # Add bookmark after tag
+    sed "/^$tag$/a - [$title]($url)" "$file" > "$file.tmp"
+    mv "$file.tmp" "$file"
 }
 
 _edit(){
