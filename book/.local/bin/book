@@ -54,7 +54,7 @@ _add(){
 }
 
 _add_file(){
-    [ -z "$1" ] && _error "expected at least one argument"
+    [ -z "$1" ] && _error "add file: expected at least one argument"
 
     # if dir ends with '/', use 'misc' as file
     file="$( echo "$1" | sed 's|/$|/misc|' ).md"
