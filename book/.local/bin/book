@@ -99,7 +99,10 @@ _list_tags(){
 
 _get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
 
-_bm_from_tag(){ sed -n "/^${1}$/,/##.*$/{/^-[[:space:]]/p}" | sed 's/-[[:space:]]*//'; }
+_bm_from_tag(){ 
+    tag="$( echo "$1" | sed 's/##*/& /' )"
+    sed -n "/^${tag}$/,/^#${tag%#*}[[:space:]].*$/{/^-[[:space:]]/p}"
+}
 
 _tag_menu(){
     choice="$( _list_tags | fzf --exact )"
