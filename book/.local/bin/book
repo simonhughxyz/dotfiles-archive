@@ -107,7 +107,7 @@ _bm_from_tag(){
 _tag_menu(){
     choice="$( _list_tags | fzf --exact )"
     file="$(  echo "$choice" | awk '{print $1}' )"
-    tag="$(  echo "$choice" | awk -F '#' '{print $2}' | _format_tag )"
+    tag="$(  echo "$choice" | awk '{print $2}' )"
     cat "${file}.md" | _bm_from_tag "$tag"
 }
 
