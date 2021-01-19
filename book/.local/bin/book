@@ -69,14 +69,15 @@ _add_file(){
 }
 
 _edit(){
-    if [ -z "$1" ]; then
-        $EDITOR "$( _list_files | fzf ).md"
-    else
-        $EDITOR "${1}.md"
-    fi
+    [ -z "$1" ] && _error "edit: expected at least one argument"
+    $EDITOR "${1}.md"
 }
 
-_open(){
+_edit_menu(){
+    _edit "$( _list_files | fzf )"
+}
+
+_open_menu(){
     choice="$( _menu $@ )"
     if [ $( echo "$choice" | wc -l ) -gt 1 ] && [ "$1" != "all" ] && [ ! -z "$1" ]; then
         choice="$( echo "$choice" | fzf -m --sync )"
@@ -94,15 +95,6 @@ _list_bookmarks(){
 
 _list_tags(){
     grep -r --include="*.md" "^##.*$" | sed 's|\.md:##[[:space:]]*| #|g'
-}
-
-_list(){
-    case "$1" in
-        all) _list_bookmarks ;;
-        file) _list_files ;;
-        tag) _list_tags ;;
-        *) _list_bookmarks ;;
-    esac
 }
 
 _get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
@@ -133,16 +125,6 @@ _add_menu(){
     _add "$uri" "$file" "$tag"
 }
 
-_menu(){
-    case "$1" in
-        all) _list_bookmarks | fzf --exact -m ;;
-        add) _add_menu ;;
-        tag) _tag_menu ;;
-        file) _file_menu ;;
-        *) _list_bookmarks | fzf --exact -m ;;
-    esac
-}
-
 _grep(){ grep -hr -i --color=auto "$@"; }
 
 _search(){
@@ -170,19 +152,72 @@ _get(){
     done
 }
 
+
+_cli_add(){
+    _add "$@"
+}
+
+_cli_edit(){
+    if [ -z "$1" ]; then
+        _edit_menu
+    else
+        _edit "$@"
+    fi
+}
+
+
+_cli_open(){
+    _open_menu "$@"
+}
+
+_cli_list(){
+    case "$1" in
+        all) _list_bookmarks ;;
+        file) _list_files ;;
+        tag) _list_tags ;;
+        *) _list_bookmarks ;;
+    esac
+}
+
+_cli_menu(){
+    case "$1" in
+        all) _list_bookmarks | fzf --exact -m ;;
+        add) _add_menu ;;
+        tag) _tag_menu ;;
+        file) _file_menu ;;
+        *) _list_bookmarks | fzf --exact -m ;;
+    esac
+}
+
+_cli_mmenu(){
+    _cli_menu "$@" | fzf --sync
+}
+
+_cli_get(){
+    _get "$@"
+}
+
+_cli_search(){
+    _search "$@"
+}
+
+_cli_grep(){
+    _grep "$@"
+}
+
 [ -z "$1" ] && echo "$__usage"
 while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__help"; exit ;;
-        -a|--add) shift; _add $@; exit ;;
-        -e|--edit) shift; _edit $@; exit ;;
-        -o|--open) shift; _open $@; exit ;;
-        -l|--list) shift; _list $@; exit ;;
-        -m|--menu) shift; _menu $@; exit ;;
-        -mm|--mmenu) shift; _menu $@ | fzf --sync; exit ;;
-        -g|--get) shift; _get $@; exit ;;
-        --grep) shift; _grep $@; exit ;;
-        -s|--search) shift; _search $@; exit ;;
+        -a|--add) shift; _cli_add $@; exit ;;
+        -e|--edit) shift; _cli_edit $@; exit ;;
+        -o|--open) shift; _cli_open $@; exit ;;
+        -l|--list) shift; _cli_list $@; exit ;;
+        -m|--menu) shift; _cli_menu $@; exit ;;
+        -mm|--mmenu) shift; _cli_mmenu $@; exit ;;
+        -g|--get) shift; _cli_get $@; exit ;;
+        --grep) shift; _cli_grep $@; exit ;;
+        -s|--search) shift; _cli_search $@; exit ;;
         *) _get $@; exit ;;
     esac
     shift
