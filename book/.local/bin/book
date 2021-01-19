@@ -223,7 +223,7 @@ while test $# -gt 0; do
         -m|--menu) shift; _cli_menu $@; exit ;;
         -mm|--mmenu) shift; _cli_mmenu $@; exit ;;
         -q|--query) shift; _cli_query "$@"; exit ;;
-        --grep) shift; _cli_grep $@; exit ;;
+        -g|--grep) shift; _cli_grep $@; exit ;;
         -s|--search) shift; _cli_search $@; exit ;;
         *) _query "$@"; exit ;;
     esac
