@@ -108,7 +108,7 @@ _add_menu_fzf(){
 }
 
 _add_menu(){
-    tag="$( _list_tags | awk '{print $2}' | sort | uniq | _add_menu_fzf "Tag: " )"
+    tag="$( _list_tags | awk -F ' #' '{print $2}' | sort | uniq | _add_menu_fzf "Tag: " )"
     file="$( _list_files | sort | _add_menu_fzf "File: " )"
     uri="$( xclip -o 2> /dev/null | _add_menu_fzf "URI: " )"
 
