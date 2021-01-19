@@ -125,6 +125,15 @@ _add_menu(){
     _add "$uri" "$file" "$tag"
 }
 
+_menu(){
+    case "$1" in
+        all) _list_bookmarks | fzf --exact -m ;;
+        tag) _tag_menu ;;
+        file) _file_menu ;;
+        *) _list_bookmarks | fzf --exact -m ;;
+    esac
+}
+
 _grep(){ grep -hr -i --color=auto "$@"; }
 
 _search(){
@@ -184,16 +193,11 @@ _cli_list(){
 }
 
 _cli_menu(){
-    case "$1" in
-        all) _list_bookmarks | fzf --exact -m ;;
-        tag) _tag_menu ;;
-        file) _file_menu ;;
-        *) _list_bookmarks | fzf --exact -m ;;
-    esac
+    _menu "$@"
 }
 
 _cli_mmenu(){
-    _cli_menu "$@" | fzf --sync
+    _menu "$@" | fzf --sync
 }
 
 _cli_get(){
