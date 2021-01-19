@@ -94,7 +94,7 @@ _list_bookmarks(){
 }
 
 _list_tags(){
-    grep -r --include="*.md" "^##.*$" | sed 's|\.md:##[[:space:]]*| #|g'
+    grep -r --include="*.md" "^#.*$" | sed 's|\.md:| |;s/#[[:space:]][[:space:]]*/#/'
 }
 
 _get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
