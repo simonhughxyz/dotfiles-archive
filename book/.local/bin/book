@@ -154,7 +154,11 @@ _get(){
 
 
 _cli_add(){
-    _add "$@"
+    if [ -z "$1" ]; then
+        _add_menu
+    else
+        _add "$@"
+    fi
 }
 
 _cli_edit(){
@@ -182,7 +186,6 @@ _cli_list(){
 _cli_menu(){
     case "$1" in
         all) _list_bookmarks | fzf --exact -m ;;
-        add) _add_menu ;;
         tag) _tag_menu ;;
         file) _file_menu ;;
         *) _list_bookmarks | fzf --exact -m ;;
