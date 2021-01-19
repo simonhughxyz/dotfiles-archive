@@ -22,7 +22,7 @@ Options:
   -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
   -s, --search <term>                Search for bookmarks
   -q, --query <term>                 Get bookmarks based on file and/or tags 
-  --grep <term>                      Grep files recursively in bookmark directory
+  -g, --grep <term>                  Grep files recursively in bookmark directory
   -h, --help                         Print this help message
 "
 
