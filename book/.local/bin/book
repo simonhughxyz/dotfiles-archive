@@ -140,7 +140,7 @@ _search(){
     grep -hr "^- \[.*\]\(.*\)$" | grep -i --color=auto -E "$@"
 }
 
-_get(){
+_query(){
     for arg in "$@"; do
         file="${arg%%#*}"
         tags="${arg##*#}"
@@ -200,8 +200,8 @@ _cli_mmenu(){
     _menu "$@" | fzf --sync
 }
 
-_cli_get(){
-    _get "$@"
+_cli_query(){
+    _query "$@"
 }
 
 _cli_search(){
@@ -222,10 +222,10 @@ while test $# -gt 0; do
         -l|--list) shift; _cli_list $@; exit ;;
         -m|--menu) shift; _cli_menu $@; exit ;;
         -mm|--mmenu) shift; _cli_mmenu $@; exit ;;
-        -g|--get) shift; _cli_get $@; exit ;;
+        -q|--query) shift; _cli_query "$@"; exit ;;
         --grep) shift; _cli_grep $@; exit ;;
         -s|--search) shift; _cli_search $@; exit ;;
-        *) _get $@; exit ;;
+        *) _query "$@"; exit ;;
     esac
     shift
 done
