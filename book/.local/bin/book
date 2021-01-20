@@ -32,7 +32,7 @@ _get_html_title(){
     curl --silent --fail "$1" | awk -vRS="</title>" '/<title.*>/{gsub(/.*<title.*>|\n+/,"");print;exit}' | recode -q html..utf8
 }
 
-_format_tag(){ sed 's/.*/\L&/;s/^./\u&/;s/[[:space:]]./\U&/g;s/[[:space:]][[:space:]]*/ /g;s/.*/## &/'; }
+_format_tag(){ sed 's/[^#].*$/\u&/;s/##*/& /;s/^[^#]/# &/'; }
 
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
