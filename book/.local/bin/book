@@ -145,22 +145,27 @@ _search(){
 
 _query(){
     for arg in "$@"; do
-        file="${arg%%#*}"
-        tags="${arg##*#}"
+        file="$( echo "$arg" | sed 's/\!*##*.*$//' )"
+        tags="${arg#$file}"
 
         # make sure tags is empty if no tags given
         [ -z "${arg##*#*}" ] || tags=""
 
-        # For every file search for every tag
-        find . -type f | grep "$file" | while read file; do
-            if [ -z "$tags" ]; then
-                cat "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//'
-            else
-                echo "$tags" | tr '#' '\n' | while read tag; do
-                cat "$file" | _bm_from_tag "$( echo "$tag" | _format_tag )"
-                done
-            fi
+        # Get contents of files
+        file="$( grep -hr '' ./${file}*.md )"
+
+        # Get all bookmarks from files
+        bookmarks="$( echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' )"
+        
+        # For each tag get bookmarks and filter
+        for tag in $( echo "$tags" | sed 's/\!*##*/\n&/g' ); do
+            bm="$( echo "$file" | _bm_from_tag "$( echo "$tag" | sed 's/^!//' )" )"
+            case "$tag" in
+                !*) bookmarks="$( echo "$bookmarks" | grep -v -F -- "$bm" )" ;;
+                *) bookmarks="$( echo "$bookmarks" | grep -x -F -- "$bm" )" ;;
+            esac
         done
+        echo "$bookmarks"
     done
 }
 
@@ -204,7 +209,7 @@ _cli_mmenu(){
 }
 
 _cli_query(){
-    _query "$@"
+    _query "$@" | sort -u
 }
 
 _cli_search(){
