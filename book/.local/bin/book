@@ -86,7 +86,7 @@ _open_menu(){
 }
 
 _list_files(){
-    find . -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//'
+    find . -not -path '*/\.*' -name "*.md" -type f -printf "%P\n" | grep ".*/${file}" | sed 's/\.md$//'
 }
 
 _list_bookmarks(){
