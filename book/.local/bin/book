@@ -101,7 +101,8 @@ _get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
 
 _bm_from_tag(){ 
     tag="$( echo "$1" | _format_tag )"
-    sed -n "/^${tag}$/,/^#${tag%#*}[[:space:]].*$/{/^-[[:space:]]/p}" | sed 's/^-[[:space:]]//'
+    count="#${tag%# *}"
+    sed -nE "/^${tag}$/,/^#{1,${#count}}[[:space:]].*$/{/^.*\[.*\]\(.*\).*$/p}" | grep -o '\[.*\]\(.*\)'
 }
 
 _tag_menu(){
