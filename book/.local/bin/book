@@ -159,14 +159,20 @@ _query(){
         bookmarks="$( echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' )"
         
         # For each tag get bookmarks and filter
-        for tag in $( echo "$tags" | sed 's/\!*##*/\n&/g' ); do
-            bm="$( echo "$file" | _bm_from_tag "$( echo "$tag" | sed 's/^!//' )" )"
+        (
+        IFS='
+        '
+        for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g' ); do
+            bm="$( echo "$file" | _bm_from_tag "$( echo "$tag" | sed 's/^+!//;s/^!//;s/^+//' )" )"
             case "$tag" in
+                +!*) bookmarks="$bookmarks\n$(  echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' | grep -v -F -- "$bm" )" ;;
+                +*) bookmarks="$bookmarks\n$bm" ;;
                 !*) bookmarks="$( echo "$bookmarks" | grep -v -F -- "$bm" )" ;;
                 *) bookmarks="$( echo "$bookmarks" | grep -x -F -- "$bm" )" ;;
             esac
         done
-        echo "$bookmarks"
+        [ -z "$bookmarks" ] || printf "%s\n" "$bookmarks"
+        )
     done
 }
 
