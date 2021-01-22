@@ -27,7 +27,9 @@ Options:
 "
 
 
-# Helper Functions
+###-------------------###
+### UTILITY FUNCTIONS ###
+###-------------------###
 
 # print formatted error
 _error(){ printf "%s\nerror: %s\n" "$__usage" "$1"; exit 1; }
@@ -90,6 +92,12 @@ _tags_from_file(){
 _tags_with_file(){
     _list_files "${1}" | tr '\n' '\0' | xargs -0 -I{} grep -H '^#' '{}.md' | sed 's/:/ /;s/#[[:space:]][[:space:]]*/#/;s/\.md[[:space:]]/ /'
 }
+
+
+###-------------------###
+### COMMAND FUNCTIONS ###
+###-------------------###
+
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
@@ -232,6 +240,10 @@ _query(){
     done
 }
 
+
+###---------------###
+### CLI FUNCTIONS ###
+###---------------###
 
 _cli_add(){
     if [ -z "$1" ]; then
