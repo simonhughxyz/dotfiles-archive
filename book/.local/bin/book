@@ -53,6 +53,9 @@ _get_tag_content(){
     count="#${tag%# *}"
     sed -nE "/^${tag}$/,/^#{1,${#count}}[[:space:]].*$/{/^.*\[.*\]\(.*\).*$/p}"
 }
+
+# get bookmarks from stream
+_get_bm(){ grep -o '\[.*\]\(.*\)' ; }
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
