@@ -26,6 +26,9 @@ Options:
   -h, --help                         Print this help message
 "
 
+
+# Helper Functions
+
 _error(){ printf "%s\nerror: %s\n" "$__usage" "$1"; exit 1; }
 
 _get_html_title(){
@@ -34,6 +37,13 @@ _get_html_title(){
 
 _format_tag(){ sed 's/[^#].*$/\u&/;s/##*/& /;s/^[^#]/# &/'; }
 
+_list_files(){
+    case "$1" in
+        ^*) file="^./${1#^}" ;;
+        *) file="/${1}" ;;
+    esac
+    find . -not -path '*/\.*' -name "*.md" -type f -printf "%p\n" | grep "${file}" | sed 's|^\./||;s|\.md$||'
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
