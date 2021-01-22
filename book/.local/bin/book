@@ -142,11 +142,7 @@ _edit_menu(){
 }
 
 _open_menu(){
-    choice="$( _menu $@ )"
-    if [ $( echo "$choice" | wc -l ) -gt 1 ] && [ "$1" != "all" ] && [ ! -z "$1" ]; then
-        choice="$( echo "$choice" | fzf -m --sync )"
-    fi
-    echo "$choice" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
+    _mmenu "$@" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
 }
 
 _add_menu_fzf(){
@@ -254,7 +250,7 @@ _cli_edit(){
 
 
 _cli_open(){
-    _open_menu "$@"
+    _mmenu "$@" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
 }
 
 _cli_list(){
