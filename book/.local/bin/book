@@ -61,6 +61,11 @@ _get_bm(){ grep -o '\[.*\]\(.*\)' ; }
 _bm_from_tag(){ 
     _get_tag_content "${1}" | _get_bm
 }
+
+# get bookmarks from file
+_bm_from_file(){
+    _get_file_content "${1}" | _get_bm
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
