@@ -5,7 +5,7 @@
 #
 # Store and search for bookmarks
 
-bookmark_dir=~/Documents/notes/bookmarks
+bookmark_dir=~/Documents/notes/
 cd $bookmark_dir
 
 __usage="usage: $(basename "$0") [OPTIONS]"
