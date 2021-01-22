@@ -48,6 +48,11 @@ _list_files(){
 _get_file_content(){
     _list_files "${1}" | tr '\n' '\0' | xargs -0 -I{} cat "./{}.md"
 }
+_get_tag_content(){
+    tag="$( echo "$1" | _format_tag )"
+    count="#${tag%# *}"
+    sed -nE "/^${tag}$/,/^#{1,${#count}}[[:space:]].*$/{/^.*\[.*\]\(.*\).*$/p}"
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
