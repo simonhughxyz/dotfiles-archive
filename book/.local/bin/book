@@ -149,38 +149,6 @@ _open_menu(){
     echo "$choice" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
 }
 
-_list_files(){
-    find . -not -path '*/\.*' -name "*.md" -type f -printf "%P\n" | grep ".*/${file}" | sed 's/\.md$//'
-}
-
-_list_bookmarks(){
-    grep -hr --include="*.md" "^-[[:space:]]\[.*\](.*)" | sed 's/^-[[:space:]]*//'
-}
-
-_list_tags(){
-    grep -r --include="*.md" "^#.*$" | sed 's|\.md:| |;s/#[[:space:]][[:space:]]*/#/'
-}
-
-_get_bm(){ grep '^-[[:space:]]*\[.*\](.*)$' | sed 's/^-[[:space:]]*//'; }
-
-_bm_from_tag(){ 
-    tag="$( echo "$1" | _format_tag )"
-    count="#${tag%# *}"
-    sed -nE "/^${tag}$/,/^#{1,${#count}}[[:space:]].*$/{/^.*\[.*\]\(.*\).*$/p}" | grep -o '\[.*\]\(.*\)'
-}
-
-_tag_menu(){
-    choice="$( _list_tags | fzf --exact )"
-    file="$(  echo "$choice" | awk '{print $1}' )"
-    tag="$(  echo "$choice" | awk '{print $2}' )"
-    cat "${file}.md" | _bm_from_tag "$tag"
-}
-
-_file_menu(){
-    file="$( _list_files | fzf --exact )"
-    cat "${file}.md" | _get_bm
-}
-
 _add_menu_fzf(){
     fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
 }
