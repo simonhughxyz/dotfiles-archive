@@ -181,6 +181,16 @@ _search(){
     grep -hr "^- \[.*\]\(.*\)$" | grep -i --color=auto -E "$@"
 }
 
+# use a query to filter out bookmarks
+# query is of the form `subject#tag`
+# where subject if file and tag is markdown heading
+# 
+# you can use logical operators:
+# + : OR
+# ! : NOT
+# +! : NOR
+# no operator is logical AND
+# Example: `filename#tag1##tag2+#tag3+!###tag4`
 _query(){
     for arg in "$@"; do
         file="$( echo "$arg" | sed 's/\!*##*.*$//' )"
