@@ -56,6 +56,11 @@ _get_tag_content(){
 
 # get bookmarks from stream
 _get_bm(){ grep -o '\[.*\]\(.*\)' ; }
+
+# get bookmarks associated with tag
+_bm_from_tag(){ 
+    _get_tag_content "${1}" | _get_bm
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
