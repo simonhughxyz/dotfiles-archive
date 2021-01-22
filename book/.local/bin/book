@@ -11,7 +11,7 @@ cd $bookmark_dir
 __usage="usage: $(basename "$0") [OPTIONS]"
 __help="$__usage
 
-Store and search for bookmarks
+Store and search for bookmarks/links in markdown
 
 Options:
   -a, --add [uri] [file] [tag]       Add bookmark
