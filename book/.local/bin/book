@@ -141,10 +141,6 @@ _edit_menu(){
     _edit "$( _list_files | fzf )"
 }
 
-_open_menu(){
-    _mmenu "$@" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
-}
-
 _add_menu_fzf(){
     fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
 }
