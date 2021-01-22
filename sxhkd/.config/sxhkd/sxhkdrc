@@ -71,7 +71,7 @@ super + {_,shift +} h
 
 # bookmaks
 super + {_,shift +} period
-    scratchpad -c dropdown_bookmenu -t Bookmarks -e "book -o {tag,_}" -C
+    scratchpad -c dropdown_bookmenu -t Bookmarks -e "book -o {_,all}" -C
 
 
 
