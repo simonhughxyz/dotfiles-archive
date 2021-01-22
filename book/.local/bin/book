@@ -21,7 +21,7 @@ Options:
   -m, --menu [OPTIONS]               Find bookmarks using FZF
   -mm, --mmenu [OPTIONS]             Same as menu but pass result back into FZF
   -s, --search <term>                Search for bookmarks
-  -q, --query <expression            Get bookmarks filtered by query
+  -q, --query <expression>           Get bookmarks filtered by query
   -g, --grep <term>                  Grep files recursively in bookmark directory
   -h, --help                         Print this help message
 "
