@@ -175,7 +175,15 @@ _menu(){
     esac
 }
 
-_grep(){ grep -hr -i --color=auto "$@"; }
+# pass results of `_menu` back into fzf
+# print if only one result
+_mmenu(){
+    choice="$( _menu $@ )"
+    if [ $( echo "$choice" | wc -l ) -gt 1 ] && [ "$1" != "all" ]; then
+        choice="$( echo "$choice" | fzf -m --sync )"
+    fi
+    echo "$choice"
+}
 
 _search(){
     grep -hr "^- \[.*\]\(.*\)$" | grep -i --color=auto -E "$@"
