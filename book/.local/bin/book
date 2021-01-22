@@ -200,7 +200,7 @@ _query(){
         [ -z "${arg##*#*}" ] || tags=""
 
         # Get contents of files
-        file="$( _list_files | grep ".*/${file}" | xargs -I{} cat "./{}.md" )"
+        file="$( _get_file_content "${file}" )"
 
         # Get all bookmarks from files
         bookmarks="$( echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' )"
