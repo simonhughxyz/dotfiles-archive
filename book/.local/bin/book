@@ -271,7 +271,7 @@ _cli_menu(){
 }
 
 _cli_mmenu(){
-    _menu "$@" | fzf --sync
+    _mmenu "$@"
 }
 
 _cli_query(){
