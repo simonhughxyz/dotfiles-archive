@@ -275,7 +275,7 @@ _cli_search(){
 }
 
 _cli_grep(){
-    _grep "$@"
+    grep -hr -i --color=auto "$@"
 }
 
 [ -z "$1" ] && echo "$__usage"
