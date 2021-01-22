@@ -183,7 +183,7 @@ _search(){
 
 # use a query to filter out bookmarks
 # query is of the form `subject#tag`
-# where subject if file and tag is markdown heading
+# where subject is filename and tag is markdown heading
 # 
 # you can use logical operators:
 # + : OR
