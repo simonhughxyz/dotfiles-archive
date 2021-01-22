@@ -203,7 +203,7 @@ _query(){
         file="$( _get_file_content "${file}" )"
 
         # Get all bookmarks from files
-        bookmarks="$( echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' )"
+        bookmarks="$( echo "$file" | _get_bm )"
         
         # For each tag get bookmarks and filter
         (
@@ -212,7 +212,7 @@ _query(){
         for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g' ); do
             bm="$( echo "$file" | _bm_from_tag "$( echo "$tag" | sed 's/^+!//;s/^!//;s/^+//' )" )"
             case "$tag" in
-                +!*) bookmarks="$bookmarks\n$(  echo "$file" | grep '^-[[:space:]]' | sed 's/-[[:space:]]*//' | grep -v -F -- "$bm" )" ;;
+                +!*) bookmarks="$bookmarks\n$(  echo "$file" | _get_bm | grep -v -F -- "$bm" )" ;;
                 +*) bookmarks="$bookmarks\n$bm" ;;
                 !*) bookmarks="$( echo "$bookmarks" | grep -v -F -- "$bm" )" ;;
                 *) bookmarks="$( echo "$bookmarks" | grep -x -F -- "$bm" )" ;;
