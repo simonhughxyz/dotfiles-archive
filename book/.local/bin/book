@@ -44,6 +44,10 @@ _list_files(){
     esac
     find . -not -path '*/\.*' -name "*.md" -type f -printf "%p\n" | grep "${file}" | sed 's|^\./||;s|\.md$||'
 }
+
+_get_file_content(){
+    _list_files "${1}" | tr '\n' '\0' | xargs -0 -I{} cat "./{}.md"
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
