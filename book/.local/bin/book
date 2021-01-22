@@ -71,6 +71,11 @@ _bm_from_file(){
 _tags_from_file(){
     _get_file_content "${1}" | grep "^##*[[:space:]].*$" | sort -u | sed 's/#[[:space:]][[:space:]]*/#/'
 }
+
+# get a list of tags and the file the tag is from
+_tags_with_file(){
+    _list_files "${1}" | tr '\n' '\0' | xargs -0 -I{} grep -H '^#' '{}.md' | sed 's/:/ /;s/#[[:space:]][[:space:]]*/#/;s/\.md[[:space:]]/ /'
+}
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     url="$1"
