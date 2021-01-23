@@ -109,8 +109,8 @@ _add(){
     # create file if it does not exist
     _add_file "$file"
 
-    # Make tag if it does not exist
-    grep -c "^$tag$" "$file" || echo "\n$tag" >> "$file"
+    # add tag if it does not exist
+    _add_tag "$tag" "$file"
 
     # Add bookmark after tag
     sed "/^$tag$/a - [$title]($uri)" "$file" > "$file.tmp"
