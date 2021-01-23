@@ -154,6 +154,7 @@ _add_tag(){
 
 _edit(){
     [ -z "$1" ] && _error "edit: expected at least one argument"
+    [ ! -f "${1}.md" ] && _error "edit: file does not exist"
     $EDITOR "${1}.md"
 }
 
