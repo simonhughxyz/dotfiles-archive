@@ -135,8 +135,18 @@ _add_file(){
 # add a formatted tag to file
 _add_tag(){
     [ -z "${2}" ] && _error "add tag: expected two arguments"
-    [ ! -f "${2}.md" ] && _error "add tag: file does not exist"
-    grep -c "^$( echo "${1}" | _format_tag )$" "${2}.md" || echo "\n$tag" >> "$file"
+    tag="$(echo "${1}" | _format_tag )" 
+    file="${2}.md"
+
+    [ ! -f "${file}" ] && _error "add tag: file does not exist"
+    
+    # check if tag already in file
+    if ! grep -q "^${tag}$" "${file}"; then
+        # make sure last line is empty
+        tail -n1 lol.md | grep -c '^[[:space:]]*$' || echo "" >> "${file}"
+
+        echo "${tag}" >> "${file}"
+    fi
 }
 
 _edit(){
