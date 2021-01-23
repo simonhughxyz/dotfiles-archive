@@ -102,6 +102,8 @@ _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
     uri="$1"
     file="${2:-misc}.md"
+    [ ! -f "${file}" ] && _error "add: file does not exist"
+
     tag="$( echo "${3:-Misc}" | _format_tag )"
     title="$( _get_html_title "$uri" )"
     [ "$title" = "" ] && title="$uri"
