@@ -119,11 +119,13 @@ _add(){
 }
 
 _add_file(){
-    [ -z "$1" ] && _error "add file: expected at least one argument"
+    [ -z "${1}" ] && _error "add file: expected at least one argument"
 
     # if dir ends with '/', use 'misc' as file
-    file="$( echo "$1" | sed 's|/$|/misc|' ).md"
+    file="$( echo "${1}" | sed 's|/$|/misc|' )"
     
+    [ -f "${file}.md" ] && _error "add file: file already exists"
+
     # if file does not exist, create it with formatted heading
     if [ ! -f "$file" ]; then
         dir="${file%/*}"
