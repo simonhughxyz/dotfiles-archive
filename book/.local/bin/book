@@ -127,12 +127,12 @@ _add_file(){
     [ -f "${file}.md" ] && _error "add file: file already exists"
 
     # if file does not exist, create it with formatted heading
-    if [ ! -f "$file" ]; then
+    if [ ! -f "${file}.md" ]; then
         dir="${file%/*}"
         mkdir -p "$dir"
-        echo "${file##*/}" | sed 's/\.md$//' | _format_tag > "$file"
+        touch "${file}.md"
+        _add_tag "#${file##*/}" "${file}"
     fi
-    exit
 }
 
 # add a formatted tag to file
