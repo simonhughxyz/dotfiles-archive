@@ -105,12 +105,16 @@ _add(){
     tag="$( echo "${3:-Misc}" | _format_tag )"
     title="$( _get_html_title "$uri" )"
     [ "$title" = "" ] && title="$uri"
+    bookmark="[${title}](${uri})"
 
     # add tag if it does not exist
-    _add_tag "$tag" "${file%.md}"
+    _add_tag "${tag}" "${file%.md}"
+
+    # check if bookmark already exists in tag
+    _get_file_content "${file}" | _bm_from_tag "${tag}" | grep -qF "$bookmark" && exit
 
     # Add bookmark after tag
-    sed "/^$tag$/a - [$title]($uri)" "${file}" > "${file}.tmp"
+    sed "/^${tag}$/a - ${bookmark}" "${file}" > "${file}.tmp"
     mv "${file}.tmp" "${file}"
 }
 
