@@ -132,6 +132,13 @@ _add_file(){
     exit
 }
 
+# add a formatted tag to file
+_add_tag(){
+    [ -z "${2}" ] && _error "add tag: expected two arguments"
+    [ ! -f "${2}.md" ] && _error "add tag: file does not exist"
+    grep -c "^$( echo "${1}" | _format_tag )$" "${2}.md" || echo "\n$tag" >> "$file"
+}
+
 _edit(){
     [ -z "$1" ] && _error "edit: expected at least one argument"
     $EDITOR "${1}.md"
