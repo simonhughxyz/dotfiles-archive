@@ -124,7 +124,7 @@ _add_file(){
     # if dir ends with '/', use 'misc' as file
     file="$( echo "${1}" | sed 's|/$|/misc|' )"
     
-    [ -f "${file}.md" ] && _error "add file: file already exists"
+    [ -f "${file}.md" ] && _error "add file: file exists"
 
     # if file does not exist, create it with formatted heading
     if [ ! -f "${file}.md" ]; then
@@ -299,6 +299,10 @@ _cli_grep(){
     grep -hr -i --color=auto "$@"
 }
 
+_cli_add_file(){
+    _add_file "$@"
+}
+
 [ -z "$1" ] && echo "$__usage"
 while test $# -gt 0; do
     case "$1" in
@@ -312,6 +316,7 @@ while test $# -gt 0; do
         -q|--query) shift; _cli_query "$@"; exit ;;
         -g|--grep) shift; _cli_grep $@; exit ;;
         -s|--search) shift; _cli_search $@; exit ;;
+        --addfile) shift; _cli_add_file "$@"; exit ;;
         *) _query "$@"; exit ;;
     esac
     shift
