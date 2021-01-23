@@ -100,11 +100,11 @@ _tags_with_file(){
 
 _add(){
     [ -z "$1" ] && _error "add: expected at least one argument"
-    url="$1"
+    uri="$1"
     file="${2:-misc}"
     tag="$( echo "${3:-Misc}" | _format_tag )"
-    title="$( _get_html_title "$url" )"
-    [ "$title" = "" ] && title="$url"
+    title="$( _get_html_title "$uri" )"
+    [ "$title" = "" ] && title="$uri"
 
     # create file if it does not exist
     _add_file "$file"
@@ -113,7 +113,7 @@ _add(){
     grep -c "^$tag$" "$file" || echo "\n$tag" >> "$file"
 
     # Add bookmark after tag
-    sed "/^$tag$/a - [$title]($url)" "$file" > "$file.tmp"
+    sed "/^$tag$/a - [$title]($uri)" "$file" > "$file.tmp"
     mv "$file.tmp" "$file"
 }
 
