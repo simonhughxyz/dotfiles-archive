@@ -127,7 +127,7 @@ _add_file(){
     if [ ! -f "$file" ]; then
         dir="${file%/*}"
         mkdir -p "$dir"
-        echo "${file##*/}" | sed 's/\.md$//;s/^./# \u&/' > "$file"
+        echo "${file##*/}" | sed 's/\.md$//' | _format_tag > "$file"
     fi
     exit
 }
