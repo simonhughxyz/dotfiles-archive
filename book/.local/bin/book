@@ -106,9 +106,6 @@ _add(){
     title="$( _get_html_title "$uri" )"
     [ "$title" = "" ] && title="$uri"
 
-    # create file if it does not exist
-    _add_file "$file"
-
     # add tag if it does not exist
     _add_tag "$tag" "$file"
 
