@@ -163,10 +163,6 @@ _edit(){
     $editor "${1}.md"
 }
 
-_edit_menu(){
-    _edit "$( _list_files | fzf )"
-}
-
 _add_menu_fzf(){
     fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
 }
@@ -264,7 +260,7 @@ _cli_add(){
 
 _cli_edit(){
     if [ -z "$1" ]; then
-        _edit_menu
+        _edit "$( _list_files | fzf )"
     else
         _edit "$@"
     fi
