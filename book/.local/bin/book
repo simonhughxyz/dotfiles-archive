@@ -6,6 +6,9 @@
 # Store and search for bookmarks
 
 bookmark_dir=~/Documents/notes/
+editor="${EDITOR:-vim}"
+
+
 cd $bookmark_dir
 
 __usage="usage: $(basename "$0") [OPTIONS]"
@@ -157,7 +160,7 @@ _add_tag(){
 _edit(){
     [ -z "$1" ] && _error "edit: expected at least one argument"
     [ ! -f "${1}.md" ] && _error "edit: file does not exist"
-    $EDITOR "${1}.md"
+    $editor "${1}.md"
 }
 
 _edit_menu(){
