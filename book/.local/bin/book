@@ -172,6 +172,8 @@ _menu(){
         tag) _get_file_content "${2}" | _bm_from_tag "$( _tags_from_file | fzf --exact )" ;;
         # list files and print bookmarks of chosen file
         file) _bm_from_file "^$( _list_files | fzf --exact )" ;;
+        # query for bookmarks and list in fzf
+        query) _query "${2}" | sort -u | fzf --exact ;;
         # list tags and files and print bookmarks of chosen tag with file
         *) choice="$( _tags_with_file | fzf --exact )"; _get_file_content "${choice%% #*}" | _bm_from_tag "${choice#* }";;
     esac
