@@ -245,10 +245,12 @@ _add_fzf(){
     fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
 }
 
+# if no argument given, use fzf to aid in adding bookmark
 _cli_add(){
     if [ -z "$1" ]; then
-        tag="$( _tags_from_file | sort -u | _add_fzf "Tag: " )"
-        file="$( _list_files | sort | _add_fzf "File: " )"
+        choice="$( _tags_with_file | fzf --exact )"
+        file="$( echo "$choice" | awk -F' #' '{print $1}' )"
+        tag="#$( echo "$choice" | awk -F' #' '{print $2}' )"
         uri="$( xclip -o 2> /dev/null | _add_fzf "URI: " )"
 
         _add "$uri" "$file" "$tag"
