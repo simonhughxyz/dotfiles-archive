@@ -163,18 +163,6 @@ _edit(){
     $editor "${1}.md"
 }
 
-_add_menu_fzf(){
-    fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
-}
-
-_add_menu(){
-    tag="$( _list_tags | awk -F ' #' '{print $2}' | sort | uniq | _add_menu_fzf "Tag: " )"
-    file="$( _list_files | sort | _add_menu_fzf "File: " )"
-    uri="$( xclip -o 2> /dev/null | _add_menu_fzf "URI: " )"
-
-    _add "$uri" "$file" "$tag"
-}
-
 # use fzf to find bookmarks
 _menu(){
     case "$1" in
@@ -250,9 +238,17 @@ _query(){
 ### CLI FUNCTIONS ###
 ###---------------###
 
+_add_fzf(){
+    fzf --exact --prompt "$1" --bind="enter:replace-query+print-query,ctrl-space:print-query"
+}
+
 _cli_add(){
     if [ -z "$1" ]; then
-        _add_menu
+        tag="$( _list_tags | awk -F ' #' '{print $2}' | sort | uniq | _add_fzf "Tag: " )"
+        file="$( _list_files | sort | _add_fzf "File: " )"
+        uri="$( xclip -o 2> /dev/null | _add_fzf "URI: " )"
+
+        _add "$uri" "$file" "$tag"
     else
         _add "$@"
     fi
