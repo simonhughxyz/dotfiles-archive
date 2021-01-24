@@ -244,7 +244,7 @@ _add_fzf(){
 
 _cli_add(){
     if [ -z "$1" ]; then
-        tag="$( _list_tags | awk -F ' #' '{print $2}' | sort | uniq | _add_fzf "Tag: " )"
+        tag="$( _tags_from_file | sort -u | _add_fzf "Tag: " )"
         file="$( _list_files | sort | _add_fzf "File: " )"
         uri="$( xclip -o 2> /dev/null | _add_fzf "URI: " )"
 
