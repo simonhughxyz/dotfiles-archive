@@ -290,7 +290,7 @@ _cli_mmenu(){
 }
 
 _cli_query(){
-    _query "$@" | sort -u
+    _query "$@"
 }
 
 _cli_search(){
