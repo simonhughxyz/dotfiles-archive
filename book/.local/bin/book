@@ -44,7 +44,7 @@ _get_html_title(){
 }
 
 # format tag in the form `# Word Word`
-_format_tag(){ sed 's/[^#].*$/\u&/;s/##*/& /;s/^[^#]/# &/;s/[[:space:]][[:space:]]*/ /g'; }
+_format_tag(){ sed 's/##*/& /;s/[[:space:]]./\U&/g;s/^[^#]/# &/;s/[[:space:]][[:space:]]*/ /g'; }
 
 # get a list of files
 # if no argument is given, then get all files
