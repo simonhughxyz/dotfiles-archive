@@ -216,22 +216,22 @@ _query(){
         file="$( _get_file_content "${file}" )"
 
         # Get all bookmarks from files
-        bookmarks="$( echo "$file" | _get_bm )"
+        content="$file"
         
         # For each tag get bookmarks and filter
         (
-        IFS='
-        '
-        for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g' ); do
-            bm="$( echo "$file" | _bm_from_tag "$( echo "$tag" | sed 's/^+!//;s/^!//;s/^+//' )" )"
+        IFS='|'
+        for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g;s/\n/|/g' ); do
+            tag_content="$( echo "$file" | _get_tag_content "$( echo "$tag" | sed 's/^+!//;s/^!//;s/^+//' )" )"
+            # echo "$tag_content"
             case "$tag" in
-                +!*) bookmarks="$bookmarks\n$(  echo "$file" | _get_bm | grep -v -F -- "$bm" )" ;;
-                +*) bookmarks="$bookmarks\n$bm" ;;
-                !*) bookmarks="$( echo "$bookmarks" | grep -v -F -- "$bm" )" ;;
-                *) bookmarks="$( echo "$bookmarks" | grep -x -F -- "$bm" )" ;;
+                +!*) content="$content\n$(  echo "$tag_content" | grep -v -F -- "$tag_content" )" ;;
+                +*) content="$content\n$tag_content" ;;
+                !*) content="$( echo "$content" | grep -v -F -- "$tag_content" )" ;;
+                *) content="$( echo "$content" | grep -x -F -- "$tag_content" )" ;;
             esac
         done
-        [ -z "$bookmarks" ] || echo "$bookmarks" | sed '/^[[:space:]]*$/d'
+        [ -z "$content" ] || echo "$content" | sed '/^[[:space:]]*$/d'
         )
     done
 }
