@@ -217,25 +217,19 @@ _query(){
         [ -z "${arg##*#*}" ] || tags=""
 
         # Get contents of files
-        file="$( _get_file_content "${file}" )"
-
-        # Get all bookmarks from files
-        content="$file"
+        content="$( _get_file_content "${file}" )"
         
         # For each tag get bookmarks and filter
         (
-        IFS='|'
-        for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g;s/\n/|/g' ); do
-            tag_content="$( echo "$file" | _get_tag_content "$( echo "$tag" | sed 's/^+!//;s/^!//;s/^+//' )" )"
-            # echo "$tag_content"
+        IFS='
+'
+        for tag in $( echo "$tags" | sed 's/+*\!*##*/\n&/g' ); do
             case "$tag" in
-                +!*) content="$content\n$(  echo "$tag_content" | grep -v -F -- "$tag_content" )" ;;
-                +*) content="$content\n$tag_content" ;;
-                !*) content="$( echo "$content" | grep -v -F -- "$tag_content" )" ;;
-                *) content="$( echo "$content" | grep -x -F -- "$tag_content" )" ;;
+                +*) content="$content\n\n$( echo "$prev" | _get_tag_content "${tag#+}" )" ;;
+                *) prev="$content"; content="$( echo "$content" | _get_tag_content "${tag#+}" )" ;;
             esac
         done
-        [ -z "$content" ] || echo "$content" | sed '/^[[:space:]]*$/d'
+        [ -z "$content" ] || echo "$content"
         )
     done
 }
