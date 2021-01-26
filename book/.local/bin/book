@@ -68,6 +68,7 @@ _get_file_content(){
 
 # get tag content
 # retrieves all content of all files associated with tag
+# if tag starts with `!` then negate tag
 _get_tag_content(){
     tag="$( echo "${1#!}" | _format_tag )"
     count="#${tag%# *}"
