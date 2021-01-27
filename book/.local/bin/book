@@ -26,6 +26,7 @@ Options:
   -s, --search <term>                Search for bookmarks
   -q, --query <expression>           Get bookmarks filtered by query
   -g, --grep <term>                  Grep files recursively in bookmark directory
+  -b                                 Filter out bookmarks from some functions
   --addfile <file>                   Add file
   -h, --help                         Print this help message
 "
