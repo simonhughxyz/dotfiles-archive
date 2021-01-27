@@ -181,15 +181,15 @@ _edit(){
 _menu(){
     case "$1" in
         # list all bookmarks in fzf
-        all|bm) _bm_from_file "${2}" | fzf --exact -m ;;
+        all|bm) _get_file_content "${2}" | _get_bm_flag | fzf --exact -m ;;
         # list tags and print bookmarks of chosen tag
-        tag) _get_file_content "${2}" | _bm_from_tag "$( _tags_from_file | fzf --exact )" ;;
+        tag) _get_file_content "${2}" | _get_tag_content "$( _tags_from_file | fzf --exact )" | _get_bm_flag;;
         # list files and print bookmarks of chosen file
-        file) _bm_from_file "^$( _list_files | fzf --exact )" ;;
+        file) _get_file_content "^$( _list_files | fzf --exact )" | _get_bm_flag ;;
         # query for bookmarks and list in fzf
-        query) _query "${2}" | sort -u | fzf -m --exact ;;
+        query) _query "${2}" | _get_bm_flag | fzf -m --exact ;;
         # list tags and files and print bookmarks of chosen tag with file
-        *) choice="$( _tags_with_file | fzf --exact )"; _get_file_content "${choice%% #*}" | _bm_from_tag "${choice#* }";;
+        *) choice="$( _tags_with_file | fzf --exact )"; _get_file_content "${choice%% #*}" | _get_tag_content "${choice#* }" | _get_bm_flag ;;
     esac
 }
 
