@@ -81,6 +81,15 @@ _get_tag_content(){
 # get bookmarks from stream
 _get_bm(){ grep -o '\[.*\]\(.*\)' ; }
 
+# get bookmarks only if `-b` flag is set
+_get_bm_flag(){
+    if [ -z $book ]; then
+        cat
+    else
+        _get_bm
+    fi
+}
+
 # get bookmarks associated with tag
 _bm_from_tag(){ 
     _get_tag_content "${1}" | _get_bm
@@ -316,6 +325,7 @@ while test $# -gt 0; do
         -q|--query) shift; _cli_query "$@"; exit ;;
         -g|--grep) shift; _cli_grep $@; exit ;;
         -s|--search) shift; _cli_search $@; exit ;;
+        -b) book=1 ;;
         --addfile) shift; _cli_add_file "$@"; exit ;;
         *) _query "$@"; exit ;;
     esac
