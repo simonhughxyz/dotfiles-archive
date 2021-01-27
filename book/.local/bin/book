@@ -26,7 +26,7 @@ Options:
   -s, --search <term>                Search for bookmarks
   -q, --query <expression>           Get bookmarks filtered by query
   -g, --grep <term>                  Grep files recursively in bookmark directory
-  -b                                 Filter out bookmarks from some functions
+  -c, --content                      Show all content, don't filter out bookmarks
   --addfile <file>                   Add file
   -h, --help                         Print this help message
 "
@@ -83,11 +83,11 @@ _get_tag_content(){
 _get_bm(){ grep -o '\[.*\]\(.*\)' ; }
 
 # get bookmarks only if `-b` flag is set
-_get_bm_flag(){
-    if [ -z $book ]; then
-        cat
-    else
+_filter_bm(){
+    if [ -z $content_flag ]; then
         _get_bm
+    else
+        cat
     fi
 }
 
@@ -182,15 +182,15 @@ _edit(){
 _menu(){
     case "$1" in
         # list all bookmarks in fzf
-        all|bm) _get_file_content "${2}" | _get_bm_flag | fzf --exact -m ;;
+        all|bm) _get_file_content "${2}" | _filter_bm | fzf --exact -m ;;
         # list tags and print bookmarks of chosen tag
-        tag) _get_file_content "${2}" | _get_tag_content "$( _tags_from_file | fzf --exact )" | _get_bm_flag;;
+        tag) _get_file_content "${2}" | _get_tag_content "$( _tags_from_file | fzf --exact )" | _filter_bm;;
         # list files and print bookmarks of chosen file
-        file) _get_file_content "^$( _list_files | fzf --exact )" | _get_bm_flag ;;
+        file) _get_file_content "^$( _list_files | fzf --exact )" | _filter_bm ;;
         # query for bookmarks and list in fzf
-        query) _query "${2}" | _get_bm_flag | fzf -m --exact ;;
+        query) _query "${2}" | _filter_bm | fzf -m --exact ;;
         # list tags and files and print bookmarks of chosen tag with file
-        *) choice="$( _tags_with_file | fzf --exact )"; _get_file_content "${choice%% #*}" | _get_tag_content "${choice#* }" | _get_bm_flag ;;
+        *) choice="$( _tags_with_file | fzf --exact )"; _get_file_content "${choice%% #*}" | _get_tag_content "${choice#* }" | _filter_bm ;;
     esac
 }
 
@@ -298,7 +298,7 @@ _cli_mmenu(){
 }
 
 _cli_query(){
-    _query "$@" | _get_bm_flag
+    _query "$@" | _filter_bm
 }
 
 _cli_search(){
@@ -326,7 +326,7 @@ while test $# -gt 0; do
         -q|--query) shift; _cli_query "$@"; exit ;;
         -g|--grep) shift; _cli_grep $@; exit ;;
         -s|--search) shift; _cli_search $@; exit ;;
-        -b) book=1 ;;
+        -c|--content) content_flag=1 ;;
         --addfile) shift; _cli_add_file "$@"; exit ;;
         *) _query "$@"; exit ;;
     esac
