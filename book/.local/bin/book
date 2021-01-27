@@ -80,7 +80,7 @@ _get_tag_content(){
 }
 
 # get bookmarks from stream
-_get_bm(){ grep -o '\[.*\]\(.*\)' ; }
+_get_bm(){ grep -o '\[.*\](.*)' ; }
 
 # get bookmarks only if `-b` flag is set
 _filter_bm(){
