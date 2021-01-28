@@ -7,7 +7,7 @@ max-items 0                   # Keep all articles.
 external-url-viewer "urlscan" # Use 'urlscan'.
 save-path "~/articles"        # Path to save articles to.
 text-width 80                 # Max text width.
-browser "w3m %u"    # Set default browser.
+browser "$BROWSER %u"         # Set default browser.
 
 # Format
 datetime-format "%d %b %y"
