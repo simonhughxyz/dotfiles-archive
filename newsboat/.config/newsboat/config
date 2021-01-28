@@ -54,5 +54,5 @@ unbind-key SPACE
 bind-key SPACE macro-prefix
 
 # macros
-macro v set browser "m -d --file='%u'"; open-in-browser ; set browser "w3m %u"
+macro v set browser "vid -d --file='%u'"; open-in-browser ; set browser "w3m %u"
 macro o set browser "firefox %u"; open-in-browser ; set browser "w3m %u"
