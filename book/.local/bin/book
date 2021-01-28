@@ -156,7 +156,7 @@ _add_tag(){
     # check if tag already in file
     if ! grep -q "^${tag}$" "${file}"; then
         # make sure last line is empty
-        tail -n1 lol.md | grep -c '^[[:space:]]*$' || echo "" >> "${file}"
+        tail -n1 "${file}" | grep -c '^[[:space:]]*$' || echo "" >> "${file}"
 
         echo "${tag}" >> "${file}"
     fi
