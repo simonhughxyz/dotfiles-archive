@@ -121,7 +121,7 @@ _add(){
     _add_tag "${tag}" "${file%.md}"
 
     # check if bookmark already exists in tag
-    _get_file_content "${file}" | _get_file_content "${tag}" | _get_bm | grep -qF "$bookmark" && exit
+    _get_file_content "${file}" | _get_tag_content "${tag}" | _get_bm | grep -qF "$bookmark" && exit
 
     # Add bookmark after tag
     sed "/^${tag}$/a - ${bookmark}" "${file}" > "${file}.tmp"
