@@ -15,7 +15,7 @@ __usage="usage: $(basename "$0") <URL>"
 [ -z "$1" ] && echo "$__usage" && exit 1
 
 # make sure URL is of correct format and ends with '/videos'
-url="https://www.youtube.com$( echo "$1" | grep -o '/\(c\|channel\)/[^/]*' )/videos"
+url="https://www.youtube.com$( echo "$1" | grep -o '/\(c\|user\|channel\)/[^/]*' )/videos"
 
 # get src and extract ID and title
 src="$( curl -s "$url" )"

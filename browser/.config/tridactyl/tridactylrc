@@ -16,6 +16,7 @@ sanitize tridactyllocal tridactylsync
 alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('vid -d --file=' + url))
 alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
+alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/newsboat.url'))
 
 " Set default zoom
 " autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
@@ -146,6 +147,7 @@ bind d hint -JW ytdl
 bindurl youtube.com d composite hint -Jpipe ytd-thumbnail>a href | ytdl
 " Download playlist
 bindurl youtube.com/playlist D composite get_current_url | ytdl_pl
+bindurl youtube.com n composite get_current_url | ytrss
 
 
 " Git{Hub,Lab} git clone via SSH yank
