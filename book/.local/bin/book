@@ -126,6 +126,9 @@ _add(){
     # Add bookmark after tag
     sed "/^${tag}$/a - ${bookmark}" "${file}" > "${file}.tmp"
     mv "${file}.tmp" "${file}"
+
+    # send notification confirming bookmark
+    notify-send "${title}" "Added to ${file} ${tag}"
 }
 
 _add_file(){
