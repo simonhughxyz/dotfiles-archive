@@ -10,6 +10,7 @@ text-width 80                 # Max text width.
 browser "$BROWSER %u"         # Set default browser.
 scrolloff 5                   # Number of lines to keep at edge when scrolling
 prepopulate-query-feeds yes   # Prepopulate query feeds on startup
+confirm-exit yes              # Confirm exit before quitting newsboat
 error-log "~/.local/share/newsboat/error.log"
 
 # Format
