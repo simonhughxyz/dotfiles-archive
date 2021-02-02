@@ -8,3 +8,4 @@
 -o ~/Videos/%(title)s_%(width)sx%(height)s.%(ext)s
 --restrict-filenames
 -f bestvideo[height<=?1080][fps<=?60]+bestaudio/best
+--cookie ~/sync/cookies/youtube
