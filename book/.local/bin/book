@@ -270,7 +270,7 @@ _cli_edit(){
 
 
 _cli_open(){
-    _mmenu "$@" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "$BROWSER {}; sleep 0.1"
+    _mmenu "$@" | awk -F'[()]' '{print $(NF-1)}' | xargs -I {} sh -c "setsid -f $BROWSER {} > /dev/null 2>&1; sleep 0.1"
 }
 
 _cli_list(){
