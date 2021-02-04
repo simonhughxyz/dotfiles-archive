@@ -28,7 +28,7 @@ elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0
 elvi="$( echo "$elvi_list" | _fzf )"
 [ "$elvi" = "" ] && exit 1
 
-surfraw "$elvi" $search_term
+setsid -f surfraw "$elvi" $search_term > /dev/null 2>&1 &
 
 # # append to history files.
 echo "$search_term" >> $hfile
