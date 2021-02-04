@@ -103,7 +103,6 @@ alias defcomp='def -u "Free On-Line Dictionary of Computing"'
 alias defde='def -u "German - English" -u "English - German"'
 
 # media
-alias vid='mpv'
 alias img='sxiv -a'
 # alias ytdl='youtube-dl'
 
