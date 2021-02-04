@@ -1,4 +1,3 @@
---force-ipv4
 --audio-format best
 --add-metadata
 --geo-bypass
