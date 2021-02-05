@@ -7,13 +7,14 @@
 
 # shortcuts 
 alias sudo='sudo '
-alias se='sudoedit'
+alias se='sudoedit '
 alias path='echo $PATH'
-alias c='clear'
-alias p='sudo pacman'
-alias xi="sudo xbps-install"
-alias xr="sudo xbps-remove"
-alias xq="xbps-query"
+alias c='clear '
+alias p='sudo pacman '
+alias xi='sudo xbps-install '
+alias xr='sudo xbps-remove '
+alias xq='xbps-query '
+alias xl='xlocate -S; xlocate '
 alias mux='tmuxinator'
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
