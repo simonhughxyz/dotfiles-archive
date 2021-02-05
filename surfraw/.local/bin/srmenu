@@ -33,3 +33,6 @@ setsid -f surfraw "$elvi" $search_term > /dev/null 2>&1 &
 # # append to history files.
 echo "$search_term" >> $hfile
 echo "$elvi" >> $elvi_hfile
+
+# give time for setsid to launch new session and run surfraw
+sleep 0.1
