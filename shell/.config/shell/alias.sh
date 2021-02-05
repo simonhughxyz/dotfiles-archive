@@ -9,7 +9,7 @@
 alias sudo='sudo '
 alias se='sudoedit '
 alias path='echo $PATH'
-alias c='clear '
+alias x='clear '
 alias p='sudo pacman '
 alias xi='sudo xbps-install '
 alias xr='sudo xbps-remove '
