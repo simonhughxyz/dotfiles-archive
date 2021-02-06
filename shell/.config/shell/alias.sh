@@ -94,7 +94,7 @@ alias gd='git diff'
 alias grep='grep --color=auto '
 alias diff='diff --color=auto'
 alias fd='fd -H '
-alias rg='rg --hidden'
+alias rg='rg --color=auto --hidden'
 
 # stardict
 alias def='sdcv --color'
