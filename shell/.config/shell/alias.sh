@@ -69,12 +69,6 @@ mcd() { mkdir "$1"; cd "$1"; }  # make dir and cd into it.
 b(){ cd "$(bk -L | fzf)"; }
 
 
-# grep
-alias grep='grep --color=auto '
-
-# diff
-alias diff='diff --color=auto'
-
 # vim
 alias vim='nvim'
 alias vi='vim'
@@ -97,6 +91,8 @@ alias gm='git merge'
 alias gd='git diff'
 
 # Utils
+alias grep='grep --color=auto '
+alias diff='diff --color=auto'
 alias fd='fd -H '
 alias rg='rg --hidden'
 
