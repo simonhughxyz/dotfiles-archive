@@ -70,7 +70,7 @@ b(){ cd "$(bk -L | fzf)"; }
 
 
 # grep
-alias grep='grep -r --color=auto'
+alias grep='grep --color=auto '
 
 # diff
 alias diff='diff --color=auto'
