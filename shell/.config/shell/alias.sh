@@ -106,9 +106,6 @@ alias defde='def -u "German - English" -u "English - German"'
 # media
 alias img='sxiv -a'
 
-# buku
-alias bu='buku --suggest'
-
 # system info
 alias free='free -hlt'
 alias free1000='free -hlt --si' # display using power of 1000 instead 1024
