@@ -65,7 +65,7 @@ nnn_config=$HOME/.config/nnn/nnnrc
 # Host specific config
 if [ "$HOST" = "voidtower" ]; then
     export LIBVA_DRIVER_NAME="radeonsi"
-    export MPV_PROFILE="hq"
+    export MPV_PROFILE="fhd60"
 elif [ "$HOST" = "voidbook" ]; then
     export MPV_PROFILE="hd"
 fi
