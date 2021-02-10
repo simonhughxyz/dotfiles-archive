@@ -51,13 +51,13 @@ super + alt + c; {e,f}
 super + alt + p
     pdfmenu
 
-# Dmenu
+# Menu
 super + a
     scratchpad -c app_menu -t apps -e appmenu -C
 ctrl + alt + Delete
     scratchpad -c powermenu -t Power -e powermenu -C
 super + {_,shift +} c
-    {clipmenu, clipdel -d ".*"}
+    {scratchpad -c dropdown_fclip -t Clip -e fclip, clipdel -d ".*"}
 super + y
     xclip < /dev/null
 super + s
