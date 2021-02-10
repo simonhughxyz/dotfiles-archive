@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# FCLIP
+# 
+# AUTHOR: Simon H Moore
+#
+# DATE: Wed Feb 10 2021
+#
+# DESC: fzf clipboard manager using clipmenu
+
+# Check for clipmenu dependency
+command -v clipmenu > /dev/null || { echo "error: clipmenu not found"; exit 1; }
+
+# Launch clipmenu with fzf
+CM_LAUNCHER=fzf clipmenu
