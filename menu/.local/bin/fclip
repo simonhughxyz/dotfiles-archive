@@ -8,8 +8,10 @@
 #
 # DESC: fzf clipboard manager using clipmenu
 
-# Check for clipmenu dependency
-command -v clipmenu > /dev/null || { echo "error: clipmenu not found"; exit 1; }
+# Check for dependencies
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "clipmenu"
+_dependency "fzf"
 
 # Launch clipmenu with fzf
 CM_LAUNCHER=fzf clipmenu
