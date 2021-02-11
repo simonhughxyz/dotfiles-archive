@@ -22,12 +22,12 @@ end
 
 
 mp.register_event('start-file', function(event) 
-    title = mp.get_property('media-title');  
     path = mp.get_property('path')
 end)
 
 -- log files that successfully loaded
 mp.register_event('file-loaded', function()
+    title = mp.get_property('media-title');  
     if not path:find("http.?://") or path:find("magnet:%?") then
         path = utils.join_path(mp.get_property("working-directory"), path)
     end
