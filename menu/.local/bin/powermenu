@@ -6,11 +6,10 @@
 # Gives a list of options to:
 # hibernate, sleep, exit (logout), shutdown or reboot.
 
-# List of choices to pass to dmenu
+# List of choices to pass to fzf
 choices="Hibernate\nSleep\nExit\nShutdown\nReboot"
 
-# get choice form dmenu
-# choice=$(echo -e "$choices" | dmenu -sb "#ad1616" -p "Power Menu: ")
+# get choice form fzf
 choice=$(echo -e "$choices" | fzf --cycle --reverse --info=hidden --border --padding=0 --margin=0 --color='bw,border:1,fg+:1:bold' )
 
 case "$choice" in 
