@@ -45,7 +45,7 @@ _error(){
 
 _download(){ 
     _notify "Starting Download..."
-    youtube-dl --config-location "$config" "$url" $@ || _error "Failed to download!"
+    youtube-dl --config-location "$config" --exec "ffmpeg -i {} -c:v copy -c:a copy -metadata URL=$url {}.tmp.mkv;mv -f {}.tmp.mkv {}" "$url" $@ || _error "Failed to download!"
     _notify "Finished Download!"
     exit
 }
