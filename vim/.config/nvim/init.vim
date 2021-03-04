@@ -557,6 +557,25 @@ let g:netrw_banner = 0
 " FZF {{{
 " set rtp+=~/.fzf
 " }}}
+" Pager {{{
+function! Pager()
+    " Status line
+    set laststatus=0
+    set cmdheight=1
+    set nomodifiable " Only in version 6.0
+    set readonly
+
+    " No menu bar and tool bar
+    set guioptions=aiMr
+
+    " Key bindings.
+    nmap b <C-B><C-G>
+    nmap q :q!<CR>
+    nmap <Up> <C-Y>
+    nmap <Down> <C-E>
+endfunction
+command! Pager call Pager(<f-args>)
+" }}}
 " Input mode Shortcuts {{{
 inoremap \\ \z
 " }}}
