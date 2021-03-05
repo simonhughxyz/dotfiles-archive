@@ -571,6 +571,10 @@ function! Pager()
     " Disable folds
     set nofoldenable
 
+    " No numberline
+    set nonumber
+    set norelativenumber
+
     " Key bindings.
     nmap b <C-B><C-G>
     nmap q :q!<CR>
