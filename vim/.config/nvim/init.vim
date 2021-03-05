@@ -568,6 +568,9 @@ function! Pager()
     " No menu bar and tool bar
     set guioptions=aiMr
 
+    " Disable folds
+    set nofoldenable
+
     " Key bindings.
     nmap b <C-B><C-G>
     nmap q :q!<CR>
