@@ -580,6 +580,7 @@ function! Pager()
     nmap q :q!<CR>
     nmap <Up> <C-Y>
     nmap <Down> <C-E>
+    nmap <F2> :set number!<CR>
 endfunction
 command! Pager call Pager(<f-args>)
 " }}}
