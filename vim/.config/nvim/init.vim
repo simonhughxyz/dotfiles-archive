@@ -65,6 +65,8 @@ set conceallevel=2
 set concealcursor=c
 " time in milliseconds for key sequence to complete
 set timeoutlen=500
+" Lines to keep above and below cursor
+set scrolloff=5
 " }}}
 " Folding {{{
 "=== folding ===
