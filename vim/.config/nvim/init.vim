@@ -577,6 +577,9 @@ function! Pager()
     set nonumber
     set norelativenumber
 
+    " Keep cursor in center
+    set scrolloff=9999
+
     " Key bindings.
     nmap b <C-B><C-G>
     nmap q :q!<CR>
