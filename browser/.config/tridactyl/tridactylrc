@@ -17,6 +17,7 @@ alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_qu
 alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/newsboat.url'))
+alias chromium js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('www -c ' + url))
 
 " Set default zoom
 " autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
@@ -81,6 +82,7 @@ unbind o
 bind o composite get_current_url | winopen
 unbind O
 bind O composite get_current_url | tabopen
+bind c composite get_current_url | chromium
 unbind p
 bind p composite get_current_url | winopen -private
 
