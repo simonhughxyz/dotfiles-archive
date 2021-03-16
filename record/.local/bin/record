@@ -59,7 +59,7 @@ _screencast(){
     -video_size "$( res )" \
     -framerate $fps \
     -i "$DISPLAY" \
-    -f alsa -i default \
+    -f pulse -i default \
     -vf 'hwupload,scale_vaapi=format=nv12' \
     -c:v h264_vaapi \
     -qp 24 \
