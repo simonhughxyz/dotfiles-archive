@@ -62,8 +62,6 @@ super + y
     xclip < /dev/null
 super + s
     scratchpad -c dropdown_srmenu -t Search -e srmenu -C
-super + shift + backslash
-    streammenu
 super + shift + p
     scratchpad -c pass_menu -t Pass -e "pass menu" -C
 super + {_,shift +} h
