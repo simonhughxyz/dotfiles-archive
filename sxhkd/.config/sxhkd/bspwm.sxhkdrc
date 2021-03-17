@@ -36,10 +36,10 @@ super + {_, shift +} {Left,Down,Up,Right}
 super + shift + bracket{left,right}
     bspc node -f {prev,next}.local
 
-super + {_, shift +} z
+super + {_, shift +} slash
     {class=window; flag="",class=window-all; flag="-a"}; \
     scratchpad -c $class -t Windows -e "bspwm_current_window_menu $flag"
-super + {_, shift +} n
+super + {_, shift +} backslash
     {class=window; flag="",class=window-all; flag="-a"}; \
     scratchpad -c $class -t Windows -e "bspwm_current_window_menu $flag"
 
