@@ -25,7 +25,7 @@ super + p
     $TERMINAL -c pulsemixer -t pulsemixer -e pulsemixer
 super + shift + m
     $TERMINAL -c mail  -t mail -e mail -a
-super + b
+super + n
     $TERMINAL -c newsboat -t newsboat -e newsboat
 super + shift + c
     scratchpad -c calc -t calc -e bc
