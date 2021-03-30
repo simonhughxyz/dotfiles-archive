@@ -44,7 +44,7 @@ if [ "$USER" = "simon" ]; then
 fi
 bspc rule -a Zathura state=tiled # open zathura in tiled mode.
 bspc rule -a Emacs state=tiled   # open emacs in tiled mode.
-bspc rule -a Sype state=tiled   # open skype in tiled mode.
+bspc rule -a Skype state=tiled   # open skype in tiled mode.
 
 # run bspwm specific sxhkd config.
 sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" > ~/.local/share/sxhkd/bspwm.sxhkd.log 2>&1 & # keybindings.
