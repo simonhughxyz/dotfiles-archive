@@ -185,7 +185,7 @@ _date() {
     b_color="-"
     icon=""
     click_command="melonbar-click date"
-    date="$( date '+%a %d %B' )"
+    date="$( date '+%a %d %b' )"
 
     # module=$( _build_module "$date" "$icon" "$f_color" )
     # _build_mouse "$module" "$click_command" > $prefix/date
