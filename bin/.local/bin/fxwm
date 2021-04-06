@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# FXWM
+# Simon Hugh Moore
+#
+# Lists all windows in current desktop in fzf.
+# Chosen window is focused.
+# Use -a to list all windows.
+
+_window(){
+    windows="$( wmctrl -l -pG )"
+
+    if [ "$1" = "-c" ]; then
+        current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
+        windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
+    fi
+
+    choice="$( echo "$windows" | fzf --with-nth=9.. )"
+
+    wid="$( echo "$choice" | cut -d' ' -f1 )"
+
+    wmctrl -ia "$wid"
+}
+
+_desktop(){
+    wmctrl -d
+}
+
+case "$1" in
+    window) shift; _window "$@" ;;
+    desktop) shift; _desktop "$@" ;;
+    display) shift; _display "$@" ;;
+esac
