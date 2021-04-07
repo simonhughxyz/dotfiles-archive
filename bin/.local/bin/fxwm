@@ -17,9 +17,7 @@ _window(){
 
     choice="$( echo "$windows" | fzf --with-nth=9.. )"
 
-    wid="$( echo "$choice" | cut -d' ' -f1 )"
-
-    wmctrl -ia "$wid"
+    wmctrl -ia "$choice"
 }
 
 _desktop(){
