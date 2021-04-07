@@ -24,8 +24,12 @@ _desktop(){
     wmctrl -d
 }
 
+_monitor(){
+    xrandr --listmonitors
+}
+
 case "$1" in
     window) shift; _window "$@" ;;
     desktop) shift; _desktop "$@" ;;
-    display) shift; _display "$@" ;;
+    monitor) shift; _monitor "$@" ;;
 esac
