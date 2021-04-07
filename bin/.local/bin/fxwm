@@ -21,7 +21,8 @@ _window(){
 }
 
 _desktop(){
-    wmctrl -d
+    choice="$( wmctrl -d | fzf --with-nth=9 )"
+    wmctrl -s "$choice"
 }
 
 _monitor(){
