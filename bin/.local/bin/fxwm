@@ -10,7 +10,7 @@ _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; ex
 _dependency "wmctrl"
 _dependency "xrandr"
 
-# TODO: Add delete and move commands
+# TODO: Add move command
 _window(){
     windows="$( wmctrl -l -pG )"
 
@@ -19,9 +19,14 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=9.. )"
+    choice="$( echo "$windows" | fzf --with-nth=9.. --expect='alt-q,alt-m' )"
+    key="$( echo "$choice" | head -n1 )"
+    window="$( echo "$choice" | tail -n1 )"
 
-    wmctrl -ia "$choice"
+    case "$key" in
+        alt-q) wmctrl -ic "$window" ;;
+        *) wmctrl -ia "$window" ;;
+    esac
 }
 
 # TODO: Add delete and move commands
