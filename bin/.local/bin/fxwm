@@ -7,6 +7,7 @@
 # Chosen window is focused.
 # Use -a to list all windows.
 
+# TODO: Add delete and move commands
 _window(){
     windows="$( wmctrl -l -pG )"
 
@@ -20,11 +21,13 @@ _window(){
     wmctrl -ia "$choice"
 }
 
+# TODO: Add delete and move commands
 _desktop(){
     choice="$( wmctrl -d | fzf --with-nth=9 )"
     wmctrl -s "$choice"
 }
 
+# TODO: present list of monitors in fzf
 _monitor(){
     xrandr --listmonitors
 }
