@@ -24,6 +24,7 @@ _window(){
 
     case "$key" in
         alt-q) wmctrl -ic "$window" ;;
+        alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;;
         alt-m) wmctrl -iR "$window" ;;
         alt-t) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;;
         *) wmctrl -ia "$window" ;;
