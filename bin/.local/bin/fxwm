@@ -18,7 +18,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=9.. --expect='alt-q,alt-m,alt-t' )"
+    choice="$( echo "$windows" | fzf --with-nth=9.. --expect='alt-q,alt-Q,alt-m,alt-t' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
