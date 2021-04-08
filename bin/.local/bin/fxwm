@@ -3,9 +3,8 @@
 # FXWM
 # Simon Hugh Moore
 #
-# Lists all windows in current desktop in fzf.
-# Chosen window is focused.
-# Use -a to list all windows.
+# A psudo window manager using fzf
+# Switch, move and delete windows, desktops and monitors
 
 # TODO: Add delete and move commands
 _window(){
