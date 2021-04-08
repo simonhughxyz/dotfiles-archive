@@ -25,6 +25,7 @@ _window(){
     case "$key" in
         alt-q) wmctrl -ic "$window" ;;
         alt-m) wmctrl -iR "$window" ;;
+        alt-t) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;;
         *) wmctrl -ia "$window" ;;
     esac
 }
