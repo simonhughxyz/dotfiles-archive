@@ -10,7 +10,6 @@ _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; ex
 _dependency "wmctrl"
 _dependency "xrandr"
 
-# TODO: Add move command
 _window(){
     windows="$( wmctrl -l -pG )"
 
@@ -25,6 +24,7 @@ _window(){
 
     case "$key" in
         alt-q) wmctrl -ic "$window" ;;
+        alt-m) wmctrl -iR "$window" ;;
         *) wmctrl -ia "$window" ;;
     esac
 }
