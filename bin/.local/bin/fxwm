@@ -6,6 +6,9 @@
 # A psudo window manager using fzf
 # Switch, move and delete windows, desktops and monitors
 
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "wmctrl"
+
 # TODO: Add delete and move commands
 _window(){
     windows="$( wmctrl -l -pG )"
