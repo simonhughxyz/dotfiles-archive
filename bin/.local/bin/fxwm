@@ -18,7 +18,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c,alt-w' )"
+    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c,alt-w,alt-p' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -29,6 +29,7 @@ _window(){
         alt-t) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;;
         alt-c) echo "$window" | awk '{ print $8 }' ;;
         alt-w) echo "$window" | awk '{ print $1 }' ;;
+        alt-p) echo "$window" | awk '{ print $3 }' ;;
         *) wmctrl -ia "$window" ;;
     esac
 }
