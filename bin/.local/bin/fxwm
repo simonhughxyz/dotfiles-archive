@@ -11,14 +11,14 @@ _dependency "wmctrl"
 _dependency "xrandr"
 
 _window(){
-    windows="$( wmctrl -l -pG )"
+    windows="$( wmctrl -lxpG )"
 
     if [ "$1" = "-c" ]; then
         current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=9.. --expect='alt-q,alt-Q,alt-m,alt-t' )"
+    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -27,6 +27,7 @@ _window(){
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;;
         alt-m) wmctrl -iR "$window" ;;
         alt-t) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;;
+        alt-c) echo "$window" | awk '{ print $8 }' ;;
         *) wmctrl -ia "$window" ;;
     esac
 }
