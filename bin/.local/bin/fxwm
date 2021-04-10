@@ -36,12 +36,13 @@ _window(){
 
 # TODO: Add delete and move commands
 _desktop(){
-    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-t' )"
+    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-t,alt-n' )"
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
 
     case "$key" in
         alt-t) echo "$desktop" | awk '{ print $9 }' ;;
+        alt-n) echo "$desktop" | awk '{ print $1 }' ;;
         *) wmctrl -s "$desktop" ;;
     esac
 }
