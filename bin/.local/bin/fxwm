@@ -36,8 +36,14 @@ _window(){
 
 # TODO: Add delete and move commands
 _desktop(){
-    choice="$( wmctrl -d | fzf --with-nth=9 )"
-    wmctrl -s "$choice"
+    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-t' )"
+    key="$( echo "$choice" | head -n1 )"
+    desktop="$( echo "$choice" | tail -n1 )"
+
+    case "$key" in
+        alt-t) echo "$desktop" | awk '{ print $9 }' ;;
+        *) wmctrl -s "$desktop" ;;
+    esac
 }
 
 # TODO: present list of monitors in fzf
