@@ -10,6 +10,8 @@ runtime=/tmp/lock
 # PID file
 pid=$runtime/pid
 
+command -v /bin/slock > /dev/null || { echo "error: slock not found"; exit 1; }
+
 # Script to run on exit
 _cleanup() {
     rm -f "$pid"
