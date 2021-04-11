@@ -22,7 +22,7 @@ if [ -f "$pid" ]; then
     exit 1
 else
     # delete pid file when exiting
-    trap _cleanup INT TERM EXIT
+    trap _cleanup EXIT INT HUP TERM
     # create runtime dir
     mkdir -m 0700 -p "$runtime"
     echo $$ > "$pid"
