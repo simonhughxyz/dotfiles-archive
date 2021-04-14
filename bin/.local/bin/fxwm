@@ -21,7 +21,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c,alt-w,alt-p,alt-d,alt-D' )"
+    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -29,7 +29,7 @@ _window(){
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
-        alt-t) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
+        alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
         alt-c) echo "$window" | awk '{ print $8 }' ;; # Print window class to stdout
         alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
         alt-p) echo "$window" | awk '{ print $3 }' ;; # Print process ID to stdout
