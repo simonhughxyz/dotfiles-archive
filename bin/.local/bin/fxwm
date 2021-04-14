@@ -21,7 +21,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c,alt-w,alt-p,alt-d' )"
+    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-m,alt-t,alt-c,alt-w,alt-p,alt-d,alt-D' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -34,6 +34,7 @@ _window(){
         alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
         alt-p) echo "$window" | awk '{ print $3 }' ;; # Print process ID to stdout
         alt-d) wmctrl -d | grep "^$(echo "$window" | awk '{ print $2 }')[[:space:]].*$" | awk '{print $9}' ;; # Print desktop name of window to stdout
+        alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
     esac
 }
