@@ -3,7 +3,7 @@
 # FXWM
 # Simon Hugh Moore
 #
-# A psudo window manager using fzf
+# A pseudo window manager using fzf
 # Switch, move and delete windows, desktops and monitors
 
 export DISPLAY=:0
@@ -27,14 +27,15 @@ Options:
 "
 
 _window(){
-    windows="$( wmctrl -lxpG )"
+    # get a list of windows including the desktop name for each window
+    windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
 
     if [ "$1" = "-c" ]; then
         current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a' )"
+    choice="$( echo "$windows" | fzf --with-nth=3,11.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -45,11 +46,11 @@ _window(){
         alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
         alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
         alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
-        alt-t) echo "$window" | awk '{for(i=10;i<=NF;i++) printf $i" "; print ""}' ;; # Print window title to stdout
-        alt-c) echo "$window" | awk '{ print $8 }' ;; # Print window class to stdout
+        alt-t) echo "$window" | awk '{for(i=11;i<=NF;i++) printf $i" "; print ""}' ;; # Print window title to stdout
+        alt-c) echo "$window" | awk '{ print $9 }' ;; # Print window class to stdout
         alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
-        alt-p) echo "$window" | awk '{ print $3 }' ;; # Print process ID to stdout
-        alt-d) wmctrl -d | grep "^$(echo "$window" | awk '{ print $2 }')[[:space:]].*$" | awk '{print $9}' ;; # Print desktop name of window to stdout
+        alt-p) echo "$window" | awk '{ print $4 }' ;; # Print process ID to stdout
+        alt-d) echo "$window" | awk '{ print $3 }' ;; # Print desktop name of window to stdout
         alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
         alt-a) echo "$window" ;; # Print all window data
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
