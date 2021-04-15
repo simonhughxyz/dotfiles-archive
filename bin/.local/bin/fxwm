@@ -35,7 +35,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=3,11.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a' )"
+    choice="$( echo "$windows" | fzf --with-nth=3,11.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -53,6 +53,7 @@ _window(){
         alt-d) echo "$window" | awk '{ print $3 }' ;; # Print desktop name of window to stdout
         alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
         alt-a) echo "$window" ;; # Print all window data
+        alt-A) xprop -id "$window" ;; # Print window data from xprop
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
     esac
 }
