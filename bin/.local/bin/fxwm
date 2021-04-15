@@ -59,7 +59,7 @@ _window(){
 }
 
 _desktop(){
-    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-a,alt-m' --preview='wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
+    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-a,alt-m' --preview-window=right,90% --preview='wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
 
