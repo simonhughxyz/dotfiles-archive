@@ -36,6 +36,7 @@ _window(){
         alt-p) echo "$window" | awk '{ print $3 }' ;; # Print process ID to stdout
         alt-d) wmctrl -d | grep "^$(echo "$window" | awk '{ print $2 }')[[:space:]].*$" | awk '{print $9}' ;; # Print desktop name of window to stdout
         alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
+        alt-a) echo "$window" ;; # Print all information of window
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
     esac
 }
