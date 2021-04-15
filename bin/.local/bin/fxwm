@@ -36,12 +36,11 @@ _window(){
         alt-p) echo "$window" | awk '{ print $3 }' ;; # Print process ID to stdout
         alt-d) wmctrl -d | grep "^$(echo "$window" | awk '{ print $2 }')[[:space:]].*$" | awk '{print $9}' ;; # Print desktop name of window to stdout
         alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
-        alt-a) echo "$window" ;; # Print all information of window
+        alt-a) echo "$window" ;; # Print all window data
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
     esac
 }
 
-# TODO: Add delete and move commands
 _desktop(){
     choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-m' )"
     key="$( echo "$choice" | head -n1 )"
@@ -50,6 +49,7 @@ _desktop(){
     case "$key" in
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
+        alt-a) echo "$desktop" ;; # Print all desktop data
         alt-m) wmctrl -ir "$( xdotool getwindowfocus )" -t "$desktop" ;; # Move focused window to desktop
         *) wmctrl -s "$desktop" ;; # Switch to desktop
     esac
