@@ -13,6 +13,19 @@ _dependency "wmctrl"
 _dependency "xrandr"
 _dependency "xdotool"
 
+__usage="usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
+
+FZF X Window Manager
+Control and manage X windows, desktops and monitors with FZF
+
+Options:
+  window [OPTIONS]                   Manage windows in FZF, the default option
+  desktop                            Manage desktops in FZF
+  monitor                            Manage monitors in FZF
+  -h, --help                         Print this help message
+"
+
 _window(){
     windows="$( wmctrl -lxpG )"
 
@@ -63,6 +76,7 @@ _monitor(){
 }
 
 case "$1" in
+    -h|--help) echo "$__help"; exit ;;
     window) shift; _window "$@" ;;
     desktop) shift; _desktop "$@" ;;
     monitor) shift; _monitor "$@" ;;
