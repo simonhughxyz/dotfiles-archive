@@ -57,7 +57,7 @@ _window(){
 }
 
 _desktop(){
-    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-m' )"
+    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-a,alt-m' )"
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
 
