@@ -26,6 +26,10 @@ Options:
   -h, --help                         Print this help message
 "
 
+_field_to_end(){
+    awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}' 
+}
+
 _window(){
     # get a list of windows including the desktop name for each window
     windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
@@ -46,7 +50,7 @@ _window(){
         alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
         alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
         alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
-        alt-t) echo "$window" | awk '{for(i=11;i<=NF;i++) printf $i" "; print ""}' ;; # Print window title to stdout
+        alt-t) echo "$window" | _field_to_end "11" ;; # Print window title to stdout
         alt-c) echo "$window" | awk '{ print $9 }' ;; # Print window class to stdout
         alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
         alt-p) echo "$window" | awk '{ print $4 }' ;; # Print process ID to stdout
@@ -66,7 +70,7 @@ _desktop(){
     case "$key" in
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
-        alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | cut -d' ' -f1 )[[:space:]].*$" | _get_window_title "10" ;; # Print desktop number to stdout
+        alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | cut -d' ' -f1 )[[:space:]].*$" | _field_to_end "10" ;; # Print desktop number to stdout
         alt-a) echo "$desktop" ;; # Print all desktop data
         alt-m) wmctrl -ir "$( xdotool getwindowfocus )" -t "$desktop" ;; # Move focused window to desktop
         *) wmctrl -s "$desktop" ;; # Switch to desktop
