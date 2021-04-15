@@ -66,4 +66,5 @@ case "$1" in
     window) shift; _window "$@" ;;
     desktop) shift; _desktop "$@" ;;
     monitor) shift; _monitor "$@" ;;
+    *) _window "$@" ;;
 esac
