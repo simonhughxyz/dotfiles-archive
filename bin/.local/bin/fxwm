@@ -21,7 +21,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-h,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a' )"
+    choice="$( echo "$windows" | fzf --with-nth=10.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a' )"
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
@@ -29,6 +29,7 @@ _window(){
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
+        alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
         alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
         alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
         alt-t) echo "$window" | awk '{for(i=10;i<=NF;i++) printf $i" "; print ""}' ;; # Print window title to stdout
