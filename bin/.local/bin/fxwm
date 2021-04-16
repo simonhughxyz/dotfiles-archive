@@ -74,6 +74,8 @@ _desktop(){
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
 
+    [ -z "$desktop" ] && exit
+
     # Perform different actions depending on key pressed by the user
     case "$key" in
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
