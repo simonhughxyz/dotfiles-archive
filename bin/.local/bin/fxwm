@@ -26,6 +26,33 @@ Options:
   -h, --help                         Print this help message
 "
 
+__window_keys="alt-?  : Show this help message
+alt-q  : Close the window
+alt-Q  : Kill the window
+alt-h  : Hide the window
+alt-f  : Switch window to fullscreen
+alt-m  : Move the window to the current desktop
+alt-T  : Change the window title
+alt-t  : Print window title to stdout
+alt-c  : Print window class to stdout
+alt-w  : Print window ID to stdout
+alt-p  : Print process ID to stdout
+alt-d  : Print desktop name of window to stdout
+alt-D  : Print desktop number of window to stdout
+alt-a  : Print all window data
+alt-A  : Print window data from xprop
+return : Switch to desktop containing window and focus
+"
+
+__desktop_keys="alt-?  : Show this help message
+alt-d  : Print desktop name to stdout
+alt-D  : Print desktop number to stdout
+alt-t  : Print window titles contained in desktop to stdout
+alt-a  : Print all desktop information
+alt-m  : Move focused window to desktop
+return : Switch to desktop
+"
+
 _fzf(){
     fzf --no-info --preview-window=right,90%,border-left "$@"
 }
@@ -51,6 +78,7 @@ _window(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
+        alt-?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window;; # Show keymap help in fzf
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
@@ -82,6 +110,7 @@ _desktop(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
+        alt-?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop;; # Show keymap help in fzf
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
         alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | 
