@@ -26,23 +26,26 @@ Options:
   -h, --help                         Print this help message
 "
 
-_field_to_end(){
-    awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}' 
-}
+# Return all fields from nth to last field
+_field_to_end(){ awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}'; }
 
+# Present a list of windows in fzf to perform various actions with
 _window(){
     # get a list of windows including the desktop name for each window
     windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
 
+    # Return only windows local to the desktop
     if [ "$1" = "-d" ]; then
         current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
     choice="$( echo "$windows" | fzf --with-nth=3,11.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
 
+    # Perform different actions depending on key pressed by the user
     case "$key" in
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
@@ -62,15 +65,21 @@ _window(){
     esac
 }
 
+# Present a list of desktops in fzf to perform various actions with
 _desktop(){
-    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-t,alt-a,alt-m' --preview-window=right,90% --preview='wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
+    # List desktops in fzf with a list of windows in the preview window
+    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-t,alt-a,alt-m' --preview-window=right,90% --preview='
+    wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
+
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
 
+    # Perform different actions depending on key pressed by the user
     case "$key" in
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
-        alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | cut -d' ' -f1 )[[:space:]].*$" | _field_to_end "10" ;; # Print desktop number to stdout
+        alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | 
+            cut -d' ' -f1 )[[:space:]].*$" | _field_to_end "10" ;; # Print window titles contained in desktop
         alt-a) echo "$desktop" ;; # Print all desktop data
         alt-m) wmctrl -ir "$( xdotool getwindowfocus )" -t "$desktop" ;; # Move focused window to desktop
         *) wmctrl -s "$desktop" ;; # Switch to desktop
