@@ -26,6 +26,10 @@ Options:
   -h, --help                         Print this help message
 "
 
+_fzf(){
+    fzf --no-info --preview-window=right,90%,border-left "$@"
+}
+
 # Return all fields from nth to last field
 _field_to_end(){ awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}'; }
 
@@ -40,7 +44,7 @@ _window(){
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
-    choice="$( echo "$windows" | fzf --with-nth=3,11.. --expect='alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+    choice="$( echo "$windows" | _fzf --with-nth=3,11.. --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
@@ -68,7 +72,7 @@ _window(){
 # Present a list of desktops in fzf to perform various actions with
 _desktop(){
     # List desktops in fzf with a list of windows in the preview window
-    choice="$( wmctrl -d | fzf --with-nth=9 --expect='alt-d,alt-D,alt-t,alt-a,alt-m' --preview-window=right,90% --preview='
+    choice="$( wmctrl -d | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m'  --preview='
     wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
 
     key="$( echo "$choice" | head -n1 )"
