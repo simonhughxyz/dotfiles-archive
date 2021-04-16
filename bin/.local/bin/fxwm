@@ -67,7 +67,12 @@ _window(){
 
     # Return only windows local to the desktop
     if [ "$1" = "-d" ]; then
-        current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
+            if [ -n "$2" ] && [ "${2%${2#?}}" != "-" ]; then
+                current_desktop="$( wmctrl -d | grep "[[:space:]]${2}$" | cut -d' ' -f1 )"
+            else
+                current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
+            fi
+
         windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
     fi
 
