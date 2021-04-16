@@ -78,7 +78,7 @@ _window(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
-        alt-?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window;; # Show keymap help in fzf
+        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window;; # Show keymap help in fzf
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
@@ -110,7 +110,7 @@ _desktop(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
-        alt-?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop;; # Show keymap help in fzf
+        alt-\?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop;; # Show keymap help in fzf
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
         alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | 
