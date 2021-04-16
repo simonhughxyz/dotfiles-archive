@@ -103,6 +103,8 @@ _window(){
 }
 
 # Present a list of desktops in fzf to perform various actions with
+# TODO: Option to only show populated desktops
+#       wmctrl -d | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$|.*$/p;|' | uniq )"
 _desktop(){
     # List desktops in fzf with a list of windows in the preview window
     choice="$( wmctrl -d | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m'  --preview='
