@@ -58,8 +58,8 @@ super + {_, shift +} slash
 super + {_, shift +} backslash
     {class=window; flag="-d",class=window-all; flag="-D"}; \
     scratchpad -c $class -t Windows -e "fxwm window $flag"
-super + d
-    scratchpad -c dropdown_desktop -t Windows -e "fxwm desktop"
+super + {_, shift +} d
+    scratchpad -c dropdown_desktop -t Windows -e "fxwm desktop {-p,_}"
 super + a
     scratchpad -c app_menu -t apps -e appmenu -C
 ctrl + alt + Delete
