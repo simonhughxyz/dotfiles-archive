@@ -41,8 +41,7 @@ alt-d  : Print desktop name of window to stdout
 alt-D  : Print desktop number of window to stdout
 alt-a  : Print all window data
 alt-A  : Print window data from xprop
-return : Switch to desktop containing window and focus
-"
+return : Switch to desktop containing window and focus"
 
 __desktop_keys="alt-?  : Show this help message
 alt-d  : Print desktop name to stdout
@@ -53,6 +52,19 @@ alt-m  : Move focused window to desktop
 alt-w  : Open window menu with selected desktop
 return : Switch to desktop
 "
+
+
+__window_help="usage: $(basename $0) window [OPTIONS]
+
+Control windows in fzf
+
+Options:
+  -h, --help                         Print this help message
+  -d [desktop name]                  Only show windows of given desktop or local desktop by default
+  -D                                 Show desktop name along with window title
+
+Keymap:
+$( echo "$__window_keys" | sed 's/^.*$/  &/' )"
 
 _fzf(){
     fzf --no-info --preview-window=right,90%,border-left "$@"
@@ -68,6 +80,7 @@ _window(){
 
     while test $# -gt 0; do
         case "$1" in
+            -h|--help) echo "$__window_help"; exit ;;
             -D) nth="3,11.." ;; # Show desktop name
             -d) # Return only windows local to the desktop
                 if [ -n "$2" ] && [ "${2%${2#?}}" != "-" ]; then
