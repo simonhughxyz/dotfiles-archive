@@ -65,18 +65,22 @@ _window(){
     # get a list of windows including the desktop name for each window
     windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
 
-    # Return only windows local to the desktop
-    if [ "$1" = "-d" ]; then
-            if [ -n "$2" ] && [ "${2%${2#?}}" != "-" ]; then
-                current_desktop="$( wmctrl -d | grep "[[:space:]]${2}$" | cut -d' ' -f1 )"
-            else
-                current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
-            fi
+    while test $# -gt 0; do
+        case "$1" in
+            -D) nth="3,11.." ;; # Show desktop name
+            -d) # Return only windows local to the desktop
+                if [ -n "$2" ] && [ "${2%${2#?}}" != "-" ]; then
+                    current_desktop="$( wmctrl -d | grep "[[:space:]]${2}$" | cut -d' ' -f1 )"
+                else
+                    current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
+                fi
 
-        windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
-    fi
+                windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
+        esac
+        shift
+    done
 
-    choice="$( echo "$windows" | _fzf --with-nth=3,11.. --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
