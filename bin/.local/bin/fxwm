@@ -78,6 +78,7 @@ _window(){
     # get a list of windows including the desktop name for each window
     windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
 
+    args="$@" # save arguments for help message
     while test $# -gt 0; do
         case "$1" in
             -h|--help) echo "$__window_help"; exit ;;
@@ -103,7 +104,7 @@ _window(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
-        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window "$@" ;; # Show keymap help in fzf
+        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window $args ;; # Show keymap help in fzf
         alt-q) wmctrl -ic "$window" ;; # Close the window
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
