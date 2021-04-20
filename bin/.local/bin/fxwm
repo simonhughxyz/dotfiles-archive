@@ -50,6 +50,7 @@ alt-D  : Print desktop number to stdout
 alt-t  : Print window titles contained in desktop to stdout
 alt-a  : Print all desktop information
 alt-m  : Move focused window to desktop
+alt-w  : Open window menu with selected desktop
 return : Switch to desktop
 "
 
@@ -133,7 +134,7 @@ _desktop(){
             cut -d' ' -f1 )[[:space:]].*$" | _field_to_end "10" ;; # Print window titles contained in desktop
         alt-a) echo "$desktop" ;; # Print all desktop data
         alt-m) wmctrl -ir "$( xdotool getwindowfocus )" -t "$desktop" ;; # Move focused window to desktop
-        alt-w) _window -d "$( echo "$desktop" | awk '{print $9}' )" ;; # Move focused window to desktop
+        alt-w) _window -d "$( echo "$desktop" | awk '{print $9}' )" ;; # Open window menu with selected desktop
         *) wmctrl -s "$desktop" ;; # Switch to desktop
     esac
 }
