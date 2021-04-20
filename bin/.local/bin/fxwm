@@ -103,11 +103,14 @@ _window(){
 }
 
 # Present a list of desktops in fzf to perform various actions with
-# TODO: Option to only show populated desktops
-#       wmctrl -d | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$|.*$/p;|' | uniq )"
 _desktop(){
+    desktops="$( wmctrl -d )"
+
+    # Only show populated desktops
+    [ "$1" = "-p" ] && desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )"
+
     # List desktops in fzf with a list of windows in the preview window
-    choice="$( wmctrl -d | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m'  --preview='
+    choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m'  --preview='
     wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
 
     key="$( echo "$choice" | head -n1 )"
