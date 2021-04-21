@@ -119,13 +119,15 @@ _window_title(){
 }
 _window_count(){
     icon=""
-    click_command="bspc node -c"
+    click_command="scratchpad -c window -t fxwm -e 'fxwm window -d'"
+    left_click_command="scratchpad -c window-all -t fxwm -e 'fxwm window'"
+    middle_click_command="bspc node -c"
     window_count="$(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == "0" ] && window_count="" && icon=""
 
     # module=$( _build_module "$window_count" "$icon" )
     # _build_mouse "$module" "$click_command" > $prefix/window_count
-    echo "$icon $window_count" | _mouse "$click_command" | _delim > $prefix/window_count
+    echo "$icon $window_count" | _mouse "$click_command" | _mouse "$middle_click_command" 2 | _mouse "$left_click_command" 3 | _delim > $prefix/window_count
 }
 _uptime() {
     f_color="#ff55bb"
