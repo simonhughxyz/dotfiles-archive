@@ -30,7 +30,8 @@ __window_keys="alt-?  : Show this help message
 alt-q  : Close the window
 alt-Q  : Kill the window
 alt-h  : Hide the window
-alt-f  : Switch window to fullscreen
+alt-f  : Toggle fullscreen
+alt-s  : Toggle sticky
 alt-m  : Move the window to the current desktop
 alt-T  : Change the window title
 alt-t  : Print window title to stdout
