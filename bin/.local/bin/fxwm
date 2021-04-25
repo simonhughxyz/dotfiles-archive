@@ -95,7 +95,7 @@ _window(){
         shift
     done
 
-    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
@@ -109,6 +109,7 @@ _window(){
         alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
         alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
         alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
+        alt-s) wmctrl -ir "$window" -b "toggle,sticky" ;; # Make window sticky
         alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
         alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
         alt-t) echo "$window" | _field_to_end "11" ;; # Print window title to stdout
