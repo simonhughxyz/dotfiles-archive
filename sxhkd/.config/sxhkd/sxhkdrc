@@ -16,6 +16,10 @@ super + space; m
 {@}Scroll_Lock
     melonbar update keystate
 
+# Window controls
+super + shift + s
+    wmctrl -r ":ACTIVE:" -b "toggle,sticky"
+
 # Apps
 super + t
     $TERMINAL -c htop -t htop -e htop
