@@ -18,7 +18,7 @@ super + space; m
 
 # Window controls
 super + {_,shift +} q
-    kill -{15,9} "$( xdotool getactivewindow getwindowpid )"
+    {wmctrl -c ":ACTIVE:", xdotool getactivewindow windowkill}
 super + shift + s
     wmctrl -r ":ACTIVE:" -b "toggle,sticky"
 
