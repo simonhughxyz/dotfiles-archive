@@ -27,8 +27,16 @@ _last(){
     _switch -n "$( tail -n1 "$history" )"
 }
 
+_move(){
+    case "$1" in
+        -n) desktop="$2" ;;
+        *) desktop="$( _get_number "$1" )" ;;
+    esac
+    wmctrl -r ":ACTIVE:" -t "$desktop"
+}
 
 case "$1" in
     -s) shift; _switch "$@" ;;
     -l) _last ;;
+    -m) shift;  _move "$@" ;;
 esac
