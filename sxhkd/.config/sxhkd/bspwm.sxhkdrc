@@ -1,6 +1,6 @@
 # BSPWM
-super + {_,shift +} q
-    bspc node -{c,k}
+# super + {_,shift +} q
+#     bspc node -{c,k}
 
 super + {_,shift +} numbersign
     bspc node -t {tiled,\~floating}

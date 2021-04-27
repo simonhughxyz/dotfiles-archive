@@ -17,6 +17,8 @@ super + space; m
     melonbar update keystate
 
 # Window controls
+super + {_,shift +} q
+    kill -{15,9} "$( xdotool getactivewindow getwindowpid )"
 super + shift + s
     wmctrl -r ":ACTIVE:" -b "toggle,sticky"
 
