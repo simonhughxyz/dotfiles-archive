@@ -6,8 +6,8 @@ super + {_,shift +} numbersign
     bspc node -t {tiled,\~floating}
 
 # cycle between monocle and tiles moad or fullscreen
-super + {_,shift +} f
-    bspc {desktop --layout next,node -t \~fullscreen}
+super + f
+    bspc desktop --layout next
 
 # DESKTOP
 super + {1-9,0,v,F5,F6,F7,F8,F9,F10,F11,F12}
