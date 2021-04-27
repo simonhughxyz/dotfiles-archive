@@ -39,4 +39,5 @@ case "$1" in
     -s) shift; _switch "$@" ;;
     -l) _last ;;
     -m) shift;  _move "$@" ;;
+    *) _switch "$@"
 esac
