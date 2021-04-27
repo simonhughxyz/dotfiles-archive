@@ -23,6 +23,12 @@ _switch(){
     echo "$desktop" >> "$history"
 }
 
+_last(){
+    _switch -n "$( tail -n1 "$history" )"
+}
+
+
 case "$1" in
     -s) shift; _switch "$@" ;;
+    -l) _last ;;
 esac
