@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# DESKTOP
+# Simon H Moore
+# 
+# Manage xwm desktops
+
+prefix="${XDG_RUNTIME_DIR}/desktop"
+history="$prefix/history"
+
+mkdir -p "$prefix"
+
+# get desktop number from desktop name
+_get_number(){ wmctrl -d | grep "^.* ${1}$" | cut -d' ' -f1; }
+
+_switch(){
+    case "$1" in
+        -n) desktop="$2" ;;
+        *) desktop="$( _get_number "$1" )" ;;
+    esac
+    wmctrl -s "$desktop"
+
+    echo "$desktop" >> "$history"
+}
+
+case "$1" in
+    -s) shift; _switch "$@" ;;
+esac
