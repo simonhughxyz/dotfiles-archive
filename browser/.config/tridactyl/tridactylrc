@@ -77,6 +77,10 @@ bind gd tabdetach
 bind q tabclose
 bind Q winclose
 
+" Reload a tab
+bind r reload
+bind R reloadall
+
 " Duplicate current url in new window
 unbind o
 bind o composite get_current_url | winopen
