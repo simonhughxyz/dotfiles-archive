@@ -22,3 +22,13 @@ template_default="${8}" # the default template name
 template_ext="${9}"     # the extension of template files
 root_path="${10}"       # a count of ../ for pages buried in subdirs
 custom_args="${11}"     # custom arguments that will be passed to the conversion
+
+input_file_name="${input_file##*/}"
+output_file="${output_dir}/${input_file_name%.${extension}}.html"
+
+# title is first level 1 heading of markdown
+title="$( grep -m 1 "^#[[:space:]][[:space:]]*.*$" "$input_file" )"
+
+template="${template_path}/${template_default}.${template_ext}"
+
+pandoc --section-divs -s --highlight-style=pygments --metadata pagetitle="$title" -f markdown -t html -o "$output_file" "$input_file"
