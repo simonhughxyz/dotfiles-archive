@@ -7,6 +7,9 @@
 # 
 # Desc: Convert markdown files from vimwiki
 
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "pandoc"
+
 # Input arguments passed from vimwiki (see `:h vimwiki-option-custom_wiki2html`)
 force="${1}"            # [0/1] overwrite an existing file
 syntax="${2}"           # the syntax chosen for this wiki
