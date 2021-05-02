@@ -40,7 +40,7 @@ case "$1" in
     *.od[dt]p|*.fodp|*.pp[ts]x|*.potx|*.pp[ts]|*.pot) $DOCUMENT "$1" ;;
 
     # text
-    *.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term $TEXT "$1" ;;
+    *.md|*.txt|*.csv|*.log|*.cfg|*.ini|*.conf|*.cnf|*rc) term $TEXT "$1" ;;
 
     # code
     *.sh|*.bash|*.zsh|*.fish|*.py|*.c|*.h|*.pl|*.java|*.css|*.js|*.mk|Makefile) term $CODE "$1" ;;
