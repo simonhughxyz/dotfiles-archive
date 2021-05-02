@@ -14,6 +14,7 @@ export NNN_OPENER="$LBIN/open"
 
 # key-bookmark pairs
 export NNN_BMS="\
+n:~/Documents/notes;\
 w:/mnt/wh;\
 t:/mnt/wh/torrents;\
 F:/mnt/wh/film;\
