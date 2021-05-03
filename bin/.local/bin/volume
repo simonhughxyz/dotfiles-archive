@@ -11,25 +11,12 @@
 prefix="${XDG_RUNTIME_DIR}/volume"
 pipe="$prefix/pipe"
 
-_get_default_sink_name() {
-    pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
-}
+_get_volume() { pulsemixer --get-volume | awk '{ if($1 == $2) print $1; else print $0 }'; }
 
-_get_volume() {
-    pacmd list-sinks |
-        awk '/^\s+name: /{indefault = $2 == "<'$( _get_default_sink_name )'>"}
-            /^\s+volume: / && indefault {print $5; exit}' | sed 's/%//'
-
-}
-
-_get_mute() {
-    pacmd list-sinks |
-       awk -F': ' '/^\s+name: /{indefault = $2 == "<'$( _get_default_sink_name )'>"}
-            /^\s+muted: / && indefault {print $2; exit}' | sed 's/%//'
-}
+_get_mute() { pulsemixer --get-mute; }
 
 _get_state(){
-    if [ "$(_get_mute)" = "yes" ]; then
+    if [ "$(_get_mute)" = "1" ]; then
         echo "mute"
     else
         _get_volume
