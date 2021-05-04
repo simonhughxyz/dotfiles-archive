@@ -5,10 +5,6 @@
 #
 # Set config options for lemonbar
 
-# Kill any running lemonbar
-# pgrep -x lemonbar > /dev/null && pkill -x lemonbar &
-
-
 if [ "$USER" = "simon" ]; then
     font="SourceCodeProSemiBold-13"
     icon_font="FontAwesome-13"
@@ -55,11 +51,13 @@ _update(){
 _run(){
     mkdir -p $prefix
 
-    # Kill any existing melonbar process
+    # Kill any existing melonbar process and its children
     pid_file="$prefix/pid"
     if [ -f "$pid_file" ]; then
         echo "$(basename $0) is already running, terminating process..."
-        kill -- -$( cat "$pid_file" )
+        pid="$( cat "$pid_file" )"
+        kill -- -"$pid"
+        kill "$pid"
     fi
     echo $$ > "$pid_file"
 
