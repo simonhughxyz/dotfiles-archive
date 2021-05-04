@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# LIMEBAR
+# MELONBAR
 # Simon Hugh Moore
 #
 # Set config options for lemonbar
@@ -25,11 +25,6 @@ b_color="#000000"
 
 prefix=${XDG_RUNTIME_DIR}/melonbar
 pipe=$prefix/melonbar_pipe
-
-_cleanup() {
-    rm -f $pipe
-    exit
-}
 
 _update_pipe() {
     if [ -p $pipe ]; then
@@ -58,21 +53,19 @@ _update(){
 
 
 _run(){
-    # Create pipe if it doesn't exist and
-    #  remove it when exit.
-    # If pipe does exist, exit.
     mkdir -p $prefix
-    if { mkfifo $pipe 2>/dev/null; }; then
-        trap _cleanup INT TERM EXIT
-    else
-        echo "$(basename $0) is already running, exiting..."
-        exit 1
+
+    # Kill any existing melonbar process
+    pid_file="$prefix/pid"
+    if [ -f "$pid_file" ]; then
+        echo "$(basename $0) is already running, terminating process..."
+        kill -- -$( cat "$pid_file" )
     fi
+    echo $$ > "$pid_file"
 
-        
-
-    # pass contents of pipe into lemonbar
-    tail -f "$pipe" | lemonbar -p -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
+    # create pipe and pass contents of pipe into lemonbar
+    mkfifo $pipe 2>/dev/null
+    tail -f "$pipe" | lemonbar -a "${clickable_areas}" -f "${font}" -f "${icon_font}" -f "Font Awesome" -o "${offset}" -g "${geometry}" -B "${b_color}" -F "${f_color}" | dash &
 
     # update statusline once for initialization.
     _update all
