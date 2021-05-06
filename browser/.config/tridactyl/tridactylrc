@@ -120,13 +120,17 @@ bind T hint -t
 unbind w
 bind w hint -w
 
-" Optomize follow link for URL's.
+" Optimize follow link for domains
 bindurl youtube.com f hint -Jw
 bindurl youtube.com t hint -J
 
 " Yank with hint
 bind Y hint -y
 bind gy hint -p
+
+" Optimize yank for domains
+bindurl youtube.com Y hint -Jy
+bindurl youtube.com gy hint -Jp
 
 " View images
 bind i composite hint -Jpipe img src | image
