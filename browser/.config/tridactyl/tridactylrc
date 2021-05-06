@@ -18,6 +18,7 @@ alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_q
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/newsboat.url'))
 alias chromium js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('www -c ' + url))
+alias image js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('img -u ' + url))
 
 " Set default zoom
 " autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
@@ -128,7 +129,7 @@ bind Y hint -y
 bind gy hint -p
 
 " View images
-bind i hint -I
+bind i composite hint -Jpipe img src | image
 bind I hint -i
 
 " Play video with mpv
