@@ -31,7 +31,10 @@ _replace(){
 _alacritty(){
     _dep "alacritty"
 
-    cmd="$( echo "$@" | _replace "-c" "--class" )"
+    embed_wid="$( echo "$@" | awk '{for(i=0;i<=NF;i++) if($i == "--embed" ) print $(i+1)}' )"
+    
+    cmd="$( echo "$@" | _replace "-c" "--class" | _replace "$embed_wid" "$( printf "%d" "$embed_wid" )" )"
+
     if [ "$HOST" = "mumtop" ]; then
         eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd"
     else
