@@ -8,8 +8,8 @@ elvi_hnumber=5 # number of elvi to remember.
 # file to save search history to
 # keep it in /run to make it non persistent
 runtime_dir="$XDG_RUNTIME_DIR/surfraw"
-hfile="$runtime_dir/searchhistory"
-elvi_hfile="$runtime_dir/elvihistory"
+hfile="$runtime_dir/history.search"
+elvi_hfile="$runtime_dir/history.elvi"
 
 mkdir -p $runtime_dir
 
@@ -24,15 +24,15 @@ search_term=$( echo "$(xclip -o 2> /dev/null)" | tac - $hfile 2> /dev/null | awk
 # append search to history
 echo "$search_term" >> $hfile
 
-elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist} $1 ~ /^[^A-Z]/{print $1}' )"
+elvi_list="$( sr -elvi | awk -v hist="$( tac $elvi_hfile | awk 'NF' | awk '!x[$0]++' | head -n $elvi_hnumber )" 'BEGIN{print hist} $1 ~ /^[^A-Z]/{print $0}' )"
 
 elvi="$( echo "$elvi_list" | _fzf )"
 [ "$elvi" = "" ] && exit 1
 
-setsid -f surfraw "$elvi" $search_term > /dev/null 2>&1 &
-
 # append elvi to history
 echo "$elvi" >> $elvi_hfile
+
+setsid -f surfraw "$( echo "$elvi" | awk '{print $1}' )" $search_term > /dev/null 2>&1 &
 
 # give time for setsid to launch new session and run surfraw
 sleep 0.1
