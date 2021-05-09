@@ -25,7 +25,7 @@ _dep() {
 
 # Replace one cli command with another
 _replace(){
-    sed "s/[[:blank:]]*$1[[:blank:]][[:blank:]]*/ $2 /"
+    sed "s/[[:blank:]][[:blank:]]*$1[[:blank:]][[:blank:]]*/ $2 /;s/[[:blank:]][[:blank:]]*$1$/ $2/"
 }
 
 _alacritty(){
