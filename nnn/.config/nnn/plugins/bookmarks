@@ -25,7 +25,9 @@
 # Shell: POSIX compliant
 # Author: Todd Yamakawa
 
-BOOKMARKS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/nnn/bookmarks"
+if [ -z "$BOOKMARKS_DIR" ]; then
+    BOOKMARKS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/nnn/bookmarks"
+fi
 
 # Check if NNN_PIPE is set
 if [ -z "$NNN_PIPE" ]; then
@@ -42,7 +44,11 @@ get_links() {
         [ -d "$entry" ] || continue
 
         printf "%20s -> %s\n" "$(basename "$entry")" "$(readlink -f "$entry")"
-    done | fzf | awk 'END { print "'"$BOOKMARKS_DIR"'/"$1 }'
+    done | fzf |
+    awk 'END {
+        if (length($1) == 0) { print "'"$PWD"'" }
+        else { print "'"$BOOKMARKS_DIR"'/"$1 }
+    }'
 }
 
 # Choose symlink with fzf
@@ -52,4 +58,3 @@ cddir="$(get_links "$BOOKMARKS_DIR")"
 # https://github.com/jarun/nnn/tree/master/plugins#send-data-to-nnn
 context=0
 printf "%s" "${context}c$(readlink -f "$cddir")" > "$NNN_PIPE"
-
