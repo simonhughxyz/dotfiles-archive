@@ -23,6 +23,26 @@ _dep() {
     command -v "$1" > /dev/null || { echo "$1 not found"; exit 1; }
 }
 
+runtime_dir="$XDG_RUNTIME_DIR/terminal"
+pipe="$runtime_dir/pipe"
+
+_make_pipe() {
+    [ -p "$pipe" ] && return 0
+    mkdir -p "$runtime_dir"
+    mkfifo "$pipe" 2> /dev/null
+}
+_make_pipe
+
+# Returns the state of volume.
+_subscribe() {
+    _make_pipe
+    tail -f "$pipe"
+}
+
+_report(){
+    echo "$1" > "$pipe"
+}
+
 # Replace one cli command with another
 _replace(){
     sed "s/^$1[[:blank:]][[:blank:]]*/$2 /;s/[[:blank:]][[:blank:]]*$1[[:blank:]][[:blank:]]*/ $2 /g;s/[[:blank:]][[:blank:]]*$1$/ $2/"
@@ -36,10 +56,11 @@ _alacritty(){
     cmd="$( echo "$@" | _replace "-c" "--class" | _replace "$embed_wid" "$( printf "%d" "$embed_wid" )" )"
 
     if [ "$HOST" = "mumtop" ]; then
-        eval "LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd"
+        LIBGL_ALWAYS_SOFTWARE=1 alacritty $cmd
     else
-        eval "alacritty $cmd"
+        alacritty $cmd &
     fi
+    _report "PID:$!"
 }
 
 _urxvt(){
@@ -70,6 +91,7 @@ _xterm(){
 while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__usage"; exit ;;
+        subscribe) _subscribe ;;
         urxvt) shift; _urxvt "$@"; exit ;;
         st) shift; _st "$@"; exit ;;
         xst) shift; _xst "$@"; exit ;;
