@@ -50,7 +50,7 @@
 
 
 XDOTOOL_TIMEOUT=2
-PAGER=${PAGER:-"vim -R"}
+PAGER=${PAGER:-"less"}
 NUKE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins/nuke"
 
 
