@@ -54,7 +54,9 @@ PAGER=${PAGER:-"less"}
 NUKE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins/nuke"
 
 
-if which xterm >/dev/null 2>&1 ; then
+if which alacritty >/dev/null 2>&1 ; then
+    TERMINAL="alacritty --embed "
+elif which xterm >/dev/null 2>&1 ; then
     TERMINAL="xterm -into"
 elif which urxvt >/dev/null 2>&1 ; then
     TERMINAL="urxvt -embed"
@@ -86,6 +88,7 @@ start_tabbed () {
     fi
 
     read -r XID < "$FIFO"
+    DXID="$( printf "%d" "$XID" )"
 
     rm "$FIFO"
 }
@@ -144,48 +147,31 @@ previewer_loop () {
             video/*)
                 if which mpv >/dev/null 2>&1 ; then
                     mpv --force-window=immediate --loop-file --wid="$XID" "$FILE" &
-                else
-                    term_nuke "$XID" "$FILE"
                 fi
                 ;;
             audio/*)
                 if which mpv >/dev/null 2>&1 ; then
                     mpv --force-window=immediate --loop-file --wid="$XID" "$FILE" &
-                else
-                    term_nuke "$XID" "$FILE"
                 fi
                 ;;
             image/*)
                 if which sxiv >/dev/null 2>&1 ; then
                     sxiv -e "$XID" "$FILE" &
-                else
-                    term_nuke "$XID" "$FILE"
                 fi
                 ;;
             application/pdf)
                 if which zathura >/dev/null 2>&1 ; then
                     zathura -e "$XID" "$FILE" &
-                else
-                    term_nuke "$XID" "$FILE"
                 fi
                 ;;
             inode/directory)
-                $TERMINAL "$XID" -e nnn "$FILE" &
+                $TERMINAL "$DXID" -e nnn "$FILE" &
                 ;;
             text/*)
-                if [ -x "$NUKE" ] ; then
-                    term_nuke "$XID" "$FILE"
-                else
-                    # shellcheck disable=SC2086
-                    $TERMINAL "$XID" -e $PAGER "$FILE" &
-                fi
+                $TERMINAL "$DXID" -e $PAGER "$FILE" &
                 ;;
             *)
-                if [ -x "$NUKE" ] ; then
-                    term_nuke "$XID" "$FILE"
-                else
-                    $TERMINAL "$XID" -e sh -c "file '$FILE' | $PAGER -" &
-                fi
+                $TERMINAL "$DXID" -e sh -c "file '$FILE' | $PAGER -" &
                 ;;
         esac
         get_viewer_pid
