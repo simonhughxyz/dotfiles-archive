@@ -40,7 +40,7 @@ export NNN_COLORS='3256'
 export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
 
 # custom SSHFS cmd
-# export NNN_SSHFS='sshfs -o reconnect,idmap=user'
+export NNN_SSHFS='sshfs -o reconnect,idmap=user'
 
 # custom rclone cmd
 # export NNN_RCLONE='rclone mount --read-only'
