@@ -124,6 +124,7 @@ iptl-search() { sudo iptables -nvL | awk -vRS= "BEGIN{IGNORECASE = 1}/^Chain $1/
 
 # misc
 alias r='trash-put '
+alias rm='rm -I '
 alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 alias du='du -d1 -h'  # max depth and human readable.
