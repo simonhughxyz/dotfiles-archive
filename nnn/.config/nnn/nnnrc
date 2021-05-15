@@ -16,6 +16,7 @@ export NNN_OPENER="$LBIN/open"
 export NNN_BMS="\
 n:~/Documents/notes;\
 y:~/Videos/youtube;\
+m:/mnt;\
 w:/mnt/wh;\
 t:/mnt/wh/torrents;\
 F:/mnt/wh/film;\
