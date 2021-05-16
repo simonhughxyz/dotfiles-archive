@@ -39,6 +39,8 @@ set hintchars hjklgftyuvbiondsrcm
 
 " Editor
 set editorcmd $TERMINAL -e sh -c "sleep 0.1; nvim -c 'set filetype=tridactyl-edit' %f"
+bind --mode=insert <C-e> editor
+bind --mode=input <C-e> editor
 
 " Always open in new window
 " autocmd DocStart .* tabdetach
