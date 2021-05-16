@@ -24,9 +24,9 @@ _main(){
         else
             echo "Creating new scratchpad"
             if [ "${title}" = "" ]; then
-                $TERMINAL -c "${class}" -e ${exe}
+                $TERMINAL --class "${class}" -e ${exe}
             else
-                $TERMINAL -c "${class}" -t "${title}" -e ${exe}
+                $TERMINAL --class "${class}" -t "${title}" -e ${exe}
             fi
         fi
     fi
