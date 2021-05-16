@@ -2,7 +2,7 @@
 super + shift + Delete
     pkill -USR1 -x sxhkd
 super + {_,shift +} Return
-    $TERMINAL {_,-c nnn -t nnn -e nnn}
+    $TERMINAL {_,--class nnn -t nnn -e nnn}
 super + x
     lock
 super + space; m
@@ -26,15 +26,15 @@ super + shift + s
 
 # Apps
 super + t
-    $TERMINAL -c htop -t htop -e htop
+    $TERMINAL --class htop -t htop -e htop
 super + w
     $BROWSER
 super + p
-    $TERMINAL -c pulsemixer -t pulsemixer -e pulsemixer
+    $TERMINAL --class pulsemixer -t pulsemixer -e pulsemixer
 super + shift + m
-    $TERMINAL -c mail  -t mail -e mail -a
+    $TERMINAL --class mail  -t mail -e mail -a
 super + n
-    $TERMINAL -c newsboat -t newsboat -e newsboat
+    $TERMINAL --class newsboat -t newsboat -e newsboat
 super + shift + c
     scratchpad -c calc -t calc -e bc
 super + shift + w
