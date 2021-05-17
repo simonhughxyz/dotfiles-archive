@@ -162,6 +162,9 @@ Plug 'jamessan/vim-gnupg'
 if has('nvim')
     Plug 'norcalli/nvim-colorizer.lua'
 endif
+if has('nvim-0.5.0')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
 call plug#end()
 " }}}
 " Plugin Settings {{{
