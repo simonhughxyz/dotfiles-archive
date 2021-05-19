@@ -6,7 +6,7 @@
 # Defines all my shell aliases to use.
 
 # shortcuts 
-alias sudo='sudo '
+alias sudo='sudo -v; sudo '
 alias se='sudoedit '
 alias path='echo $PATH'
 alias x='clear '
