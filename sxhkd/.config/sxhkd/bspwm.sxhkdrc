@@ -2,6 +2,10 @@
 # super + {_,shift +} q
 #     bspc node -{c,k}
 
+# Escape to desktop 6
+super + Delete
+    bspc query -D -d "6.focused" && bspc desktop -f last.local || bspc desktop -f "6.local"
+
 super + {_,shift +} numbersign
     bspc node -t {tiled,\~floating}
 
