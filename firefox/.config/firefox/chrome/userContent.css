@@ -1,0 +1,18 @@
+/* userContent.css */
+/* Used to style firefox. */
+
+/* Dark background for about:blank */
+@-moz-document url(about:blank) {
+  html,body { background: #111111; }
+}
+
+@namespace url(http://www.w3.org/1999/xhtml);
+/* Dark page for neterrors. */
+:root {
+  --in-content-page-color: #f0f0f0 !important;
+  --in-content-page-background: #101010 !important;
+  --in-content-text-color: #f0f0f0 !important;
+  --in-content-primary-button-background: #9000ff !important;
+  --in-content-primary-button-background-hover: #8e2901ab !important;
+  --in-content-primary-button-background-active: #8e290154 !important;
+}

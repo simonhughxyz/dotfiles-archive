@@ -1,0 +1,69 @@
+/* userChrome.css */
+
+/* Used to style firefox. */
+
+/* @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /1* only needed once *1/ */
+
+/* Hide back and forward button. */
+
+/* #back-button, #forward-button { display: none !important; } */
+
+/* hides the native tab-bar */
+
+/* #TabsToolbar { visibility: collapse; } */
+
+/* Hide tab-bar if there is only one tab. */
+
+#tabbrowser-tabs,
+#tabbrowser-tabs arrowscrollbox {
+  min-height: 0 !important;
+}
+
+#tabbrowser-tabs tab {
+  height: var(--tab-min-height);
+}
+
+#tabbrowser-tabs tab:first-of-type:last-of-type {
+  display: none !important;
+}
+
+/* Only show tab close button on hover */
+
+.tabbrowser-tab:not(:hover) .tab-close-button {
+  display: none;
+}
+
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+  display: -moz-box !important;
+}
+
+/* Put the hoverlink notification at the bottom to the right */
+
+/* so it does not interfere with tridactyl. */
+
+statuspanel[type="overLink"],
+#statuspanel[type="overLink"] {
+  right: 0;
+  display: inline;
+}
+
+/* ANTI FEATURES */
+
+/* Remove "Send Page to Device", "Send Link to Device", */
+/* "Send Tab to Device" from context menu. */
+
+#context-sendpagetodevice,
+#context-sep-sendpagetodevice,
+#context-sendlinktodevice,
+#context-sep-sendlinktodevice,
+#context_sendTabToDevice,
+#context_sendTabToDevice_separator {
+  display: none !important;
+}
+
+/* Remove the "Sign in to sync" from top of photon hamburger menu. */
+
+#appMenu-fxa-container,
+#appMenu-fxa-container + toolbarseparator {
+  display: none !important;
+}
