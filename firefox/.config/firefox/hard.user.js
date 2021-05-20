@@ -10,7 +10,7 @@
 // UI SETTINGS
 //
 
-user_pref("browser.tabs.drawInTitlebar", true);
+user_pref("browser.tabs.drawInTitlebar", false);
 
 user_pref("browser.uidensity", 1);
 
