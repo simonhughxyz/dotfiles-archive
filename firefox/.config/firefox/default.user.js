@@ -1,7 +1,8 @@
 //
 // #### HARD.USER.JS ####
 //
-//  This user js is a good compromise between privacy and usability
+//  This user js has very strict privacy protecting settings which may break
+//  some websites
 //
 // All settings in this file will overide about:config settings.
 
@@ -114,7 +115,7 @@ user_pref("accessibility.force_disabled", 1);
 user_pref("extensions.formautofill.available", "off"); // Disable autofill
 user_pref("extensions.screenshots.disabled", true); // Disable screenshots
 user_pref("extensions.webcompat-reporter.enabled", false); // Disable report this site
-user_pref("identity.fxaccounts.enabled", false); // Disable Fx accounts
+user_pref("identity.fxaccounts.enabled", true); // Disable Fx accounts
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false); // Remove whats new
 
 // Don't check for updates (My package manager handles that).
@@ -287,7 +288,7 @@ user_pref("network.cookie.lifetimePolicy", 0);
 // 0 = Send the full URL in the Referer header
 // 1 = Send the URL without its query string in the Referer header
 // 2 = Send only the scheme, host, and port in the Referer header
-user_pref("network.http.referer.trimmingPolicy", 1);
+user_pref("network.http.referer.trimmingPolicy", 2);
 
 // Only send Referer header when the full hostnames match. (Note: if you notice significant breakage, you might try 1 combined with an XOriginTrimmingPolicy tweak below.).
 //     0 = Send Referer in all cases
@@ -545,3 +546,4 @@ user_pref("plugins.click_to_play", true);
 // Decrease system information leakage to Mozilla blocklist update servers
 // https://trac.torproject.org/projects/tor/ticket/16931
 user_pref("extensions.blocklist.url", "https://blocklist.addons.mozilla.org/blocklist/3/%APP_ID%/%APP_VERSION%/");
+

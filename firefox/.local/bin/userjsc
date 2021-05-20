@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# USERJSC
+# Simon Hugh Moore
+#
+# Compile several firefox user.js files into one and save in firefox profile
+
+profile_dir=~/.mozilla/firefox
+profile=default
+
+__usage="usage: $(basename "$0") [OPTIONS] <file>"
+__help="$__usage
+
+Firefox user.js  compiler
+Compile several firefox user.js files into one and save in firefox profile
+
+Options:
+  -h, --help                         Print this help message
+  -p, --profile                      set profile, otherwise use 'default'
+"
+
+_compile(){
+    cat "$@" > "${profile_dir}/${profile}/user.js"
+}
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help) echo "$__help"; exit ;;
+        -p|--profile) shift; profile="$1";;
+        *) _compile "$@"; exit ;;
+    esac
+    shift
+done
