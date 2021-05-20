@@ -68,6 +68,8 @@ if [ "$HOST" = "voidtower" ]; then
     export MPV_PROFILE="fhd60"
 elif [ "$HOST" = "voidbook" ]; then
     export MPV_PROFILE="hd"
+else
+    export LIBGL_ALWAYS_SOFTWARE=1
 fi
 
 # Start ssh-agent if its not already running
