@@ -21,7 +21,7 @@ alias chromium js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.excla
 alias image js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('img -u ' + url))
 
 " Set default zoom
-" autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
+autocmd DocStart .* zoom 150 false TRI_FIRED_MOZ_TABID
 
 "
 " Settings
