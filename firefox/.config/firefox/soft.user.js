@@ -140,7 +140,7 @@ user_pref("dom.webnotifications.enabled", false); // Disable Web notifications
 user_pref("media.videocontrols.picture-in-picture.enabled", false); // Disable picture in picture
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false); // Disable picture in picture button
 user_pref("browser.urlbar.suggest.searches", false); // Dont suggest searches in url bar.
-user_pref("media.autoplay.default", 0); // Pause media by default
+user_pref("media.autoplay.default", 1); // Pause media by default
 
 // Disable recommendations
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
