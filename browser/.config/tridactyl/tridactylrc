@@ -62,6 +62,16 @@ bind z js window.toggleZoom()
 " Bind Keys
 "
 
+" Navigation
+bind j scrollline +10
+bind <c-j> scrollline +1
+bind k scrollline -10
+bind <c-k> scrollline -1
+bind <ArrowDown> scrollline +10
+bind <c-ArrowDown> scrollline +1
+bind <ArrowUp> scrollline -10
+bind <c-ArrowUp> scrollline -1
+
 " TAB AND WINDOWS
 
 bind [ tabprev
