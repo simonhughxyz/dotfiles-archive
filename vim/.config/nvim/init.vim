@@ -871,6 +871,7 @@ endfunction
 " }}}
 " Line Shortcuts {{{
 nnoremap 4 $
+vnoremap 4 $
 " Function Keys
 " <F1> is paste toggle
 nnoremap <F2> :set number!<CR>:set relativenumber!<CR>
