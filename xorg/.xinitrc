@@ -1,4 +1,14 @@
 #!/bin/sh
+
+LOG_PREFIX=~/.local/share
+
+# create log directory and return full log path
+_log(){
+    path="${LOG_PREFIX}/${1}"
+    mkdir -p "${path}"
+    echo "${path}/${1}.log"
+}
+
 xrdb -merge ~/.Xresources
 
 if [ "$HOST" = "voidtower" ]; then
@@ -28,15 +38,15 @@ fi
 
 # startup apps
 start-pulseaudio-x11 & # make sure pulseaudio is running.
-syncthing -no-browser > ~/.local/share/syncthing/syncthing.log 2>&1 & # syncs files between devises.
+syncthing -no-browser > "$( _log "syncthing" )" 2>&1 & # syncs files between devises.
 clipmenud &                                   # deamon for clipmenu.
 redshift &                                    # reduced blue levels on screen.
 unclutter -f &                                # removes mouse from screen after x seconds.
 compton &                                     # for transparency and some other effects.
 export $(dbus-launch) &
 dunst &                                       # for notification.
-sxhkd > ~/.local/share/sxhkd/sxhkd.log 2>&1 & # keybindings.
+sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
 bluetoothctl power on                         # Switch on bluetooth.
 # ntpd -qg    # set time and date from ntp server
 
-exec bspwm > ~/.local/share/bspwm/bspwm.log 2>&1
+exec bspwm > "$( _log "bspwm" )" 2>&1
