@@ -12,6 +12,22 @@
 _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
 _dependency "clipmenu"
 _dependency "fzf"
+_dependency "xdotool"
+
+# type out using xdotool
+_write(){
+    setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
+    sleep 0.001
+}
 
 # Launch clipmenu with fzf
-CM_LAUNCHER=fzf clipmenu
+choice="$( CM_LAUNCHER=rofi-script clipmenu | fzf --expect='alt-n,alt-w' )"
+
+key="$( echo "$choice" | head -n1 )"
+selection="$( CM_OUTPUT_CLIP=1 CM_LAUNCHER=rofi-script clipmenu "$( echo "$choice" | tail -n1 )" )"
+
+case "$key" in
+    alt-n) notify-send "$selection" ;;
+    alt-w) _write "$selection" ;;
+    *) echo "$selection" | xsel --logfile /dev/null -i --clipboard --primary ;;
+esac
