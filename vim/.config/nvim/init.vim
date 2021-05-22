@@ -135,7 +135,6 @@ Plug 'junegunn/limelight.vim'   " Highlight the current column.
 Plug 'mcchrish/nnn.vim' " Use nnn file browser.
 Plug 'vimwiki/vimwiki'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'} " LSP support.
-Plug 'liuchengxu/vim-which-key'
 
 " Text Object Plugins
 Plug 'wellle/targets.vim'   " Expands on vim text objects and adds a few new ones.
@@ -933,9 +932,6 @@ let mapleader=" "
 let maplocalleader=","
 " re-source .vimrc
 nnoremap <leader>R :so $MYVIMRC<CR>
-" Which Key
-nnoremap <silent><leader> :WhichKey '<space>'<CR>
-nnoremap <silent><localleader> :WhichKey ','<CR>
 " Buffer Commands
 nnoremap <silent><leader>b :Buffers<cr>
 nnoremap <silent><leader>f :Files<cr>
