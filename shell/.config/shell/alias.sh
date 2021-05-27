@@ -25,6 +25,7 @@ alias bt='bluetoothctl'
 
 # program options
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc'
+alias newsboat='newsboat -I ~/sync/newsboat/read.newsboat; newsboat '
 
 # ls
 # alias ls='ls --color=auto --group-directories-first'
