@@ -81,5 +81,8 @@ if [ ! "$SSH_AUTH_SOCK" ]; then
     . "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
 fi
 
+# source alias, mostly needed for dash
+. ~/.config/shell/alias.sh
+
 # Start graphical server
 [ "$(tty)" = "/dev/tty1" ] && exec startx
