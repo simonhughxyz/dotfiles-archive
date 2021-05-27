@@ -82,7 +82,7 @@ if [ ! "$SSH_AUTH_SOCK" ]; then
 fi
 
 # source alias, mostly needed for dash
-. ~/.config/shell/alias.sh
+export ENV=$HOME/.config/shell/alias.sh
 
 # Start graphical server
 [ "$(tty)" = "/dev/tty1" ] && exec startx
