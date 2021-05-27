@@ -81,5 +81,5 @@ if [ ! "$SSH_AUTH_SOCK" ]; then
     . "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
 fi
 
-# Start graphical server if i3 not already running.
-[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
+# Start graphical server
+[ "$(tty)" = "/dev/tty1" ] && exec startx
