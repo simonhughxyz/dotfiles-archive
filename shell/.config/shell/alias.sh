@@ -120,7 +120,6 @@ alias ipt='sudo iptables'
 alias ip6t='sudo ip6tables'
 alias iptl='sudo iptables -nvL'
 alias ip6tl='sudo ip6tables -nvL'
-iptl-search() { sudo iptables -nvL | awk -vRS= "BEGIN{IGNORECASE = 1}/^Chain $1/"; }
 
 # misc
 alias r='trash-put '
