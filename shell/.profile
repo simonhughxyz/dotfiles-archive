@@ -60,7 +60,7 @@ export WH="/mnt/wh"
 
 # Source NNN config
 nnn_config=$HOME/.config/nnn/nnnrc
-[ -f $nnn_config ] && source $nnn_config
+[ -f $nnn_config ] && . $nnn_config
 
 # Host specific config
 if [ "$HOST" = "voidtower" ]; then
@@ -77,8 +77,8 @@ if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     mkdir -p "$XDG_RUNTIME_DIR/ssh"
     ssh-agent -t 16h > "$XDG_RUNTIME_DIR/ssh/ssh-agent.env"
 fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
+if [ ! "$SSH_AUTH_SOCK" ]; then
+    . "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
 fi
 
 # Start graphical server if i3 not already running.
