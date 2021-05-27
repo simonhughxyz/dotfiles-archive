@@ -34,7 +34,7 @@ super + p
 super + shift + m
     $TERMINAL --class mail  -t mail -e mail -a
 super + n
-    $TERMINAL --class newsboat -t newsboat -e newsboat
+    $TERMINAL --class newsboat -t newsboat -e sh -c "newsboat -I ~/sync/newsboat/read.newsboat; newsboat"
 super + shift + c
     scratchpad -c calc -t calc -e bc
 super + shift + w
