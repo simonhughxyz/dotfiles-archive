@@ -36,24 +36,24 @@ Options:
   -h, --help                                 Print this help message
 "
 
-
-_error(){
-    echo "$1"    
-    _notify "$1"
-    exit 1
+_get_title(){
+    # if failed, return url
+    youtube-dl --get-title "$1" 2>/dev/null || echo "$1"
 }
 
 _download(){ 
-    _notify "Starting Download..."
-    youtube-dl --config-location "$config" --exec "ffmpeg -i {} -c:v copy -c:a copy -metadata URL=$url {}.tmp.mkv;mv -f {}.tmp.mkv {}" "$url" $arg || _error "Failed to download!"
-    _notify "Finished Download!"
+    ts -S 4
+    title="$( _get_title "$url" )"
+    notify-send 'Added Download to queu...' ''"$title"''
+
+    # Use printf to allow the use of ' to protect against command injection
+    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Failed to download!' '%s' && exit 1)" "$config" "$url" "$url" "$( echo "$title" | sed "s/'/'\"'\"'/g" )" )"
+    ts -L ytdl sh -c "$cmd"
+
+    ts -d -L ytdl notify-send 'Finished Download!' ''"$title"''
     exit
 }
 
-_notify(){
-    [ -z $notify ] && return 0
-    notify-send "Youtube-DL" "$1"
-}
 
 while test $# -gt 0; do
     case "$1" in
