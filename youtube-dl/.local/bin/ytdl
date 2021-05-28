@@ -45,7 +45,7 @@ _error(){
 
 _download(){ 
     _notify "Starting Download..."
-    youtube-dl --config-location "$config" --exec "ffmpeg -i {} -c:v copy -c:a copy -metadata URL=$url {}.tmp.mkv;mv -f {}.tmp.mkv {}" "$url" $@ || _error "Failed to download!"
+    youtube-dl --config-location "$config" --exec "ffmpeg -i {} -c:v copy -c:a copy -metadata URL=$url {}.tmp.mkv;mv -f {}.tmp.mkv {}" "$url" $arg || _error "Failed to download!"
     _notify "Finished Download!"
     exit
 }
@@ -67,7 +67,8 @@ while test $# -gt 0; do
         -u) shift; url="$1" ;;
         --url=*) url=${1#*=} ;;
         http*) url="$1" ;;
+        *) arg="$arg $1" ;;
     esac
     shift
 done
-_download $@
+_download "$arg"
