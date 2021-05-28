@@ -12,6 +12,10 @@
 # -p    : download playlist.
 # -n    : turn on notifications.
 
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "youtube-dl"
+_dependency "ts"
+
 config_dir=$XDG_CONFIG_HOME/youtube-dl
 video_config=$config_dir/config
 hq_config=$config_dir/hq.config
