@@ -4,7 +4,7 @@
 # Simon Hugh Moore
 #
 # A wrapper around youtube-dl to manage separate configs, queue downloads with
-# task-spooler and notify when the download is finished
+# task-spooler, notify when the download is finished and keep a history log
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
@@ -19,6 +19,8 @@ Options:
   -p, --playlist                             Download playlist
   -s, --slow                                 Don't use aria2
   -u, --url=url                              URL to download
+  -H|--history                               Print download history
+  -F|--failed                                Print failed download history
   -h, --help                                 Print this help message
 "
 
@@ -26,7 +28,10 @@ _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; ex
 _dependency "youtube-dl"
 _dependency "ts"
 
+# Runtime
 runtime_dir=$XDG_RUNTIME_DIR/ytdl
+history=$runtime_dir/history.download
+failed_history=$runtime_dir/history.failed
 mkdir -p $runtime_dir
 
 # Task Spooler
@@ -51,11 +56,16 @@ _download(){
     title="$( _get_title "$url" )"
     notify-send 'Added Download to queu...' ''"$title"''
 
+    # title with ' escaped 
+    etitle="$( echo "$title" | sed "s/'/'\"'\"'/g" )"
+    msg="$( printf "%s\t%s" "$url" "$etitle" )"
+
     # Use printf to allow the use of ' to protect against command injection
-    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Failed to download!' '%s' && exit 1)" "$config" "$url" "$url" "$( echo "$title" | sed "s/'/'\"'\"'/g" )" )"
+    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Failed to download!' '%s'; echo '%s' >> %s; exit 1 )" "$config" "$url" "$url" "$etitle" "$msg" "$failed_history" )"
     ts -L ytdl sh -c "$cmd"
 
     ts -d -L ytdl notify-send 'Finished Download!' ''"$title"''
+    ts -d -L ytdl sh -c "echo '$msg' >> $history"
     exit
 }
 
@@ -64,6 +74,8 @@ while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__usage"; exit ;;
         -t|--ts) shift; ts $@; exit;;
+        -H|--history) cat "$history"; exit;;
+        -F|--failed) cat "$failed_history"; exit;;
         -v|--video) config=$video_config ;;
         -q|--hq) config=$hq_config ;;
         -a|--audio) config=$audio_config ;;
