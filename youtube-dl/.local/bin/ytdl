@@ -57,17 +57,17 @@ _get_title(){
 _download(){ 
     [ -z $url ] && echo "$__usage" && exit 1
     title="$( _get_title "$url" )"
-    notify-send 'Added Download to queu...' ''"$title"''
+    notify-send 'Add Download to queu...' ''"$title"''
 
     # title with ' escaped 
     etitle="$( echo "$title" | sed "s/'/'\"'\"'/g" )"
     msg="$( printf "%s\t%s" "$url" "$etitle" )"
 
     # Use printf to allow the use of ' to protect against command injection
-    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Failed to download!' '%s'; echo '%s' >> %s; exit 1 )" "$config" "$url" "$url" "$etitle" "$msg" "$failed_history" )"
+    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Download Failed!' '%s'; echo '%s' >> %s; exit 1 )" "$config" "$url" "$url" "$etitle" "$msg" "$failed_history" )"
     ts -L ytdl sh -c "$cmd"
 
-    ts -d -L ytdl notify-send 'Finished Download!' ''"$title"''
+    ts -d -L ytdl notify-send 'Download Complete!' ''"$title"''
     ts -d -L ytdl sh -c "echo '$msg' >> $history"
     exit
 }
