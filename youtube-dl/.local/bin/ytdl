@@ -8,7 +8,7 @@
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
-Download video or playlist, with or without notifications
+Download video or playlist using youtube-dl
 Any argument starting with 'http' will be accepted as URL
 
 Options:
@@ -21,6 +21,7 @@ Options:
   -u, --url=url                              URL to download
   -H, --history                              Print download history
   -F, --failed                               Print failed download history
+  -C, --clear                                Clear history and task spooler
   -h, --help                                 Print this help message
 "
 
@@ -76,6 +77,7 @@ while test $# -gt 0; do
         -t|--ts) shift; ts $@; exit;;
         -H|--history) cat "$history"; exit;;
         -F|--failed) cat "$failed_history"; exit;;
+        -C|--clear) ts -C; > "$history"; > "$failed_history" ;exit;;
         -v|--video) config=$video_config ;;
         -q|--hq) config=$hq_config ;;
         -a|--audio) config=$audio_config ;;
