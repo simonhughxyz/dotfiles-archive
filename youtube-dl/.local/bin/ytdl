@@ -6,8 +6,8 @@
 # A wrapper around youtube-dl to manage separate configs, queue downloads with
 # task-spooler, notify when the download is finished and keep a history log
 
-__usage="
-Usage: $(basename "$0") [OPTIONS]
+__usage="Usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
 Download video or playlist using youtube-dl
 Any argument starting with 'http' will be accepted as URL
 
@@ -54,6 +54,7 @@ _get_title(){
 }
 
 _download(){ 
+    [ -z $url ] && echo "$__usage" && exit 1
     title="$( _get_title "$url" )"
     notify-send 'Added Download to queu...' ''"$title"''
 
@@ -73,7 +74,7 @@ _download(){
 
 while test $# -gt 0; do
     case "$1" in
-        -h|--help) echo "$__usage"; exit ;;
+        -h|--help) echo "$__help"; exit ;;
         -t|--ts) shift; ts $@; exit;;
         -H|--history) cat "$history"; exit;;
         -F|--failed) cat "$failed_history"; exit;;
