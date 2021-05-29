@@ -19,8 +19,8 @@ Options:
   -p, --playlist                             Download playlist
   -s, --slow                                 Don't use aria2
   -u, --url=url                              URL to download
-  -H|--history                               Print download history
-  -F|--failed                                Print failed download history
+  -H, --history                              Print download history
+  -F, --failed                               Print failed download history
   -h, --help                                 Print this help message
 "
 
