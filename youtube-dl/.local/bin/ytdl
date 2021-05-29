@@ -16,6 +16,14 @@ _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; ex
 _dependency "youtube-dl"
 _dependency "ts"
 
+runtime_dir=$XDG_RUNTIME_DIR/ytdl
+mkdir -p $runtime_dir
+
+# Task Spooler
+export TMPDIR=$runtime_dir/ts
+mkdir -p $TMPDIR
+ts -S 4
+
 config_dir=$XDG_CONFIG_HOME/youtube-dl
 video_config=$config_dir/config
 hq_config=$config_dir/hq.config
@@ -46,7 +54,6 @@ _get_title(){
 }
 
 _download(){ 
-    ts -S 4
     title="$( _get_title "$url" )"
     notify-send 'Added Download to queu...' ''"$title"''
 
@@ -62,6 +69,7 @@ _download(){
 while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__usage"; exit ;;
+        -t|--ts) shift; ts $@; exit;;
         -n|--notify) notify="true" ;;
         -v|--video) config=$video_config ;;
         -q|--hq) config=$hq_config ;;
