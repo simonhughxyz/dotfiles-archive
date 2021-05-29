@@ -3,14 +3,24 @@
 # YTDL
 # Simon Hugh Moore
 #
-# This script enables you to have separate configs for video and playlist
-# downloading which is useful for having different youtube-dl templates.
-# The script can also provide notifications.
-# 
-# Use:
-# -v    : download video.
-# -p    : download playlist.
-# -n    : turn on notifications.
+# A wrapper around youtube-dl to manage separate configs, queue downloads with
+# task-spooler and notify when the download is finished
+
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Download video or playlist, with or without notifications
+Any argument starting with 'http' will be accepted as URL
+
+Options:
+  -t, --ts                                   Call task spooler
+  -v, --video                                Download single video
+  -q, --hq                                   Download single high quality video
+  -a, --audio                                Download audio only
+  -p, --playlist                             Download playlist
+  -s, --slow                                 Don't use aria2
+  -u, --url=url                              URL to download
+  -h, --help                                 Print this help message
+"
 
 _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
 _dependency "youtube-dl"
@@ -31,22 +41,6 @@ playlist_config=$config_dir/pl.config
 slow_config=$config_dir/slow.config
 audio_config=$config_dir/audio.config
 config=$video_config
-
-__usage="
-Usage: $(basename "$0") [OPTIONS]
-Download video or playlist, with or without notifications
-Any argument starting with 'http' will be accepted as URL
-
-Options:
-  -n, --notify                               Turn on notifications
-  -v, --video                                Download single video
-  -q, --hq                                   Download single high quality video
-  -a, --audio                                Download audio only
-  -p, --playlist                             Download playlist
-  -s, --slow                                 Don't use aria2
-  -u, --url=url                              URL to download
-  -h, --help                                 Print this help message
-"
 
 _get_title(){
     # if failed, return url
@@ -70,7 +64,6 @@ while test $# -gt 0; do
     case "$1" in
         -h|--help) echo "$__usage"; exit ;;
         -t|--ts) shift; ts $@; exit;;
-        -n|--notify) notify="true" ;;
         -v|--video) config=$video_config ;;
         -q|--hq) config=$hq_config ;;
         -a|--audio) config=$audio_config ;;
