@@ -105,7 +105,7 @@ _download(){
 }
 
 _fzf(){
-    fzf --delimiter "\t" --with-nth=2 --expect="alt-?,alt-u,alt-U,alt-t,alt-T,alt-w,alt-W,alt-D,alt-V" "$@"
+    fzf --delimiter "\t" --with-nth=3 --expect="alt-?,alt-u,alt-U,alt-t,alt-T,alt-w,alt-W,alt-D,alt-V" "$@"
 }
 
 # type out using xdotool
@@ -130,8 +130,8 @@ _menu(){
     choice="$( echo "$choice" | tail -n1 )"
     [ -z "$choice" ] && exit
 
-    url="$( echo "$choice" | cut -f1 )"
-    title="$( echo "$choice" | cut -f2 )"
+    url="$( echo "$choice" | cut -f2 )"
+    title="$( echo "$choice" | cut -f3 )"
 
     case "$key" in
         alt-\?) echo -n "$__fzf_keys" | fzf --disabled >/dev/null;  _menu "$1" ;; # Show keymap help in fzf
