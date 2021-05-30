@@ -110,6 +110,9 @@ _write(){
 
 # Use fzf to select history
 _menu(){
+    _dependency "fzf"
+    _dependency "xdotool"
+
     case "$1" in
         help) echo "$__menu_help"; exit ;; 
         h|history) choice="$( cat "$history" | _fzf )" ;;
