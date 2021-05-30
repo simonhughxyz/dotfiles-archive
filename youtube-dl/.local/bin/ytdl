@@ -63,7 +63,7 @@ mkdir -p $runtime_dir
 
 # Task Spooler
 export TMPDIR=$runtime_dir/ts
-export TS_MAXFINISHED=15
+export TS_MAXFINISHED=6
 mkdir -p $TMPDIR
 ts -S 4
 
