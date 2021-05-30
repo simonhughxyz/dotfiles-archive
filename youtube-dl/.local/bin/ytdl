@@ -61,6 +61,12 @@ history=$runtime_dir/history.download
 failed_history=$runtime_dir/history.failed
 mkdir -p $runtime_dir
 
+# local
+local_dir=~/.local/share/ytdl
+local_history=$local_dir/history.download
+local_failed_history=$local_dir/failed.download
+mkdir -p $local_dir
+
 # Task Spooler
 export TMPDIR=$runtime_dir/ts
 export TS_MAXFINISHED=6
@@ -90,11 +96,11 @@ _download(){
     msg="$( printf "%s\t%s" "$url" "$etitle" )"
 
     # Use printf to allow the use of ' to protect against command injection
-    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Download Failed!' '%s'; echo '%s' >> %s; exit 1 )" "$config" "$url" "$url" "$etitle" "$msg" "$failed_history" )"
+    cmd="$( printf "youtube-dl --config-location '%s' --exec \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" '%s' || ( notify-send 'Download Failed!' '%s'; echo '%s' | tee -a %s %s > /dev/null; exit 1 )" "$config" "$url" "$url" "$etitle" "$msg" "$failed_history" "$local_failed_history" )"
     ts -L ytdl sh -c "$cmd"
 
     ts -d -L ytdl notify-send 'Download Complete!' ''"$title"''
-    ts -d -L ytdl sh -c "echo '$msg' >> $history"
+    ts -d -L ytdl sh -c "echo '$msg' | tee -a $history $local_history > /dev/null"
     exit
 }
 
