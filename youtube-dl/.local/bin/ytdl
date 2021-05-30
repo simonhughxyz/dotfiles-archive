@@ -23,6 +23,7 @@ Options:
   -F, --failed                               Print failed download history
   -C, --clear                                Clear history and task spooler
   -M, --menu                                 Use fzf to select history
+  -P, --persistent                           Use persistent history
   -h, --help                                 Print this help message
 "
 
