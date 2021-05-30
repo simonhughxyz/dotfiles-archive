@@ -22,8 +22,34 @@ Options:
   -H, --history                              Print download history
   -F, --failed                               Print failed download history
   -C, --clear                                Clear history and task spooler
+  -M, --menu                                 Use fzf to select history
   -h, --help                                 Print this help message
 "
+
+
+__fzf_keys="alt-? : Show keymap help in fzf
+alt-u  : Print url to stdout
+alt-U  : Copy url to clipboard
+alt-t  : Print title to stdout 
+alt-T  : Copy title to clipboard
+alt-w  : Type out url with xdotool
+alt-W  : Type out title with xdotool
+alt-D  : Download video again
+alt-V  : Play video
+return : Open in BROWSER 
+"
+
+__menu_help="usage: $(basename $0) -M [OPTIONS]
+
+Control windows in fzf
+
+Options:
+  help                          Print this help message
+  history                       Select history with fzf
+  failed                        Select failed history with fzf
+
+Keymap:
+$( echo "$__fzf_keys" | sed 's/^.*$/  &/' )"
 
 _dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
 _dependency "youtube-dl"
@@ -72,6 +98,45 @@ _download(){
     exit
 }
 
+_fzf(){
+    fzf --delimiter "\t" --with-nth=2 --expect="alt-?,alt-u,alt-U,alt-t,alt-T,alt-w,alt-W,alt-D,alt-V" "$@"
+}
+
+# type out using xdotool
+_write(){
+    setsid xdotool sleep 0.1 type --clearmodifiers "$1" &
+    sleep 0.001
+}
+
+# Use fzf to select history
+_menu(){
+    case "$1" in
+        help) echo "$__menu_help"; exit ;; 
+        h|history) choice="$( cat "$history" | _fzf )" ;;
+        f|failed) choice="$( cat "$failed_history" | _fzf )" ;;
+        *) choice="$( cat "$history" | _fzf )" ;;
+    esac
+
+    key="$( echo "$choice" | head -n1 )"
+    choice="$( echo "$choice" | tail -n1 )"
+    [ -z "$choice" ] && exit
+
+    url="$( echo "$choice" | cut -f1 )"
+    title="$( echo "$choice" | cut -f2 )"
+
+    case "$key" in
+        alt-\?) echo -n "$__fzf_keys" | fzf --disabled >/dev/null;  _menu "$1" ;; # Show keymap help in fzf
+        alt-u) echo "$url" ;; # Print url to stdout
+        alt-U) echo "$url" | xsel ;; # Copy url to clipboard
+        alt-t) echo "$title" ;; # Print title to stdout 
+        alt-T) echo "$title" | xsel ;; # Copy title to clipboard
+        alt-w) _write "$url"  ;; # Type out url with xdotool
+        alt-W) _write "$title"  ;; # Type out title with xdotool
+        alt-D) ytdl "$url"  ;; # Download video again
+        alt-V) vid "$url"  ;; # Play video
+        *) $BROWSER "$url" ;; # Open in BROWSER
+    esac
+}
 
 while test $# -gt 0; do
     case "$1" in
@@ -79,6 +144,7 @@ while test $# -gt 0; do
         -t|--ts) shift; ts $@; exit;;
         -H|--history) cat "$history"; exit;;
         -F|--failed) cat "$failed_history"; exit;;
+        -M|--menu) shift; _menu $@ ; exit;;
         -C|--clear) ts -C; > "$history"; > "$failed_history" ;exit;;
         -v|--video) config=$video_config ;;
         -q|--hq) config=$hq_config ;;
