@@ -53,11 +53,12 @@ _launch() {
     b_color="-"    # Background color
 
     quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" )"
+    window="$( echo "" | _color "$f_color" | _mouse "bspc desktop --layout next" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" | _delim )"
     firefox="$( echo "" | _color "$f_color" | _mouse "$BROWSER" )"
     file_browser="$( echo "" | _color "$f_color" | _mouse "pcmanfm" )"
     office_writer="$( echo "" | _color "$f_color" | _mouse "libreoffice --writer" )"
     office_calc="$( echo "" | _color "$f_color" | _mouse "libreoffice --calc" )"
-    echo "${quit}  ${firefox} ${file_browser} ${office_writer} ${office_calc}" > $prefix/launch
+    echo "${quit} ${window}${firefox} ${file_browser} ${office_writer} ${office_calc}" > $prefix/launch
 }
 _keystate() {
     f_color=$alert_color
