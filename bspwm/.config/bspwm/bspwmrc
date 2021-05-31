@@ -3,16 +3,11 @@
 # Remove all previously set rules.
 bspc rule -r "*"
 
-if [ "$USER" = "simon" ]; then
-    # set up desktops for each monitor.
-    bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 'V' 'B'
+# set up desktops for each monitor.
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 'V' 'B'
 
-    # set default layout for Video desktop
-    bspc desktop 'V' --layout monocle
-else
-    bspc monitor -d 1
-    bspc desktop 1 --layout monocle
-fi
+# set default layout for Video desktop
+bspc desktop 'V' --layout monocle
 
 # config options
 bspc config border_width          2     # width of border around window.
@@ -51,8 +46,4 @@ sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" > ~/.local/share/sxhkd/bspwm.sxhkd.
 # run lemonbar panel after sleep to give system time to catch up.
 
 sleep 1
-if [ "$USER" = "simon" ]; then
-    melonbar run &
-else
-    tint2 &
-fi
+melonbar run &
