@@ -52,7 +52,7 @@ _launch() {
     f_color="#bb00ff"    # Foreground color
     b_color="-"    # Background color
 
-    quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" )"
+    quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" )"
     firefox="$( echo "" | _color "$f_color" | _mouse "$BROWSER" )"
     file_browser="$( echo "" | _color "$f_color" | _mouse "pcmanfm" )"
     echo "${quit}  ${firefox} ${file_browser}" > $prefix/launch
