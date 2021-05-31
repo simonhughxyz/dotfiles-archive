@@ -48,6 +48,15 @@ _mouse(){
 }
 
 ### Modules ###
+_launch() {
+    f_color="#bb00ff"    # Foreground color
+    b_color="-"    # Background color
+
+    quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" )"
+    firefox="$( echo "" | _color "$f_color" | _mouse "$BROWSER" )"
+    file_browser="$( echo "" | _color "$f_color" | _mouse "pcmanfm" )"
+    echo "${quit}  ${firefox} ${file_browser}" > $prefix/launch
+}
 _keystate() {
     f_color=$alert_color
 
