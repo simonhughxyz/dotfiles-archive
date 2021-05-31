@@ -55,7 +55,9 @@ _launch() {
     quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" )"
     firefox="$( echo "" | _color "$f_color" | _mouse "$BROWSER" )"
     file_browser="$( echo "" | _color "$f_color" | _mouse "pcmanfm" )"
-    echo "${quit}  ${firefox} ${file_browser}" > $prefix/launch
+    office_writer="$( echo "" | _color "$f_color" | _mouse "libreoffice --writer" )"
+    office_calc="$( echo "" | _color "$f_color" | _mouse "libreoffice --calc" )"
+    echo "${quit}  ${firefox} ${file_browser} ${office_writer} ${office_calc}" > $prefix/launch
 }
 _keystate() {
     f_color=$alert_color
