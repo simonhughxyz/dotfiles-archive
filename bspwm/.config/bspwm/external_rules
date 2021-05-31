@@ -19,7 +19,7 @@ case "$instance" in
         echo "border=off"
     ;;
     window*)
-        xdotool windowmove $wid 0 -10
+        xdotool windowmove $wid 20% 35%
         
         # get local of global window count
         if [ "$instance" = "window-all" ]; then
@@ -29,10 +29,10 @@ case "$instance" in
         fi
 
         # The more windows the larger the window height
-        window_height=$(( ($window_count * 38) + 100 ))
-        [ $window_height -lt 150 ] && window_height=150
+        window_height=$(( ($window_count * 38) + 120 ))
+        [ $window_height -lt 220 ] && window_height=220
         [ $window_height -gt 500 ] && window_height=500
-        xdotool windowsize $wid 100% "$window_height"
+        xdotool windowsize $wid 60% "$window_height"
 
         echo "state=floating"
         echo "sticky=on"
