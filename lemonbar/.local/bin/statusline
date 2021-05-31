@@ -11,7 +11,7 @@ _delim(){
     # Pipe into function to put delim on right side.
     # Pass as argument to put delim on left side.
     delim="|"
-    f_color="#b0b0b0"
+    f_color="#d0d0d0"
     b_color=""
 
     # print stdin to left of delim.
@@ -49,11 +49,11 @@ _mouse(){
 
 ### Modules ###
 _launch() {
-    f_color="#bb00ff"    # Foreground color
+    f_color="#a0a0ff"    # Foreground color
     b_color="-"    # Background color
 
-    quit="$( echo "" | _color "$f_color" | _mouse "bspc node -c" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" )"
-    window="$( echo "" | _color "$f_color" | _mouse "bspc desktop --layout next" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" | _delim )"
+    quit="$( echo "" | _color "#ff2222" | _mouse "bspc node -c" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" )"
+    window="$( echo "" | _color "#f0f0f0" | _mouse "bspc desktop --layout next" | _mouse "setsid scratchpad -C -c powermenu -t Power -e powermenu &" "3" | _delim )"
     firefox="$( echo "" | _color "$f_color" | _mouse "$BROWSER" )"
     file_browser="$( echo "" | _color "$f_color" | _mouse "pcmanfm" )"
     office_writer="$( echo "" | _color "$f_color" | _mouse "libreoffice --writer" )"
