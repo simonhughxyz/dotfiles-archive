@@ -131,8 +131,8 @@ _window_title(){
 }
 _window_count(){
     icon=""
-    click_command="scratchpad -c window -t fxwm -e 'fxwm window -d'"
-    left_click_command="scratchpad -c window-all -t fxwm -e 'fxwm window'"
+    click_command="setsid scratchpad -c window -t fxwm -e 'fxwm window -d' &"
+    left_click_command="setsid scratchpad -c window-all -t fxwm -e 'fxwm window' &"
     middle_click_command="bspc node -c"
     window_count="$(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == "0" ] && window_count="" && icon=""
