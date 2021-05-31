@@ -244,7 +244,7 @@ _desktops() {
 ### Print Status###
 _print_status() {
     echo "%{l}"
-    cat $prefix/desktops 2> /dev/null
+    cat $prefix/launch 2> /dev/null
     
     echo " "
     cat $prefix/window_name 2> /dev/null
@@ -255,10 +255,6 @@ _print_status() {
     cat $prefix/record 2> /dev/null
 
     cat $prefix/window_count 2> /dev/null
-
-    cat $prefix/uptime 2> /dev/null
-
-    cat $prefix/memory  2> /dev/null
     
 	cat $prefix/volume 2> /dev/null
 
@@ -277,13 +273,12 @@ _update_system(){
     _battery &
     _time &
     _date &
-    _memory &
-    _uptime
 }
 _update_all(){
     # Update everything apart from WM modules
     # they a special case.
     # _update_window_manager &
+    _launch &
     _update_system &
     _keystate &
     _record
@@ -302,6 +297,7 @@ _update(){
         keystate) _keystate ;;
         system) _update_system ;;
         record) _record "$2" ;;
+        launch) _launch ;;
         all) _update_all ;;
         *) _update_all ;;
     esac
