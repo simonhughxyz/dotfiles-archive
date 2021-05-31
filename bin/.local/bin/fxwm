@@ -67,6 +67,17 @@ Options:
 Keymap:
 $( echo "$__window_keys" | sed 's/^.*$/  &/' )"
 
+__desktop_help="usage: $(basename $0) desktop [OPTIONS]
+
+Control desktops in fzf
+
+Options:
+  -h, --help                         Print this help message
+  -p                                 Only show populated desktops
+
+Keymap:
+$( echo "$__desktop_keys" | sed 's/^.*$/  &/' )"
+
 _fzf(){
     fzf --no-info --preview-window=right,90%,border-left "$@"
 }
@@ -128,9 +139,12 @@ _window(){
 # Present a list of desktops in fzf to perform various actions with
 _desktop(){
     desktops="$( wmctrl -d )"
-
-    # Only show populated desktops
-    [ "$1" = "-p" ] && desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )"
+    
+    case "$1" in
+        -h) echo "$__desktop_help"; exit;;
+        -p) # Only show populated desktops
+            desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )"
+    esac
 
     # List desktops in fzf with a list of windows in the preview window
     choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m,alt-w'  --preview='
