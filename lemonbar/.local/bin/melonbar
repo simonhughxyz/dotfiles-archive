@@ -10,7 +10,7 @@ icon_font="FontAwesome-13"
 geometry="x28"
 offset="-2"
 clickable_areas=25  # Number of clickable areas.
-f_color="#ff3300"
+f_color="#ff6600"
 b_color="#000000"
 
 prefix=${XDG_RUNTIME_DIR}/melonbar
