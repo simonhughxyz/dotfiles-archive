@@ -72,7 +72,7 @@ mkdir -p $local_dir
 export TMPDIR=$runtime_dir/ts
 export TS_MAXFINISHED=6
 mkdir -p $TMPDIR
-ts -S 3
+ts -S 2
 
 config_dir=$XDG_CONFIG_HOME/youtube-dl
 video_config=$config_dir/config
