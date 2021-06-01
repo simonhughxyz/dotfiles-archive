@@ -36,7 +36,7 @@ super + shift + m
 super + n
     $TERMINAL --class newsboat -t newsboat -e sh -c "newsboat -I ~/sync/newsboat/read.newsboat; newsboat"
 super + shift + c
-    scratchpad -c calc -t calc -e bc
+    scratchpad -c calc -t calc -e qalc
 super + shift + w
     scratchpad -c words_menu -t words -e words
 
