@@ -13,7 +13,7 @@ firefox_profiles=~/.mozilla/firefox
 
 _firefox(){ 
     # Run firefox always in new window with timezone set to UTC.
-    TZ=UTC firefox --new-window $@
+    TZ=UTC firefox -P default --new-window $@
 }
 
 _chromium(){ 
