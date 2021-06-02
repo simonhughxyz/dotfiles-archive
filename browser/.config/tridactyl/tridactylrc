@@ -8,6 +8,20 @@
 " Remove any existing settings.
 sanitize tridactyllocal tridactylsync
 
+" Clean browser data
+sanetize cache
+" sanetize cookies
+sanetize downloads
+sanetize fileSystems
+sanetize formData
+sanetize history
+sanetize indexedDB
+sanetize localStorage
+sanetize passwords
+sanetize pluginData
+sanetize serverBoundCertificates
+sanetize serviceWorkers
+
 "
 " Alias
 "
