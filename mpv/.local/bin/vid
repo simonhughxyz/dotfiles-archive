@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# M
+# VID
 # Simon Hugh Moore
 #
 # Wrapper script for mpv to have a persistent profile state.
