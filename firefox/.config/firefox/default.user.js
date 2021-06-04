@@ -12,6 +12,7 @@
 
 user_pref("browser.tabs.drawInTitlebar", false);
 
+user_pref("browser.compactmode.show", true); // Bring back compact mode!
 user_pref("browser.uidensity", 1);
 
 user_pref("browser.uiCustomization.state",{"placements":{"widget-overflow-fixed-list":["_testpilot-containers-browser-action","cookieautodelete_kennydo_com-browser-action","ublock0_raymondhill_net-browser-action","https-everywhere_eff_org-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"],"nav-bar":["back-button","forward-button","urlbar-container","downloads-button","umatrix_raymondhill_net-browser-action","_a655a6b2-69a5-40de-a3b8-3f7f200c95a7_-browser-action","jid1-qofqdk4qzufgwq_jetpack-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","alltabs-button"],"PersonalToolbar":["personal-bookmarks"]},"seen":["developer-button","ublock0_raymondhill_net-browser-action","umatrix_raymondhill_net-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action","_a655a6b2-69a5-40de-a3b8-3f7f200c95a7_-browser-action","https-everywhere_eff_org-browser-action","jid1-qofqdk4qzufgwq_jetpack-browser-action","_testpilot-containers-browser-action","cookieautodelete_kennydo_com-browser-action"],"dirtyAreaCache":["nav-bar","toolbar-menubar","TabsToolbar","PersonalToolbar","widget-overflow-fixed-list"],"currentVersion":16,"newElementCount":6});
@@ -170,13 +171,18 @@ user_pref("dom.disable_window_open_feature.toolbar", true);
 user_pref("dom.disable_window_open_feature.scrollbars", true);
 user_pref("dom.disable_window_status_change", true);
 
+//
 // PROXY SETTINGS
+//
+
 user_pref("network.proxy.autoconfig_url", "file:///etc/proxy.pac");
 user_pref("network.proxy.type", 2);
 user_pref("network.proxy.socks_remote_dns", true);
 user_pref("network.dns.blockDotOnion", false);
 
+//
 // Performance and memory
+//
 
 // Amount of cache to store in memory in kb.
 user_pref("browser.cache.memory.enable", true);

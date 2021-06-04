@@ -50,6 +50,7 @@ statuspanel[type="overLink"],
 /* ANTI FEATURES */
 
 /* Remove "Send Page to Device", "Send Link to Device", */
+
 /* "Send Tab to Device" from context menu. */
 
 #context-sendpagetodevice,
@@ -66,4 +67,26 @@ statuspanel[type="overLink"],
 #appMenu-fxa-container,
 #appMenu-fxa-container + toolbarseparator {
   display: none !important;
+}
+
+/* Compact Navbar */
+
+#nav-bar {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
+  background: #000000 !important;
+}
+
+#nav-bar toolbarbutton {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
+  opacity: 30 !important;
+}
+
+#urlbar {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
+  min-height: 10px !important;
+  opacity: 10 !important;
+  font-size: 24px !important;
 }
