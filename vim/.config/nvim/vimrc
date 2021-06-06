@@ -1,2 +1,697 @@
-" Source neovim's 'init.vim'.
-exec 'source'  fnamemodify($MYVIMRC,':p:h') . '/init.vim'
+"
+" No thrills vim config for traditional vim
+"
+
+" File Type {{{
+
+function! Run(...)
+    " use b:runcmd if set
+    if exists("b:runcmd") | let l:cmd=b:runcmd | endif
+    
+    " use function argument as cmd if provided.
+    if exists("a:1") | let l:cmd=a:1 | endif
+
+    " run command.
+    if exists("l:cmd")
+        silent !clear
+        exec 'silent :!' . l:cmd . ' &'
+        exec 'redraw!'
+    else
+        echo "No runcmd provided, use b:runcmd to set run command!"
+    endif
+endfu!
+command Run call Run()
+
+" runs file type detect if filetype is empty
+function! SetFileType()
+    if &filetype != 'filetype='
+        filetype detect
+    endif
+endfu!
+" get filetype on write
+" autocmd BufWritePost * call SetFileType()
+
+autocmd BufWritePost statusbar call system("reloadbar")
+
+" open all mutt config files with filetype muttrc
+autocmd BufReadPost *.muttrc set filetype=muttrc
+" }}}
+"Misc {{{
+set nocompatible
+filetype plugin indent on
+" syntax on
+set encoding=utf-8
+scriptencoding utf-8
+set omnifunc=syntaxcomplete#Complete
+set history=500
+" NO ANOYING BELL!!!
+set noerrorbells
+set vb t_vb=
+set listchars=eol:$,tab:»\ ,trail:~,extends:>,precedes:<,nbsp:~
+set pastetoggle=<F1>
+set mouse=a
+set clipboard=unnamedplus
+set backspace=indent,eol,start
+let g:python_host_prog = '/home/simonhugh/.pyenv/versions/2.7.15/envs/apps2/bin/python'
+let g:python3_host_prog = '/home/simonhugh/.pyenv/versions/3.7.1/envs/apps3/bin/python3'
+set modelines=1
+set modeline
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+set updatetime=100
+set noshowmode
+set undofile
+set undodir=~/.vim/undodir
+" conceal
+set conceallevel=2
+" don't conceal on line when in visual, insert or normal mode.
+set concealcursor=c
+" time in milliseconds for key sequence to complete
+set timeoutlen=500
+" Lines to keep above and below cursor
+set scrolloff=5
+" }}}
+" Folding {{{
+"=== folding ===
+set foldenable          " don't fold files by default on open
+set foldmethod=indent   " fold based on indent level
+set foldnestmax=1      " max 1 depth
+set foldlevelstart=0   " start with fold level of 1
+" set fold colors
+highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
+" }}}
+" Dictionary and Spelling {{{
+if has("spell")
+    set spelllang=en_us
+endif
+set dictionary+=~/.vim/words/english
+set dictionary+=~/.vim/words/new-german
+set thesaurus+=~/.vim/words/th_english
+set complete+=k
+" }}}
+" Colors {{{
+set background=dark
+set t_Co=256
+if (has("termguicolors"))
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+    set termguicolors
+
+    " nvim-colorizer only works with termguicolors and neovim
+    if has('nvim')
+        lua require 'colorizer'.setup({'*';},
+            \{
+            \   RGB      = true;
+            \   RRGGBB   = true;
+            \   names    = true;
+            \   RRGGBBAA = true;
+            \   rgb_fn   = true;
+            \   hsl_fn   = true;
+            \   css      = true;
+            \   css_fn   = true;
+            \   mode = 'background';
+            \})
+    endif
+endif
+syntax enable           " enable syntax processing
+colorscheme gruvbox
+" Make background transparent
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+" set custom syntax colors
+hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
+" set color of 80 char width column
+highlight ColorColumn ctermbg=0 guibg=#303030
+" change color of cursor line
+highlight CursorLine ctermbg=0 guibg=#000000
+highlight CursorLineNr ctermbg=0 ctermfg=2 guibg=#000000 guifg=#008000
+
+" Vim Diff colors
+highlight DiffAdd ctermbg=2 ctermfg=0 guibg=#000000 guifg=#00c000
+highlight DiffChange ctermbg=2 ctermfg=0 guibg=#000000 guifg=#c0c000
+highlight DiffDelete ctermbg=2 ctermfg=0 guibg=#000000 guifg=#c00000
+highlight DiffText ctermbg=2 ctermfg=0 guibg=#ffffff guifg=#3000a0
+
+" }}}
+" Spaces & Tabs {{{
+set tabstop=4           " 4 space tab
+set expandtab           " use spaces for tabs
+set softtabstop=4       " 4 space tab
+set shiftwidth=4
+set autoindent
+set smartindent
+set cindent
+" }}}
+" UI Layout {{{
+set number  relativenumber      " show line numbers
+set showcmd                     " show command in bottom bar
+set wildmenu                    " show wildmenu on tab
+" set wildmode=list:longest,full  " 1st tab list shown, 2nd tab wildmenu show
+set wildmode=longest:full,full
+set lazyredraw                  " Vim will only redraw when needed
+set showmatch                   " higlight matching parenthesis
+set ruler                       " show row and column in footer
+set fillchars+=vert:┃
+set splitbelow splitright       " Splits open at the bottom and right
+" set textwidth=80                " Wrap text at 80th column
+set cursorline                  " highlight current line
+set colorcolumn=80              " show line at 80th character column
+" }}}
+" Searching {{{
+set ignorecase          " ignore case when searching
+set smartcase           " dont ignore uppercase
+set incsearch           " search as characters are entered
+set hlsearch            " highlight all matches
+" Visual Select Search
+vnoremap / y/\V<C-r>=escape(@",'/\')<CR><CR>
+" }}}
+" Status Line {{{
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?' '.l:branchname.' |':''
+endfunction
+
+function! StatusLinePaste()
+    let l:paste = &paste
+    if (&paste == 1)
+        return ' Paste '
+    else
+        return ''
+    endif
+endfunction
+
+" Get current vim mode
+function! GetMode()
+    let l:currentmode={
+            \ 'n'  : 'Normal',
+            \ 'no' : 'N·Operator Pending',
+            \ 'v'  : 'Visual',
+            \ 'V'  : 'V·Line',
+            \ '' : 'V·Block',
+            \ 's'  : 'Select',
+            \ 'S'  : 'S·Line',
+            \ '' : 'S·Block',
+            \ 'i'  : 'Insert',
+            \ 'R'  : 'Replace',
+            \ 'Rv' : 'V·Replace',
+            \ 'c'  : 'Command',
+            \ 'cv' : 'Vim Ex',
+            \ 'ce' : 'Ex',
+            \ 'r'  : 'Prompt',
+            \ 'rm' : 'More',
+            \ 'r?' : 'Confirm',
+            \ '!'  : 'Shell',
+            \ 't'  : 'Terminal',
+            \}
+    return get(currentmode, mode(), 'Normal')
+endfunctio
+
+" define statusline and line number color for the vim modes
+let g:colors = {
+    \ 'black':      '#000000',
+    \ 'white':      '#ffffff',
+    \ 'background': '#0c0c0c',
+    \ 'normal':     '#005000',
+    \ 'visual':     '#706000',
+    \ 'insert':     '#004090',
+    \ 'paste':      '#5518ab',
+    \ 'else':       '#800000',
+\}
+
+" Automatically change the statusline color depending on mode
+function! ChangeModeColor()
+  if (mode() =~# '\v(n|no)')
+    exe 'hi User1 ctermbg=2 ctermfg=0  guibg=' . g:colors.normal . ' guifg=' . g:colors.white
+    exe 'hi statusline ctermbg=2'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=2 guibg=' . g:colors.normal . ' guifg=' . g:colors.white
+    exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
+  elseif (mode() =~# '\v(v|V|)')
+    exe 'hi User1 ctermbg=3 ctermfg=0  guibg=' . g:colors.visual . ' guifg=' . g:colors.white
+    exe 'hi statusline ctermbg=3'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.visual . ' guifg=' . g:colors.white
+  elseif (mode() ==# 'i')
+    exe 'hi User1 ctermbg=6 ctermfg=0  guibg=' . g:colors.insert . ' guifg=' . g:colors.white
+    exe 'hi statusline ctermbg=6'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=6 guibg=' . g:colors.insert . ' guifg=' . g:colors.white
+    exe 'hi CursorLine ctermbg=0 guibg=' . g:colors.black
+  else
+    exe 'hi User1 ctermbg=1 ctermfg=255  guibg=' . g:colors.else . ' guifg=' . g:colors.white
+    exe 'hi statusline ctermbg=1'
+    exe 'hi CursorLineNr ctermbg=0 ctermfg=1 guibg=' . g:colors.else . ' guifg=' . g:colors.white
+  endif
+
+  return ''
+endfunction
+call ChangeModeColor()
+
+" Fix for color sometimes not changeing or being delayed
+if version >= 700
+    augroup ColorSwapFix
+        au InsertEnter * call ChangeModeColor()
+        au InsertLeave * call ChangeModeColor()
+        au CmdlineEnter * redrawstatus
+        au CmdlineLeave * redrawstatus
+        au CmdwinEnter * call ChangeModeColor()
+        au CmdwinLeave * call ChangeModeColor()
+        au BufEnter * call ChangeModeColor()
+        au BufLeave * call ChangeModeColor()
+        if has('nvim')
+            au TermEnter * call ChangeModeColor()
+            au TermLeave * call ChangeModeColor()
+        else " Fix to change color cmdline for regular vim
+            au CmdlineEnter * call ChangeModeColor()
+            au CmdlineLeave * call ChangeModeColor()
+        endif
+    augroup END
+endif
+
+" Fix for delay in color change for visual modes
+vnoremap <expr> <SID>ChangeModeColor() ChangeModeColor()
+nnoremap <script> v v<SID>ChangeModeColor()
+nnoremap <script> V V<SID>ChangeModeColor()
+nnoremap <script> <C-v> <C-v><SID>ChangeModeColor()
+
+" main statusline color
+" background and foreground are swapped out of some reason.
+exe 'hi statusline ctermfg=15 ctermbg=0 guibg=' . g:colors.white . ' guifg= ' . g:colors.background
+
+" Paste Toggle Color
+exe 'hi user2 ctermfg=15 ctermbg=5 guifg=' . g:colors.white . ' guibg=' . g:colors.paste
+
+set laststatus=2
+set statusline=
+
+" LEFT SIDE
+" Used for color change
+set statusline+=%{ChangeModeColor()}
+set statusline+=%1*
+" show vim mode
+set statusline+=\ %{GetMode()}
+set statusline+=\ %*
+" show paste toggle
+set statusline+=%2*
+set statusline+=%{StatusLinePaste()}
+set statusline+=%*
+" show file name
+set statusline+=\ %.40f
+" truncate line from here
+set statusline+=%<
+" show if file is modified
+set statusline+=\ %m
+" show if file is read only
+set statusline+=\ %r
+
+" RIGHT SIDE
+set statusline+=%=
+" show git brannch
+set statusline+=%{StatuslineGit()}
+" show file type
+set statusline+=\ %Y
+set statusline+=\ \|
+" show buffer number
+set statusline+=\ %n
+set statusline+=\ \|
+" show character code user cursor
+set statusline+=\ 0x%B
+" gray section
+set statusline+=\ %1*
+" show file percentage
+set statusline+=\ %p%%
+" show column:line / total lines
+set statusline+=\ %v:%l
+set statusline+=\ \/\ %L
+set statusline+=\ %*
+" }}}
+" NetRw {{{
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+" }}}
+" Pager {{{
+function! Pager()
+    " Status line
+    set laststatus=0
+    set cmdheight=1
+    set nomodifiable " Only in version 6.0
+    set readonly
+
+    " No menu bar and tool bar
+    set guioptions=aiMr
+
+    " Disable folds
+    set nofoldenable
+
+    " No numberline
+    set nonumber
+    set norelativenumber
+
+    " Keep cursor in center
+    set scrolloff=9999
+
+    " Key bindings.
+    nmap b <C-B><C-G>
+    nmap q :q!<CR>
+    nmap <Up> <C-Y>
+    nmap <Down> <C-E>
+    nmap <F2> :set number!<CR>
+endfunction
+command! Pager call Pager(<f-args>)
+" }}}
+" Input mode Shortcuts {{{
+inoremap \\ \z
+" }}}
+" functions {{{
+function! RegToClip(reg)
+    let value = getreg(a:reg, 1, 1)
+    if executable('clip.exe')
+        call system('clip.exe', value) 
+    else
+        let @* = value[0]
+        let @+ = value[0]
+    endif
+endfunction
+command! -nargs=1 RegToClip call RegToClip(<f-args>)
+
+function! WordProcessorMode()
+ setlocal textwidth=80
+ setlocal smartindent
+ setlocal spell spelllang=en_us
+ setlocal noexpandtab
+endfu
+command! WP call WordProcessorMode()
+
+" Dead Keys
+
+let g:DeadKeysOn=0
+
+function! ToggleDeadKeys()
+	if !g:DeadKeysOn
+		call DeadKeys()
+	else
+		call DeadKeysOff()
+	endif
+endfunction
+
+function! DeadKeys()
+	echo "Dead Keys: On"
+	let g:DeadKeysOn=1
+    
+    imap `1 :call DKUmlaut()<cr> 
+    imap `2 :call DKGrave()<cr>
+    call DKUmlaut()
+endfunction
+
+function! DKUmlaut()
+	" umlaut
+	imap a ä
+	imap e ë
+	imap i ï
+	imap o ö
+	imap u ü
+	imap A Ä
+	imap E Ë
+	imap I Ï
+	imap O Ö
+	imap U Ü
+endfunction
+
+function! DKGrave()
+	" grave accents
+	imap `a à
+	imap `e è
+	imap `i ì
+	imap `o ò
+	imap `u ù
+	imap `A À
+	imap `E È
+	imap `I Ì
+	imap `O Ò
+	imap `U Ù
+	imap `<space> `
+endfunction
+
+function! DKMacrons()
+	" macrons
+	imap :a ā
+	imap :e ē
+	imap :i ī
+	imap :o ō
+	imap :u ū
+	imap :A Ā
+	imap :E Ē
+	imap :I Ī
+	imap :O Ō
+	imap :U Ū
+
+	" acute accents
+	imap 'a á
+	imap 'A Á
+	imap 'C Ć
+	imap 'c ć
+	imap 'e é
+	imap 'E É
+	imap 'i í
+	imap 'I Í
+	imap 'N Ń
+	imap 'n ń
+	imap 'o ó
+	imap 'R Ŕ
+	imap 'r ŕ
+	imap 'S Ś
+	imap 's ś
+	imap 'O Ó
+	imap 'u ú
+	imap 'U Ú
+	imap '<space> '
+
+	" under dot
+	imap .D Ḍ
+	imap .d ḍ
+	imap .H Ḥ
+	imap .h ḥ
+	imap .L Ḹ
+	imap .l ḹ
+	imap .M Ṃ
+	imap .m ṃ
+	imap .N Ṇ
+	imap .n ṇ
+	imap .R Ṛ
+	imap .r ṛ
+	imap .G Ṝ
+	imap .g ṝ
+	imap .S Ṣ
+	imap .s ṣ
+	imap .T Ṭ
+	imap .t ṭ
+
+	" tilde
+	imap ~a ã
+	imap ~A Ã
+	imap ~e ẽ
+	imap ~E Ẽ
+	imap ~i ĩ
+	imap ~I Ĩ
+	imap ~o õ
+	imap ~O Õ
+	imap ~u ũ
+	imap ~U Ũ
+	imap ~n ñ
+	imap ~N Ñ
+
+	" caron
+	imap >A Ǎ
+	imap >a ǎ
+	imap >C Č
+	imap >c č
+	imap >E Ě
+	imap >e ě
+	imap >G Ǧ
+	imap >g ǧ
+	imap >I Ǐ
+	imap >i ǐ
+	imap >O Ǒ
+	imap >o ǒ
+	imap >R Ř
+	imap >r ř
+	imap >S Ṧ
+	imap >s ṧ
+	imap >U Ǔ
+	imap >u ǔ
+	imap >V Ǚ
+	imap >v ǚ
+	imap >Z Ž
+	imap >z ž
+
+endfunction "deadkeys()
+
+
+function! DeadKeysOff()
+	echo "Dead Keys: Off"
+	let g:DeadKeysOn=0
+
+	" unmapping umlauts
+	imap a a
+	imap b b
+	imap c c
+	imap d d
+	imap e e
+	imap f f
+	imap g g
+	imap h h
+	imap i i
+	imap j j
+	imap k k
+	imap l l
+	imap m m
+	imap n n
+	imap o o
+	imap p p
+	imap q q
+	imap r r
+	imap s s
+	imap t t
+	imap u u
+	imap v v
+	imap w w
+	imap x x
+	imap y y
+	imap z z
+
+	imap A A
+	imap B B
+	imap C C
+	imap D D
+	imap E E
+	imap F F
+	imap G G
+	imap H H
+	imap I I
+	imap J J
+	imap K K
+	imap L L
+	imap M M
+	imap N N
+	imap O O
+	imap P P
+	imap Q Q
+	imap R R
+	imap S S
+	imap T T
+	imap U U
+	imap V V
+	imap W W
+	imap X X
+	imap Y Y
+	imap Z Z
+
+endfunction
+
+" }}}
+" Line Shortcuts {{{
+nnoremap 4 $
+vnoremap 4 $
+" Function Keys
+" <F1> is paste toggle
+nnoremap <F2> :set number!<CR>:set relativenumber!<CR>
+nnoremap <F4> :make<CR>
+nnoremap <F9> :TagbarOpenAutoClose<CR>
+nnoremap <F10> :TagbarToggle<CR>
+" Replace all
+nnoremap \ :%s//g<Left><Left>
+" Replace all in visual range
+vnoremap \ :s//g<Left><Left>
+" Search visually selected text
+vnoremap // "vy/\V<C-r>=escape(@v,'/\')<CR><CR>
+" Replace visually selected text
+vnoremap /s "vy:%s/<C-r>=escape(@v,'/\')<CR>//g<left><left>
+" Change panes
+nnoremap <C-J> <C-W><C-J>  " Move down one pane in split sceen
+nnoremap <C-K> <C-W><C-K>    " Move up one pane in split screen
+nnoremap <C-H> <C-W><C-H>  " Move to the left pane in split screen
+nnoremap <C-L> <C-W><C-L> " Move to the right pane in split screen
+" Change panes with arrow keys
+nnoremap <C-Down> <C-W><C-J>  " Move down one pane in split sceen
+nnoremap <C-Up> <C-W><C-K>    " Move up one pane in split screen
+nnoremap <C-Left> <C-W><C-H>  " Move to the left pane in split screen
+nnoremap <C-Right> <C-W><C-L> " Move to the right pane in split screen
+" Move along display lines.
+" nnoremap j gj
+" nnoremap k gk
+" vnoremap j gj
+" vnoremap k gk
+" nnoremap <Down> gj
+" nnoremap <Up> gk
+" vnoremap <Down> gj
+" vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
+
+" Set exit terminal mode
+tnoremap <Esc><Esc> <c-\><c-n>
+
+nnoremap <C-O> :Files<cr>   " Open FZF search
+nnoremap <C-B> :Buffers<cr>   " Open FZF search
+" FOLDING
+nnoremap z\ za  " Toggle Folding
+nnoremap z[ zR  " Open all Folds
+nnoremap z] zM  " Close all folds
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+" FZF completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <C-O>:call fzf#vim#complete#path("eval $FZF_DEFAULT_COMMAND")<return>
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+" next and previous hunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+" }}}
+" Leader Shortcuts {{{
+let mapleader=" "
+let maplocalleader=","
+" re-source .vimrc
+nnoremap <leader>R :so $MYVIMRC<CR>
+" Buffer Commands
+nnoremap <silent><leader>b :Buffers<cr>
+nnoremap <silent><leader>f :Files<cr>
+nnoremap <silent><leader>n :bn<cr>
+nnoremap <silent><leader>p :bp<cr>
+" spellcheck
+nnoremap <silent><leader>s :setlocal spell!<CR>
+nnoremap <leader>lb :set spelllang=en_gb<CR>
+nnoremap <leader>la :set spelllang=en_us<CR>
+nnoremap <leader>ld :set spelllang=de<CR>
+" Register to Clipboard (requires gvim/nvim/vim-x11 installed)
+nnoremap <silent><leader>y :RegToClip "<CR>
+nnoremap <silent><leader>Y :RegToClip<space>
+nnoremap <silent><leader>yy ^yg_
+" Paste from Clipboard
+nnoremap <silent><Leader>p "+p
+nnoremap <silent><Leader>P "+P
+" Toggle highlight
+nnoremap <silent><Leader>h :noh<CR>
+" Show empty chars
+nnoremap <silent><Leader>w :set invlist<CR>
+" Show cursor line
+nnoremap <silent><Leader>cl :set invcursorline<CR>
+" Show cursor colum
+nnoremap <silent><Leader>cc :set invcursorcolumn<CR>
+" Toggle Conceal
+nnoremap <silent><Leader>ct :let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>
+" Toggle deadkeys
+nnoremap <leader>d <esc>:call ToggleDeadKeys()<CR>
+" Toggle GitGutter Highlights
+nnoremap <leader>gg :GitGutterLineHighlightsToggle<CR>
+nnoremap <leader>gs :GitGutterStageHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
+" Rainbow toggle
+nnoremap <leader>r :RainbowToggle<CR>
+" Easy Align
+vmap <leader># :EasyAlign # {'filter': 'v/^#/'}<CR>
+" Swap characters
+" }}}
