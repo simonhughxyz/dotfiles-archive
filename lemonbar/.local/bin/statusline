@@ -109,8 +109,7 @@ _battery() {
         bat="$bat $( echo "$icon $tmp%" | _color "$f_color" )"
     done <<< "$(acpi -b)"
 
-    # _delim "$( echo "$bat" | sed 's/^\s//' )" | _mouse "$click_command" > $prefix/battery
-    _delim "$( echo "$bat" | sed 's/^\s//' )" > $prefix/battery
+    _delim "$( echo "$bat" | sed 's/^\s//' | _mouse "$click_command" )" > $prefix/battery
 }
 _window_title(){
     window_name="$(xdotool getwindowfocus getwindowname)"
