@@ -269,6 +269,7 @@ _update_system(){
     _time &
     _date &
     _memory &
+    _volume &
     _uptime
 }
 _update_all(){
