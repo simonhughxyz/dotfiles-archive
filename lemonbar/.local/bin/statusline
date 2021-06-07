@@ -160,7 +160,8 @@ _volume() {
     scroll_up_command="volume +5"
     scroll_down_command="volume -5"
 
-	vol="$1"
+    [ $1 ] && vol="$1" || vol="$( volume )"
+
     percentage="%"
 
 	if [ "$vol" == "mute" ]; then
