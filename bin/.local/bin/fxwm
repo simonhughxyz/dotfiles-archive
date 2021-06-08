@@ -79,7 +79,7 @@ Keymap:
 $( echo "$__desktop_keys" | sed 's/^.*$/  &/' )"
 
 _fzf(){
-    fzf --no-info --preview-window=right,90%,border-left "$@"
+    fzf --exact --no-info --preview-window=right,90%,border-left "$@"
 }
 
 # Return all fields from nth to last field
@@ -106,8 +106,9 @@ _window(){
         esac
         shift
     done
-
-    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+    
+    current_window="$( xdotool getwindowfocus )"
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --bind="left-click:execute(wmctrl -ia {}; wmctrl -ia ${current_window})" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
