@@ -68,6 +68,8 @@ super + {_, shift +} backslash
     scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
 super + {_, shift +} d
     scratchpad -c fxwm_desktop -t fxwm -e "fxwm desktop {-P,_} -p -m"
+super + b
+    scratchpad -c fxwm_window_all -t fxwm -e "fxwm window -p -m -D -E -c Navigator.Firefox|chromium.Chromium"
 super + a
     scratchpad -c app_menu -t apps -e appmenu -C
 ctrl + alt + Delete
