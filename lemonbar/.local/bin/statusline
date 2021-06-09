@@ -118,8 +118,8 @@ _window_title(){
 }
 _window_count(){
     icon=""
-    click_command="scratchpad -C -c fxwm_window -t fxwm -e 'fxwm window -d -p -m' &"
-    left_click_command="scratchpad -C -c fxwm_window_all -t fxwm -e 'fxwm window -D -p -m' &"
+    click_command="scratchpad -C -c fxwm_window -t fxwm -e 'fxwm window -d -p -m -E' &"
+    left_click_command="scratchpad -C -c fxwm_window_all -t fxwm -e 'fxwm window -D -p -m -E' &"
     middle_click_command="bspc node -c"
     window_count="$(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == "0" ] && window_count="" && icon=""
