@@ -90,6 +90,9 @@ _window(){
     # get a list of windows including the desktop name for each window
     windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
 
+    current_window="$( xdotool getwindowfocus )"
+    persistant_cmd="wmctrl -ia {}; wmctrl -ia ${current_window}"
+
     args="$@" # save arguments for help message
     while test $# -gt 0; do
         case "$1" in
@@ -102,13 +105,13 @@ _window(){
                     current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
                 fi
 
-                windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )"
+                windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )" ;;
+            -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
         esac
         shift
     done
     
-    current_window="$( xdotool getwindowfocus )"
-    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --bind="left-click:execute(wmctrl -ia {}; wmctrl -ia ${current_window})" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' )"
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --preview-window="right,0" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' --bind="up:up${bind_cmd}" )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
