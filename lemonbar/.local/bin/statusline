@@ -278,6 +278,16 @@ _update_system(){
     _date &
     _volume &
 }
+
+_update_all(){
+    # Update everything apart from WM modules
+    # they a special case.
+    _launch &
+    _update_system &
+    _keystate &
+    _record
+}
+
 _update(){
     case "$1" in
         battery) _battery ;;
