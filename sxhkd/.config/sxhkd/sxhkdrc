@@ -62,10 +62,10 @@ super + alt + p
 # Menu
 super + {_, shift +} slash
     {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window -p -m $flag"
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
 super + {_, shift +} backslash
     {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window -p -m $flag"
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
 super + {_, shift +} d
     scratchpad -c fxwm_desktop -t fxwm -e "fxwm desktop {-P,_} -p -m"
 super + a
