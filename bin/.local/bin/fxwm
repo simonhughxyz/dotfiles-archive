@@ -79,6 +79,7 @@ Control desktops in fzf
 Options:
   -h, --help                         Print this help message
   -P                                 Only show populated desktops
+  -l                                 Live mode, go to selected desktop, but don't loose focus
   -p                                 Persistent mode, don't exit or loose focus when pressing enter
   -m                                 Mouse mode, go to desktop selected with mouse, but don't loose focus
 
@@ -165,13 +166,14 @@ _desktop(){
             -P) # Only show populated desktops
                 desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )" ;;
             -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
+            -l) preview_cmd="${persistant_cmd};" ;;
             -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
         esac
         shift
     done
 
     # List desktops in fzf with a list of windows in the preview window
-    choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m,alt-w'  --preview='
+    choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m,alt-w'  --preview="${preview_cmd}"'
     wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' --bind="up:up${bind_cmd}" )"
 
     key="$( echo "$choice" | head -n1 )"
