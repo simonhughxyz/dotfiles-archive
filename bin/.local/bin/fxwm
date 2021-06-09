@@ -62,6 +62,8 @@ Control windows in fzf
 Options:
   -h, --help                         Print this help message
   -d [desktop name]                  Only show windows of given desktop or local desktop by default
+  -c <class>                         Filter by class
+  -t <title>                         Filter by title
   -D                                 Show desktop name along with window title
   -l                                 Live mode, go to selected window, but don't loose focus
   -p                                 Persistent mode, don't exit or loose focus when pressing enter
@@ -112,6 +114,8 @@ _window(){
             -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
             -l) preview_cmd="${persistant_cmd}" ;;
             -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
+            -c) shift; windows="$( echo "$windows" | awk -v var="$1" '$9 ~ var {print $0}' )" ;;
+            -t) shift; windows="$( echo "$windows" | grep -E "^([^ ]*[[:space:]][[:space:]]*){,10}.*$1.*$" )" ;;
         esac
         shift
     done
