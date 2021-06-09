@@ -107,11 +107,12 @@ _window(){
 
                 windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )" ;;
             -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
+            -l) preview_cmd="${persistant_cmd}" ;;
         esac
         shift
     done
     
-    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --preview-window="right,0" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' --bind="up:up${bind_cmd}" )"
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --preview-window="right,0" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' --bind="up:up${bind_cmd}" --preview="${preview_cmd}" )"
 
     key="$( echo "$choice" | head -n1 )"
     window="$( echo "$choice" | tail -n1 )"
