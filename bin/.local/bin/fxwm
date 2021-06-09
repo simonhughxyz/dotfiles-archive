@@ -78,7 +78,9 @@ Control desktops in fzf
 
 Options:
   -h, --help                         Print this help message
-  -p                                 Only show populated desktops
+  -P                                 Only show populated desktops
+  -p                                 Persistent mode, don't exit or loose focus when pressing enter
+  -m                                 Mouse mode, go to desktop selected with mouse, but don't loose focus
 
 Keymap:
 $( echo "$__desktop_keys" | sed 's/^.*$/  &/' )"
@@ -153,16 +155,23 @@ _window(){
 _desktop(){
     desktops="$( wmctrl -d )"
     
-    case "$1" in
-        -h) echo "$__desktop_help"; exit;;
-        -p) # Only show populated desktops
-            desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )" ;;
-        -l) live_cmd="${persistant_cmd};"
-    esac
+    current_window="$( xdotool getwindowfocus )"
+    persistant_cmd="wmctrl -s {}; wmctrl -ia ${current_window}"
+
+    while test $# -gt 0; do
+        case "$1" in
+            -h) echo "$__desktop_help"; exit;;
+            -P) # Only show populated desktops
+                desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )" ;;
+            -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
+            -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
+        esac
+        shift
+    done
 
     # List desktops in fzf with a list of windows in the preview window
     choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m,alt-w'  --preview='
-    wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' )"
+    wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' --bind="up:up${bind_cmd}" )"
 
     key="$( echo "$choice" | head -n1 )"
     desktop="$( echo "$choice" | tail -n1 )"
