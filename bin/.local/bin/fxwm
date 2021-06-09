@@ -158,6 +158,7 @@ _desktop(){
     current_window="$( xdotool getwindowfocus )"
     persistant_cmd="wmctrl -s {}; wmctrl -ia ${current_window}"
 
+    args="$@" # save arguments for help message
     while test $# -gt 0; do
         case "$1" in
             -h) echo "$__desktop_help"; exit;;
@@ -180,7 +181,7 @@ _desktop(){
 
     # Perform different actions depending on key pressed by the user
     case "$key" in
-        alt-\?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop;; # Show keymap help in fzf
+        alt-\?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop $args;; # Show keymap help in fzf
         alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
         alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
         alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | 
