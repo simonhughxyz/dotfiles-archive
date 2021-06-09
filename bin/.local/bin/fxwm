@@ -108,6 +108,7 @@ _window(){
                 windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )" ;;
             -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
             -l) preview_cmd="${persistant_cmd}" ;;
+            -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
         esac
         shift
     done
