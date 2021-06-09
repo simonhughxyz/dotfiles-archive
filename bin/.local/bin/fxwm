@@ -63,6 +63,9 @@ Options:
   -h, --help                         Print this help message
   -d [desktop name]                  Only show windows of given desktop or local desktop by default
   -D                                 Show desktop name along with window title
+  -l                                 Live mode, go to selected window, but don't loose focus
+  -p                                 Persistent mode, don't exit or loose focus when pressing enter
+  -m                                 Mouse mode, go to window selected with mouse, but don't loose focus
 
 Keymap:
 $( echo "$__window_keys" | sed 's/^.*$/  &/' )"
@@ -149,7 +152,8 @@ _desktop(){
     case "$1" in
         -h) echo "$__desktop_help"; exit;;
         -p) # Only show populated desktops
-            desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )"
+            desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )" ;;
+        -l) live_cmd="${persistant_cmd};"
     esac
 
     # List desktops in fzf with a list of windows in the preview window
