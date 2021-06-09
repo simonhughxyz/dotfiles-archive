@@ -163,6 +163,7 @@ if has('nvim')
 endif
 if has('nvim-0.5.0')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    lua require('treesitter')
 endif
 call plug#end()
 " }}}
@@ -316,15 +317,6 @@ let g:limelight_default_coefficient = 0.8
 
 " Number of preceding/following paragraphs to include (default: 0)
 let g:limelight_paragraph_span = 0
-
-" Treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
-EOF
 
 " }}}
 " Colors {{{

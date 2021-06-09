@@ -18,11 +18,11 @@ case "$instance" in
         echo "sticky=on"
         echo "border=off"
     ;;
-    window*)
+    fxwm_window*)
         xdotool windowmove $wid 20% 35%
         
         # get local of global window count
-        if [ "$instance" = "window-all" ]; then
+        if [ "$instance" = "fxwm_window_all" ]; then
         window_count=$( bspc query -N -n .window | wc -l )
         else
         window_count=$( bspc query -N -n .window.local | wc -l )
@@ -33,6 +33,14 @@ case "$instance" in
         [ $window_height -lt 220 ] && window_height=220
         [ $window_height -gt 500 ] && window_height=500
         xdotool windowsize $wid 60% "$window_height"
+
+        echo "state=floating"
+        echo "sticky=on"
+        echo "border=off"
+    ;;
+    fxwm_desktop)
+        xdotool windowmove $wid 20% 35%
+        xdotool windowsize $wid 60% 30%
 
         echo "state=floating"
         echo "sticky=on"

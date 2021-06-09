@@ -61,13 +61,13 @@ super + alt + p
 
 # Menu
 super + {_, shift +} slash
-    {class=window; flag="-d",class=window-all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window $flag"
+    {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
 super + {_, shift +} backslash
-    {class=window; flag="-d",class=window-all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window $flag"
+    {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
 super + {_, shift +} d
-    scratchpad -c dropdown_desktop -t fxwm -e "fxwm desktop {-p,_}"
+    scratchpad -c fxwm_desktop -t fxwm -e "fxwm desktop {-P,_} -p -m"
 super + a
     scratchpad -c app_menu -t apps -e appmenu -C
 ctrl + alt + Delete
