@@ -7,7 +7,7 @@ IMAPAccount simonhugh.xyz
 Host 127.0.0.1
 Port 1143
 User simon@simonhugh.xyz
-PassCmd "pass protonmail/bridge | head -n1"
+PassCmd "pass get pass protonmail/bridge"
 SSLType STARTTLS
 SSLVersions TLSv1.2
 CertificateFile ~/.config/protonmail/bridge/cert.pem
