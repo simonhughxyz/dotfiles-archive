@@ -10,7 +10,7 @@ User simon@simonhugh.xyz
 PassCmd "pass protonmail/bridge | head -n1"
 SSLType STARTTLS
 SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile ~/.config/protonmail/bridge/cert.pem
 
 
 ### Remote storage ###
