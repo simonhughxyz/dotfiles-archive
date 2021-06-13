@@ -2,7 +2,7 @@ set from = "simon@simonhugh.xyz"
 set realname = "Simon H Moore"
 
 # paths
-set folder = ~/.mail/simonhugh.xyz
+set folder = ~/.mail/
 
 set sendmail  = "/usr/bin/msmtp"
 
