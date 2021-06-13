@@ -29,6 +29,7 @@ Master :simonhugh.xyz-remote:"INBOX"
 Slave :simonhugh.xyz-local:INBOX
 Create Both
 Expunge Both
+SyncState *
 
 # Drafts
 Channel simonhugh.xyz-drafts
@@ -36,6 +37,7 @@ Master :simonhugh.xyz-remote:"Drafts"
 Slave :simonhugh.xyz-local:drafts
 Create Both
 Expunge Both
+SyncState *
 
 # Sent
 Channel simonhugh.xyz-sent
@@ -43,27 +45,31 @@ Master :simonhugh.xyz-remote:"Sent"
 Slave :simonhugh.xyz-local:sent
 Create Both
 Expunge Both
+SyncState *
 
 # deleted
 Channel simonhugh.xyz-deleted
-Master :simonhugh.xyz-remote:"deleted"
+Master :simonhugh.xyz-remote:"Trash"
 Slave :simonhugh.xyz-local:deleted
 Create Both
 Expunge Both
+SyncState *
 
 # Archive
 Channel simonhugh.xyz-archive
-Master :simonhugh.xyz-remote:"archive2"
+Master :simonhugh.xyz-remote:"Archive"
 Slave :simonhugh.xyz-local:archive
 Create Both
 Expunge Both
+SyncState *
 
 # Spam
 Channel simonhugh.xyz-spam
-Master :simonhugh.xyz-remote:"Junk"
+Master :simonhugh.xyz-remote:"Spam"
 Slave :simonhugh.xyz-local:spam
 Create Both
 Expunge Both
+SyncState *
 
 ### Create Group ###
 Group simonhugh.xyz
