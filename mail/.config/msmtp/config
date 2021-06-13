@@ -2,7 +2,7 @@
 defaults
 auth           on
 tls            on
-tls_trust_file /etc/ssl/certs/ca-certificates.crt
+tls_trust_file ~/.config/protonmail/bridge/cert.pem
 logfile        ~/.local/share/msmtp/msmtp.log
 
 #####################
