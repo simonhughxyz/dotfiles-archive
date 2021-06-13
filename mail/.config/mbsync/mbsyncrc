@@ -20,8 +20,8 @@ Account simonhugh.xyz
 
 ### Local storage ###
 MaildirStore simonhugh.xyz-local
-Path ~/.mail/simonhugh.xyz/
-Inbox ~/.mail/simonhugh.xyz/INBOX
+Path ~/.mail/
+Inbox ~/.mail/INBOX/
 
 # Inbox
 Channel simonhugh.xyz-inbox
