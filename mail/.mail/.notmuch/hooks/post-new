@@ -28,7 +28,7 @@ _sync_tag() {
 
 # Make sure all files in dir have corresponding tag.
 _tag_dir() {
-    notmuch tag +"$1" -- path:"/.*\/$1\/.*/"
+    notmuch tag +$1 -- path:\"/.*$1.*/\"
 }
 
 _sync_tag "deleted"
