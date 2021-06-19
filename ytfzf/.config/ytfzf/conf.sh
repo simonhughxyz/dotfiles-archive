@@ -122,8 +122,8 @@ is_ext_menu=0
 show_thumbnails=1
 
 # The thumbnail quality to download
-# 0: better thumbnails (slower)
-# 1: low res thumbnails (faster)
+# 0: low res thumbnails (faster)
+# 1: better thumbnails (slower)
 thumbnail_quality=0
 
 #enable/disable selecting the first result automatically
