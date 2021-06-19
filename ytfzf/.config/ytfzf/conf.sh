@@ -243,7 +243,7 @@ sp=""
     # search again
 #in that order, these keys can be changed
 #any keys after will not have default behaviour and the behaviour must be defined in handle_custom_shortcuts
-shortcuts="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,alt-enter"
+shortcuts="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,alt-enter,alt-q"
 
 #some helpful variables to keep in mind:
     #selected_key: the shortcut pressed
@@ -255,6 +255,12 @@ shortcuts="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,alt-enter"
     #returning 1 will exit the program and will clean up after itself
     #returning 2 will restart the main loop (this is used for the search_again shortcut)
 handle_custom_shortcuts () {
+    case $selected_key in
+	"alt-q")
+	    unset videos_data search_query
+	    [ "$scrape" = "pt_search" ] && scrape_fn || scrape="yt_search" scrape_fn
+	    return 2 ;;
+    esac
     return 0
 }
 
