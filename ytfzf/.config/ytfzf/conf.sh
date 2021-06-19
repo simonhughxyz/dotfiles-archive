@@ -465,7 +465,15 @@ on_exit () {
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
 #you can call open_player yourself, as shown below
 handle_urls () {
-    open_player $*
+	if [ $is_download -eq 1 ]; then
+        if [ $is_audio_only -eq 1 ]; then
+            ytdl --audio --url="$@"
+        else
+            ytdl --video --url="$@"
+        fi
+    else
+        vid "$@"
+    fi
 }
 
 #############
