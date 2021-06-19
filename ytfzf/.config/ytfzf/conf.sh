@@ -252,7 +252,7 @@ video_info_text() {
 	printf "%-${dur_len}.${dur_len}s\t" "$duration"
 	printf "%-${view_len}.${view_len}s\t" "$views"
 	printf "%-${date_len}.${date_len}s\t" "$date"
-	printf "%-${url_len}.${url_len}s\t" "$shorturl"
+    printf "%s" "$shorturl"
 	printf "\n"
 }
 
