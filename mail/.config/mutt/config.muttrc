@@ -16,6 +16,7 @@ set delete
 set quit
 set thorough_search
 set mail_check_stats
+set sort=reverse-date
 unset confirmappend
 unset move
 unset mark_old
