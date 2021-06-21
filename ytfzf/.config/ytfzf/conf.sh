@@ -279,14 +279,13 @@ useragent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko
 exit_on_opt_error=1
 
 #the file for storing watch history
-history_file="$cache_dir/ytfzf_hst"
-
+history_file="$cache_dir/watch.history"
 
 #enable/disable logging of search history
 enable_search_hist=1
 
 #the file for storing search history
-search_history_file="$cache_dir/ytfzf_search_hst"
+search_history_file="$cache_dir/search.history"
 
 #prompt for search history menu
 search_history_prompt="Search: "
@@ -295,7 +294,7 @@ search_history_prompt="Search: "
 allow_empty_search_hist=1
 
 #the file for writing the menu option that was chosen
-current_file="$cache_dir/ytfzf_cur"
+current_file="$cache_dir/watch.current"
 
 #the folder where thumbnails are cached
 thumb_dir="$cache_dir/thumb"
