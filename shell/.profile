@@ -17,6 +17,7 @@ export LBIN="$HOME/.local/bin"
 export PATH="$LBIN:$GOBIN:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 # default programs
 export EDITOR="nvim"
@@ -46,6 +47,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
 
 # # LESS
 export LESS=-R

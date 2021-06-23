@@ -23,6 +23,11 @@ bind index,pager \# sidebar-open
 
 # Tagging
 macro index A "<modify-labels>!archive -unread !inbox\n" "Archive message..."
-macro index,pager d "<modify-labels-then-hide>!deleted -unread !inbox\n" "Sent to trash..."
+bind index,pager d noop
+macro index,pager dd "<modify-labels-then-hide>!deleted -unread !inbox\n" "Sent to trash..."
 macro index c "<change-vfolder>?" "Change to vfolder overview"
 macro index \\\\ "<vfolder-from-query>" "Search mailbox"
+
+# urlscan
+macro index,pager u "<pipe-message> urlscan<Enter>"
+macro attach,compose u  "<pipe-entry> urlscan<Enter>"
