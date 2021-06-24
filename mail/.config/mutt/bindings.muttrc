@@ -2,9 +2,20 @@
 ### Key-bindings ###
 ####################
 
-# Vim like keys
+# Basic Navigation
 bind pager j next-line
 bind pager k previous-line
+bind generic l select-entry
+bind index l display-message
+bind pager h exit
+macro index h '<change-folder>?'
+bind pager <down> next-line
+bind pager <up> previous-line
+bind generic <right> select-entry
+bind index <right> display-message
+bind pager <left> exit
+macro index <left> '<change-folder>?'
+
 bind attach,index,pager \CD next-page
 bind attach,index,pager \CU previous-page
 bind pager g top
@@ -23,6 +34,11 @@ bind index,pager \# sidebar-open
 
 # Tagging
 macro index A "<modify-labels>!archive -unread !inbox\n" "Archive message..."
-macro index,pager d "<modify-labels-then-hide>!deleted -unread !inbox\n" "Sent to trash..."
+bind index,pager d noop
+macro index,pager dd "<modify-labels-then-hide>!deleted -unread !inbox\n" "Sent to trash..."
 macro index c "<change-vfolder>?" "Change to vfolder overview"
 macro index \\\\ "<vfolder-from-query>" "Search mailbox"
+
+# urlscan
+macro index,pager u "<pipe-message> urlscan<Enter>"
+macro attach,compose u  "<pipe-entry> urlscan<Enter>"

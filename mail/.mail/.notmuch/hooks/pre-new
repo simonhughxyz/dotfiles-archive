@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# PRE-NEW
+# Simon Hugh Moore
+#
+# Hook runs before `notmuch new`
+# Pull mail from server
+
+# Temporarily launch proton-bridge
+/usr/lib/protonmail/bridge/proton-bridge --no-window --noninteractive &
+pid=$!
+
+# Wait to allow proton-bridge to launch
+sleep 5
+
+# Pull all mail
+mbsync -a -c ~/.config/mbsync/mbsyncrc
+
+# Kill proton-bridge
+kill -TERM $pid

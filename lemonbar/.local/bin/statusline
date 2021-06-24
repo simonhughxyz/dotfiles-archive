@@ -130,8 +130,8 @@ _window_title(){
 }
 _window_count(){
     icon=""
-    click_command="scratchpad -C -c window -t fxwm -e 'fxwm window -d' &"
-    left_click_command="scratchpad -C -c window-all -t fxwm -e 'fxwm window' &"
+    click_command="scratchpad -C -c fxwm_window -t fxwm -e 'fxwm window -d -p -m -E' &"
+    left_click_command="scratchpad -C -c fxwm_window_all -t fxwm -e 'fxwm window -D -p -m -E' &"
     middle_click_command="bspc node -c"
     window_count="$(bspc query -N -n .window.local | wc -l )"
     [ "$window_count" == "0" ] && window_count="" && icon=""
@@ -172,7 +172,8 @@ _volume() {
     scroll_up_command="volume +5"
     scroll_down_command="volume -5"
 
-	vol="$1"
+    [ $1 ] && vol="$1" || vol="$( volume )"
+
     percentage="%"
 
 	if [ "$vol" == "mute" ]; then
