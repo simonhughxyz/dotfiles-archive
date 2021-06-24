@@ -59,9 +59,9 @@ if [ -p $pipe ]; then
         is_connected="$( xrandr | sed -n '/HDMI1 connected/p')"
 
         if [ -n "$is_connected" ]; then
-        ¦   xrandr --output HDMI1 --mode 1360x768
+            xrandr --output HDMI1 --mode 1360x768
         else
-        ¦   xrandr --output HDMI1 --off
+            xrandr --output HDMI1 --off
         fi
     done &
 fi
