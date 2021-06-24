@@ -6,6 +6,36 @@
 # Hook runs before `notmuch new`
 # Pull mail from server
 
+maildir=$( notmuch config get database.path )
+
+# Move a message file while removing its UID-part
+# within the 'account' maildir.
+_move() {
+    s=${1##*/}
+    s=${s%%,*}
+    mv -f $1 $maildir/$2/cur/$s
+}
+
+# move all files with a tag to corresponding dir in each account.
+_sync_tag() {
+    for dir in $( find "$maildir/" -maxdepth 1 -type d -not -path "$maildir/.*" -print | sed "s|^${maildir}/||" ); do
+        tag="$( echo "$dir" | tr '[:upper:]' '[:lower:]' )"
+        for file in $( notmuch search --output=files "tag:${tag}" AND NOT "path:${dir}/**" ); do
+            _move "$file" "$dir"
+        done
+    done
+}
+
+# Make sure all files in dir have corresponding tag.
+_tag_dir() {
+    for dir in $( find "$maildir/" -maxdepth 1 -type d -not -path "$maildir/.*" -print | sed "s|^${maildir}/||" ); do
+        tag="$( echo "$dir" | tr '[:upper:]' '[:lower:]' )"
+        notmuch tag "+${tag}" -- "path:${dir}/**"
+    done
+}
+
+_sync_tag
+
 # Temporarily launch proton-bridge
 /usr/lib/protonmail/bridge/proton-bridge --no-window --noninteractive &
 pid=$!
@@ -18,3 +48,5 @@ mbsync -a -c ~/.config/mbsync/mbsyncrc
 
 # Kill proton-bridge
 kill -TERM $pid
+
+_tag_dir
