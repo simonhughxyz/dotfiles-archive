@@ -47,6 +47,7 @@ bluetoothctl power off                         # Switch on bluetooth.
 pipe=/tmp/hdmi.pipe
 if [ -p $pipe ]; then
     tail -f $pipe | while read -r line; do
+        export DISPLAY=:0
         export XAUTHORITY=~/.Xauthority
 
         is_connected="$( xrandr | sed -n '/HDMI1 connected/p')"
