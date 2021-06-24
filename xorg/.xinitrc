@@ -49,4 +49,21 @@ sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
 bluetoothctl power on                         # Switch on bluetooth.
 # ntpd -qg    # set time and date from ntp server
 
+# auto connect hdmi
+# requres a udev rule to fill pipe when hdmi is connected/disconnected
+pipe=/tmp/hdmi.pipe
+if [ -p $pipe ]; then
+    tail -f $pipe | while read -r line; do
+        export XAUTHORITY=~/.Xauthority
+
+        is_connected="$( xrandr | sed -n '/HDMI1 connected/p')"
+
+        if [ -n "$is_connected" ]; then
+        ¦   xrandr --output HDMI1 --mode 1360x768
+        else
+        ¦   xrandr --output HDMI1 --off
+        fi
+    done &
+fi
+
 exec bspwm > "$( _log "bspwm" )" 2>&1
