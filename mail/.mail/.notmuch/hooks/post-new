@@ -23,6 +23,13 @@ notmuch tag +ebay -- "from:/^.*ebay[.]com|.*ebay[.]co[.]uk/"
 notmuch tag +facebook -- "from:/^.*facebookmail[.]com/"
 
 
+# each of these tags correspond to a mail directory
+# only one of these tags are allowed at a time
+notmuch tag -inbox -archive -drafts -sent -spam -- "tag:deleted"
+notmuch tag -inbox -archive -drafts -sent -deleted -- "tag:spam"
+notmuch tag -inbox -drafts -sent -deleted -spam -- "tag:archive"
+notmuch tag -inbox -archive -sent -deleted -spam -- "tag:drafts"
+notmuch tag -inbox -archive -drafts -deleted -spam -- "tag:sent"
 # notify of new messages
 if [ $count = 1 ]; then
     notify-send -u normal "Mail" "You have 1 new message!" # singular
