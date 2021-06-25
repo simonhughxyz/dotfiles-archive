@@ -30,6 +30,9 @@ notmuch tag -inbox -archive -drafts -sent -deleted -- "tag:spam"
 notmuch tag -inbox -drafts -sent -deleted -spam -- "tag:archive"
 notmuch tag -inbox -archive -sent -deleted -spam -- "tag:drafts"
 notmuch tag -inbox -archive -drafts -deleted -spam -- "tag:sent"
+
+notmuch tag -unread -- "tag:deleted OR tag:archive OR tag:drafts OR tag:sent"
+
 # notify of new messages
 if [ $count = 1 ]; then
     notify-send -u normal "Mail" "You have 1 new message!" # singular
