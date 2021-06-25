@@ -34,6 +34,14 @@ _tag_dir() {
     done
 }
 
+# each of these tags corresponds to a mail directory
+# only one of these tags are allowed at a time
+notmuch tag -inbox -archive -drafts -sent -spam -- "tag:deleted"
+notmuch tag -inbox -archive -drafts -sent -deleted -- "tag:spam"
+notmuch tag -inbox -drafts -sent -deleted -spam -- "tag:archive"
+notmuch tag -inbox -archive -sent -deleted -spam -- "tag:drafts"
+notmuch tag -inbox -archive -drafts -deleted -spam -- "tag:sent"
+
 _sync_tag
 
 # Temporarily launch proton-bridge
