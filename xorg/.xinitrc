@@ -6,7 +6,7 @@ LOG_PREFIX=~/.local/share
 _log(){
     path="${LOG_PREFIX}/${1}"
     mkdir -p "${path}"
-    echo "${path}/${1}.log"
+    echo "${path}/${2:-1}.log"
 }
 
 xrdb -merge ~/.Xresources
