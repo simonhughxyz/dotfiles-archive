@@ -16,11 +16,13 @@ notmuch tag -new +inbox +unread -- tag:new
 notmuch tag +noreply -- "from:/^.*noreply.*$/"
 
 # tag domain specific messages
-notmuch tag +youtube -- "from:/^.*youtube[.]com/"
-notmuch tag +google -- "from:/^.*google[.]com/"
-notmuch tag +amazon -- "from:/^.*amazon[.]com|.*amazon[.]co[.]uk|.*amazonbusiness[.]co[.]uk/"
-notmuch tag +ebay -- "from:/^.*ebay[.]com|.*ebay[.]co[.]uk/"
-notmuch tag +facebook -- "from:/^.*facebookmail[.]com/"
+notmuch tag +deleted +google -- "from:/^.*google[.]com/"
+notmuch tag +deleted +shopping +amazon -- "from:/^.*amazon[.]com|.*amazon[.]co[.]uk|.*amazonbusiness[.]co[.]uk/"
+notmuch tag +deleted +shopping +ebay -- "from:/^.*ebay[.]com|.*ebay[.]co[.]uk/"
+notmuch tag +deleted +social +youtube -- "from:/^.*youtube[.]com/"
+notmuch tag +deleted +social +facebook -- "from:/^.*facebookmail[.]com/"
+notmuch tag +deleted +social +twitter -- "from:/^.*twitter[.]com/"
+notmuch tag +deleted +social +mastodon +fosstodon -- "from:/^.*fosstodon[.]org/"
 
 
 # each of these tags correspond to a mail directory
