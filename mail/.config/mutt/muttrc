@@ -15,7 +15,7 @@ virtual-mailboxes "INBOX" $spoolfile
 virtual-mailboxes "Unread" "notmuch://?query=tag:unread"
 virtual-mailboxes "Sent" "notmuch://?query=tag:sent"
 virtual-mailboxes "Archive" "notmuch://?query=tag:archive"
-virtual-mailboxes "Trash" "notmuch://?query=tag:deleted"
+virtual-mailboxes "Deleted" "notmuch://?query=tag:deleted"
 virtual-mailboxes "Spam" "notmuch://?query=tag:spam"
 
 source config.muttrc
