@@ -116,6 +116,10 @@ ts -S 2
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
 #you can call open_player yourself, as shown below
 handle_urls () {
+    if [ $is_download -eq 1 ];then
+        titles="$( printf "%s" "$selected_data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
+        notify-send 'Add to Download queue' "$titles"
+    fi
     for url in $@; do
     ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
 
