@@ -107,15 +107,28 @@ sort_videos_data=1
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
 #you can call open_player yourself, as shown below
 handle_urls () {
-	if [ $is_download -eq 1 ]; then
-        if [ $is_audio_only -eq 1 ]; then
-            ytdl --audio --url="$@"
-        else
-            ytdl --video --url="$@"
-        fi
+    for url in $@; do
+    ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
+
+    etitle="$( printf "%s" "$selected_data" | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+    msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$etitle" )"
+
+	if [ $is_download -eq 0 ]; then
+		if [ $is_audio_only -eq 0 ]; then
+			setsid -f $video_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
+		else
+			setsid -f $audio_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
+		fi
     else
-        vid "$@"
-    fi
+        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --config-location '%s' --exec \
+\"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
+'%s' \
+&& { notify-send 'Download Complete!' '%s'; } \
+|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$etitle" "$ytdl_config" "$url" "$url" "$etitle" "$etitle" "$msg" )"
+
+        ts -L ytdl sh -c "$cmd"
+	fi
+    done
 }
 
 
