@@ -123,8 +123,8 @@ handle_urls () {
     # let youtube-dl get the title as a fall back
     [ -z "$selected_data" ] && selected_data="$( youtube-dl --get-title "$1" 2>/dev/null )"
 
-    etitle="$( printf "%s" "$selected_data" | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
-    msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$etitle" )"
+    title="$( printf "%s" "$selected_data" | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+    msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$title" )"
 
 	if [ $is_download -eq 0 ]; then
 		if [ $is_audio_only -eq 0 ]; then
@@ -137,7 +137,7 @@ handle_urls () {
 \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
 '%s' \
 && { notify-send 'Download Complete!' '%s'; } \
-|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$etitle" "$ytdl_config" "$url" "$url" "$etitle" "$etitle" "$msg" )"
+|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$title" "$ytdl_config" "$url" "$url" "$title" "$title" "$msg" )"
 
         ts -L ytdl sh -c "$cmd"
 	fi
