@@ -117,6 +117,7 @@ ts -S 2
 #you can call open_player yourself, as shown below
 handle_urls () {
     data="$selected_data"
+    ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
 
     if [ $is_download -eq 1 ];then
         titles="$( printf "%s" "$data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
@@ -124,8 +125,6 @@ handle_urls () {
     fi
 
     for url in $@; do
-    ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
-
     # sometimes select_data is empty
     # let youtube-dl get the title as a fall back
     [ -z "$data" ] && data="$( youtube-dl --get-title "$1" 2>/dev/null )"
