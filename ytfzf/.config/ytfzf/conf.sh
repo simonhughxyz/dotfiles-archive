@@ -102,6 +102,11 @@ scrape="yt_search"
 #sort videos, history, and subscriptions by date from newest to oldest
 sort_videos_data=1
 
+# Task Spooler
+export TMPDIR=/tmp/ytfzf/ts
+export TS_MAXFINISHED=6
+mkdir -m 0700 -p $TMPDIR
+ts -S 2
 #when this function is set it will be called instead of open_player,
 #open_player handles downloading, and showing a video,
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
