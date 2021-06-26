@@ -116,19 +116,24 @@ ts -S 2
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
 #you can call open_player yourself, as shown below
 handle_urls () {
+    data="$selected_data"
+
     if [ $is_download -eq 1 ];then
-        titles="$( printf "%s" "$selected_data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
+        titles="$( printf "%s" "$data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
         notify-send 'Add to Download queue' "$titles"
     fi
+
     for url in $@; do
     ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
 
     # sometimes select_data is empty
     # let youtube-dl get the title as a fall back
-    [ -z "$selected_data" ] && selected_data="$( youtube-dl --get-title "$1" 2>/dev/null )"
+    [ -z "$data" ] && data="$( youtube-dl --get-title "$1" 2>/dev/null )"
 
-    title="$( printf "%s" "$selected_data" | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+    title="$( printf "%s" "$data" | sed -n '1p' | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
     msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$title" )"
+
+    data="$( printf '%s' "$data" | sed '1d' )"
 
 	if [ $is_download -eq 0 ]; then
 		if [ $is_audio_only -eq 0 ]; then
