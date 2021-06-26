@@ -119,6 +119,10 @@ handle_urls () {
     for url in $@; do
     ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
 
+    # sometimes select_data is empty
+    # let youtube-dl get the title as a fall back
+    [ -z "$selected_data" ] && selected_data="$( youtube-dl --get-title "$1" 2>/dev/null )"
+
     etitle="$( printf "%s" "$selected_data" | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
     msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$etitle" )"
 
