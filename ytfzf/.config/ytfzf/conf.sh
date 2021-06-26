@@ -118,6 +118,7 @@ ts -S 2
 handle_urls () {
     data="$selected_data"
     ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
+    ytdl_pl_config="$XDG_CONFIG_HOME/youtube-dl/pl.config"
 
     if [ $is_download -eq 1 ];then
         titles="$( printf "%s" "$data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
@@ -144,11 +145,16 @@ handle_urls () {
 			setsid -f $audio_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
 		fi
     else
+        if echo "$url" | grep -c 'youtube.com/playlist'; then
+            config="$ytdl_pl_config"
+        else
+            config="$ytdl_config"
+        fi
         cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --config-location '%s' --exec \
 \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
 '%s' \
 && { notify-send 'Download Complete!' '%s'; } \
-|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$title" "$ytdl_config" "$url" "$url" "$title" "$title" "$msg" )"
+|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" )"
 
         ts -L ytdl sh -c "$cmd"
 	fi
