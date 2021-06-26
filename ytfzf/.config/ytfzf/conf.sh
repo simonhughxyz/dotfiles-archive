@@ -80,7 +80,7 @@ video_player_format="mpv --ytdl-format="
 
 #the player to use for audio ( option -m )
 #(YTFZF_AUDIO_PLAYER)
-audio_player="mpv --no-video"
+audio_player="mpv --no-video --ytdl-format=bestaudio"
 
 #enable/disable showing the different video formats
 #same as -f
