@@ -127,12 +127,15 @@ handle_urls () {
     for url in $@; do
     # sometimes select_data is empty
     # let youtube-dl get the title as a fall back
-    [ -z "$data" ] && data="$( youtube-dl --get-title "$1" 2>/dev/null )"
+    if [ -z "$data" ]; then
+        title="$( youtube-dl --get-title "$1" 2>/dev/null )"
+    else
+        title="$( printf "%s" "$data" | sed -n '1p' | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+        data="$( printf '%s' "$data" | sed '1d' )"
+    fi
 
-    title="$( printf "%s" "$data" | sed -n '1p' | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+    # format failed download message for file
     msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$title" )"
-
-    data="$( printf '%s' "$data" | sed '1d' )"
 
 	if [ $is_download -eq 0 ]; then
 		if [ $is_audio_only -eq 0 ]; then
