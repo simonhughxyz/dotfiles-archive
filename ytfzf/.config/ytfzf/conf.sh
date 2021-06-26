@@ -55,7 +55,7 @@ enable_cur=1
 #enable(1)/disable(0) notification when play video
 #the notification is send via send-notify
 #(YTFZF_NOTI)
-enable_noti=1
+enable_noti=0
 
 #enable/disable ytfzf's use of your $FZF_DEFAULT_OPTS
 #depending on your fzf settings, this could mess up the formatting of the menu
