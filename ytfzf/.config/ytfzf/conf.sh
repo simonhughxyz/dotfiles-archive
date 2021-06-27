@@ -21,6 +21,9 @@ history_file="$cache_dir/watch.history"
 #the file for storing search history
 search_history_file="$cache_dir/search.history"
 
+#fail to download history file
+fail_history_file="$cache_dir/fail.history"
+
 #the file for writing the menu option that was chosen
 current_file="$cache_dir/watch.current"
 
@@ -154,7 +157,7 @@ handle_urls () {
 \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
 '%s' \
 && { notify-send 'Download Complete!' '%s'; } \
-|| { notify-send 'Download Failed!' '%s'; echo '%s' > failed_dl; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" )"
+|| { notify-send 'Download Failed!' '%s'; echo '%s' > %s; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" "$fail_history_file" )"
 
         ts -L ytdl sh -c "$cmd"
 	fi
