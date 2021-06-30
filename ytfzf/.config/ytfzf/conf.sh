@@ -132,7 +132,7 @@ handle_urls () {
     # sometimes select_data is empty
     # let youtube-dl get the title as a fall back
     if [ -z "$data" ]; then
-        title="$( youtube-dl --get-title "$1" 2>/dev/null )"
+        title="$( youtube-dl --get-title "$1" 2>/dev/null | sed "s/'/'\"'\"'/g" )"
     else
         title="$( printf "%s" "$data" | sed -n '1p' | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
         data="$( printf '%s' "$data" | sed '1d' )"
