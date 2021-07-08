@@ -5,6 +5,8 @@ set statusbar-v-padding 0
 set page-padding 1
 set adjust-open best-fit
 set recolor true
+set window-title-home-tilde true
+set statusbar-home-tilde true
 
 # Navigation Bindings
 map g goto top
