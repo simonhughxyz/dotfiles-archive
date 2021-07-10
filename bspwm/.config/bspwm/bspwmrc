@@ -1,8 +1,7 @@
 #! /bin/sh
 
-BSPWM_TMP=/tmp/bspwm
+export BSPWM_TMP=/tmp/bspwm
 mkdir -p $BSPWM_TMP
-export $BSPWM_TMP
 
 # Remove all previously set rules.
 bspc rule -r "*"
