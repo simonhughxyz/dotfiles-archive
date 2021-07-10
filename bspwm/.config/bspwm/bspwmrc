@@ -57,4 +57,4 @@ bspc subscribe node_focus | while read -r line; do
     [ "$wid" -eq "$focused_wid" ] && continue
     xdotool windowactivate "$wid"
     sleep 0.2
-done
+done > /dev/null 2>&1 &
