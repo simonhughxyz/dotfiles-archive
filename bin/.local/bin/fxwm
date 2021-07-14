@@ -94,6 +94,30 @@ _fzf(){
 # Return all fields from nth to last field
 _field_to_end(){ awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}'; }
 
+_window_bind_cmd(){
+    key="$1"
+    window="$2"
+    # Perform different actions depending on key pressed by the user
+    case "$key" in
+        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window $args ;; # Show keymap help in fzf
+        alt-q) wmctrl -ic "$window" ;; # Close the window
+        alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
+        alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
+        alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
+        alt-s) wmctrl -ir "$window" -b "toggle,sticky" ;; # Make window sticky
+        alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
+        alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
+        alt-t) echo "$window" | _field_to_end "11" ;; # Print window title to stdout
+        alt-c) echo "$window" | awk '{ print $9 }' ;; # Print window class to stdout
+        alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
+        alt-p) echo "$window" | awk '{ print $4 }' ;; # Print process ID to stdout
+        alt-d) echo "$window" | awk '{ print $3 }' ;; # Print desktop name of window to stdout
+        alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
+        alt-a) echo "$window" ;; # Print all window data
+        alt-A) xprop -id "$window" ;; # Print window data from xprop
+        *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
+    esac
+}
 # Present a list of windows in fzf to perform various actions with
 _window(){
     # get a list of windows including the desktop name for each window
@@ -133,26 +157,7 @@ _window(){
 
     [ -z "$window" ] && exit
 
-    # Perform different actions depending on key pressed by the user
-    case "$key" in
-        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window $args ;; # Show keymap help in fzf
-        alt-q) wmctrl -ic "$window" ;; # Close the window
-        alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
-        alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
-        alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
-        alt-s) wmctrl -ir "$window" -b "toggle,sticky" ;; # Make window sticky
-        alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
-        alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
-        alt-t) echo "$window" | _field_to_end "11" ;; # Print window title to stdout
-        alt-c) echo "$window" | awk '{ print $9 }' ;; # Print window class to stdout
-        alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
-        alt-p) echo "$window" | awk '{ print $4 }' ;; # Print process ID to stdout
-        alt-d) echo "$window" | awk '{ print $3 }' ;; # Print desktop name of window to stdout
-        alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
-        alt-a) echo "$window" ;; # Print all window data
-        alt-A) xprop -id "$window" ;; # Print window data from xprop
-        *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
-    esac
+    _window_bind_cmd "$key" "$window"
 }
 
 # Present a list of desktops in fzf to perform various actions with
