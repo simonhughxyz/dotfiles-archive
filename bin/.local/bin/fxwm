@@ -118,6 +118,12 @@ _window_bind_cmd(){
         *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
     esac
 }
+
+_fzf_persistant_cmd(){
+    key="$1"
+    window="$2"
+}
+
 # Present a list of windows in fzf to perform various actions with
 _window(){
     # get a list of windows including the desktop name for each window
@@ -145,7 +151,8 @@ _window(){
             -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
             -c) shift; windows="$( echo "$windows" | awk -v var="$1" '$9 ~ var {print $0}' )" ;;
             -t) shift; windows="$( echo "$windows" | grep -E "^([^ ]*[[:space:]][[:space:]]*){,10}.*$1.*$" )" ;;
-            -E) windows="$( echo "$windows" | grep -v "^$current_window_hex[[:space:]].*$" )"
+            -E) windows="$( echo "$windows" | grep -v "^$current_window_hex[[:space:]].*$" )";;
+            -X) _fzf_persistant_cmd $*;;
         esac
         shift
     done
