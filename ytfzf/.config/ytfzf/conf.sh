@@ -255,7 +255,7 @@ fancy_subscriptions_text="             -------%s-------"
 #
 #Note: some parts of `key_binds` used to be handled by `shortcuts`,
 #which is no longer supported
-key_binds="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,alt-enter,alt-q,enter,double-click"
+key_binds="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,f9,alt-q,alt-enter,enter,double-click"
 
 #this allows for the use of key_binds without leaving fzf
 #therefore fzf does not have to reload and the selection does not get reset
@@ -280,9 +280,10 @@ enable_persistent_key_binds=1
 #which is no longer supported
 handle_custom_key_binds () {
     case $selected_key in
-	"alt-q")
-	    unset videos_data search_query
-	    [ "$scrape" = "pt_search" ] && scrape_fn || scrape="yt_search" scrape_fn
+        "alt-enter") is_download=0; is_audio_only=0; return 0;;
+        "alt-q")
+            unset videos_data search_query
+            [ "$scrape" = "pt_search" ] && scrape_fn || scrape="yt_search" scrape_fn
 	    return 2 ;;
     esac
     return 0
