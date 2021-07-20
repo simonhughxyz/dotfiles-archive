@@ -10,6 +10,14 @@ class=$2
 instance=$3
 
 case "$instance" in
+    home)
+        xdotool windowmove $wid 10% 30%
+        xdotool windowsize $wid 80% 40%
+
+        echo "state=floating"
+        echo "sticky=on"
+        echo "border=off"
+    ;;
     dropdown*)
         xdotool windowmove $wid 0 -10
         xdotool windowsize $wid 100% 300
