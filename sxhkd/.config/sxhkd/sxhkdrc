@@ -23,6 +23,11 @@ super + shift + f
     wmctrl -r ":ACTIVE:" -b "toggle,fullscreen"
 super + shift + s
     wmctrl -r ":ACTIVE:" -b "toggle,sticky"
+XF86Back
+    wmctrl -c ":ACTIVE:"
+Menu
+    wmctrl -r ":ACTIVE:" -b "toggle,fullscreen"
+
 
 # Apps
 super + t
