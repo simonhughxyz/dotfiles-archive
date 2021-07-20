@@ -88,4 +88,6 @@ fi
 export ENV=$HOME/.config/shell/alias.sh
 
 # Start graphical server
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+if [ "$(tty)" = "/dev/tty1" ] || [ "$(tty)" = "/dev/tty2" ]; then
+    exec startx
+fi
