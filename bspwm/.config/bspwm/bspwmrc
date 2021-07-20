@@ -46,7 +46,7 @@ melonbar run &
 
 lock_focus_file=${BSPWM_TMP}/lock_focus
 bspc subscribe node_focus | while read -r line; do
-    xdotool search --all --onlyvisible --classname fxwm > $lock_focus_file || continue
+    xdotool search --all --onlyvisible --classname "fxwm|home" > $lock_focus_file || continue
     wid="$( tail -n 1 $lock_focus_file )"
     focused_wid="$( xdotool getwindowfocus )"
     [ "$wid" -eq "$focused_wid" ] && continue
