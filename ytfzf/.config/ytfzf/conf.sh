@@ -21,6 +21,9 @@ history_file="$cache_dir/watch.history"
 #the file for storing search history
 search_history_file="$cache_dir/search.history"
 
+#fail to download history file
+fail_history_file="$cache_dir/fail.history"
+
 #the file for writing the menu option that was chosen
 current_file="$cache_dir/watch.current"
 
@@ -80,7 +83,7 @@ video_player_format="mpv --ytdl-format="
 
 #the player to use for audio ( option -m )
 #(YTFZF_AUDIO_PLAYER)
-audio_player="mpv --no-video"
+audio_player="mpv --no-video --ytdl-format=bestaudio"
 
 #enable/disable showing the different video formats
 #same as -f
@@ -102,20 +105,63 @@ scrape="yt_search"
 #sort videos, history, and subscriptions by date from newest to oldest
 sort_videos_data=1
 
+# Task Spooler
+export TMPDIR=/tmp/ytfzf/ts
+export TS_MAXFINISHED=6
+mkdir -m 0700 -p $TMPDIR
+ts -S 2
+
+# Command to interact with task spooler
+[ "$1" = "-R" ] && { shift; ts $*; exit; }
+
 #when this function is set it will be called instead of open_player,
 #open_player handles downloading, and showing a video,
 #when handle_urls is defined you get all the urls passed in, and can do whatever you want with them,
 #you can call open_player yourself, as shown below
 handle_urls () {
-	if [ $is_download -eq 1 ]; then
-        if [ $is_audio_only -eq 1 ]; then
-            ytdl --audio --url="$@"
-        else
-            ytdl --video --url="$@"
-        fi
-    else
-        vid "$@"
+    data="$selected_data"
+    ytdl_config="$XDG_CONFIG_HOME/youtube-dl/config"
+    ytdl_pl_config="$XDG_CONFIG_HOME/youtube-dl/pl.config"
+
+    if [ $is_download -eq 1 ];then
+        titles="$( printf "%s" "$data" | awk -F"\t" '{printf "%s\n\n", $1}' )"
+        notify-send 'Add to Download queue' "$titles"
     fi
+
+    for url in $@; do
+    # sometimes select_data is empty
+    # let youtube-dl get the title as a fall back
+    if [ -z "$data" ]; then
+        title="$( youtube-dl --get-title "$1" 2>/dev/null | sed "s/'/'\"'\"'/g" )"
+    else
+        title="$( printf "%s" "$data" | sed -n '1p' | awk -F"\t" '{print $1}' | sed "s/'/'\"'\"'/g" )"
+        data="$( printf '%s' "$data" | sed '1d' )"
+    fi
+
+    # format failed download message for file
+    msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$title" )"
+
+	if [ $is_download -eq 0 ]; then
+		if [ $is_audio_only -eq 0 ]; then
+			setsid -f $video_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
+		else
+			setsid -f $audio_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
+		fi
+    else
+        if echo "$url" | grep -c 'youtube.com/playlist'; then
+            config="$ytdl_pl_config"
+        else
+            config="$ytdl_config"
+        fi
+        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --config-location '%s' --exec \
+\"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
+'%s' \
+&& { notify-send 'Download Complete!' '%s'; } \
+|| { notify-send 'Download Failed!' '%s'; echo '%s' > %s; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" "$fail_history_file" )"
+
+        ts -L ytdl sh -c "$cmd"
+	fi
+    done
 }
 
 
@@ -189,14 +235,12 @@ fancy_subscriptions_menu=1
 #the spaces are for centering
 fancy_subscriptions_text="             -------%s-------"
 
+#############
+# Key Binds #
+#############
 
-
-#####################
-#     Shortcuts     #
-#####################
-
-#the shortcuts to use in fzf
-#the first 6 are used for
+#the key binds to use in fzf
+#the first 7 are used for
     # printing the urls
     # printing the title
     # openeing selected urls in a browser
@@ -204,24 +248,42 @@ fancy_subscriptions_text="             -------%s-------"
     # downloading the video
     # listening to the video
     # search again
+    # detach player
 #in that order, these keys can be changed
-#any keys after will not have default behaviour and the behaviour must be defined in handle_custom_shortcuts
-shortcuts="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,alt-enter,alt-q"
+#any keys after will not have default behaviour and the behaviour can be defined in handle_custom_key_binds
+#any undefined keys will be used for default selection behaviour
+#
+#Note: some parts of `key_binds` used to be handled by `shortcuts`,
+#which is no longer supported
+key_binds="alt-l,alt-t,alt-o,alt-v,alt-d,alt-m,alt-s,f9,alt-q,alt-enter,enter,double-click"
+
+#this allows for the use of key_binds without leaving fzf
+#therefore fzf does not have to reload and the selection does not get reset
+#if you do not wish to use this behavior, simply leave this option blank
+persistent_key_binds="enter,alt-enter,alt-v,alt-d,alt-o,double-click"
+
+#if you wish to have persistent key binds when loop is not given enable this
+#this will automatically be enabled with -l
+enable_persistent_key_binds=1
 
 #some helpful variables to keep in mind:
-    #selected_key: the shortcut pressed
+    #selected_key: they key_bind pressed
     #selected_urls: the selected urls
     #selected_data: the line that was selected
     #play_url: a function that takes a url and plays it (play_url "$url") 
 #the return value matters in this function,
     #returning 0 will continue the program as normal
     #returning 1 will exit the program and will clean up after itself
-    #returning 2 will restart the main loop (this is used for the search_again shortcut)
-handle_custom_shortcuts () {
+    #returning 2 will restart the main loop (this is used for the search_again key_bind)
+# 
+#Note: `handle_custom_key_binds` used to be handled by `handle_custom_shortcuts`,
+#which is no longer supported
+handle_custom_key_binds () {
     case $selected_key in
-	"alt-q")
-	    unset videos_data search_query
-	    [ "$scrape" = "pt_search" ] && scrape_fn || scrape="yt_search" scrape_fn
+        "alt-enter") is_download=0; is_audio_only=0; return 0;;
+        "alt-q")
+            unset videos_data search_query
+            [ "$scrape" = "pt_search" ] && scrape_fn || scrape="yt_search" scrape_fn
 	    return 2 ;;
     esac
     return 0

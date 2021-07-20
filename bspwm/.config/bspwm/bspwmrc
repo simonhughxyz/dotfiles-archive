@@ -1,5 +1,8 @@
 #! /bin/sh
 
+export BSPWM_TMP=/tmp/bspwm
+mkdir -p $BSPWM_TMP
+
 # Remove all previously set rules.
 bspc rule -r "*"
 
@@ -36,7 +39,17 @@ bspc rule -a Skype state=tiled   # open skype in tiled mode.
 
 # run bspwm specific sxhkd config.
 sxhkd -c "$HOME/.config/sxhkd/bspwm.sxhkdrc" > ~/.local/share/sxhkd/bspwm.sxhkd.log 2>&1 & # keybindings.
-# run lemonbar panel after sleep to give system time to catch up.
 
+# run melonbar after sleep to give system time to catch up.
 sleep 1
 melonbar run &
+
+lock_focus_file=${BSPWM_TMP}/lock_focus
+bspc subscribe node_focus | while read -r line; do
+    xdotool search --all --onlyvisible --classname fxwm > $lock_focus_file || continue
+    wid="$( tail -n 1 $lock_focus_file )"
+    focused_wid="$( xdotool getwindowfocus )"
+    [ "$wid" -eq "$focused_wid" ] && continue
+    xdotool windowactivate "$wid"
+    sleep 0.2
+done > /dev/null 2>&1 &

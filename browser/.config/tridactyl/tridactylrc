@@ -27,8 +27,8 @@ sanetize serviceWorkers
 "
 
 " mpv alias uses a wrapper script called instead of calling mpv directly.a
-alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('vid -d --file=' + url))
-alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
+alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet("ytfzf --download=0 '" + url + "'"))
+alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet("ytfzf --download=1 '" + url + "'"))
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/newsboat.url'))
 alias chromium js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('www -c ' + url))
