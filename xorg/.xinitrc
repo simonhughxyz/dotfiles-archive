@@ -9,6 +9,9 @@ _log(){
     echo "${path}/${2:-${1}}.log"
 }
 
+# lock screen for autologin
+lock &
+
 xrdb -merge ~/.Xresources
 
 setxkbmap -layout gb -option "altwin:menu_win"
