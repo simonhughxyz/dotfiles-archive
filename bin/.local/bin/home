@@ -102,7 +102,7 @@ case "$1" in
     -h|--help) printf "%s\n" "$__help"; exit;;
     pic|pictures) _pictures;;
     www) _www;;
-    videos) _videos;;
+    vid|videos) _videos;;
     music) _music;;
     *) _quick_menu;;
 esac
