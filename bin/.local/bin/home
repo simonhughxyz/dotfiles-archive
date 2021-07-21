@@ -71,7 +71,7 @@ _music(){
     nohup mpv --quiet "${dir}${choice}${file}" > /dev/null &
 }
 
-_links(){
+_www(){
     links="$( bookmd -q 'home##Links' | sed 's/^\[//;s/)$//' | awk -F']\\(' '{printf "%s\t\t\t%s\n", $1, $2}' )"
 
     choice="$( printf "%s" "$links" | fzf -d "\t\t\t" --with-nth=1 )"
@@ -82,13 +82,13 @@ _links(){
 }
 
 _quick_menu(){
-    options="LINKS\nVIDEOS\nMUSIC\nPICTURES"
+    options="WWW\nVIDEOS\nMUSIC\nPICTURES"
 
     choice="$( echo "$options" | fzf )"
     [ -z "$choice" ] && exit
     
     case "$choice" in
-        LINKS) _links;;
+        WWW) _www;;
         VIDEOS) _videos;;
         MUSIC) _music;;
         PICTURES) _pictures;;
@@ -98,7 +98,7 @@ _quick_menu(){
 case "$1" in
     -h|--help) printf "%s\n" "$__help"; exit;;
     pic|pictures) _pictures;;
-    links) _links;;
+    www) _www;;
     videos) _videos;;
     music) _music;;
     *) _quick_menu;;
