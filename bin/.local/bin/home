@@ -42,7 +42,8 @@ _pictures(){
     choice="$( printf "%s" "$pic_dirs" | fzf )"
     [ -z "$choice" ] && exit
 
-    sxiv -t "${dir}/${choice}"
+    nohup sxiv -t "${dir}/${choice}" </dev/null >dev/null 2>&1 &
+    sleep 0.1
 }
 
 _videos(){
