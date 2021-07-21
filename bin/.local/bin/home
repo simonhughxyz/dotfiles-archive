@@ -16,7 +16,7 @@ __help="$__usage
 For simple, quick, most used navigation
 
 Options:
-  links                             Open links in BROWSER
+  www|web                           Open links in BROWSER
   pic|pictures                      Select and show images
   vid|videos                        Select and play a video
   music                             Select and play music
