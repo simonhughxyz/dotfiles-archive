@@ -92,7 +92,6 @@ _quick_menu(){
         MUSIC) _music;;
         PICTURES) _pictures;;
     esac
-    _quick_menu
 }
 
 case "$1" in
