@@ -101,7 +101,7 @@ _quick_menu(){
 case "$1" in
     -h|--help) printf "%s\n" "$__help"; exit;;
     pic|pictures) _pictures;;
-    www) _www;;
+    www|web) _www;;
     vid|videos) _videos;;
     music) _music;;
     *) _quick_menu;;
