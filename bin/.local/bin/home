@@ -56,7 +56,8 @@ _videos(){
     [ -z "$choice" ] && exit
 
     file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
-    nohup mpv --quiet "${dir}${choice}${file}" > /dev/null &
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
 _music(){
@@ -69,7 +70,8 @@ _music(){
     [ -z "$choice" ] && exit
 
     file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
-    nohup mpv --quiet "${dir}${choice}${file}" > /dev/null &
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
 _www(){
