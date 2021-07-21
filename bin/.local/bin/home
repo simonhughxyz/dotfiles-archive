@@ -77,7 +77,8 @@ _links(){
     choice="$( printf "%s" "$links" | fzf -d "\t\t\t" --with-nth=1 )"
     [ -z "$choice" ] && exit
 
-    $BROWSER "$( printf "%s" "$choice" | awk -F"\t\t\t" '{print $2}' )"
+    nohup sh -c "$BROWSER '$( printf "%s" "$choice" | awk -F"\t\t\t" '{print $2}' )'" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
 _quick_menu(){
