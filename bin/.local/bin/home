@@ -16,7 +16,7 @@ __help="$__usage
 For simple, quick, most used navigation
 
 Options:
-  links                             Open links in BROWSER
+  www|web                           Open links in BROWSER
   pic|pictures                      Select and show images
   vid|videos                        Select and play a video
   music                             Select and play music
@@ -42,7 +42,8 @@ _pictures(){
     choice="$( printf "%s" "$pic_dirs" | fzf )"
     [ -z "$choice" ] && exit
 
-    sxiv -t "${dir}/${choice}"
+    nohup sxiv -t "${dir}/${choice}" </dev/null >dev/null 2>&1 &
+    sleep 0.1
 }
 
 _videos(){
@@ -55,7 +56,8 @@ _videos(){
     [ -z "$choice" ] && exit
 
     file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
-    nohup mpv --quiet "${dir}${choice}${file}" > /dev/null &
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
 _music(){
@@ -68,38 +70,39 @@ _music(){
     [ -z "$choice" ] && exit
 
     file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
-    nohup mpv --quiet "${dir}${choice}${file}" > /dev/null &
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
-_links(){
+_www(){
     links="$( bookmd -q 'home##Links' | sed 's/^\[//;s/)$//' | awk -F']\\(' '{printf "%s\t\t\t%s\n", $1, $2}' )"
 
     choice="$( printf "%s" "$links" | fzf -d "\t\t\t" --with-nth=1 )"
     [ -z "$choice" ] && exit
 
-    $BROWSER "$( printf "%s" "$choice" | awk -F"\t\t\t" '{print $2}' )"
+    nohup sh -c "$BROWSER '$( printf "%s" "$choice" | awk -F"\t\t\t" '{print $2}' )'" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
 }
 
 _quick_menu(){
-    options="LINKS\nVIDEOS\nMUSIC\nPICTURES"
+    options="WWW\nVIDEOS\nMUSIC\nPICTURES"
 
     choice="$( echo "$options" | fzf )"
     [ -z "$choice" ] && exit
     
     case "$choice" in
-        LINKS) _links;;
+        WWW) _www;;
         VIDEOS) _videos;;
         MUSIC) _music;;
         PICTURES) _pictures;;
     esac
-    _quick_menu
 }
 
 case "$1" in
     -h|--help) printf "%s\n" "$__help"; exit;;
     pic|pictures) _pictures;;
-    links) _links;;
-    videos) _videos;;
+    www|web) _www;;
+    vid|videos) _videos;;
     music) _music;;
     *) _quick_menu;;
 esac
