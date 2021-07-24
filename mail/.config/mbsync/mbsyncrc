@@ -4,12 +4,13 @@
 #####################
 
 IMAPAccount simonhugh.xyz
-Host imap.mailbox.org
-User simonhugh@mailbox.org
-PassCmd "pass simonhugh.xyz/mailbox | head -n1"
-SSLType IMAPS
+Host 127.0.0.1
+Port 1143
+User simon@simonhugh.xyz
+PassCmd "pass get pass protonmail/bridge"
+SSLType STARTTLS
 SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile ~/.config/protonmail/bridge/cert.pem
 
 
 ### Remote storage ###
@@ -19,8 +20,8 @@ Account simonhugh.xyz
 
 ### Local storage ###
 MaildirStore simonhugh.xyz-local
-Path ~/.mail/simonhugh.xyz/
-Inbox ~/.mail/simonhugh.xyz/INBOX
+Path ~/.mail/
+Inbox ~/.mail/INBOX/
 
 # Inbox
 Channel simonhugh.xyz-inbox
@@ -28,6 +29,7 @@ Master :simonhugh.xyz-remote:"INBOX"
 Slave :simonhugh.xyz-local:INBOX
 Create Both
 Expunge Both
+SyncState *
 
 # Drafts
 Channel simonhugh.xyz-drafts
@@ -35,6 +37,7 @@ Master :simonhugh.xyz-remote:"Drafts"
 Slave :simonhugh.xyz-local:drafts
 Create Both
 Expunge Both
+SyncState *
 
 # Sent
 Channel simonhugh.xyz-sent
@@ -42,27 +45,31 @@ Master :simonhugh.xyz-remote:"Sent"
 Slave :simonhugh.xyz-local:sent
 Create Both
 Expunge Both
+SyncState *
 
 # deleted
 Channel simonhugh.xyz-deleted
-Master :simonhugh.xyz-remote:"deleted"
+Master :simonhugh.xyz-remote:"Trash"
 Slave :simonhugh.xyz-local:deleted
 Create Both
 Expunge Both
+SyncState *
 
 # Archive
 Channel simonhugh.xyz-archive
-Master :simonhugh.xyz-remote:"archive2"
+Master :simonhugh.xyz-remote:"Archive"
 Slave :simonhugh.xyz-local:archive
 Create Both
 Expunge Both
+SyncState *
 
 # Spam
 Channel simonhugh.xyz-spam
-Master :simonhugh.xyz-remote:"Junk"
+Master :simonhugh.xyz-remote:"Spam"
 Slave :simonhugh.xyz-local:spam
 Create Both
 Expunge Both
+SyncState *
 
 ### Create Group ###
 Group simonhugh.xyz
@@ -71,57 +78,3 @@ Channel simonhugh.xyz-drafts
 Channel simonhugh.xyz-sent
 Channel simonhugh.xyz-deleted
 Channel simonhugh.xyz-spam
-
-
-
-################################
-##### simonhugh94@gmail.com ####
-################################
-
-IMAPAccount gmail.simonhmoore94
-Host imap.gmail.com
-User simon.h.moore94@gmail.com
-PassCmd "pass get mutt google/main"
-SSLType IMAPS
-SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-# remote storage
-IMAPStore gmail.simonhmoore94-remote
-Account gmail.simonhmoore94
-
-# local storage
-MaildirStore gmail.simonhmoore94-local
-Path ~/.mail/simonhmoore94@gmail.com/
-Inbox ~/.mail/simonhmoore94@gmail.com/INBOX
-
-Channel gmail.simonhmoore94-inbox
-Master :gmail.simonhmoore94-remote:"INBOX"
-Slave :gmail.simonhmoore94-local:INBOX
-Create Both
-Expunge Master
-SyncState *
-
-Channel gmail.simonhmoore94-sent
-Master :gmail.simonhmoore94-remote:"[Gmail]/Sent Mail"
-Slave :gmail.simonhmoore94-local:sent
-Create Both
-Expunge Master
-
-Channel gmail.simonhmoore94-deleted
-Master :gmail.simonhmoore94-remote:"deleted"
-Slave :gmail.simonhmoore94-local:deleted
-Create Both
-Expunge Both
-
-Channel gmail.simonhmoore94-archive
-Master :gmail.simonhmoore94-remote:"archive2"
-Slave :gmail.simonhmoore94-local:archive
-Create Both
-Expunge Both
-
-Group gmail.simonhmoore94
-Channel gmail.simonhmoore94-inbox
-channel gmail.simonhmoore94-sent
-channel gmail.simonhmoore94-all
-channel gmail.simonhmoore94-deleted

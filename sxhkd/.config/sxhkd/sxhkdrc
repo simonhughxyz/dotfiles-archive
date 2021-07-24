@@ -23,6 +23,11 @@ super + shift + f
     wmctrl -r ":ACTIVE:" -b "toggle,fullscreen"
 super + shift + s
     wmctrl -r ":ACTIVE:" -b "toggle,sticky"
+XF86Back
+    wmctrl -c ":ACTIVE:"
+Menu
+    wmctrl -r ":ACTIVE:" -b "toggle,fullscreen"
+
 
 # Apps
 super + t
@@ -60,15 +65,21 @@ super + alt + p
     pdfmenu
 
 # Menu
-super + {_, shift +} slash
-    {class=window; flag="-d",class=window-all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window $flag"
-super + {_, shift +} backslash
-    {class=window; flag="-d",class=window-all; flag="-D"}; \
-    scratchpad -c $class -t fxwm -e "fxwm window $flag"
-super + {_, shift +} d
-    scratchpad -c dropdown_desktop -t fxwm -e "fxwm desktop {-p,_}"
 super + a
+    scratchpad -c home -t Home -e home
+XF86HomePage
+    scratchpad -c home -t Home -e home
+super + {_, shift +} slash
+    {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
+super + {_, shift +} backslash
+    {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
+    scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"
+super + {_, shift +} d
+    scratchpad -c fxwm_desktop -t fxwm -e "fxwm desktop {-P,_} -p -m"
+super + b
+    scratchpad -c fxwm_window_all -t fxwm -e "fxwm window -p -m -D -E -c Navigator.Firefox|chromium.Chromium"
+super + shift + a
     scratchpad -c app_menu -t apps -e appmenu -C
 ctrl + alt + Delete
     scratchpad -c powermenu -t Power -e powermenu -C

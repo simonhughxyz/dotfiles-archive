@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# POST-NEW
+# Simon Hugh Moore
+#
+# Hook runs after `notmuch new`
+# Tag mail from server.
+    
+# count the number of new messages
+count=$( notmuch count tag:new )
+
+# retag all new messages as inbox and unread
+notmuch tag -new +inbox +unread -- tag:new
+
+# tag all messages with 'noreply' in address.
+notmuch tag +noreply -- "from:/^.*noreply.*$/"
+
+# tag domain specific messages
+notmuch tag +deleted +google -- "from:/^.*google[.]com/"
+notmuch tag +deleted +shopping +amazon -- "from:/^.*amazon[.]com|.*amazon[.]co[.]uk|.*amazonbusiness[.]co[.]uk/"
+notmuch tag +deleted +shopping +ebay -- "from:/^.*ebay[.]com|.*ebay[.]co[.]uk/"
+notmuch tag +deleted +social +youtube -- "from:/^.*youtube[.]com/"
+notmuch tag +deleted +social +facebook -- "from:/^.*facebookmail[.]com/"
+notmuch tag +deleted +social +twitter -- "from:/^.*twitter[.]com/"
+notmuch tag +deleted +social +mastodon +fosstodon -- "from:/^.*fosstodon[.]org/"
+
+
+# each of these tags correspond to a mail directory
+# only one of these tags are allowed at a time
+notmuch tag -inbox -archive -drafts -sent -spam -- "tag:deleted"
+notmuch tag -inbox -archive -drafts -sent -deleted -- "tag:spam"
+notmuch tag -inbox -drafts -sent -deleted -spam -- "tag:archive"
+notmuch tag -inbox -archive -sent -deleted -spam -- "tag:drafts"
+notmuch tag -inbox -archive -drafts -deleted -spam -- "tag:sent"
+
+notmuch tag -unread -- "tag:deleted OR tag:archive OR tag:drafts OR tag:sent"
+
+# notify of new messages
+if [ $count = 1 ]; then
+    notify-send -u normal "Mail" "You have 1 new message!" # singular
+elif [ $count != 0 ]; then
+    notify-send -u normal "Mail" "You have $count new messages!" #  plural
+fi
+

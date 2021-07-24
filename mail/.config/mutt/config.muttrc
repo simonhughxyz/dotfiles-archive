@@ -16,6 +16,9 @@ set delete
 set quit
 set thorough_search
 set mail_check_stats
+set sort=reverse-threads
+set sort_aux=last-date-received
+set sort_browser=reverse-date
 unset confirmappend
 unset move
 unset mark_old
@@ -39,7 +42,7 @@ set index_format = "%4C %Z %<[y?%<[m?%<[d?%[%H:%M    ]&%[%a %d   ]>&%[%b %d   ]>
 
 set sidebar_width = 25
 set sidebar_divider_char = '│'
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_format = "%D%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
 
 

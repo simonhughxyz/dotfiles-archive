@@ -27,8 +27,8 @@ sanetize serviceWorkers
 "
 
 " mpv alias uses a wrapper script called instead of calling mpv directly.a
-alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('vid -d --file=' + url))
-alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --video --url=' + url))
+alias mpv js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet("ytfzf --download=0 '" + url + "'"))
+alias ytdl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet("ytfzf --download=1 '" + url + "'"))
 alias ytdl_pl js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('ytdl --notify --playlist --url=' + url))
 alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/newsboat.url'))
 alias chromium js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('www -c ' + url))
@@ -136,19 +136,18 @@ bind M mute all toggle
 " Follow link
 unbind f
 bind f hint
-" Open link in new tab
-unbind t
-bind t hint -b
-" Open link in foreground tab
-unbind T
-bind T hint -t
 " Open link in new window
-unbind w
-bind w hint -w
+unbind t
+bind t hint -w
+" Open link in tab
+unbind T
+bind T hint -b
+" Open link in foreground tab
+bind gT hint -t
 
 " Optimize follow link for domains
-bindurl youtube.com f hint -Jw
-bindurl youtube.com t hint -J
+bindurl youtube.com f hint -J
+bindurl youtube.com t hint -Jw
 
 " Yank with hint
 bind Y hint -y

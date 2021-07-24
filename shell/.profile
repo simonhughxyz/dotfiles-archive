@@ -17,6 +17,7 @@ export LBIN="$HOME/.local/bin"
 export PATH="$LBIN:$GOBIN:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 # default programs
 export EDITOR="nvim"
@@ -32,7 +33,7 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS="true"
 export WINEARCH="win64"
 export WINEPREFIX="/home/simon/.wine/lutris64 setup_dxvk64"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --smart-case --glob '!.git/*'"
-export FZF_DEFAULT_OPTS="--cycle --reverse --info=hidden --border --padding=0 --margin=0 --color='bw,border:129,fg+:129:bold' --bind='ctrl-space:print-query,ctrl-b:backward-kill-word,ctrl-w:kill-word,alt-b:backward-word,alt-w:forward-word,ctrl-p:toggle-preview,ctrl-g:top,ctrl-a:end-of-line,ctrl-i:beginning-of-line,ctrl-d:clear-query,ctrl-h:deselect-all,ctrl-f:jump,ctrl-s:toggle,ctrl-z:toggle-all,enter:accept,tab:replace-query'"
+export FZF_DEFAULT_OPTS="--cycle --reverse --info=hidden --border --padding=0 --margin=0 --color=border:129,fg+:129:bold --bind=ctrl-space:print-query,ctrl-b:backward-kill-word,ctrl-w:kill-word,alt-b:backward-word,alt-w:forward-word,ctrl-p:toggle-preview,ctrl-g:top,ctrl-a:end-of-line,ctrl-i:beginning-of-line,ctrl-d:clear-query,ctrl-h:deselect-all,ctrl-f:jump,ctrl-s:toggle,ctrl-z:toggle-all,tab:replace-query"
 export LIBVA_DRIVER_NAME="i965"
 export BC_ENV_ARGS="-q -l $XDG_CONFIG_HOME/bc/extensions.bc"
 export SXHKD_SHELL="/bin/sh"
@@ -46,6 +47,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
 
 # # LESS
 export LESS=-R
@@ -85,4 +88,6 @@ fi
 export ENV=$HOME/.config/shell/alias.sh
 
 # Start graphical server
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+if [ "$(tty)" = "/dev/tty1" ] || [ "$(tty)" = "/dev/tty2" ]; then
+    exec startx
+fi

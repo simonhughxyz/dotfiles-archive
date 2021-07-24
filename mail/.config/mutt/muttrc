@@ -1,3 +1,23 @@
-# Default account
-# source accounts/simonhugh.xyz
-source accounts/simonhmoore94@gmail.com.muttrc
+# muttrc
+
+set from = "simon@simonhugh.xyz"
+set realname = "Simon H Moore"
+
+# paths
+set folder = ~/.mail/
+
+set sendmail  = "/usr/bin/msmtp"
+
+set spoolfile="notmuch://?query=tag:inbox"
+
+# Not much
+virtual-mailboxes "INBOX" $spoolfile
+virtual-mailboxes "Unread" "notmuch://?query=tag:unread"
+virtual-mailboxes "Sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "Archive" "notmuch://?query=tag:archive"
+virtual-mailboxes "Deleted" "notmuch://?query=tag:deleted OR (tag:deleted AND tag:spam)"
+virtual-mailboxes "Spam" "notmuch://?query=tag:spam"
+virtual-mailboxes "Shopping" "notmuch://?query=tag:shopping OR (tag:shopping AND tag:deleted)"
+virtual-mailboxes "Social" "notmuch://?query=tag:social OR (tag:social AND tag:deleted)"
+
+source config.muttrc
