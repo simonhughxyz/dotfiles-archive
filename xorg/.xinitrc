@@ -37,9 +37,12 @@ else
 fi
 
 # startup apps
-# start-pulseaudio-x11 & # make sure pulseaudio is running.
-pipewire > "$( _log "pipewire" )" 2>&1 &
-pipewire-pulse > "$( _log "pipewire" "pipewire-pulse" )" 2>&1 &
+if command -v start-pulseaudio-x11; then
+    start-pulseaudio-x11 & # make sure pulseaudio is running.
+else
+    pipewire > "$( _log "pipewire" )" 2>&1 &
+    pipewire-pulse > "$( _log "pipewire" "pipewire-pulse" )" 2>&1 &
+fi
 syncthing -no-browser > "$( _log "syncthing" )" 2>&1 & # syncs files between devises.
 clipmenud &                                   # deamon for clipmenu.
 redshift &                                    # reduced blue levels on screen.
