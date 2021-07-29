@@ -21,6 +21,9 @@ return require('packer').startup(function()
         config = function()
             vim.cmd[[colorscheme gruvbox]]
             vim.g.gruvbox_italic = 1
+            vim.g.gruvbox_transparent_bg = true
+            vim.g.gruvbox_improved_strings = true
+            vim.g.gruvbox_constrast_dark = 'hard'
         end
     }
 
