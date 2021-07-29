@@ -68,7 +68,16 @@ return require('packer').startup(function()
     use 'ludovicchabant/vim-gutentags' -- Manage tag files.
     use 'majutsushi/tagbar'    -- Shows list of tags in a sidebar.
     use 'AndrewRadev/splitjoin.vim'    -- Split single lines or join multiple lines.
-    use 'airblade/vim-gitgutter'   -- Show git diff in sign column.
+    use { -- Show git diff in sign column
+        'airblade/vim-gitgutter',
+        config = function()
+            vim.cmd([[
+                highlight GitGutterAdd guifg=#009900 ctermfg=Green
+                highlight GitGutterChange guifg=#dddd00 ctermfg=Yellow
+                highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+            ]])
+        end
+    }
     use 'Yggdroot/indentLine'  -- Show a line marking indents.
     use 'luochen1990/rainbow' -- Color matching brackets.
     use {
