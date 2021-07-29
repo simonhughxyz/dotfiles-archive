@@ -78,7 +78,12 @@ return require('packer').startup(function()
             ]])
         end
     }
-    use 'Yggdroot/indentLine'  -- Show a line marking indents.
+    use { -- Show a line marking indents
+        'Yggdroot/indentLine',
+        config = function()
+            vim.g.indentLine_setConceal = 0
+        end
+    }
     use 'luochen1990/rainbow' -- Color matching brackets.
     use {
         'dhruvasagar/vim-table-mode',
