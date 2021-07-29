@@ -169,7 +169,12 @@ return require('packer').startup(function()
     use 'wellle/targets.vim'   -- Expands on vim text objects and adds a few new ones.
     use 'michaeljsmith/vim-indent-object'  -- Adds indent text object.
     use 'chaoren/vim-wordmotion'   -- Vim recognizes camel case and more as words.
-    use 'junegunn/vim-after-object'    -- Text object to target text after char.
+    use { -- Text object to target text after char.
+        'junegunn/vim-after-object',
+        config = function()
+            vim.cmd([[autocmd VimEnter * call after_object#enable('=', ':', ';', '-', '+', '#', '_', '$')]])
+        end
+    }
     -- use 'kana/vim-textobj-user'
     use 'coderifous/textobj-word-column.vim'   -- Add column text object.
 
