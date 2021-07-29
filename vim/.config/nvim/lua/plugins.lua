@@ -88,7 +88,10 @@ return require('packer').startup(function()
     use {
         'dhruvasagar/vim-table-mode',
         ft = 'markdown',
-        cmd = 'TableModeToggle'
+        cmd = 'TableModeToggle',
+        config = function()
+            vim.g.table_mode_corner = '|'
+        end
     }
     use 'MarcWeber/vim-addon-mw-utils'
     use 'tomtom/tlib_vim'
