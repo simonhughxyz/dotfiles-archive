@@ -53,7 +53,18 @@ return require('packer').startup(function()
     use 'junegunn/fzf.vim'
     use 'junegunn/vim-easy-align'  -- Align text.
     use 'junegunn/vim-peekaboo'    -- Show register contents in sidebar.
-    use 'unblevable/quick-scope'   -- Highlights unique letters to help with 'f'.
+    use { -- Highlights unique letters to help with 'f'
+        'unblevable/quick-scope',
+        config = function()
+            vim.cmd([[
+            augroup qs_colors
+                autocmd!
+                autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+                autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+            augroup END
+            ]])
+        end
+    }
     use 'ludovicchabant/vim-gutentags' -- Manage tag files.
     use 'majutsushi/tagbar'    -- Shows list of tags in a sidebar.
     use 'AndrewRadev/splitjoin.vim'    -- Split single lines or join multiple lines.
