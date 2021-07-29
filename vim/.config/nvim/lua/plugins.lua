@@ -39,7 +39,16 @@ return require('packer').startup(function()
     use {
         'junegunn/fzf',
         dir = '~/.fzf',
-        run = './install --all'
+        run = './install --all',
+        config = function()
+            vim.g.fzf_layout = {
+                window = {
+                    width = 0.8,
+                    height = 0.5,
+                    highlight = 'Comment',
+                }
+            }
+        end
     }
     use 'junegunn/fzf.vim'
     use 'junegunn/vim-easy-align'  -- Align text.
