@@ -163,7 +163,7 @@ if has('nvim')
 endif
 if has('nvim-0.5.0')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    lua require('treesitter')
+    lua require('lua/treesitter.lua')
 endif
 call plug#end()
 " }}}
