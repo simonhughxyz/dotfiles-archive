@@ -97,9 +97,14 @@ return require('packer').startup(function()
     use 'tomtom/tlib_vim'
     -- use 'garbas/vim-snipmate'
     -- use 'honza/vim-snippets'
-    use 'AndrewRadev/switch.vim'   -- Switch true to false, yes to no etc.
-    use 'junegunn/goyo.vim'    -- Distraction free writing.
-    use 'junegunn/limelight.vim'   -- Highlight the current column.
+    use { -- Switch true to false, yes to no etc.
+        'AndrewRadev/switch.vim',
+        config = function()
+            vim.g.switch_custom_definitions = {
+                vim.fn["switch#NormalizedCase(['yes','no'])"]
+            }
+        end
+    }
     use {
         'mcchrish/nnn.vim',
         config = function()
