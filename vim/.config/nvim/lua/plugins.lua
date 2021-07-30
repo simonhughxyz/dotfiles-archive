@@ -160,7 +160,7 @@ return require('packer').startup(function()
     }
     use {
         'vimwiki/vimwiki',
-        conifg = function()
+        setup = function()
             vim.g.vimwiki_auto_header = 1
             vim.g.vimwiki_folding = 'custom'
             vim.g.vimwiki_key_mappings = { links = 0 }
