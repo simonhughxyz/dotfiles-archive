@@ -27,15 +27,111 @@ return require('packer').startup(function()
         end
     }
 
-    use 'tpope/vim-surround'   -- Add, delete, change surroundings such as brackets.
-    use 'tpope/vim-repeat'     -- Allows repeating '.' for many plugins.
-    use 'tpope/vim-commentary' -- Easily un/comment text.
-    use 'tpope/vim-fugitive'   -- Useful git commands.
-    use 'tpope/vim-unimpaired'     -- Adds common bracket mappings.
-    -- use {
-    --     'universal-ctags/ctags', 
-    --     run = './autogen.sh;./configure --prefix=$HOME/.local;make install'
-    -- }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        branch = '0.5-compat',
+        run = ':TSUpdate',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                highlight = {
+                    enable = true,
+                    disable = {},
+                },
+                indent = {
+                    enable = true,
+                    disable = {},
+                },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gnn",
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
+                    },
+                },
+                ensure_installed = {
+                    'lua',
+                    'regex',
+                    'bash',
+                    'c',
+                    'html',
+                    'css',
+                    'javascript',
+                    'typescript',
+                    'go',
+                    'python',
+                    'json',
+                    'toml',
+                    'yaml',
+                },
+            }
+        end
+    }
+
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        branch = '0.5-compat',
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+              textobjects = {
+                select = {
+                  enable = true,
+                  -- Automatically jump forward to textobj, similar to targets.vim 
+                  lookahead = true,
+                  keymaps = {
+                    -- You can use the capture groups defined in textobjects.scm
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = "@class.inner",
+                    ["aa"] = "@parameter.outer",
+                    ["ia"] = "@parameter.inner",
+                    ["al"] = "@loop.outer",
+                    ["il"] = "@loop.inner",
+                    ["a#"] = "@comment.outer",
+                    ["i#"] = "@comment.outer",
+                },
+                },
+                 swap = {
+                    enable = true,
+                    swap_next = {
+                        ["<leader>a"] = "@parameter.inner",
+                    },
+                    swap_previous = {
+                        ["<leader>A"] = "@parameter.inner",
+                    },
+                },
+            move = {
+                  enable = true,
+                  set_jumps = true, -- whether to set jumps in the jumplist
+                  goto_next_start = {
+                    ["]f"] = "@function.outer",
+                    ["]c"] = "@class.outer",
+                    ["]#"] = "@comment.outer",
+                  },
+                  goto_next_end = {
+                    ["]F"] = "@function.outer",
+                    ["]C"] = "@class.outer",
+                    ["]~"] = "@comment.outer",
+                  },
+                  goto_previous_start = {
+                    ["[f"] = "@function.outer",
+                    ["[c"] = "@class.outer",
+                    ["[#"] = "@comment.outer",
+                  },
+                  goto_previous_end = {
+                    ["[F"] = "@function.outer",
+                    ["[C"] = "@class.outer",
+                    ["[~"] = "@comment.outer",
+                  },
+                },
+              },
+            }
+        end
+    }
+
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
@@ -97,6 +193,16 @@ return require('packer').startup(function()
             }
         end
     }
+
+    use 'tpope/vim-surround'   -- Add, delete, change surroundings such as brackets.
+    use 'tpope/vim-repeat'     -- Allows repeating '.' for many plugins.
+    use 'tpope/vim-commentary' -- Easily un/comment text.
+    use 'tpope/vim-fugitive'   -- Useful git commands.
+    use 'tpope/vim-unimpaired'     -- Adds common bracket mappings.
+    -- use {
+    --     'universal-ctags/ctags', 
+    --     run = './autogen.sh;./configure --prefix=$HOME/.local;make install'
+    -- }
     use {
         'junegunn/fzf',
         dir = '~/.fzf',
@@ -262,47 +368,6 @@ return require('packer').startup(function()
                    css_fn   = true;
                    mode     = 'background';
                 })
-        end
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        branch = '0.5-compat',
-        run = ':TSUpdate',
-        config = function()
-            require'nvim-treesitter.configs'.setup {
-                highlight = {
-                    enable = true,
-                    disable = {},
-                },
-                indent = {
-                    enable = true,
-                    disable = {},
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "gnn",
-                        node_incremental = "grn",
-                        scope_incremental = "grc",
-                        node_decremental = "grm",
-                    },
-                },
-                ensure_installed = {
-                    'lua',
-                    'regex',
-                    'bash',
-                    'c',
-                    'html',
-                    'css',
-                    'javascript',
-                    'typescript',
-                    'go',
-                    'python',
-                    'json',
-                    'toml',
-                    'yaml',
-                },
-            }
         end
     }
     
