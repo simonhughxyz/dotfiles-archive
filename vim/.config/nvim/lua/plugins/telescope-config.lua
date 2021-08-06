@@ -1,5 +1,9 @@
 -- telescope.lua
 
+local M = {}
+utils = require('utils')
+lmap = utils.lmap
+
 require('telescope').setup{
     defaults = {
     vimgrep_arguments = {
@@ -51,3 +55,23 @@ require('telescope').setup{
     buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker
 }
 }
+
+M.project_files = function()
+  local opts = {} -- define here if you want to define something
+  local ok = pcall(require'telescope.builtin'.git_files, opts)
+  if not ok then require'telescope.builtin'.find_files(opts) end
+end
+
+lmap('n', 'f', [[<CMD>lua require'plugins.telescope-config'.project_files()<CR>]], silent)
+lmap('n', 'F', [[:Telescope find_files<CR>]], silent)
+lmap('n', 'bb', [[:Telescope buffers<CR>]], silent)
+lmap('n', 'bf', [[:Telescope current_buffer_fuzzy_find<CR>]], silent)
+lmap('n', 'tm', [[:Telescope man_pages<CR>]], silent)
+lmap('n', 'th', [[:Telescope help_tags<CR>]], silent)
+lmap('n', 'gf', [[:Telescope git_files<CR>]], silent)
+lmap('n', 'gb', [[:Telescope git_branches<CR>]], silent)
+lmap('n', 'gs', [[:Telescope git_status<CR>]], silent)
+lmap('n', 'gS', [[:Telescope git_stash<CR>]], silent)
+lmap('n', 'gc', [[:Telescope git_commits<CR>]], silent)
+
+return M
