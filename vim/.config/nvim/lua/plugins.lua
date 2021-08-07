@@ -31,42 +31,7 @@ return require('packer').startup(function()
         'nvim-treesitter/nvim-treesitter',
         branch = '0.5-compat',
         run = ':TSUpdate',
-        config = function()
-            require'nvim-treesitter.configs'.setup {
-                highlight = {
-                    enable = true,
-                    disable = {},
-                },
-                indent = {
-                    enable = true,
-                    disable = {},
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "gnn",
-                        node_incremental = "grn",
-                        scope_incremental = "grc",
-                        node_decremental = "grm",
-                    },
-                },
-                ensure_installed = {
-                    'lua',
-                    'regex',
-                    'bash',
-                    'c',
-                    'html',
-                    'css',
-                    'javascript',
-                    'typescript',
-                    'go',
-                    'python',
-                    'json',
-                    'toml',
-                    'yaml',
-                },
-            }
-        end
+        config = function() require('plugins.treesitter-config') end
     }
 
     use {
