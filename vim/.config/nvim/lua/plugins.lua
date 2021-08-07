@@ -138,7 +138,10 @@ return require('packer').startup(function()
             {'nvim-lua/popup.nvim'},
             {'nvim-lua/plenary.nvim'},
         },
-        config = function() require('plugins.telescope-config') end,
+        config = function()
+            require('plugins.telescope-config')
+            require('plugins.telescope-config.mappings')
+        end,
     }
 
     use 'tpope/vim-surround'   -- Add, delete, change surroundings such as brackets.
