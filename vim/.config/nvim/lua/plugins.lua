@@ -97,6 +97,13 @@ return require('packer').startup(function()
         end
     }
 
+    -- use 'luochen1990/rainbow' -- Color matching brackets.
+    use {
+        'p00f/nvim-ts-rainbow',
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = function() require('plugins.rainbow-config') end
+    }
+
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
@@ -163,7 +170,6 @@ return require('packer').startup(function()
             vim.g.indentLine_setConceal = 0
         end
     }
-    use 'luochen1990/rainbow' -- Color matching brackets.
     use {
         'dhruvasagar/vim-table-mode',
         ft = 'markdown',
