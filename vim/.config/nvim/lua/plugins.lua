@@ -17,14 +17,9 @@ return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
     use {
-        'morhetz/gruvbox',
-        config = function()
-            vim.cmd[[colorscheme gruvbox]]
-            vim.g.gruvbox_italic = 1
-            vim.g.gruvbox_transparent_bg = true
-            vim.g.gruvbox_improved_strings = true
-            vim.g.gruvbox_constrast_dark = 'hard'
-        end
+        "npxbr/gruvbox.nvim",
+        requires = {"rktjmp/lush.nvim"},
+        config = function() require('plugins.gruvbox-config') end
     }
 
     use {
