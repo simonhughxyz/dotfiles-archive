@@ -41,7 +41,7 @@ map('n', '<F10>', ':TagbarToggle<CR>')
 
 -- Search and replace
 map('n', '\\', ':%s//g<Left><Left>')
-map('v', '\\', ':%s//g<Left><Left>')
+map('v', '\\', ':s//g<Left><Left>')
 map('v', '//', [["vy/\V<C-r>=escape(@v,'/\')<CR><CR>]])
 map('v', '/s', [["vy:%s/<C-r>=escape(@v,"/\\")<CR>//g<left><left>]])
 
