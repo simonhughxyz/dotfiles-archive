@@ -3,33 +3,7 @@
 local o = vim.opt
 local cmd = vim.cmd
 local v = vim.api
-
-function highlight(group, guibg, guifg, ctermbg, ctermfg, au)
-    if au == nil then
-        exe = 'highlight'
-    else
-        exe = 'autocmd ColorScheme * highlight'
-    end
-    if group == nil then
-        exe = exe .. ' *'
-    else
-        exe = exe .. ' ' .. group
-    end
-    if not (guibg == nil) then
-        exe = exe .. ' guibg=' .. guibg
-    end
-    if not (guifg == nil) then
-        exe = exe .. ' guifg=' .. guifg
-    end
-    if not (ctermbg == nil) then
-        exe = exe .. ' ctermbg=' .. ctermbg
-    end
-    if not (ctermfg == nil) then
-        cfg = 'ctermfg=' .. ctermfg
-        exe = exe .. ' ctermfg=' .. ctermfg
-    end
-    vim.cmd(exe)
-end
+hl = require('utils').highlight
 
 -- Get current vim mode
 function get_mode()
@@ -92,19 +66,19 @@ colors = {
 function change_mode_color()
     mode = v.nvim_get_mode().mode
     if mode == 'n' or mode == 'no' then
-        highlight('User1', colors['normal'], colors['white'], '2', '0')
-        highlight('CursorLineNr', colors['normal'], colors['white'], '0', '2')
+        hl('User1', colors['normal'], colors['white'], '2', '0')
+        hl('CursorLineNr', colors['normal'], colors['white'], '0', '2')
 --  elseif (mode() =~# '\v(v|V|)')
     elseif mode == 'v' or mode == 'V' or mode =='' then
-        highlight('User1', colors['visual'], colors['white'], '3', '0')
-        highlight('CursorLineNr', colors['visual'], colors['white'], '0', '6')
+        hl('User1', colors['visual'], colors['white'], '3', '0')
+        hl('CursorLineNr', colors['visual'], colors['white'], '0', '6')
 --  elseif (mode() ==# 'i')
     elseif mode == 'i' then
-        highlight('User1', colors['insert'], colors['white'], '6', '0')
-        highlight('CursorLineNr', colors['insert'], colors['white'], '0', '6')
+        hl('User1', colors['insert'], colors['white'], '6', '0')
+        hl('CursorLineNr', colors['insert'], colors['white'], '0', '6')
     else
-        highlight('User1', colors['else'], colors['white'], '1', '255')
-        highlight('CursorLineNr', colors['else'], colors['white'], '0', '1')
+        hl('User1', colors['else'], colors['white'], '1', '255')
+        hl('CursorLineNr', colors['else'], colors['white'], '0', '1')
     end
     return ''
 end
@@ -132,10 +106,10 @@ vim.api.nvim_set_keymap('n', 'V', 'V<SID>v:lua.change_mode_color()', {script = t
 vim.api.nvim_set_keymap('n', '<C-V>', '<C-V><SID>v:lua.change_mode_color()', {script = true})
 
 -- main statusline color
-highlight('statusline', colors['white'], colors['background'], '0', '15', true)
+hl('statusline', colors['white'], colors['background'], '0', '15', true)
 
 -- Paste Toggle Color
-highlight('User2', colors['paste'], colors['white'], '5', '15', true)
+hl('User2', colors['paste'], colors['white'], '5', '15', true)
 
 
 o.laststatus = 2
