@@ -6,8 +6,6 @@ hl = require('utils').highlight
 hl('Normal', 'NONE', nil, 'NONE', nil, true)
 hl('NonText', 'NONE', nil, 'NONE', nil, true)
 
--- -- -- set custom syntax colors
-hl('Comment', '#262626', '#bcbcbc', '235', '250', true)
 -- -- -- set color of 80 char width column
 hl('ColorColumn', '#303030', nil, '0', nil, true)
 -- -- -- change color of cursor line
