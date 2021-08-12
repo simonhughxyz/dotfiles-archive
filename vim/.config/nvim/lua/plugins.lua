@@ -120,21 +120,6 @@ return require('packer').startup(function()
     --     'universal-ctags/ctags', 
     --     run = './autogen.sh;./configure --prefix=$HOME/.local;make install'
     -- }
-    use {
-        'junegunn/fzf',
-        dir = '~/.fzf',
-        run = './install --all',
-        config = function()
-            vim.g.fzf_layout = {
-                window = {
-                    width = 0.8,
-                    height = 0.5,
-                    highlight = 'Comment',
-                }
-            }
-        end
-    }
-    use 'junegunn/fzf.vim'
     use 'junegunn/vim-easy-align'  -- Align text.
     use 'junegunn/vim-peekaboo'    -- Show register contents in sidebar.
     use { -- Highlights unique letters to help with 'f'
