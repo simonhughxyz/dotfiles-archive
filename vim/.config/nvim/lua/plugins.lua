@@ -144,11 +144,12 @@ return require('packer').startup(function()
         },
         config = function() require('plugins.gitsigns-config') end
     }
-    use { -- Show a line marking indents
-        'Yggdroot/indentLine',
+    use { -- show indent lines
+        'lukas-reineke/indent-blankline.nvim',
         config = function()
-            vim.g.indentLine_setConceal = 0
-        end
+            require('plugins.indent-blankline-config')
+            require('plugins.indent-blankline-config.highlights')
+            end
     }
     use {
         'dhruvasagar/vim-table-mode',
