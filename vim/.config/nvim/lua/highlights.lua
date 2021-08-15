@@ -12,6 +12,9 @@ hl('ColorColumn', '#303030', nil, '0', nil, true)
 hl('CursorLine', '#000000', nil, '0', nil, true)
 hl('CursorLineNr', '#000000', '#008000', '0', '2', true)
 hl('TSString', nil, '#449944', '0', '2', true)
+hl('TSVariable', nil, '#bb80bb', '0', '2', true)
+-- hl('TSFunction', nil, '#f06030', '0', '2', true)
+hl('TSStringRegex', nil, '#aa1111', '0', '2', true)
 
 -- -- Vim Diff colors
 hl('DiffAdd', '#000000', '#00c000', '2', '0', true)
