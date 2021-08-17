@@ -62,8 +62,3 @@ lmap('n', 'c', ':set invlist<CR>', silent)
 
 -- Toggle Conceal
 lmap('n', 'C', [[:let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>]], silent)
-
-
--- next and previous hunk
-lmap('n', ']h', '<Plug>(GitGutterNextHunk)', silent)
-lmap('n', '[h', '<Plug>(GitGutterPrevHunk)', silent)
