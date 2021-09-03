@@ -124,7 +124,11 @@ return require('packer').startup(function()
     }
     use {
         'vimwiki/vimwiki',
-        setup = function() require('plugins.vimwiki-config') end
+        setup = function()
+            require('plugins.vimwiki-config')
+            require('plugins.vimwiki-config.mappings')
+            require('plugins.vimwiki-config.highlights')
+        end
     }
     -- use {
     --     'autozimu/LanguageClient-neovim',
