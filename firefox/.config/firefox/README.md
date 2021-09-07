@@ -11,7 +11,7 @@ Create a symbolic link from the chrome directory to your firefox profile:
 `ln -s ~/.config/chrome ~/.mozilla/firefox/PROFILE_DIR`
 
 ### User.js
-I wrote a simple script, [userjsc](firefox/.local/bin/userjsc) to compile/concatenate the desired userjs and copy them
+I wrote a simple script, [userjsc](../../.local/bin/userjsc) to compile/concatenate the desired userjs and copy them
 into your firefox profile, `userjsc -p PROFILE_DIR_NAME default.user.js OTHER.user.js`
 
 Note: the latter user.js will always override the settings of the previous
