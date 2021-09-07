@@ -13,4 +13,8 @@ Clone the repository wherever you want (I like to keep it in `~/.dotfiles`).
 git clone https://github.com/simonhughcom/dotfiles.git && cd dotfiles && stow -t ~/ */
 ```
 
+## Packages
+These configs require packages to work, for void linux the package list is in
+pkglist.void
 
+To install run `xbps-install -Suf $(cat pkglist.void)`

@@ -66,9 +66,9 @@ super + alt + p
 
 # Menu
 super + a
-    scratchpad -c home -t Home -e home
+    scratchpad -C -c home -t Home -e home
 XF86HomePage
-    scratchpad -c home -t Home -e home
+    scratchpad -C -c home -t Home -e home
 super + {_, shift +} slash
     {class=fxwm_window; flag="-d",class=fxwm_window_all; flag="-D"}; \
     scratchpad -c $class -t fxwm -e "fxwm window -p -m -E $flag"

@@ -10,12 +10,18 @@ _branch(){
     branches=$(git --no-pager branch --all -vv | grep -v HEAD)
 
     # choose branch using fzf
-    branch=$(echo "$branches" | fzf +m --preview="git diff --color ..{1}" --preview-window=up:80%) &&
+    branch=$(echo "$branches" | fzf +m --ansi --preview="git diff --color=always ..{1}" --preview-window=up:80%) &&
 
     # checkout branch
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s#remotes/[^/]*/##")
 }
 
+_diff(){
+    preview="git diff $@ --color=always -- {-1}"
+    git diff $@ --name-only | fzf -m --ansi --preview="$preview"
+}
+
 case "$1" in
     b*) _branch ;;
+    d*) _diff ;;
 esac

@@ -8,24 +8,6 @@ setlocal foldmethod=expr
 setlocal foldexpr=Fold(v:lnum)
 
 
-" HEADER HIGHLIGHTS
-highlight VimwikiHeader1 guifg=#EE2266
-highlight VimwikiHeader2 guifg=#33EE33
-highlight VimwikiHeader3 guifg=#DD44CC
-highlight VimwikiHeader4 guifg=#44DDDD
-highlight VimwikiHeader5 guifg=#FFFF00
-highlight VimwikiHeader6 guifg=#FFAAAA
-
-" MAPPINGS
-"
-" see 'help vimwiki_key_mappings'
-
-" Open/close fold when navigating links
-nmap <Tab> <Plug>VimwikiNextLink
-    \zMzv
-nmap <S-Tab> <Plug>VimwikiPrevLink
-    \zMzv
-
 " Folding function for markdown
 function! Fold(lnum)
     let l:vimwiki_fold_blank_lines = 0 " set to 1 to fold blank lines

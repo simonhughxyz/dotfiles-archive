@@ -159,7 +159,7 @@ handle_urls () {
 && { notify-send 'Download Complete!' '%s'; } \
 || { notify-send 'Download Failed!' '%s'; echo '%s' > %s; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" "$fail_history_file" )"
 
-        ts -L ytdl sh -c "$cmd"
+        ts -L "$title" sh -c "$cmd"
 	fi
     done
 }
