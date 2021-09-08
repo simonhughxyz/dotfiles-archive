@@ -111,8 +111,16 @@ export TS_MAXFINISHED=6
 mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
+ts_menu () {
+    ts | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
+            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep "^ERROR:\|^\[download\]"' \
+            --preview-window='bottom,1%,nowrap,follow' \
+            --bind='alt-q:execute(ts -k {1})'
+}
+
 # Command to interact with task spooler
 [ "$1" = "-R" ] && { shift; ts $*; exit; }
+[ "$1" = "-M" ] && { ts_menu; exit; }
 
 #when this function is set it will be called instead of open_player,
 #open_player handles downloading, and showing a video,
@@ -153,7 +161,7 @@ handle_urls () {
         else
             config="$ytdl_config"
         fi
-        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --config-location '%s' --exec \
+        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --newline --config-location '%s' --exec \
 \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
 '%s' \
 && { notify-send 'Download Complete!' '%s'; } \
