@@ -112,8 +112,8 @@ mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
 ts_menu () {
-    ts | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
-            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep "^ERROR:\|^\[download\]"' \
+    ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
+            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered "^ERROR:\|^\[download\]\|\[youtube\]"' \
             --preview-window='bottom,1%,nowrap,follow' \
             --bind='alt-q:execute(ts -k {1})'
 }
