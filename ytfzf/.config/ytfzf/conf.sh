@@ -113,7 +113,7 @@ ts -S 2
 
 ts_menu () {
     ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
-            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered "^ERROR:\|^\[download\]\|\[youtube\]"' \
+            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -E "^ERROR:|^\[download\]|^\[youtube\]"' \
             --preview-window='bottom,1%,nowrap,follow' \
             --bind='alt-q:execute(ts -k {1}),alt-r:execute(ts -k {};
                 cmd="$( ts -i {1} | grep "^Command: " | sed "s/^Command: //" )";
