@@ -119,7 +119,7 @@ ts_menu () {
                 cmd="$( ts -i {1} | grep "^Command: " | sed "s/^Command: //" )";
                 id="$( echo {1} | sed "s/'"'"'//" )";
                 lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
-                ts -L "$lable" "$cmd";)'
+                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1})'
 }
 
 # Command to interact with task spooler
