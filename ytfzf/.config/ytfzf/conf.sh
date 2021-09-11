@@ -112,6 +112,7 @@ mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
 ts_menu () {
+    sep="================================"
     ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
             fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -E "^ERROR:|^\[download\]|^\[youtube\]"' \
             --preview-window='bottom,1%,nowrap,follow' \
@@ -119,7 +120,7 @@ ts_menu () {
                 cmd="$( ts -i {1} | grep "^Command: " | sed "s/^Command: //" )";
                 id="$( echo {1} | sed "s/'"'"'//" )";
                 lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
-                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1})'
+                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read)'
 }
 
 # Command to interact with task spooler
