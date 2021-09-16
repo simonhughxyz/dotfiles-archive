@@ -52,7 +52,6 @@ export $(dbus-launch) &
 dunst &                                       # for notification.
 sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
 bluetoothctl power on                         # Switch on bluetooth.
-# ntpd -qg    # set time and date from ntp server
 
 # auto connect hdmi
 # requres a udev rule to fill pipe when hdmi is connected/disconnected
