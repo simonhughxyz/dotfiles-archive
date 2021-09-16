@@ -52,6 +52,7 @@ export $(dbus-launch) &
 dunst &                                       # for notification.
 sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
 bluetoothctl power on                         # Switch on bluetooth.
+/usr/lib64/libexec/kdeconnectd > "$( _log "kdeconnect" "kdeconnectd" )"
 
 # auto connect hdmi
 # requres a udev rule to fill pipe when hdmi is connected/disconnected
