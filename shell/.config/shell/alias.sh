@@ -52,19 +52,13 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias cddev="cd $DEV"
 alias cddl="cd $DOWNLOADS"
 alias cddoc="cd $DOCUMENTS"
 alias cdpic="cd $PICTURES"
 alias cdvid="cd $VIDEOS"
 alias cddot="cd $DOTFILES"
-alias cdbin="cd $LOCALBIN"
 alias cdconf="cd $CONFIG"
-alias cdb="cd $LBIN"
-alias cdsc="cd $SCRIPTS"
-alias cdpdfs="cd $PDFS"
 alias cdwh="cd $WH"
-alias cdbd="cd $BUILDS"
 alias fcd=". fcd"
 mcd() { mkdir "$1"; cd "$1"; }  # make dir and cd into it.
 b(){ cd "$(bk -L | fzf)"; }
