@@ -9,12 +9,15 @@ _log(){
     echo "${path}/${2:-${1}}.log"
 }
 
-# lock screen for autologin
-lock &
-
 xrdb -merge ~/.Xresources
 
-setxkbmap -layout gb -option "altwin:menu_win"
+if [ "$HOST" = "voidtower" ]; then
+    setxkbmap -layout gb -option "caps:swapescape" -option "altwin:menu_win"
+elif [ "$HOST" = "voidbook" ]; then
+    setxkbmap -layout gb -option "caps:swapescape" -option "altwin:prtsc_rwin"
+else
+    setxkbmap -layout gb -option "altwin:menu_win"
+fi
 
 # xset r rate 200 50
 xset s 900 900 # lock screen and turn off after 5 min.
@@ -48,7 +51,8 @@ compton &                                     # for transparency and some other 
 export $(dbus-launch) &
 dunst &                                       # for notification.
 sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
-bluetoothctl power off                         # Switch on bluetooth.
+bluetoothctl power on                         # Switch on bluetooth.
+# ntpd -qg    # set time and date from ntp server
 
 # auto connect hdmi
 # requres a udev rule to fill pipe when hdmi is connected/disconnected

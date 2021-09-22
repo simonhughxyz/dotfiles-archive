@@ -111,8 +111,21 @@ export TS_MAXFINISHED=6
 mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
+ts_menu () {
+    sep="================================"
+    ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
+            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -E "^ERROR:|^\[download\]|^\[youtube\]"' \
+            --preview-window='bottom,1%,nowrap,follow' \
+            --bind='alt-q:execute(ts -k {1}),alt-r:execute(ts -k {};
+                cmd="$( ts -i {1} | grep "^Command: " | sed "s/^Command: //" )";
+                id="$( echo {1} | sed "s/'"'"'//" )";
+                lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
+                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read)'
+}
+
 # Command to interact with task spooler
 [ "$1" = "-R" ] && { shift; ts $*; exit; }
+[ "$1" = "-M" ] && { ts_menu; exit; }
 
 #when this function is set it will be called instead of open_player,
 #open_player handles downloading, and showing a video,
@@ -153,7 +166,7 @@ handle_urls () {
         else
             config="$ytdl_config"
         fi
-        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --config-location '%s' --exec \
+        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --newline --config-location '%s' --exec \
 \"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
 '%s' \
 && { notify-send 'Download Complete!' '%s'; } \
