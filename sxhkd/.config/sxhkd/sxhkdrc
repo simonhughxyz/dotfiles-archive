@@ -19,6 +19,8 @@ super + space; m
 # Window controls
 super + {_,shift +} q
     {wmctrl -c ":ACTIVE:", xdotool getactivewindow windowkill}
+super + Delete
+    wmctrl -c ":ACTIVE:"
 super + shift + f
     wmctrl -r ":ACTIVE:" -b "toggle,fullscreen"
 super + shift + s
