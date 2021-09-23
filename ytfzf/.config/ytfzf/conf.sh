@@ -114,13 +114,13 @@ ts -S 2
 ts_menu () {
     sep="================================"
     ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
-            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -v "^$"' \
-            --preview-window='bottom,30%,nowrap,follow' \
+            fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -E "^ERROR:|^\[download\]|^\[youtube\]"' \
+            --preview-window='bottom,1%,nowrap,follow' \
             --bind='alt-q:execute(ts -k {1}),alt-r:execute(ts -k {};
                 cmd="$( ts -i {1} | grep "^Command: " | sed "s/^Command: //" )";
                 id="$( echo {1} | sed "s/'"'"'//" )";
                 lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
-                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read)'
+                ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
 }
 
 # Command to interact with task spooler
