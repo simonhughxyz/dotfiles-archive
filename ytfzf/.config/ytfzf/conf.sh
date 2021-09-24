@@ -123,9 +123,31 @@ ts_menu () {
                 ts -L "$lable" "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
 }
 
-# Command to interact with task spooler
-[ "$1" = "-R" ] && { shift; ts $*; exit; }
-[ "$1" = "-M" ] && { ts_menu; exit; }
+# the command to run for tasks in task spooler
+ts_run_cmd () {
+    url="$1"
+    title="$2"
+    config="$3"
+    now="$( date '+%Y-%m-%d %H:%M:%S' )"
+
+    notify-send 'Beginning Download!' "$title"
+
+    youtube-dl --newline --config-location "$config" --exec \
+        "ffmpeg -i {} -c:v copy -c:a copy -metadata URL='$url' {}.tmp.mkv;mv -f {}.tmp.mkv {}" \
+        "$url" \
+        && { printf 'title: %s\n%s' "$title" 'Download Complete!'; \
+        notify-send 'Download Complete!' "$title"; } \
+        || { printf 'title: %s\n%s' "$title" 'Download failed!'; \
+        notify-send 'Download Faled!' "$title"; \
+        printf '%s\t%s\t%s' "$now" "$url" "$title" > "$fail_history_file"; exit 1; }
+}
+
+# Commands to interact with task spooler
+case "$1" in
+    '--ts-run-cmd') shift; ts_run_cmd "$@"; exit;;
+    '-R') shift; ts "$@"; exit;;
+    '-M') shift; ts_menu; exit;;
+esac
 
 #when this function is set it will be called instead of open_player,
 #open_player handles downloading, and showing a video,
@@ -151,9 +173,6 @@ handle_urls () {
         data="$( printf '%s' "$data" | sed '1d' )"
     fi
 
-    # format failed download message for file
-    msg="$( printf "%s\t%s\t%s" "$( date '+%Y-%m-%d %H:%M:%S' )" "$url" "$title" )"
-
 	if [ $is_download -eq 0 ]; then
 		if [ $is_audio_only -eq 0 ]; then
 			setsid -f $video_player "$url"  $YTFZF_SUBT_NAME >/dev/null 2>&1
@@ -166,13 +185,10 @@ handle_urls () {
         else
             config="$ytdl_config"
         fi
-        cmd="$( printf "notify-send 'Beginning Download!' '%s'; youtube-dl --newline --config-location '%s' --exec \
-\"ffmpeg -i {} -c:v copy -c:a copy -metadata URL='%s' {}.tmp.mkv;mv -f {}.tmp.mkv {}\" \
-'%s' \
-&& { notify-send 'Download Complete!' '%s'; } \
-|| { notify-send 'Download Failed!' '%s'; echo '%s' > %s; exit 1; }" "$title" "$config" "$url" "$url" "$title" "$title" "$msg" "$fail_history_file" )"
 
-        ts -L "$title" sh -c "$cmd"
+        # add download to task spooler
+        # runs ts_run_cmd function as task
+        ts -L "$title" sh -c "$(basename $0) --ts-run-cmd '$url' '$title' '$config'"
 	fi
     done
 }
