@@ -116,7 +116,7 @@ ts_menu () {
     ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
             fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -v "^$"' \
             --preview-window='bottom,30%,nowrap,follow' \
-            --bind='alt-q:execute(ts -k {1};ts -r {1}),alt-r:execute(
+            --bind='alt-q:execute(ts -k {1};ts -r {1}),alt-K:execute(ts -k {1}),alt-r:execute(
                 cmd="$( ts -i {1} | grep "^Command: sh -c" | sed "s/^Command: sh -c //" )";
                 id="$( echo {1} | sed "s/'"'"'//" )";
                 lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
