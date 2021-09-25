@@ -121,6 +121,7 @@ ts_menu () {
                 id="$( echo {1} | sed "s/'"'"'//" )";
                 lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
                 ts -k {1};
+                ts -r {1};
                 ts -L "$lable" sh -c "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
 }
 
