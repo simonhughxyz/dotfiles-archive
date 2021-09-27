@@ -111,8 +111,9 @@ export TS_MAXFINISHED=6
 mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
+sep="==============================================================================="
+
 ts_menu () {
-    sep="================================"
     ts -l | sed '1d;s/]sh -c .*$//;s/[[:space:]].*\[/\t/' | \
             fzf -d'\t' --with-nth='2..' --preview='ts -c {1} | grep --line-buffered -v "^$"' \
             --preview-window='bottom,30%,nowrap,follow' \
@@ -137,10 +138,10 @@ ts_run_cmd () {
     youtube-dl --newline --config-location "$config" --exec \
         "ffmpeg -i {} -c:v copy -c:a copy -metadata URL='$url' {}.tmp.mkv;mv -f {}.tmp.mkv {}" \
         "$url" \
-        && { printf 'title: %s\n%s' "$title" 'Download Complete!'; \
+        && { printf '\n\n%s\n%s\n%s\n[%s]\n' "Download Complete!" "$sep" "$title" "$url"; \
         notify-send 'Download Complete!' "$title"; } \
-        || { printf 'title: %s\n%s' "$title" 'Download failed!'; \
-        notify-send 'Download Faled!' "$title"; \
+        || { printf '\n\n%s\n%s\n%s\n[%s]\n' "Download Failed!" "$sep" "$title" "$url"; \
+        notify-send 'Download Failed!' "$title"; \
         printf '%s\t%s\t%s' "$now" "$url" "$title" > "$fail_history_file"; exit 1; }
 }
 
