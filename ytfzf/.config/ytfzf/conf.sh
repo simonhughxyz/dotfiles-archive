@@ -138,11 +138,12 @@ ts_run_cmd () {
     youtube-dl --newline --config-location "$config" --exec \
         "ffmpeg -i {} -c:v copy -c:a copy -metadata URL='$url' {}.tmp.mkv;mv -f {}.tmp.mkv {}" \
         "$url" \
-        && { printf '\n\n%s\n%s\n%s\n[%s]\n' "Download Complete!" "$sep" "$title" "$url"; \
-        notify-send 'Download Complete!' "$title"; } \
-        || { printf '\n\n%s\n%s\n%s\n[%s]\n' "Download Failed!" "$sep" "$title" "$url"; \
-        notify-send 'Download Failed!' "$title"; \
+        && msg='Download Complete!' \
+        || { msg='Download Failed!'; \
         printf '%s\t%s\t%s' "$now" "$url" "$title" > "$fail_history_file"; exit 1; }
+
+    printf '\n\n%s\n%s\n%s\n[%s]\n%s\n' "$msg" "$sep" "$title" "$url" "$sep"
+    notify-send "$msg" "$title"
 }
 
 # Commands to interact with task spooler
