@@ -119,8 +119,7 @@ ts_menu () {
             --preview-window='bottom,30%,nowrap,follow' \
             --bind='alt-q:execute(ts -k {1};ts -r {1}),alt-K:execute(ts -k {1}),alt-r:execute(
                 cmd="$( ts -i {1} | grep "^Command: sh -c" | sed "s/^Command: sh -c //" )";
-                id="$( echo {1} | sed "s/'"'"'//" )";
-                lable="$( ts -l | grep "^$id" | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
+                lable="$( ts -l | grep "^"{1}" " | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
                 ts -k {1};
                 ts -r {1};
                 ts -L "$lable" sh -c "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
