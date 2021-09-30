@@ -122,7 +122,10 @@ ts_menu () {
                 lable="$( ts -l | grep "^"{1}" " | grep -o "\[.*\]sh -c" | sed "s/^\[//;s/\]sh -c//" )";
                 ts -k {1};
                 ts -r {1};
-                ts -L "$lable" sh -c "$cmd";),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
+                ts -L "$lable" sh -c "$cmd";),alt-o:execute(
+                url="$( ts -l | grep "^"{1}" " | sed "s/^.*]sh -c ytfzf --ts-run-cmd '"'"'//;s/'"'"' .*$//")";
+                $BROWSER "$url";
+                ),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo "'$sep'";read),alt-c:execute(ts -c {1};read)'
 }
 
 # the command to run for tasks in task spooler
