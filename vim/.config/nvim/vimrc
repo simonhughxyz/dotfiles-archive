@@ -2,40 +2,6 @@
 " No thrills vim config for traditional vim
 "
 
-" File Type {{{
-
-function! Run(...)
-    " use b:runcmd if set
-    if exists("b:runcmd") | let l:cmd=b:runcmd | endif
-    
-    " use function argument as cmd if provided.
-    if exists("a:1") | let l:cmd=a:1 | endif
-
-    " run command.
-    if exists("l:cmd")
-        silent !clear
-        exec 'silent :!' . l:cmd . ' &'
-        exec 'redraw!'
-    else
-        echo "No runcmd provided, use b:runcmd to set run command!"
-    endif
-endfu!
-command Run call Run()
-
-" runs file type detect if filetype is empty
-function! SetFileType()
-    if &filetype != 'filetype='
-        filetype detect
-    endif
-endfu!
-" get filetype on write
-" autocmd BufWritePost * call SetFileType()
-
-autocmd BufWritePost statusbar call system("reloadbar")
-
-" open all mutt config files with filetype muttrc
-autocmd BufReadPost *.muttrc set filetype=muttrc
-" }}}
 "Misc {{{
 set nocompatible
 filetype plugin indent on
@@ -52,10 +18,8 @@ set pastetoggle=<F1>
 set mouse=a
 set clipboard=unnamedplus
 set backspace=indent,eol,start
-let g:python_host_prog = '/home/simonhugh/.pyenv/versions/2.7.15/envs/apps2/bin/python'
-let g:python3_host_prog = '/home/simonhugh/.pyenv/versions/3.7.1/envs/apps3/bin/python3'
-set modelines=1
-set modeline
+set modelines=0
+set nomodeline
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
@@ -81,15 +45,6 @@ set foldlevelstart=0   " start with fold level of 1
 " set fold colors
 highlight Folded ctermbg=0 ctermfg=7 guibg=#202020 guifg=Silver
 " }}}
-" Dictionary and Spelling {{{
-if has("spell")
-    set spelllang=en_us
-endif
-set dictionary+=~/.vim/words/english
-set dictionary+=~/.vim/words/new-german
-set thesaurus+=~/.vim/words/th_english
-set complete+=k
-" }}}
 " Colors {{{
 set background=dark
 set t_Co=256
@@ -97,30 +52,14 @@ if (has("termguicolors"))
     set t_8f=[38;2;%lu;%lu;%lum
     set t_8b=[48;2;%lu;%lu;%lum
     set termguicolors
-
-    " nvim-colorizer only works with termguicolors and neovim
-    if has('nvim')
-        lua require 'colorizer'.setup({'*';},
-            \{
-            \   RGB      = true;
-            \   RRGGBB   = true;
-            \   names    = true;
-            \   RRGGBBAA = true;
-            \   rgb_fn   = true;
-            \   hsl_fn   = true;
-            \   css      = true;
-            \   css_fn   = true;
-            \   mode = 'background';
-            \})
-    endif
 endif
 syntax enable           " enable syntax processing
-colorscheme gruvbox
-" Make background transparent
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+colorscheme elflord
+" Make background black
+highlight Normal ctermbg=0 guibg=0
+highlight NonText ctermbg=0 guibg=0
 " set custom syntax colors
-hi Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
+highlight Comment ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc
 " set color of 80 char width column
 highlight ColorColumn ctermbg=0 guibg=#303030
 " change color of cursor line
