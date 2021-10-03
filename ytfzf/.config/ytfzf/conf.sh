@@ -107,7 +107,7 @@ sort_videos_data=1
 
 # Task Spooler
 export TMPDIR=/tmp/ytfzf/ts
-export TS_MAXFINISHED=6
+export TS_MAXFINISHED=12
 mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
