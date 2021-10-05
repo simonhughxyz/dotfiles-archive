@@ -39,7 +39,7 @@ super + w
 super + p
     $TERMINAL --class pulsemixer -t pulsemixer -e pulsemixer
 super + shift + m
-    $TERMINAL --class mail  -t mail -e mail -a
+    $TERMINAL --class mail  -t mail -e neomutt
 super + n
     $TERMINAL --class newsboat -t newsboat -e sh -c "newsboat -I ~/sync/newsboat/read.newsboat; newsboat"
 super + shift + c
