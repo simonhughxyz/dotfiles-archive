@@ -18,7 +18,7 @@ _fzf(){
 }
 
 # get primary selection, clipboard and search history from $hfile and pipe into fzf
-search_term=$( printf "%s\n%s\n" "$(xclip -o -sel clip 2> /dev/null)" "$(xclip -o -sel prim)" | tac - $hfile 2> /dev/null | awk 'NF' | awk '!x[$0]++' |  _fzf --prompt="Search: " --bind="enter:replace-query+print-query,ctrl-space:print-query")
+search_term=$( printf "%s\n%s\n" "$(xsel -b -o 2> /dev/null)" "$(xsel -p -o 2> /dev/null)" | tac - $hfile 2> /dev/null | awk 'NF' | awk '!x[$0]++' |  _fzf --prompt="Search: " --bind="enter:replace-query+print-query,ctrl-space:print-query")
 [ "$search_term" = "" ] && exit 1
 
 # append search to history
