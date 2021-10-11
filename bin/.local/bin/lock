@@ -30,5 +30,8 @@ else
     echo $$ > "$pid"
 fi
 
+# Clear cached gpg keys when locking
+pkill --signal HUP gpg-agent
+
 # run i3lock
 DISPLAY=:0 /bin/i3lock -n -i ~/.config/lockscreen.png
