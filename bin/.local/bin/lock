@@ -10,7 +10,7 @@ runtime=/tmp/lock
 # PID file
 pid=$runtime/pid
 
-command -v /bin/slock > /dev/null || { echo "error: slock not found"; exit 1; }
+command -v /bin/i3lock > /dev/null || { echo "error: i3lock not found"; exit 1; }
 
 # Script to run on exit
 _cleanup() {
@@ -30,5 +30,5 @@ else
     echo $$ > "$pid"
 fi
 
-# run slock
-DISPLAY=:0 /bin/slock
+# run i3lock
+DISPLAY=:0 /bin/i3lock -n -i ~/.config/lockscreen.png
