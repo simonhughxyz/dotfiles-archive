@@ -72,4 +72,7 @@ if [ -p $pipe ]; then
     done &
 fi
 
+# start up with screen locked
+~/.local/bin/lock > "$( _log "lock" )" 2>&1
+
 exec bspwm > "$( _log "bspwm" )" 2>&1
