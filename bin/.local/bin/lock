@@ -28,6 +28,7 @@ else
     # create runtime dir
     mkdir -m 0700 -p "$runtime"
     echo $$ > "$pid"
+    chmod 0600 "$pid"
 fi
 
 # Clear cached gpg keys when locking
