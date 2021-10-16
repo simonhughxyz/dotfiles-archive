@@ -51,6 +51,7 @@ bind-key LEFT quit
 bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
+bind-key o open-in-browser-and-mark-read
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
@@ -64,5 +65,5 @@ bind-key SPACE macro-prefix
 # macros
 macro v set browser "vid -d --file='%u'"; open-in-browser-and-mark-read ; set browser "$BROWSER %u"
 macro d set browser "setsid -f ytfzf --download=1 '%u' >/dev/null 2>&1"; open-in-browser-and-mark-read ; set browser "$BROWSER %u"
-macro o set browser "firefox %u"; open-in-browser ; set browser "$BROWSER %u"
-macro i set browser "curl '%u' > /tmp/img.tmp"; one; set browser "setsid sxiv /tmp/img.tmp >/dev/null 2>&1 &"; open-in-browser; set browser "$BROWSER %u"
+macro o set browser "firefox %u"; open-in-browser-and-mark-read ; set browser "$BROWSER %u"
+macro i set browser "curl '%u' > /tmp/img.tmp"; one; set browser "setsid sxiv /tmp/img.tmp >/dev/null 2>&1 &"; open-in-browser-and-mark-read; set browser "$BROWSER %u"
