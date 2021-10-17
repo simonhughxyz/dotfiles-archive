@@ -72,14 +72,9 @@ else
     export LIBGL_ALWAYS_SOFTWARE=1
 fi
 
-# Start ssh-agent if its not already running
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    mkdir -p "$XDG_RUNTIME_DIR/ssh"
-    ssh-agent -t 16h > "$XDG_RUNTIME_DIR/ssh/ssh-agent.env"
-fi
-if [ ! "$SSH_AUTH_SOCK" ]; then
-    . "$XDG_RUNTIME_DIR/ssh/ssh-agent.env" >/dev/null
-fi
+# Start gpg-agent if needed with ssh support
+/bin/gpg-agent --enable-ssh-support --daemon
+export SSH_AUTH_SOCK=$(/bin/gpgconf --list-dirs agent-ssh-socket)
 
 # source alias, mostly needed for dash
 export ENV=$HOME/.config/shell/alias.sh
