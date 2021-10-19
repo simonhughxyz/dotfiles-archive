@@ -89,16 +89,17 @@ _battery() {
     click_command="melonbar-click battery"
 
     while read line; do
-        tmp="$(echo "$line" | awk '{print $4}' | sed 's/,//;s/%//')"
+        charge="$(echo "$line" | awk -F',' '{print $2}')"
+        charge="${charge%*%}"
         
-        if [ "$tmp" -gt "75" ]; then
+        if [ "$charge" -gt "75" ]; then
             icon=""
-        elif [ "$tmp" -gt "50" ]; then
+        elif [ "$charge" -gt "50" ]; then
             icon=""
-        elif [ "$tmp" -gt "20" ]; then
+        elif [ "$charge" -gt "20" ]; then
             icon=""
             f_color="#f0f000"
-        elif [ "$tmp" -lt "5" ]; then
+        elif [ "$charge" -lt "5" ]; then
             icon=""
             f_color=$alert_color
         else
@@ -106,7 +107,7 @@ _battery() {
             f_color=$alert_color
         fi
 
-        bat="$bat $( echo "$icon $tmp%" | _color "$f_color" )"
+        bat="$bat $( printf "%s%s%%\n" "$icon" "$charge" | _color "$f_color" )"
     done <<< "$(acpi -b)"
 
     _delim "$( echo "$bat" | sed 's/^\s//' | _mouse "$click_command" )" > $prefix/battery
