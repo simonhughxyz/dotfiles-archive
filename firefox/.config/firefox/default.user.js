@@ -73,7 +73,7 @@ user_pref("browser.privatebrowsing.autostart", false); // Always private mode
 user_pref("browser.aboutConfig.showWarning", false); // Disable modify warning
 user_pref("general.warnOnAboutConfig", false); // XUL/XHTML version
 user_pref("browser.shell.checkDefaultBrowser", false); // Disable default check
-user_pref("dom.ipc.processCount", 16); // Double process count
+user_pref("dom.ipc.processCount", 32); // Double process count
 user_pref("findbar.highlightAll", true); // Highlight text search
 user_pref("general.smoothScroll", false); // Smooth scrolling off
 user_pref("reader.parse-on-load.enabled", false); // Disable reader
