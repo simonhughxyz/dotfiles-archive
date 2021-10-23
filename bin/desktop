@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# DESKTOP
+# Simon H Moore
+# 
+# Manage xwm desktops
+
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "wmctrl"
+
+prefix="${XDG_RUNTIME_DIR}/desktop"
+history="$prefix/history"
+
+mkdir -p "$prefix"
+
+# get desktop number from desktop name
+_get_number(){ wmctrl -d | grep "^.* ${1}$" | cut -d' ' -f1; }
+
+_switch(){
+    case "$1" in
+        -n) desktop="$2" ;;
+        *) desktop="$( _get_number "$1" )" ;;
+    esac
+    wmctrl -s "$desktop"
+
+    echo "$desktop" >> "$history"
+}
+
+_last(){
+    _switch -n "$( tail -n1 "$history" )"
+}
+
+_move(){
+    case "$1" in
+        -n) desktop="$2" ;;
+        *) desktop="$( _get_number "$1" )" ;;
+    esac
+    wmctrl -r ":ACTIVE:" -t "$desktop"
+}
+
+case "$1" in
+    -s) shift; _switch "$@" ;;
+    -l) _last ;;
+    -m) shift;  _move "$@" ;;
+    *) _switch "$@"
+esac

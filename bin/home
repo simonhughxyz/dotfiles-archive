@@ -1,0 +1,108 @@
+#!/bin/sh
+
+# HOME
+# Simon Hugh Moore
+#
+# A FZF home page
+# Intended for simple, quick, most used navigation
+
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "mpv"
+_dependency "bookmd"
+
+__usage="usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
+
+For simple, quick, most used navigation
+
+Options:
+  www|web                           Open links in BROWSER
+  pic|pictures                      Select and show images
+  vid|videos                        Select and play a video
+  music                             Select and play music
+  -h, --help                        Print this help message
+"
+
+_get_files(){
+    ext="$( printf "%s" "$2" | sed 's/|/\\|/g' )"
+    find "${1}" -not -path '*/\.*' -type f -regex "^.*\.\(${ext}\)$" -printf "%${3:-f}\n"
+}
+
+_get_containing_dirs(){
+    ext="$( printf "%s" "$2" | sed 's/|/\\|/g' )"
+    _get_files "$1" "$2" "h" | sort | uniq | sed "s|${dir}||;s|$|/|"
+}
+
+_pictures(){
+    dir="${HOME}/Pictures"
+    ext="jpeg|jpg|png"
+
+    pic_dirs="$( _get_containing_dirs "${dir}/" "${ext}" )"
+
+    choice="$( printf "%s" "$pic_dirs" | fzf )"
+    [ -z "$choice" ] && exit
+
+    nohup sxiv -t "${dir}/${choice}" </dev/null >dev/null 2>&1 &
+    sleep 0.1
+}
+
+_videos(){
+    dir="${HOME}/Videos"
+    ext="mkv|mp4|wav"
+
+    vid_dirs="$( _get_containing_dirs "${dir}/" "${ext}" )"
+
+    choice="$( printf "%s" "$vid_dirs" | fzf )"
+    [ -z "$choice" ] && exit
+
+    file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
+}
+
+_music(){
+    dir="${HOME}/Music"
+    ext="mkv|mp4|wav|mp3|aac"
+
+    vid_dirs="$( _get_containing_dirs "${dir}/" "${ext}" )"
+
+    choice="$( printf "%s" "$vid_dirs" | fzf )"
+    [ -z "$choice" ] && exit
+
+    file="$( _get_files "${dir}/${choice}" "${ext}" | fzf )"
+    nohup mpv --quiet "${dir}${choice}${file}" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
+}
+
+_www(){
+    links="$( bookmd -q 'home##Links' | sed 's/^\[//;s/)$//' | awk -F']\\(' '{printf "%s\t\t\t%s\n", $1, $2}' )"
+
+    choice="$( printf "%s" "$links" | fzf -d "\t\t\t" --with-nth=1 )"
+    [ -z "$choice" ] && exit
+
+    nohup sh -c "$BROWSER '$( printf "%s" "$choice" | awk -F"\t\t\t" '{print $2}' )'" </dev/null >/dev/null 2>&1 &
+    sleep 0.1
+}
+
+_quick_menu(){
+    options="WWW\nVIDEOS\nMUSIC\nPICTURES"
+
+    choice="$( echo "$options" | fzf )"
+    [ -z "$choice" ] && exit
+    
+    case "$choice" in
+        WWW) _www;;
+        VIDEOS) _videos;;
+        MUSIC) _music;;
+        PICTURES) _pictures;;
+    esac
+}
+
+case "$1" in
+    -h|--help) printf "%s\n" "$__help"; exit;;
+    pic|pictures) _pictures;;
+    www|web) _www;;
+    vid|videos) _videos;;
+    music) _music;;
+    *) _quick_menu;;
+esac

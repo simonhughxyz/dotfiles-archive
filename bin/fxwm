@@ -1,0 +1,212 @@
+#!/bin/sh
+
+# FXWM
+# Simon Hugh Moore
+#
+# A pseudo window manager using fzf
+# Switch, move and delete windows, desktops and monitors
+
+export DISPLAY=:0
+
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "wmctrl"
+_dependency "xrandr"
+_dependency "xdotool"
+
+__usage="usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
+
+FZF X Window Manager
+Control and manage X windows, desktops and monitors with FZF
+
+Options:
+  window [OPTIONS]                   Manage windows in FZF, the default option
+  desktop                            Manage desktops in FZF
+  monitor                            Manage monitors in FZF
+  -h, --help                         Print this help message
+"
+
+__window_keys="alt-?  : Show this help message
+alt-q  : Close the window
+alt-Q  : Kill the window
+alt-h  : Hide the window
+alt-f  : Toggle fullscreen
+alt-s  : Toggle sticky
+alt-m  : Move the window to the current desktop
+alt-T  : Change the window title
+alt-t  : Print window title to stdout
+alt-c  : Print window class to stdout
+alt-w  : Print window ID to stdout
+alt-p  : Print process ID to stdout
+alt-d  : Print desktop name of window to stdout
+alt-D  : Print desktop number of window to stdout
+alt-a  : Print all window data
+alt-A  : Print window data from xprop
+return : Switch to desktop containing window and focus"
+
+__desktop_keys="alt-?  : Show this help message
+alt-d  : Print desktop name to stdout
+alt-D  : Print desktop number to stdout
+alt-t  : Print window titles contained in desktop to stdout
+alt-a  : Print all desktop information
+alt-m  : Move focused window to desktop
+alt-w  : Open window menu with selected desktop
+return : Switch to desktop
+"
+
+
+__window_help="usage: $(basename $0) window [OPTIONS]
+
+Control windows in fzf
+
+Options:
+  -h, --help                         Print this help message
+  -d [desktop name]                  Only show windows of given desktop or local desktop by default
+  -c <class>                         Filter by class
+  -t <title>                         Filter by title
+  -D                                 Show desktop name along with window title
+  -l                                 Live mode, go to selected window, but don't loose focus
+  -p                                 Persistent mode, don't exit or loose focus when pressing enter
+  -m                                 Mouse mode, go to window selected with mouse, but don't loose focus
+  -E                                 Exclude the window containing $( basename $0 ) from list
+
+Keymap:
+$( echo "$__window_keys" | sed 's/^.*$/  &/' )"
+
+__desktop_help="usage: $(basename $0) desktop [OPTIONS]
+
+Control desktops in fzf
+
+Options:
+  -h, --help                         Print this help message
+  -P                                 Only show populated desktops
+  -l                                 Live mode, go to selected desktop, but don't loose focus
+  -p                                 Persistent mode, don't exit or loose focus when pressing enter
+  -m                                 Mouse mode, go to desktop selected with mouse, but don't loose focus
+
+Keymap:
+$( echo "$__desktop_keys" | sed 's/^.*$/  &/' )"
+
+_fzf(){
+    fzf --exact --no-info --preview-window=right,90%,border-left "$@"
+}
+
+# Return all fields from nth to last field
+_field_to_end(){ awk -v field="$1" '{for(i=field;i<=NF;i++) printf $i" "; print ""}'; }
+
+# Present a list of windows in fzf to perform various actions with
+_window(){
+    # get a list of windows including the desktop name for each window
+    windows="$( wmctrl -lxpG | sed "$( wmctrl -d | sed 's|[[:space:]].*[[:space:]]|[[:space:]]/\&|;s|.*|s/^0x[0-9a-z]*[[:space:]][[:space:]]*& /;|' )" )"
+
+    current_window="$( xdotool getwindowfocus )"
+    current_window_hex="$( printf "0x%08x" "$current_window" )"
+    persistant_cmd="wmctrl -ia {}; wmctrl -ia ${current_window}"
+
+    args="$@" # save arguments for help message
+    while test $# -gt 0; do
+        case "$1" in
+            -h|--help) echo "$__window_help"; exit ;;
+            -D) nth="3,11.." ;; # Show desktop name
+            -d) # Return only windows local to the desktop
+                if [ -n "$2" ] && [ "${2%${2#?}}" != "-" ]; then
+                    current_desktop="$( wmctrl -d | grep "[[:space:]]${2}$" | cut -d' ' -f1 )"
+                else
+                    current_desktop="$( wmctrl -d | grep '*' | cut -d' ' -f1 )"
+                fi
+
+                windows="$( echo "$windows" | grep "^0x[^ ]*[[:space:]][[:space:]]*$current_desktop[[:space:]].*$" )" ;;
+            -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
+            -l) preview_cmd="${persistant_cmd}" ;;
+            -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
+            -c) shift; windows="$( echo "$windows" | awk -v var="$1" '$9 ~ var {print $0}' )" ;;
+            -t) shift; windows="$( echo "$windows" | grep -E "^([^ ]*[[:space:]][[:space:]]*){,10}.*$1.*$" )" ;;
+            -E) windows="$( echo "$windows" | grep -v "^$current_window_hex[[:space:]].*$" )"
+        esac
+        shift
+    done
+    
+    choice="$( echo "$windows" | _fzf --with-nth="${nth:-11..}" --preview-window="right,0" --expect='alt-?,alt-q,alt-Q,alt-h,alt-f,alt-s,alt-m,alt-t,alt-T,alt-c,alt-w,alt-p,alt-d,alt-D,alt-a,alt-A' --bind="up:up${bind_cmd}" --preview="${preview_cmd}" )"
+
+    key="$( echo "$choice" | head -n1 )"
+    window="$( echo "$choice" | tail -n1 )"
+
+    [ -z "$window" ] && exit
+
+    # Perform different actions depending on key pressed by the user
+    case "$key" in
+        alt-\?) echo -n "$__window_keys" | _fzf --disabled >/dev/null;  _window $args ;; # Show keymap help in fzf
+        alt-q) wmctrl -ic "$window" ;; # Close the window
+        alt-Q) kill -s 9 "$( echo "$window" | awk '{print $3}' )" ;; # Kill the window
+        alt-h) wmctrl -ir "$window" -b "toggle,hidden" ;; # Hide the window
+        alt-f) wmctrl -ir "$window" -b "toggle,fullscreen" ;; # Switch window to fullscreen
+        alt-s) wmctrl -ir "$window" -b "toggle,sticky" ;; # Make window sticky
+        alt-m) wmctrl -iR "$window" ;; # Move the window to the current desktop
+        alt-T) wmctrl -ir "$window" -T "$( echo "" | fzf --print-query --prompt="Title: " --pointer=" " )" ;; # Change the window title
+        alt-t) echo "$window" | _field_to_end "11" ;; # Print window title to stdout
+        alt-c) echo "$window" | awk '{ print $9 }' ;; # Print window class to stdout
+        alt-w) echo "$window" | awk '{ print $1 }' ;; # Print window ID to stdout
+        alt-p) echo "$window" | awk '{ print $4 }' ;; # Print process ID to stdout
+        alt-d) echo "$window" | awk '{ print $3 }' ;; # Print desktop name of window to stdout
+        alt-D) echo "$window" | awk '{ print $2 }' ;; # Print desktop number of window to stdout
+        alt-a) echo "$window" ;; # Print all window data
+        alt-A) xprop -id "$window" ;; # Print window data from xprop
+        *) wmctrl -ia "$window" ;; # Switch to desktop containing window and focus
+    esac
+}
+
+# Present a list of desktops in fzf to perform various actions with
+_desktop(){
+    desktops="$( wmctrl -d )"
+    
+    current_window="$( xdotool getwindowfocus )"
+    persistant_cmd="wmctrl -s {}; wmctrl -ia ${current_window}"
+
+    args="$@" # save arguments for help message
+    while test $# -gt 0; do
+        case "$1" in
+            -h) echo "$__desktop_help"; exit;;
+            -P) # Only show populated desktops
+                desktops="$( echo "$desktops" | sed -n "$( wmctrl -l | sed 's|^0x[0-9a-z]*[[:space:]][[:space:]]*|/^|;s|[[:space:]].*$| .*$/p;|' | uniq )" )" ;;
+            -m) bind_cmd="${bind_cmd},left-click:execute(${persistant_cmd})" ;;
+            -l) preview_cmd="${persistant_cmd};" ;;
+            -p) bind_cmd="${bind_cmd},enter:execute(${persistant_cmd})" ;;
+        esac
+        shift
+    done
+
+    # List desktops in fzf with a list of windows in the preview window
+    choice="$( echo "$desktops" | _fzf  --with-nth=9 --expect='alt-?,alt-d,alt-D,alt-t,alt-a,alt-m,alt-w'  --preview="${preview_cmd}"'
+    wmctrl -l | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*"{1}"[[:space:]].*$" | awk '\''{for(i=4;i<=NF;i++) printf $i" "; print ""}'\''' --bind="up:up${bind_cmd}" )"
+
+    key="$( echo "$choice" | head -n1 )"
+    desktop="$( echo "$choice" | tail -n1 )"
+
+    [ -z "$desktop" ] && exit
+
+    # Perform different actions depending on key pressed by the user
+    case "$key" in
+        alt-\?) echo -n "$__desktop_keys" | _fzf --disabled >/dev/null;  _desktop $args;; # Show keymap help in fzf
+        alt-d) echo "$desktop" | awk '{ print $9 }' ;; # Print desktop name to stdout
+        alt-D) echo "$desktop" | awk '{ print $1 }' ;; # Print desktop number to stdout
+        alt-t) wmctrl -lxpG | grep "^0x[0-9a-z]*[[:space:]][[:space:]]*$( echo "$desktop" | 
+            cut -d' ' -f1 )[[:space:]].*$" | _field_to_end "10" ;; # Print window titles contained in desktop
+        alt-a) echo "$desktop" ;; # Print all desktop data
+        alt-m) wmctrl -ir "$( xdotool getwindowfocus )" -t "$desktop" ;; # Move focused window to desktop
+        alt-w) _window -d "$( echo "$desktop" | awk '{print $9}' )" ;; # Open window menu with selected desktop
+        *) wmctrl -s "$desktop" ;; # Switch to desktop
+    esac
+}
+
+# TODO: present list of monitors in fzf
+_monitor(){
+    xrandr --listmonitors
+}
+
+case "$1" in
+    -h|--help) echo "$__help"; exit ;;
+    window) shift; _window "$@" ;;
+    desktop) shift; _desktop "$@" ;;
+    monitor) shift; _monitor "$@" ;;
+    *) _window "$@" ;;
+esac

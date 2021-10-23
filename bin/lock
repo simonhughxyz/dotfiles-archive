@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# LOCK
+# Simon Hugh Moore
+#
+# Lock the screen
+
+# runtime dir.
+runtime=/tmp/lock
+# PID file
+pid=$runtime/pid
+
+command -v /bin/i3lock > /dev/null || { echo "error: i3lock not found"; exit 1; }
+
+# Script to run on exit
+_cleanup() {
+    rm -f "$pid"
+    exit
+}
+
+# Make sure only one instants of lock is running.
+if [ -f "$pid" ]; then
+    echo "$(basename "$0") is already running, exiting..."
+    exit 1
+else
+    # delete pid file when exiting
+    trap _cleanup EXIT INT HUP TERM
+    # create runtime dir
+    mkdir -m 0700 -p "$runtime"
+    echo $$ > "$pid"
+    chmod 0600 "$pid"
+fi
+
+# Clear cached gpg keys when locking
+pkill --signal HUP gpg-agent
+
+# run i3lock
+DISPLAY=:0 /bin/i3lock -n -i ~/.config/lockscreen.png

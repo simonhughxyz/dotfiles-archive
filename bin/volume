@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# VOLUME
+# Simon H Moore
+# 
+# Set, raise, lower or mute volume while refreshing melonbar
+# To set volume simply provide a volume level as an argument (volume 10)
+# To raise or lower volume use a + or - in front of level (volume +/-10)
+# To toggle mute pass the mute or m argument (volume m/mute)
+
+prefix="${XDG_RUNTIME_DIR}/volume"
+pipe="$prefix/pipe"
+
+_get_volume() { pulsemixer --get-volume | awk '{ if($1 == $2) print $1; else print $0 }'; }
+
+_get_mute() { pulsemixer --get-mute; }
+
+_get_state(){
+    if [ "$(_get_mute)" = "1" ]; then
+        echo "mute"
+    else
+        _get_volume
+    fi
+}
+
+_set_volume(){
+    case $1 in
+        [+-]*)  pulsemixer --change-volume $1 ;;
+        *)  pulsemixer --set-volume $1 ;;
+    esac
+    _update_pipe
+    exit
+}
+
+_toggle_mute(){
+    pulsemixer --toggle-mute
+    _update_pipe
+    exit
+}
+
+
+_make_pipe() {
+    [ -p "$pipe" ] && return 0
+    mkdir -p "$prefix"
+    mkfifo "$pipe" 2> /dev/null
+}
+
+_update_pipe(){
+    _make_pipe
+    _get_state > "$pipe"
+}
+
+# Returns the state of volume.
+_subscribe() {
+    _make_pipe
+    tail -f "$pipe"
+}
+
+case $1 in
+    -m|mute) _toggle_mute ;;
+    [+-][0-9][0-9]|[+-][0-9]|[0-9]*) _set_volume $1 ;;
+    -V|get-volume) _get_volume && exit ;;
+    -M|get-mute) _get_mute && exit ;;
+    update) _update_pipe exit ;;
+    subscribe) _subscribe ;;
+    *) _get_state && exit ;; 
+esac

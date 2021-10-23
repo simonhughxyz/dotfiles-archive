@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# TIMEZONE
+# Simon Hugh Moore
+#
+# Print out all times for each timezone in system
+
+_get_zones(){
+    if command -v fd > /dev/null; then
+        fd . /usr/share/zoneinfo/posix/ -0
+    else
+        find /usr/share/zoneinfo/posix/ -print0 
+    fi
+}
+
+_get_zones | sed 's\/usr/share/zoneinfo/posix/\\g' | xargs -0 -I {} sh -c 'echo "{}: $(TZ=":{}" date '+%H:%M:%S')"'
