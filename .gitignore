@@ -1,5 +1,8 @@
 # Gitignore for dotfiles
 
+# ignore itself
+.dotfiles
+
 # vim
 vim/.config/nvim/autoload/
 vim/.config/nvim/plugged/
