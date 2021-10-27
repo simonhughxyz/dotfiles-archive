@@ -116,8 +116,13 @@ alias ip6t='sudo ip6tables'
 alias iptl='sudo iptables -nvL'
 alias ip6tl='sudo ip6tables -nvL'
 
+# trash
+alias t='trash-put '
+alias tl='trash-list '
+alias tr='trash-restore '
+alias trm=' trash-rm '
+
 # misc
-alias r='trash-put '
 alias rm='rm -I '
 alias hist='history | g'
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
