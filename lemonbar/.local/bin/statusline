@@ -14,10 +14,12 @@ _delim(){
     f_color="#b0b0b0"
     b_color=""
 
-    # print stdin to left of delim.
-    while read line; do
-        echo "$line"
-    done
+    if [ -z "$1" ]; then
+        # print stdin to left of delim.
+        while read line; do
+            echo "$line"
+        done
+    fi
 
     printf " %s %s" "%{F$f_color}%{B$b_color}$delim%{F-}%{B-}" "$1"
 }
