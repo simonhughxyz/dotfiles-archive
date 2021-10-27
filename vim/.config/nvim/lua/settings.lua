@@ -1,4 +1,5 @@
 local o = vim.opt
+local env = vim.env
 
 -- global options
 o.encoding = 'utf-8'
@@ -13,7 +14,7 @@ o.backspace = 'indent,eol,start'
 o.updatetime = 100
 o.showmode = false
 o.undofile =  true
-o.undodir = '~/.vim/undodir'
+o.undodir = env.XDG_DATA_HOME .. '/nvim/undo'
 o.timeoutlen = 500
 o.scrolloff = 5
 
