@@ -120,6 +120,7 @@ alias ip6tl='sudo ip6tables -nvL'
 alias r='trash-put '
 alias t='trash-put '
 alias tl='trash-list '
+alias tc='trash-list | wc -l'
 alias tr='trash-restore '
 alias trm=' trash-rm '
 
