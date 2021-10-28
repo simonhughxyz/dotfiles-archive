@@ -117,6 +117,7 @@ alias iptl='sudo iptables -nvL'
 alias ip6tl='sudo ip6tables -nvL'
 
 # trash
+alias r='trash-put '
 alias t='trash-put '
 alias tl='trash-list '
 alias tr='trash-restore '
