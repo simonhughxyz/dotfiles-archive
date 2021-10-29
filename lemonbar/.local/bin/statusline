@@ -120,7 +120,6 @@ _battery() {
 
         # override color if battery is not discharging
         if [ $state != "Discharging" ]; then
-            echo "lol"
             battery_color=$f_color_no_power_draw
         fi
 
