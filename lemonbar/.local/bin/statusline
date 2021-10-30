@@ -89,7 +89,7 @@ _battery() {
     command -v acpi > /dev/null 2>&1 || return
     f_color="#60ff60" # color when battery is above 50%
     f_color_low_power="#f0f000" # color when battery is bellow 50%
-    f_color_no_power_draw="#5500aa" # color when battery is not being discharged
+    f_color_no_power_draw="#bb00ff" # color when battery is not being discharged
     click_command="melonbar-click battery"
 
     # for each battery
