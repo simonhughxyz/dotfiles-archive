@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# AUTHOR: Simon H Moore
+#
+# DATE: Wed Nov 04 2021
+#
+# DESC: This is a wrapper script around xdg-open to fix a bug as described in
+#       (https://gitlab.freedesktop.org/xdg/xdg-utils/-/issues/84)
+#       desktop apps with the "Terminal" key set to true will lauch with a new
+#       terminal if DISPLAY is set and FD0 and FD1 are not open
+#
+# USAGE: Run as you would xdg-open, the default terminal is set by TERMCMD env,
+#        make sure you set the appropriate flags for example:
+#        `export TERMCMD="xterm -e"`
+#        If TERMCMD is not available, it will fall back to TERMINAL and use `-e`
+#        as a command flag.
+
+OPENER="/bin/xdg-open"
+TERMINAL="${TERMINAL} -e "
+TERMCMD="${TERMCMD:-$TERMINAL}"
+
+command -v xdg-mime > /dev/null || { echo "error: xdg-mime not found"; exit; }
+command -v "$OPENER" > /dev/null || { echo "error: $OPENER not found"; exit; }
+
+# check if first argument is a flag and exit
+case "$1" in
+    -*) $OPENER "$@"; exit;;
+esac
+
+filetype="$( xdg-mime query filetype "$1" )"
+default="$( xdg-mime query default "$filetype" )"
+
+# get the default desktop file
+get_xdg_desktop_file(){
+    desktop="$1"
+    if [ -n "$desktop" ] ; then
+        xdg_user_dir="$XDG_DATA_HOME"
+        [ -n "$xdg_user_dir" ] || xdg_user_dir="$HOME/.local/share"
+
+        xdg_system_dirs="$XDG_DATA_DIRS"
+        [ -n "$xdg_system_dirs" ] || xdg_system_dirs=/usr/local/share/:/usr/share/
+
+        desktops=""
+        for dir in `echo "$xdg_user_dir:$xdg_system_dirs" | sed 's/:/ /g'`; do
+            dir="${dir%*/}/applications"
+            for file in "$dir"/*; do
+                if [ "${dir}/${desktop}" = "$file" ]; then
+                    desktops="${desktops}:${file}"
+                fi
+            done
+        done
+        desktops="${desktops#:*}"
+        printf "${desktops%:*}"
+    fi
+}
+
+# if desktop is terminal app and in a terminal emulator run with TERMCMD
+if [ "$( grep "Terminal=*" "$( get_xdg_desktop_file "$default" )" | cut -d= -f 2- )" = "true" ] &&
+     [ ! -z "$DISPLAY" ] && ( [ ! -t 0 ] || [ ! -t 1 ] ); then
+    $TERMCMD $OPENER "$@"
+else
+    $OPENER "$@"
+fi
