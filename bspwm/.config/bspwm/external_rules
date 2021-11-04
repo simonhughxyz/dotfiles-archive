@@ -77,4 +77,11 @@ case "$instance" in
         echo "sticky=on"
         echo "border=off"
     ;;
+    *)
+        case "$(xprop -id "$wid" | awk '/WM_WINDOW_ROLE/ {print $3}')" in
+        '"GtkFileChooserDialog"' )
+                echo rectangle=1400x800+0+0
+                ;;
+        esac
+    ;;
 esac
