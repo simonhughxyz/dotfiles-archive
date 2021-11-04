@@ -9,9 +9,6 @@
 # binary options to nnn
 # export NNN_OPTS="cEnrx"
 
-# custom opener (see plugin nuke)
-export NNN_OPENER="$LBIN/open"
-
 # key-bookmark pairs
 export NNN_BMS="\
 n:~/Documents/notes;\
