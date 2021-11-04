@@ -18,6 +18,7 @@ zsh/.config/zsh/.zcompdump
 # NNN
 nnn/.config/nnn/.history*
 nnn/.config/nnn/.selection
+nnn/.config/nnn/.lastd
 
 # mpv
 mpv/.config/mpv/watch_later
