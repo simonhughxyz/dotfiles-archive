@@ -21,6 +21,7 @@ alias svs='sudo sv stop '
 alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
 alias bt='bluetoothctl'
+alias o='xdg-open '
 
 # program options
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc'
