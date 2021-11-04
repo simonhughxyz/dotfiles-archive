@@ -31,6 +31,7 @@ image/gif=sxiv.desktop;
 image/jpeg=sxiv.desktop;
 image/jpg=sxiv.desktop;
 image/png=sxiv.desktop;
+image/webp=sxiv.desktop;
 image/tiff=sxiv.desktop;
 image/x-bmp=sxiv.desktop;
 image/x-portable-anymap=sxiv.desktop;
