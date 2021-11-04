@@ -87,6 +87,7 @@ wmctrl
 xclip
 xdotool
 xorg-minimal
+xprop
 xrandr
 xrdb
 xsel
