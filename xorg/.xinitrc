@@ -50,7 +50,6 @@ unclutter -f &                                # removes mouse from screen after 
 compton &                                     # for transparency and some other effects.
 export $(dbus-launch) &
 dunst &                                       # for notification.
-sxhkd > "$( _log "sxhkd" )" 2>&1 & # key bindings.
 bluetoothctl power on                         # Switch on bluetooth.
 /usr/lib64/libexec/kdeconnectd > "$( _log "kdeconnect" "kdeconnectd" )" 2>&1 &
 
