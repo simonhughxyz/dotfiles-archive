@@ -22,7 +22,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # default programs
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="st"
 export TERMCMD="${TERMINAL} -e "
 export BROWSER="www"
 export READER="zathura"
