@@ -21,6 +21,10 @@ _chromium(){
     TZ=UTC chromium $@
 }
 
+_qutebrowser(){
+    TZ=UTC qutebrowser $@
+}
+
 _sync() {
     [ $( ls "$firefox_profiles"/*/lock 2> /dev/null ) ] && echo "Firefox is running!\nClose firefox before syncing!" && exit 1
     rsync -r --exclude-from "$profiles/.rsync_ignore" "$1/" "$2"; 
@@ -32,6 +36,7 @@ _remove_firefox_profiles() { rm -rf "$firefox_profiles"; }
 _git() { git -C "$profiles" $@; }
 
 case $1 in
+    -q|qutebrowser) shift; _qutebrowser $@ ;;
     -c|chromium) shift; _chromium $@ ;;
     -f|firefox) shift; _firefox $@ ;;
     -s|save) _save_firefox_profiles ;;
