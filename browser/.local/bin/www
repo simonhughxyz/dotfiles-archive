@@ -43,5 +43,5 @@ case $1 in
     -l|load) _load_firefox_profiles ;;
     -g|git) shift; _git $@ ;;
     -r|rm) _remove_firefox_profiles ;;
-    *) _firefox $@ ;;
+    *) _qutebrowser $@ ;;
 esac
