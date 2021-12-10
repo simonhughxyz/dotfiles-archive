@@ -21,3 +21,7 @@ c.aliases = {
     'q': 'quit',
     'wq': 'quit --save',
 }
+
+# ==================== Bindings ==========================================
+config.bind("v", "hint links spawn mpv {hint-url}")
+
