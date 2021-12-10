@@ -26,3 +26,13 @@ c.aliases = {
 config.bind("v", "hint links spawn mpv {hint-url}")
 config.bind("d", "hint links spawn ytfzf --download=1 '{hint-url}'")
 
+# ==================== Search Engines ====================================
+c.url.searchengines = {
+    # DuckDuckGO
+    'DEFAULT': 'https://search.simonhugh.xyz/searx/search?q={}',
+    'd': 'https://duckduckgo.com/?q={}',
+    # Google
+    'g' :  'http://www.google.com/search?q={}',
+    # Youtube
+    'y' : 'https://www.youtube.com/results?search_query={}',
+}
