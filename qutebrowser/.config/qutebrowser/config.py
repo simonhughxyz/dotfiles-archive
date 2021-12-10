@@ -24,4 +24,5 @@ c.aliases = {
 
 # ==================== Bindings ==========================================
 config.bind("v", "hint links spawn mpv {hint-url}")
+config.bind("d", "hint links spawn ytfzf --download=1 '{hint-url}'")
 
