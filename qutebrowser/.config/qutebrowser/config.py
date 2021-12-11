@@ -15,6 +15,9 @@ c.url.default_page          = 'search.simonhugh.xyz'
 c.url.start_pages           = ['search.simonhugh.xyz']
 c.zoom.default  =  150
 
+# ==================== Privacy & Security ================================
+c.content.geolocation  =  False
+
 # ==================== Aliases ===========================================
 c.aliases = {
     'w': 'session-save',
