@@ -18,6 +18,7 @@ c.zoom.default  =  150
 # ==================== Privacy & Security ================================
 c.content.geolocation       = False
 c.content.pdfjs             = False
+c.content.webgl             = False
 
 # ==================== Aliases ===========================================
 c.aliases = {
