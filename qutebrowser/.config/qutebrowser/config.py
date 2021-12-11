@@ -19,9 +19,10 @@ c.zoom.default  =  150
 c.content.geolocation       = False
 c.content.pdfjs             = False
 c.content.webgl             = False
-c.content.cookies.accept    =  'no-3rdparty'
-c.content.javascript.can_access_clipboard  =  False
-c.content.headers.referer   =  'same-domain'
+c.content.cookies.accept    = 'no-3rdparty'
+c.content.javascript.can_access_clipboard  = False
+c.content.headers.referer   = 'same-domain'
+c.content.blocking.enabled  = True
 
 # ==================== Aliases ===========================================
 c.aliases = {
