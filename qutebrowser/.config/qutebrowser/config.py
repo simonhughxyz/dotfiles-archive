@@ -29,6 +29,23 @@ c.content.headers.do_not_track = False    # can be used to fingerprint
 c.content.blocking.enabled  = True
 c.content.blocking.method   = 'both'
 c.content.blocking.hosts.block_subdomains   = True
+c.content.blocking.adblock.lists    = [
+        "https://easylist.to/easylist/easylist.txt",
+        "https://easylist.to/easylist/easyprivacy.txt",
+        "https://easylist.to/easylist/fanboy-social.txt",
+        "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+        "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
+        "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
+        "https://curben.gitlab.io/malware-filter/urlhaus-filter.txt",
+        "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt",
+        "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt",
+]
 
 # ==================== Aliases ===========================================
 c.aliases = {
