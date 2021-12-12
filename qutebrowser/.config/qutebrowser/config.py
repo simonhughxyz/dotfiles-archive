@@ -26,6 +26,7 @@ c.content.javascript.can_access_clipboard   = False
 c.content.headers.referer   = 'same-domain'
 c.content.dns_prefetch      = False
 c.content.headers.do_not_track = False    # can be used to fingerprint
+c.content.canvas_reading  =  False
 
 # ==================== Adblock ===========================================
 c.content.blocking.enabled  = True
