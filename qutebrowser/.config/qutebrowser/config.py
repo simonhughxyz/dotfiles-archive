@@ -22,11 +22,12 @@ c.content.geolocation       = False
 c.content.pdfjs             = False
 c.content.webgl             = False
 c.content.cookies.accept    = 'no-3rdparty'
-c.content.javascript.can_access_clipboard   = False
+c.content.javascript.can_access_clipboard = False
 c.content.headers.referer   = 'same-domain'
 c.content.dns_prefetch      = False
+c.content.canvas_reading    = False
 c.content.headers.do_not_track = False    # can be used to fingerprint
-c.content.canvas_reading  =  False
+c.content.webrtc_ip_handling_policy = 'disable-non-proxied-udp'
 
 # ==================== Adblock ===========================================
 c.content.blocking.enabled  = True
