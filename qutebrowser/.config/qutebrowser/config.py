@@ -13,7 +13,8 @@ c.tabs.show                 = 'never'
 c.tabs.tabs_are_windows     = True
 c.url.default_page          = 'search.simonhugh.xyz'
 c.url.start_pages           = ['search.simonhugh.xyz']
-c.zoom.default  =  150
+c.zoom.default              = 150
+c.content.autoplay          = False
 
 # ==================== Privacy & Security ================================
 c.content.geolocation       = False
