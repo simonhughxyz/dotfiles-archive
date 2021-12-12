@@ -15,6 +15,7 @@ c.url.default_page          = 'search.simonhugh.xyz'
 c.url.start_pages           = ['search.simonhugh.xyz']
 c.zoom.default              = 150
 c.content.autoplay          = False
+c.content.mute              = True
 
 # ==================== Privacy & Security ================================
 c.content.geolocation       = False
