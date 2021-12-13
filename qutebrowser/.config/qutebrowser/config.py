@@ -51,6 +51,8 @@ c.content.blocking.adblock.lists    = [
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt",
 ]
 
+c.colors.webpage.darkmode.enabled  =  True
+
 # ==================== Aliases ===========================================
 c.aliases = {
     'w': 'session-save',
