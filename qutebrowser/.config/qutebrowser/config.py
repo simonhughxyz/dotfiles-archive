@@ -51,6 +51,7 @@ c.content.blocking.adblock.lists    = [
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt",
 ]
 
+# ==================== Dark Mode =========================================
 c.colors.webpage.darkmode.enabled  =  True
 c.colors.webpage.darkmode.algorithm  =  'lightness-cielab'
 c.colors.webpage.darkmode.policy.images  =  'smart'
