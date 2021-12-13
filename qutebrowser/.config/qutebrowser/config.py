@@ -69,7 +69,7 @@ c.aliases = {
 # ==================== Bindings ==========================================
 leader = "<Space>"
 config.bind(leader + "v", "hint links spawn mpv {hint-url}")
-config.bind("d", "hint links spawn ytfzf --download=1 '{hint-url}'")
+config.bind(leader + "d", "hint links spawn ytfzf --download=1 '{hint-url}'")
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
