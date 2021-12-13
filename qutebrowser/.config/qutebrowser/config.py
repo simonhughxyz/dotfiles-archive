@@ -52,6 +52,7 @@ c.content.blocking.adblock.lists    = [
 ]
 
 c.colors.webpage.darkmode.enabled  =  True
+c.colors.webpage.darkmode.algorithm  =  'lightness-cielab'
 
 # ==================== Aliases ===========================================
 c.aliases = {
