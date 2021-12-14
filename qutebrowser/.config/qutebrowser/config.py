@@ -28,6 +28,7 @@ c.content.dns_prefetch      = False
 c.content.canvas_reading    = False
 c.content.headers.do_not_track = False    # can be used to fingerprint
 c.content.webrtc_ip_handling_policy = 'disable-non-proxied-udp'
+c.content.hyperlink_auditing = False
 
 # ==================== Adblock ===========================================
 c.content.blocking.enabled  = True
