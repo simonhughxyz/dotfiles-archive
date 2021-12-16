@@ -73,6 +73,7 @@ config.bind("m", "tab-mute")
 config.bind(leader + "v", "hint links spawn mpv {hint-url}")
 config.bind(leader + "V", "hint links spawn mpv {url}")
 config.bind(leader + "d", "hint links spawn ytfzf --download=1 '{hint-url}'")
+config.bind(leader + "D", "spawn ytfzf --download=1 '{url}'")
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
