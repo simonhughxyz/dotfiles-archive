@@ -16,6 +16,8 @@ c.url.start_pages           = ['search.simonhugh.xyz']
 c.zoom.default              = 150
 c.content.autoplay          = False
 c.content.mute              = True
+c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c', 
+    'normal{line}G{column0}l']
 
 # ==================== Privacy & Security ================================
 c.content.geolocation       = False
