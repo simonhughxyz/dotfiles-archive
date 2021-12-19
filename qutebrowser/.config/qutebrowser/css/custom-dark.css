@@ -1,0 +1,20 @@
+body,
+html {
+  background-color: #000000 !important;
+  color: #e0e0e0 !important;
+}
+
+a {
+  color: #c000b0 !important;
+}
+
+a:visited {
+  color: #f050d0 !important;
+}
+
+input,
+textarea,
+select {
+  background-color: #000000 !important;
+  color: #e0e0e0 !important;
+}
