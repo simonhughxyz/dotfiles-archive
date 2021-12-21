@@ -74,7 +74,7 @@ c.aliases = {
 leader = "<Space>"
 config.bind("m", "tab-mute")
 config.bind(leader + "v", "hint links spawn --detach mpv {hint-url}")
-config.bind(leader + "V", "hint links spawn --detach mpv {url}")
+config.bind(leader + "V", "spawn --detach mpv {url}")
 config.bind(leader + "d", "hint links spawn --detach ytfzf --download=1 '{hint-url}'")
 config.bind(leader + "D", "spawn --detach ytfzf --download=1 '{url}'")
 config.bind(leader + "c", "hint links spawn --detach chromium '{hint-url}'")
