@@ -72,6 +72,7 @@ c.aliases = {
 
 # ==================== Bindings ==========================================
 leader = "<Space>"
+config.bind(leader + leader, "fake-key " + leader)
 config.bind("m", "tab-mute")
 config.bind(leader + "v", "hint links spawn --detach mpv {hint-url}")
 config.bind(leader + "V", "spawn --detach mpv {url}")
