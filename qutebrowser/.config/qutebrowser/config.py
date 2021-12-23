@@ -73,6 +73,7 @@ c.aliases = {
     'w': 'session-save',
     'q': 'quit',
     'wq': 'quit --save',
+    'cs': 'config-source',
 }
 
 # ==================== Bindings ==========================================
