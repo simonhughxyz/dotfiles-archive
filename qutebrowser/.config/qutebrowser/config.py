@@ -87,6 +87,13 @@ config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept
 config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload")
 config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload")
 
+config.bind("tcah", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tCah", "config-cycle -p -u *://{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tcaH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tCaH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all never ;; reload")
+config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
+
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
 config.bind("m", "tab-mute")
