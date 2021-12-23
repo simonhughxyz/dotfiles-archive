@@ -74,6 +74,7 @@ c.aliases = {
     'q': 'quit',
     'wq': 'quit --save',
     'cs': 'config-source',
+    'au': 'adblock-update',
 }
 
 # ==================== Bindings ==========================================
