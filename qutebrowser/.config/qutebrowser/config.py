@@ -20,6 +20,7 @@ c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c',
     'normal{line}G{column0}l']
 
 # ==================== Privacy & Security ================================
+c.content.javascript.enabled = False
 c.content.geolocation       = False
 c.content.pdfjs             = False
 c.content.webgl             = False
