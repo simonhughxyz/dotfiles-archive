@@ -78,6 +78,15 @@ c.aliases = {
 }
 
 # ==================== Bindings ==========================================
+
+# toggle bindings
+config.bind("tch", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCh", "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tcH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload")
+
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
 config.bind("m", "tab-mute")
