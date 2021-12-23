@@ -21,10 +21,10 @@ c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c',
 
 # ==================== Privacy & Security ================================
 c.content.javascript.enabled = False
+c.content.cookies.accept    = 'never'
 c.content.geolocation       = False
 c.content.pdfjs             = False
 c.content.webgl             = False
-c.content.cookies.accept    = 'no-3rdparty'
 c.content.javascript.can_access_clipboard = False
 c.content.headers.referer   = 'same-domain'
 c.content.dns_prefetch      = False
