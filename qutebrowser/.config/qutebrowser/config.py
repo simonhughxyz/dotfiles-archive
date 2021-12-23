@@ -55,6 +55,9 @@ c.content.blocking.adblock.lists    = [
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt",
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt",
 ]
+c.content.blocking.hosts.lists      = [
+        "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+]
 
 # ==================== Dark Mode =========================================
 c.colors.webpage.darkmode.enabled  =  True
