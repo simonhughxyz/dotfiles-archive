@@ -22,6 +22,7 @@ c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c',
 # ==================== Privacy & Security ================================
 c.content.javascript.enabled = False
 c.content.cookies.accept    = 'never'
+c.content.plugins           = False
 c.content.geolocation       = False
 c.content.pdfjs             = False
 c.content.webgl             = False
