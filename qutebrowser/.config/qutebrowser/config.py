@@ -93,3 +93,6 @@ c.url.searchengines = {
     # Youtube
     'y' : 'https://www.youtube.com/results?search_query={}',
 }
+
+# load autoconfig.yml
+config.load_autoconfig(True)
