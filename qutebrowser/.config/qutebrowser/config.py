@@ -91,6 +91,13 @@ config.bind("tCaH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accep
 config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all never ;; reload")
 config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
 
+config.bind("tbh", "config-cycle -p -t -u *://{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tBh", "config-cycle -p -u *://{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tbH", "config-cycle -p -t -u *://*.{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tBH", "config-cycle -p -u *://*.{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tbu", "config-cycle -p -t -u {url} content.blocking.enabled ;; reload")
+config.bind("tBu", "config-cycle -p -u {url} content.blocking.enabled ;; reload")
+
 # rebinds
 config.bind("q", "close")
 config.bind("m", "tab-mute")
