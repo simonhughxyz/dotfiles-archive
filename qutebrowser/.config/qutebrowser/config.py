@@ -91,9 +91,13 @@ config.bind("tCaH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accep
 config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all never ;; reload")
 config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
 
+# rebinds
+config.bind("q", "close")
+config.bind("m", "tab-mute")
+
+# leader binds
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
-config.bind("m", "tab-mute")
 config.bind(leader + "v", "hint links spawn --detach mpv {hint-url}")
 config.bind(leader + "V", "spawn --detach mpv {url}")
 config.bind(leader + "d", "hint links spawn --detach ytfzf --download=1 '{hint-url}'")
