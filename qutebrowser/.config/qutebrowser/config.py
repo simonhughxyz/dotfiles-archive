@@ -13,6 +13,7 @@ c.url.start_pages           = ['about:blank']
 c.zoom.default              = 150
 c.content.autoplay          = False
 c.content.mute              = True
+c.fonts.web.size.minimum    = 14
 c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c', 
     'normal{line}G{column0}l']
 
