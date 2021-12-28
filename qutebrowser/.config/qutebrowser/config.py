@@ -193,8 +193,10 @@ config.bind(leader + "dd", "hint links spawn --detach ytfzf --download=1 '{hint-
 config.bind(leader + "dr", "hint -r links spawn --detach ytfzf --download=1 '{hint-url}'")
 config.bind(leader + "du", "spawn --detach ytfzf --download=1 '{url}'")
 config.bind(leader + "cc", "hint links spawn --detach chromium '{hint-url}'")
+config.bind(leader + "cr", "hint -r links spawn --detach chromium '{hint-url}'")
 config.bind(leader + "cu", "spawn --detach chromium '{url}'")
 config.bind(leader + "ff", "hint links spawn --detach firefox '{hint-url}'")
+config.bind(leader + "fr", "hint -r links spawn --detach firefox '{hint-url}'")
 config.bind(leader + "fu", "spawn --detach firefox '{url}'")
 
 # ==================== Search Engines ====================================
