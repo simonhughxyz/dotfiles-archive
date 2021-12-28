@@ -187,6 +187,7 @@ config.bind("m", "tab-mute")
 # leader binds
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
+config.bind(leader + "o", "set-cmd-text -s :open -p")
 config.bind(leader + "vv", "hint links spawn --detach mpv {hint-url}")
 config.bind(leader + "vr", "hint -r links spawn --detach mpv {hint-url}")
 config.bind(leader + "vu", "spawn --detach mpv {url}")
