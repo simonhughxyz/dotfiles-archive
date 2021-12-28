@@ -187,6 +187,7 @@ config.bind("m", "tab-mute")
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
 config.bind(leader + "vv", "hint links spawn --detach mpv {hint-url}")
+config.bind(leader + "vr", "hint -r links spawn --detach mpv {hint-url}")
 config.bind(leader + "vu", "spawn --detach mpv {url}")
 config.bind(leader + "dd", "hint links spawn --detach ytfzf --download=1 '{hint-url}'")
 config.bind(leader + "du", "spawn --detach ytfzf --download=1 '{url}'")
