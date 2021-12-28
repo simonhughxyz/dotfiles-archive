@@ -208,6 +208,8 @@ c.url.searchengines = {
     'd': 'https://duckduckgo.com/?q={}',
     # Google
     'g' :  'http://www.google.com/search?q={}',
+    # Google Maps
+    'm' :  'https://www.google.com/maps/search/{}',
     # Youtube
     'y' : 'https://www.youtube.com/results?search_query={}',
     # Amazon
