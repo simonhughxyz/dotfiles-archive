@@ -186,14 +186,14 @@ config.bind("m", "tab-mute")
 # leader binds
 leader = "<Space>"
 config.bind(leader + leader, "fake-key " + leader)
-config.bind(leader + "v", "hint links spawn --detach mpv {hint-url}")
-config.bind(leader + "V", "spawn --detach mpv {url}")
-config.bind(leader + "d", "hint links spawn --detach ytfzf --download=1 '{hint-url}'")
-config.bind(leader + "D", "spawn --detach ytfzf --download=1 '{url}'")
-config.bind(leader + "c", "hint links spawn --detach chromium '{hint-url}'")
-config.bind(leader + "C", "spawn --detach chromium '{url}'")
-config.bind(leader + "f", "hint links spawn --detach firefox '{hint-url}'")
-config.bind(leader + "F", "spawn --detach firefox '{url}'")
+config.bind(leader + "vv", "hint links spawn --detach mpv {hint-url}")
+config.bind(leader + "vu", "spawn --detach mpv {url}")
+config.bind(leader + "dd", "hint links spawn --detach ytfzf --download=1 '{hint-url}'")
+config.bind(leader + "du", "spawn --detach ytfzf --download=1 '{url}'")
+config.bind(leader + "cc", "hint links spawn --detach chromium '{hint-url}'")
+config.bind(leader + "cu", "spawn --detach chromium '{url}'")
+config.bind(leader + "ff", "hint links spawn --detach firefox '{hint-url}'")
+config.bind(leader + "fu", "spawn --detach firefox '{url}'")
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
