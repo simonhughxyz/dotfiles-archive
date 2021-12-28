@@ -181,6 +181,7 @@ config.bind("dPu", "set -p -u {url} content.plugins false ;; reload")
 
 # rebinds
 config.bind("q", "close")
+config.bind("O", "set-cmd-text -s :open -w")
 config.bind("m", "tab-mute")
 
 # leader binds
