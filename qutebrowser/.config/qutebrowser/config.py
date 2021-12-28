@@ -203,13 +203,15 @@ config.bind(leader + "fu", "spawn --detach firefox '{url}'")
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
-    # DuckDuckGO
     'DEFAULT': 'https://search.simonhugh.xyz/searx/search?q={}',
+    # DuckDuckGO
     'd': 'https://duckduckgo.com/?q={}',
     # Google
     'g' :  'http://www.google.com/search?q={}',
     # Youtube
     'y' : 'https://www.youtube.com/results?search_query={}',
+    # Amazon
+    'a' : 'https://www.amazon.co.uk/s?k={}',
 }
 
 # load autoconfig.yml
