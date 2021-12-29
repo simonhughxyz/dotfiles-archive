@@ -181,6 +181,11 @@ config.bind("dPH", "set -p -u *://*.{url:host}/* content.plugins false ;; reload
 config.bind("dpu", "set -p -t -u {url} content.plugins false ;; reload")
 config.bind("dPu", "set -p -u {url} content.plugins false ;; reload")
 
+# Tor proxy
+config.bind("et", "set -p -t content.proxy socks://127.0.0.1:9050")
+config.bind("dt", "set -p -t content.proxy none")
+config.bind("tt", "config-cycle -p -t content.proxy none socks://127.0.0.1:9050")
+
 # rebinds
 config.bind("q", "close")
 config.bind("O", "set-cmd-text -s :open -w")
