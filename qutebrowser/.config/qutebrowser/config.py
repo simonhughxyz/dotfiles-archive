@@ -77,29 +77,7 @@ c.aliases = {
 
 # ==================== Bindings ==========================================
 
-# toggle bindings
-config.bind("tch", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
-config.bind("tCh", "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
-config.bind("tcH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
-config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
-config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload")
-config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload")
-
-config.bind("tcah", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept all never ;; reload")
-config.bind("tCah", "config-cycle -p -u *://{url:host}/* content.cookies.accept all never ;; reload")
-config.bind("tcaH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
-config.bind("tCaH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
-config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all never ;; reload")
-config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
-
-config.bind("tbh", "config-cycle -p -t -u *://{url:host}/* content.blocking.enabled ;; reload")
-config.bind("tBh", "config-cycle -p -u *://{url:host}/* content.blocking.enabled ;; reload")
-config.bind("tbH", "config-cycle -p -t -u *://*.{url:host}/* content.blocking.enabled ;; reload")
-config.bind("tBH", "config-cycle -p -u *://*.{url:host}/* content.blocking.enabled ;; reload")
-config.bind("tbu", "config-cycle -p -t -u {url} content.blocking.enabled ;; reload")
-config.bind("tBu", "config-cycle -p -u {url} content.blocking.enabled ;; reload")
-
-# enable
+# Javascript
 config.bind("esh", "set -p -t -u *://{url:host}/* content.javascript.enabled true ;; reload")
 config.bind("eSh", "set -p -u *://{url:host}/* content.javascript.enabled true ;; reload")
 config.bind("esH", "set -p -t -u *://*.{url:host}/* content.javascript.enabled true ;; reload")
@@ -107,6 +85,15 @@ config.bind("eSH", "set -p -u *://*.{url:host}/* content.javascript.enabled true
 config.bind("esu", "set -p -t -u {url} content.javascript.enabled true ;; reload")
 config.bind("eSu", "set -p -u {url} content.javascript.enabled true ;; reload")
 
+config.unbind("d")
+config.bind("dsh", "set -p -t -u *://{url:host}/* content.javascript.enabled false ;; reload")
+config.bind("dSh", "set -p -u *://{url:host}/* content.javascript.enabled false ;; reload")
+config.bind("dsH", "set -p -t -u *://*.{url:host}/* content.javascript.enabled false ;; reload")
+config.bind("dSH", "set -p -u *://*.{url:host}/* content.javascript.enabled false ;; reload")
+config.bind("dsu", "set -p -t -u {url} content.javascript.enabled false ;; reload")
+config.bind("dSu", "set -p -u {url} content.javascript.enabled false ;; reload")
+
+# Cookies
 config.bind("ech", "set -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty ;; reload")
 config.bind("eCh", "set -p -u *://{url:host}/* content.cookies.accept no-3rdparty ;; reload")
 config.bind("ecH", "set -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty ;; reload")
@@ -121,42 +108,34 @@ config.bind("eCaH", "set -p -u *://*.{url:host}/* content.cookies.accept all ;; 
 config.bind("ecau", "set -p -t -u {url} content.cookies.accept all ;; reload")
 config.bind("eCau", "set -p -u {url} content.cookies.accept all ;; reload")
 
-config.bind("ebh", "set -p -t -u *://{url:host}/* content.blocking.enabled true ;; reload")
-config.bind("eBh", "set -p -u *://{url:host}/* content.blocking.enabled true ;; reload")
-config.bind("ebH", "set -p -t -u *://*.{url:host}/* content.blocking.enabled true ;; reload")
-config.bind("eBH", "set -p -u *://*.{url:host}/* content.blocking.enabled true ;; reload")
-config.bind("ebu", "set -p -t -u {url} content.blocking.enabled true ;; reload")
-config.bind("eBu", "set -p -u {url} content.blocking.enabled true ;; reload")
-
-config.bind("eih", "set -p -t -u *://{url:host}/* content.images true ;; reload")
-config.bind("eIh", "set -p -u *://{url:host}/* content.images true ;; reload")
-config.bind("eiH", "set -p -t -u *://*.{url:host}/* content.images true ;; reload")
-config.bind("eIH", "set -p -u *://*.{url:host}/* content.images true ;; reload")
-config.bind("eiu", "set -p -t -u {url} content.images true ;; reload")
-config.bind("eIu", "set -p -u {url} content.images true ;; reload")
-
-config.bind("eph", "set -p -t -u *://{url:host}/* content.plugins true ;; reload")
-config.bind("ePh", "set -p -u *://{url:host}/* content.plugins true ;; reload")
-config.bind("epH", "set -p -t -u *://*.{url:host}/* content.plugins true ;; reload")
-config.bind("ePH", "set -p -u *://*.{url:host}/* content.plugins true ;; reload")
-config.bind("epu", "set -p -t -u {url} content.plugins true ;; reload")
-config.bind("ePu", "set -p -u {url} content.plugins true ;; reload")
-
-# disable
-config.unbind("d")
-config.bind("dsh", "set -p -t -u *://{url:host}/* content.javascript.enabled false ;; reload")
-config.bind("dSh", "set -p -u *://{url:host}/* content.javascript.enabled false ;; reload")
-config.bind("dsH", "set -p -t -u *://*.{url:host}/* content.javascript.enabled false ;; reload")
-config.bind("dSH", "set -p -u *://*.{url:host}/* content.javascript.enabled false ;; reload")
-config.bind("dsu", "set -p -t -u {url} content.javascript.enabled false ;; reload")
-config.bind("dSu", "set -p -u {url} content.javascript.enabled false ;; reload")
-
 config.bind("dch", "set -p -t -u *://{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dCh", "set -p -u *://{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dcH", "set -p -t -u *://*.{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dCH", "set -p -u *://*.{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dcu", "set -p -t -u {url} content.cookies.accept never ;; reload")
 config.bind("dCu", "set -p -u {url} content.cookies.accept never ;; reload")
+
+config.bind("tch", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCh", "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tcH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload")
+
+config.bind("tcah", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tCah", "config-cycle -p -u *://{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tcaH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tCaH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
+config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all never ;; reload")
+config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
+
+# AdBlocker
+config.bind("ebh", "set -p -t -u *://{url:host}/* content.blocking.enabled true ;; reload")
+config.bind("eBh", "set -p -u *://{url:host}/* content.blocking.enabled true ;; reload")
+config.bind("ebH", "set -p -t -u *://*.{url:host}/* content.blocking.enabled true ;; reload")
+config.bind("eBH", "set -p -u *://*.{url:host}/* content.blocking.enabled true ;; reload")
+config.bind("ebu", "set -p -t -u {url} content.blocking.enabled true ;; reload")
+config.bind("eBu", "set -p -u {url} content.blocking.enabled true ;; reload")
 
 config.bind("dbh", "set -p -t -u *://{url:host}/* content.blocking.enabled false ;; reload")
 config.bind("dBh", "set -p -u *://{url:host}/* content.blocking.enabled false ;; reload")
@@ -165,12 +144,35 @@ config.bind("dBH", "set -p -u *://*.{url:host}/* content.blocking.enabled false 
 config.bind("dbu", "set -p -t -u {url} content.blocking.enabled false ;; reload")
 config.bind("dBu", "set -p -u {url} content.blocking.enabled false ;; reload")
 
+config.bind("tbh", "config-cycle -p -t -u *://{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tBh", "config-cycle -p -u *://{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tbH", "config-cycle -p -t -u *://*.{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tBH", "config-cycle -p -u *://*.{url:host}/* content.blocking.enabled ;; reload")
+config.bind("tbu", "config-cycle -p -t -u {url} content.blocking.enabled ;; reload")
+config.bind("tBu", "config-cycle -p -u {url} content.blocking.enabled ;; reload")
+
+# Images
+config.bind("eih", "set -p -t -u *://{url:host}/* content.images true ;; reload")
+config.bind("eIh", "set -p -u *://{url:host}/* content.images true ;; reload")
+config.bind("eiH", "set -p -t -u *://*.{url:host}/* content.images true ;; reload")
+config.bind("eIH", "set -p -u *://*.{url:host}/* content.images true ;; reload")
+config.bind("eiu", "set -p -t -u {url} content.images true ;; reload")
+config.bind("eIu", "set -p -u {url} content.images true ;; reload")
+
 config.bind("dih", "set -p -t -u *://{url:host}/* content.images false ;; reload")
 config.bind("dIh", "set -p -u *://{url:host}/* content.images false ;; reload")
 config.bind("diH", "set -p -t -u *://*.{url:host}/* content.images false ;; reload")
 config.bind("dIH", "set -p -u *://*.{url:host}/* content.images false ;; reload")
 config.bind("diu", "set -p -t -u {url} content.images false ;; reload")
 config.bind("dIu", "set -p -u {url} content.images false ;; reload")
+
+# Plugins
+config.bind("eph", "set -p -t -u *://{url:host}/* content.plugins true ;; reload")
+config.bind("ePh", "set -p -u *://{url:host}/* content.plugins true ;; reload")
+config.bind("epH", "set -p -t -u *://*.{url:host}/* content.plugins true ;; reload")
+config.bind("ePH", "set -p -u *://*.{url:host}/* content.plugins true ;; reload")
+config.bind("epu", "set -p -t -u {url} content.plugins true ;; reload")
+config.bind("ePu", "set -p -u {url} content.plugins true ;; reload")
 
 config.bind("dph", "set -p -t -u *://{url:host}/* content.plugins false ;; reload")
 config.bind("dPh", "set -p -u *://{url:host}/* content.plugins false ;; reload")
