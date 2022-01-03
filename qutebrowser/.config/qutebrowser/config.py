@@ -190,6 +190,7 @@ config.bind("tt", "config-cycle -p -t content.proxy none socks://127.0.0.1:9050"
 # rebinds
 config.bind("q", "close")
 config.bind("O", "set-cmd-text -s :open -w")
+config.bind("F", "hint all window ")
 config.bind("m", "tab-mute")
 
 # leader binds
