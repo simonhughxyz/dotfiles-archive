@@ -23,6 +23,7 @@ require'nvim-treesitter.configs'.setup {
         'regex',
         'bash',
         'c',
+        'make',
         'html',
         'css',
         'javascript',
