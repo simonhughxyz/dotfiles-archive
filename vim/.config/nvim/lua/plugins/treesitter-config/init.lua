@@ -24,6 +24,7 @@ require'nvim-treesitter.configs'.setup {
         'bash',
         'c',
         'make',
+        'markdown',
         'comment',
         'html',
         'http',
