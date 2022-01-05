@@ -22,14 +22,12 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        branch = '0.5-compat',
         run = ':TSUpdate',
         config = function() require('plugins.treesitter-config') end
     }
 
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        branch = '0.5-compat',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function() require('plugins.treesitter-textobjects-config') end
     }
