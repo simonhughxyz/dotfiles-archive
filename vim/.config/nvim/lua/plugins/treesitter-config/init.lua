@@ -26,6 +26,7 @@ require'nvim-treesitter.configs'.setup {
         'make',
         'comment',
         'html',
+        'http',
         'css',
         'javascript',
         'typescript',
