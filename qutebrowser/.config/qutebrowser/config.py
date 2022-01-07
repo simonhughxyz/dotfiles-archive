@@ -187,6 +187,28 @@ config.bind("et", "set -p -t content.proxy socks://127.0.0.1:9050")
 config.bind("dt", "set -p -t content.proxy none")
 config.bind("tt", "config-cycle -p -t content.proxy none socks://127.0.0.1:9050")
 
+# Mute
+config.bind("emh", "set -p -t -u *://{url:host}/* content.mute true")
+config.bind("eMh", "set -p -u *://{url:host}/* content.mute true")
+config.bind("emH", "set -p -t -u *://*.{url:host}/* content.mute true")
+config.bind("eMH", "set -p -u *://*.{url:host}/* content.mute true")
+config.bind("emu", "set -p -t -u {url} content.mute true")
+config.bind("eMu", "set -p -u {url} content.mute true")
+
+config.bind("dmh", "set -p -t -u *://{url:host}/* content.mute false")
+config.bind("dMh", "set -p -u *://{url:host}/* content.mute false")
+config.bind("dmH", "set -p -t -u *://*.{url:host}/ content.mute false")
+config.bind("dMH", "set -p -u *://*.{url:host}/* content.mute false")
+config.bind("dmu", "set -p -t -u {url} content.mute false")
+config.bind("dMu", "set -p -u {url} content.mute false")
+
+config.bind("tmh", "config-cycle -p -t -u *://{url:host}/* content.mute")
+config.bind("tMh", "config-cycle -p -u *://{url:host}/* content.mute")
+config.bind("tmH", "config-cycle -p -t -u *://*.{url:host}/* content.mute")
+config.bind("tMH", "config-cycle -p -u *://*.{url:host}/* content.mute")
+config.bind("tmu", "config-cycle -p -t -u {url} content.mute")
+config.bind("tMu", "config-cycle -p -u {url} content.mute")
+
 # rebinds
 config.bind("q", "close")
 config.bind("O", "set-cmd-text -s :open -w")
