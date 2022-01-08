@@ -209,6 +209,28 @@ config.bind("tMH", "config-cycle -p -u *://*.{url:host}/* content.mute")
 config.bind("tmu", "config-cycle -p -t -u {url} content.mute")
 config.bind("tMu", "config-cycle -p -u {url} content.mute")
 
+# Local Storage
+config.bind("elh", "set -p -t -u *://{url:host}/* content.local_storage true ;; reload")
+config.bind("eLh", "set -p -u *://{url:host}/* content.local_storage true ;; reload")
+config.bind("elH", "set -p -t -u *://*.{url:host}/* content.local_storage true ;; reload")
+config.bind("eLH", "set -p -u *://*.{url:host}/* content.local_storage true ;; reload")
+config.bind("elu", "set -p -t -u {url} content.local_storage true ;; reload")
+config.bind("eLu", "set -p -u {url} content.local_storage true ;; reload")
+
+config.bind("dlh", "set -p -t -u *://{url:host}/* content.local_storage false ;; reload")
+config.bind("dLh", "set -p -u *://{url:host}/* content.local_storage false ;; reload")
+config.bind("dlH", "set -p -t -u *://*.{url:host}/ content.local_storage false ;; reload")
+config.bind("dLH", "set -p -u *://*.{url:host}/* content.local_storage false ;; reload")
+config.bind("dlu", "set -p -t -u {url} content.local_storage false ;; reload")
+config.bind("dLu", "set -p -u {url} content.local_storage false ;; reload")
+
+config.bind("tlh", "config-cycle -p -t -u *://{url:host}/* content.local_storage ;; reload")
+config.bind("tLh", "config-cycle -p -u *://{url:host}/* content.local_storage ;; reload")
+config.bind("tlH", "config-cycle -p -t -u *://*.{url:host}/* content.local_storage ;; reload")
+config.bind("tLH", "config-cycle -p -u *://*.{url:host}/* content.local_storage ;; reload")
+config.bind("tlu", "config-cycle -p -t -u {url} content.local_storage ;; reload")
+config.bind("tLu", "config-cycle -p -u {url} content.local_storage ;; reload")
+
 # rebinds
 config.bind("q", "close")
 config.bind("O", "set-cmd-text -s :open -w")
