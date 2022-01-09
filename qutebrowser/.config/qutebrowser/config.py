@@ -255,6 +255,9 @@ config.bind(leader + "cu", "spawn --detach chromium '{url}'")
 config.bind(leader + "ff", "hint links spawn --detach firefox '{hint-url}'")
 config.bind(leader + "fr", "hint -r links spawn --detach firefox '{hint-url}'")
 config.bind(leader + "fu", "spawn --detach firefox '{url}'")
+config.bind(leader + "tt", "hint links spawn --detach tm -a {hint-url}")
+config.bind(leader + "tr", "hint -r links spawn --detach tm -a {hint-url}")
+config.bind(leader + "tu", "spawn --detach tm -a {url}")
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
