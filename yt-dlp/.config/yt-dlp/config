@@ -2,8 +2,8 @@
 --add-metadata
 --geo-bypass
 --buffer-size 200M
---external-downloader aria2c
---external-downloader-args "--conf-path=/home/simon/.config/aria2/aria2.conf"
+--downloader aria2c
+--downloader "dash,m3u8:native"
 -o ~/Videos/%(extractor)s/%(title)s[%(channel)s].%(ext)s
 --restrict-filenames
 -f bestvideo[height<=?1080][fps<=?60]+bestaudio/best
