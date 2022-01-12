@@ -12,3 +12,4 @@
 --remux-video mkv
 --progress
 --no-mtime
+--exec "mkdir -p ~/.local/share/yt-dlp; printf '%s\t%s\t%s\n' \"$( date '+%Y-%m-%d %H:%M:%S' )\" '%(webpage_url)s' '%(filepath)s' >> ~/.local/share/yt-dlp/download.history;"
