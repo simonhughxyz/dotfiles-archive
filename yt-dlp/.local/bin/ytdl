@@ -26,6 +26,7 @@ help="Usage: $cmdname [options...] <url>
      -a, --add                              Add download to task spooler
      -t, --ts                               Send commands to task spooler
      -m, --ts--menu                         Launch ts menu
+     -l, --print-history                    Print download history log
 "
 
 _dependency(){ command -v "$1" > /dev/null || { printf 'error: %s command not found\nplease install the needed dependencies\n' "$1"; exit 1; }; }
@@ -60,6 +61,10 @@ _ts_menu(){
                 ),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo '$sep';read),alt-c:execute(ts -c {1};read),alt-p:execute(printf 'pid: %s' \"\$(ts -p {1})\";read)"
 }
 
+_print_history(){
+    cat "${history}"
+}
+
 case "$1" in
     --ts-run-cmd) shift; _ts_run_cmd "$@" ;; # not supposed to be run by user
     --ts-fzf-list) shift; _ts_fzf_list "$@" ;; # not supposed to be run by user
@@ -67,5 +72,6 @@ case "$1" in
     -a|--add) shift; _ts_add_cmd "$@" ;;
     -t|--ts) shift; ts "$@" ;;
     -m|--ts-menu) _ts_menu ;;
+    -l|--history) _print_history ;;
     *) _ts_add_cmd "$@" ;;
 esac
