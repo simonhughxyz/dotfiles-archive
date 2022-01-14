@@ -5,7 +5,8 @@
 # DATE: Fri Jan 14 2022
 #
 # DESC: Download a video or playlist using yt-dlp using task spooler
-#       to queue the downloads.
+#       to queue the downloads and view the download history (need
+#       corresponding yt-dlp config to save download history).
 
 cmdname="$( basename "$0" )"
 history=~/.local/share/yt-dlp/download.history
