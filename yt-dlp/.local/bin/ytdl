@@ -68,7 +68,8 @@ _print_history(){
 }
 
 _history_menu(){
-    _print_history | fzf -d'\t' --with-nth='3,7,8..'
+    _print_history | fzf -d'\t' --with-nth='3,7,8..' \
+        --bind="alt-o:execute-silent($BROWSER {2} &)"
 }
 
 case "$1" in
