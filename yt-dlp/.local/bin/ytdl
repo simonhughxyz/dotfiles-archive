@@ -28,6 +28,7 @@ help="Usage: $cmdname [options...] <url>
      -t, --ts                               Send commands to task spooler
      -m, --ts--menu                         Launch ts menu
      -l, --print-history                    Print download history log
+     -M, --history-menu                     Launch download history menu
 "
 
 _dependency(){ command -v "$1" > /dev/null || { printf 'error: %s command not found\nplease install the needed dependencies\n' "$1"; exit 1; }; }
@@ -66,6 +67,10 @@ _print_history(){
     cat "${history}"
 }
 
+_history_menu(){
+    _print_history | fzf -d'\t' --with-nth='3,7,8..'
+}
+
 case "$1" in
     --ts-run-cmd) shift; _ts_run_cmd "$@" ;; # not supposed to be run by user
     --ts-fzf-list) shift; _ts_fzf_list "$@" ;; # not supposed to be run by user
@@ -74,5 +79,6 @@ case "$1" in
     -t|--ts) shift; ts "$@" ;;
     -m|--ts-menu) _ts_menu ;;
     -l|--history) _print_history ;;
+    -M|--history-menu) _history_menu ;;
     *) _ts_add_cmd "$@" ;;
 esac
