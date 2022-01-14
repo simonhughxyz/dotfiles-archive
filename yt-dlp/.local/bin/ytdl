@@ -33,9 +33,27 @@ _ts_add_cmd(){
         notify-send 'Add Download to Queue!' %(title)q"
 }
 
+_ts_fzf_list(){
+    ts -l | sed "1d;s/[[:space:]].*]${cmdname} --ts-run-cmd / /"
+}
+
+_ts_menu(){
+    _ts_fzf_list | \
+            fzf -d' ' --with-nth='3..' --preview='ts -c {1}' \
+            --preview-window='bottom,25%,nowrap,follow' \
+            --bind="alt-q:execute(ts -k {1};ts -r {1}),alt-K:execute(ts -k {1}),alt-r:execute(
+                ts -k {1};
+                ts -r {1};
+                ${cmdname} {2};
+                ),return:reload(${cmdname} --ts-fzf-list),alt-o:execute($BROWSER {2}
+                ),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo '$sep';read),alt-c:execute(ts -c {1};read),alt-p:execute(printf 'pid: %s' \"\$(ts -p {1})\";read)"
+}
+
 case "$1" in
-    --ts-run-cmd) shift; _ts_run_cmd "$@" ;; ## not supposed to be run by user
+    --ts-run-cmd) shift; _ts_run_cmd "$@" ;; # not supposed to be run by user
+    --ts-fzf-list) shift; _ts_fzf_list "$@" ;; # not supposed to be run by user
     -a|--add) shift; _ts_add_cmd "$@" ;;
     -t|--ts) shift; ts "$@" ;;
+    -m|--ts-menu) _ts_menu ;;
     *) _ts_add_cmd "$@" ;;
 esac
