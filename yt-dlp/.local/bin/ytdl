@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# AUTHOR: Simon H Moore
+#
+# DATE: Fri Jan 14 2022
+#
+# DESC: Download a video or playlist using yt-dlp using task spooler
+#       to queue the downloads.
+
+cmdname="$( basename "$0" )"
+history=~/.local/share/yt-dlp/download.history
+runtime_dir="$XDG_RUNTIME_DIR/${cmdname}"
+
+# Task Spooler
+export TMPDIR="${runtime_dir}/ts"
+export TS_MAXFINISHED=12
+mkdir -m 0700 -p $TMPDIR
+ts -S 2
+
+_ts_run_cmd(){
+    yt-dlp "${1}" || notify-send 'Download Failed!' "$(2)"
+}
+
+_ts_add_cmd(){
+    # use yt-dlp to get download info before adding to task spooler
+    yt-dlp --ignore-config --quiet --skip-download "${1}" \
+        --exec-before-download "ts -L %(webpage_url_domain)q \
+        ${cmdname} --ts-run-cmd '${1}' %(title)q; \
+        notify-send 'Add Download to Queue!' %(title)q"
+}
+
+case "$1" in
+    --ts-run-cmd) shift; _ts_run_cmd "$@" ;; ## not supposed to be run by user
+    -a|--add) shift; _ts_add_cmd "$@" ;;
+    -t|--ts) shift; ts "$@" ;;
+    *) _ts_add_cmd "$@" ;;
+esac
