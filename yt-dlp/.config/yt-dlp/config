@@ -12,4 +12,4 @@
 --remux-video mkv
 --progress
 --no-mtime
---exec "mkdir -p ~/.local/share/yt-dlp; printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \"$( date '+%Y-%m-%d %H:%M:%S' )\" '%(original_url)s' '%(webpage_url_domain)s' '%(playlist_id|video)s' '%(duration>%H:%M:%S)s' \"$( basename -s'.%(ext)s' '%(filepath)s' )\" '%(filepath)s' >> ~/.local/share/yt-dlp/download.history;"
+--exec "mkdir -p ~/.local/share/yt-dlp; printf '%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n' \"$( date '+%Y-%m-%d %H:%M:%S' )\" '%(original_url)s' '%(webpage_url_domain)s' '%(playlist_id|video)s' '%(duration>%H:%M:%S)s' '%(filepath)s' %(channel,uploader,creator|unknown)q %(title,alt_title)q >> ~/.local/share/yt-dlp/download.history;"
