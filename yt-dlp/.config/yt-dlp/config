@@ -12,7 +12,7 @@
 --remux-video mkv
 --progress
 --no-mtime
---exec-before-download "notify-send 'Download Started' %(title)q"
+--exec-before-download "notify-send 'Download Started' %(title)q'\n- <small><i>'%(channel,uploader,creator|unknown)q'</i></small>'"
 --exec "mkdir -p ~/.local/share/yt-dlp; printf '%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n' \"$( date '+%Y-%m-%d %H:%M:%S' )\" '%(original_url)s' '%(webpage_url_domain)s' '%(playlist_id|video)s' '%(duration>%H:%M:%S)s' '%(filepath)s' %(channel,uploader,creator|unknown)q %(title,alt_title)q >> ~/.local/share/yt-dlp/download.history;"
---exec "notify-send 'Download Finished' %(title)q "
+--exec "notify-send 'Download Finished' %(title)q'\n- <small><i>'%(channel,uploader,creator|unknown)q'</i></small>'"
 --exec "sep='==============================================================================='; printf '\n\n%s\n%s\n%s - %s\n[%s]\n%s\n' 'Download Complete!' "$sep" %(title)q %(channel,uploader,creator|unknown)q %(original_url)q "$sep" "
