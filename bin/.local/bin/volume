@@ -28,32 +28,12 @@ _set_volume(){
         [+-]*)  pulsemixer --change-volume $1 ;;
         *)  pulsemixer --set-volume $1 ;;
     esac
-    _update_pipe
     exit
 }
 
 _toggle_mute(){
     pulsemixer --toggle-mute
-    _update_pipe
     exit
-}
-
-
-_make_pipe() {
-    [ -p "$pipe" ] && return 0
-    mkdir -p "$prefix"
-    mkfifo "$pipe" 2> /dev/null
-}
-
-_update_pipe(){
-    _make_pipe
-    _get_state > "$pipe"
-}
-
-# Returns the state of volume.
-_subscribe() {
-    _make_pipe
-    tail -f "$pipe"
 }
 
 case $1 in
@@ -61,7 +41,5 @@ case $1 in
     [+-][0-9][0-9]|[+-][0-9]|[0-9]*) _set_volume $1 ;;
     -V|get-volume) _get_volume && exit ;;
     -M|get-mute) _get_mute && exit ;;
-    update) _update_pipe exit ;;
-    subscribe) _subscribe ;;
     *) _get_state && exit ;; 
 esac
