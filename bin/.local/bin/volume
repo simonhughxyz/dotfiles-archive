@@ -28,11 +28,13 @@ _set_volume(){
         [+-]*)  pulsemixer --change-volume $1 ;;
         *)  pulsemixer --set-volume $1 ;;
     esac
+    notify-send -c "Volume:Volume" -u low -h "int:value:$( _get_volume )" "Volume"
     exit
 }
 
 _toggle_mute(){
     pulsemixer --toggle-mute
+    notify-send -c "Volume:Mute" -u low "Volume" "$( _get_state)"
     exit
 }
 
