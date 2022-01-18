@@ -434,3 +434,15 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+[volume]
+    summary = "Volume"
+    category = "Volume:Volume"
+    set_stack_tag = "volume"
+    format = "<b>%s</b> %n%%"
+    timeout=1
+[volume-mute]
+    summary = "Volume"
+    category = "Volume:Mute"
+    set_stack_tag = "volume"
+    format = "<b>%s</b> %b"
+    timeout=1
