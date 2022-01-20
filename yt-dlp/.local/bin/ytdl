@@ -24,11 +24,12 @@ help="Usage: $cmdname [options...] <url>
 
   OPTIONS:
      -h, --help                             Show this help text
-     -a, --add                              Add download to task spooler
-     -t, --ts                               Send commands to task spooler
+     -a, --add <url>                        Add download to task spooler
      -m, --ts--menu                         Launch ts menu
-     -l, --print-history                    Print download history log
      -M, --history-menu                     Launch download history menu
+     -p, --print [option]                   Print a list of tasks or history
+     -c, --count [option]                   Count number of tasks or history
+     -t, --ts [options...]                  Send commands to task spooler
 "
 
 _dependency(){ command -v "$1" > /dev/null || { printf 'error: %s command not found\nplease install the needed dependencies\n' "$1"; exit 1; }; }
