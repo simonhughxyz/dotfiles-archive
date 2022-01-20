@@ -70,7 +70,7 @@ _print_history(){
 _history_menu(){
     tac "${history}" \
     | awk -F'\t\0' '{$7 = substr($7,1,20); \
-    printf "%s\t\0%s\t\0%-15s\t\0%s\t\0%s\t\0%s\t\0%-20s\t\0%s\n", $1, $2, $3, $4, $5, $6, $7, $8}' \
+    printf "%s\t\0%s\t\0%-20s\t\0%s\t\0%s\t\0%s\t\0%-20s\t\0%s\n", $1, $2, $3, $4, $5, $6, $7, $8}' \
      | fzf --reverse -d'\t\0' --with-nth='3,7,8..' \
         --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &)"
 }
