@@ -84,5 +84,6 @@ case "$1" in
     -m|--ts-menu) _ts_menu ;;
     -l|--history) _print_history ;;
     -M|--history-menu) _history_menu ;;
+    -*) printf "%s\n\n%s\n" "Not a valid option!" "${help}"; exit 1;;
     *) _ts_add_cmd "$@" ;;
 esac
