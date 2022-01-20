@@ -63,10 +63,6 @@ _ts_menu(){
                 ),alt-u:execute(ts -u {1}),alt-i:execute(ts -i {1};echo '$sep';read),alt-c:execute(ts -c {1};read),alt-p:execute(printf 'pid: %s' \"\$(ts -p {1})\";read)"
 }
 
-_print_history(){
-    cat "${history}"
-}
-
 _history_menu(){
     tac "${history}" \
     | awk -F'\t\0' '{$7 = substr($7,1,20); \
@@ -94,7 +90,6 @@ case "$1" in
     -a|--add) shift; _ts_add_cmd "$@" ;;
     -t|--ts) shift; ts "$@" ;;
     -m|--ts-menu) _ts_menu ;;
-    -l|--history) _print_history ;;
     -M|--history-menu) _history_menu ;;
     -p|--print) shift; _print "$@" ;;
     -*) printf "%s\n\n%s\n" "Not a valid option!" "${help}"; exit 1;;
