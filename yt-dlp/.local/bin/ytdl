@@ -93,6 +93,7 @@ case "$1" in
     -m|--ts-menu) _ts_menu ;;
     -M|--history-menu) _history_menu ;;
     -p|--print) shift; _print "$@" ;;
+    -c|--count) shift; _print "$@" | wc -l ;;
     -*) printf "%s\n\n%s\n" "Not a valid option!" "${help}"; exit 1;;
     *) _ts_add_cmd "$@" ;;
 esac
