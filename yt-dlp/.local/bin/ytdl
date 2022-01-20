@@ -14,7 +14,6 @@ runtime_dir="$XDG_RUNTIME_DIR/${cmdname}"
 
 # Task Spooler
 export TMPDIR="${runtime_dir}/ts"
-export TS_MAXFINISHED=12
 mkdir -m 0700 -p $TMPDIR
 ts -S 2
 
