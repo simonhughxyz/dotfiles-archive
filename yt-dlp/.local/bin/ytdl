@@ -78,7 +78,7 @@ _history_menu(){
 case "$1" in
     --ts-run-cmd) shift; _ts_run_cmd "$@" ;; # not supposed to be run by user
     --ts-fzf-list) shift; _ts_fzf_list "$@" ;; # not supposed to be run by user
-    -h|--help) printf '%s\n' "${help}" ;;
+    -h|--help) printf '%s' "${help}" ;;
     -a|--add) shift; _ts_add_cmd "$@" ;;
     -t|--ts) shift; ts "$@" ;;
     -m|--ts-menu) _ts_menu ;;
