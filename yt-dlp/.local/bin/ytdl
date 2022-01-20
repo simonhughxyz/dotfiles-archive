@@ -15,7 +15,7 @@ runtime_dir="$XDG_RUNTIME_DIR/${cmdname}"
 # Task Spooler
 export TMPDIR="${runtime_dir}/ts"
 mkdir -m 0700 -p $TMPDIR
-ts -S 2
+ts -S 3
 
 help="Usage: $cmdname [options...] <url>
     Download a video or playlist using yt-dlp
