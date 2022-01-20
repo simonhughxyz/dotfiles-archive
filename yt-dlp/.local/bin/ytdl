@@ -36,7 +36,7 @@ _dependency "yt-dlp"
 _dependency "ts"
 
 _ts_run_cmd(){
-    yt-dlp "${1}" || notify-send 'Download Failed!' "$(2)"
+    yt-dlp "${1}" || { notify-send 'Download Failed!' "$(2)"; exit 1; }
 }
 
 _ts_add_cmd(){
