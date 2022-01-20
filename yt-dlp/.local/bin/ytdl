@@ -75,6 +75,18 @@ _history_menu(){
         --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &)"
 }
 
+_print(){
+    case "$1" in
+        r|running) ts -l | awk '$2=="running"';;
+        q|queued) ts -l | awk '$2=="queued"' ;;
+        w|waiting) ts -l | awk '$2=="running" || $2=="queued"' ;;
+        f|finished) ts -l | awk '$2=="finished"' ;;
+        t|tasks) ts -l | sed '1d' ;;
+        h|history) cat "${history}" ;;
+        *) ts -l | awk '$2=="running" || $2=="queued"' ;;
+    esac
+}
+
 case "$1" in
     --ts-run-cmd) shift; _ts_run_cmd "$@" ;; # not supposed to be run by user
     --ts-fzf-list) shift; _ts_fzf_list "$@" ;; # not supposed to be run by user
@@ -84,6 +96,7 @@ case "$1" in
     -m|--ts-menu) _ts_menu ;;
     -l|--history) _print_history ;;
     -M|--history-menu) _history_menu ;;
+    -p|--print) shift; _print "$@" ;;
     -*) printf "%s\n\n%s\n" "Not a valid option!" "${help}"; exit 1;;
     *) _ts_add_cmd "$@" ;;
 esac
