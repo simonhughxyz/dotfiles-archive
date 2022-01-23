@@ -44,7 +44,7 @@ _ts_add_cmd(){
     yt-dlp --ignore-config --quiet --skip-download "${1}" \
         --exec-before-download "ts -L %(webpage_url_domain)q \
         ${cmdname} --ts-run-cmd %(original_url)q %(title)q; \
-        notify-send 'Add Download to Queue!' %(title)q'\n- <small><i>'%(channel,uploader,creator|unknown)q'</i></small>'"
+        notify-send 'Add Download to Queue!' %(title)q'\n- <small><i>'%(channel,uploader,creator|unknown)q' ['%(webpage_url_domain)q']</i></small>'"
 }
 
 _ts_fzf_list(){
