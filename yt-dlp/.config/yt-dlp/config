@@ -4,7 +4,7 @@
 --buffer-size 200M
 --downloader aria2c
 --downloader "dash,m3u8:native"
---output ~/Videos/%(playlist&playlist|)s/%(playlist_title,webpage_url_domain,extractor)s/%(playlist_index|)s%(playlist_index&_|)s%(title,alt_title)s[%(channel,uploader,creator|unkown)s].%(ext)s
+--output ~/Videos/%(playlist&playlist|)s/%(playlist_title,webpage_url_domain,extractor)s/%(series|)s/%(playlist_index|)s%(playlist_index&_|)s%(season_number|)s%(episode_number&x|)s%(episode_number|)s%(season_number&_|)s%(title,alt_title)s[%(channel,uploader,creator,series|unkown)s].%(ext)s
 --restrict-filenames
 -f bestvideo[height<=?1080][fps<=?60]+bestaudio/best
 --user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
