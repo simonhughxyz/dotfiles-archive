@@ -54,7 +54,7 @@ _ts_fzf_list(){
 _ts_menu(){
     _ts_fzf_list | \
             fzf -d' ' --with-nth='3..' --preview='ts -c {1}' \
-            --preview-window='bottom,25%,nowrap,follow' \
+            --preview-window='bottom,28%,nowrap,follow' \
             --bind="alt-q:execute(ts -k {1};ts -r {1}),alt-K:execute(ts -k {1}),alt-r:execute(
                 ts -k {1};
                 ts -r {1};
