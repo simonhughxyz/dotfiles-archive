@@ -12,7 +12,7 @@
 # key-bookmark pairs
 export NNN_BMS="\
 n:~/Documents/notes;\
-y:~/Videos/youtube;\
+y:~/Videos/youtube.com;\
 m:/mnt;\
 w:/mnt/wh;\
 t:/mnt/wh/torrents;\
