@@ -99,9 +99,6 @@ alias defel='def -u "dictd_www.dict.ogrep_elements"'
 alias defcomp='def -u "Free On-Line Dictionary of Computing"'
 alias defde='def -u "German - English" -u "English - German"'
 
-# media
-alias img='sxiv -a'
-
 # system info
 alias free='free -hlt'
 alias free1000='free -hlt --si' # display using power of 1000 instead 1024
