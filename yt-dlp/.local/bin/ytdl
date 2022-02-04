@@ -68,7 +68,7 @@ _history_menu(){
     | awk -F'\t\0' '{$8 = substr($8,1,20); \
     printf "%s\t\0%s\t\0%-15s\t\0%s\t\0%s\t\0%s\t\0%s\t\0%-15s\t\0%s\n", $1, $2, $3, $4, $5, $6, $7, $8, $9}' \
      | fzf --reverse -d'\t\0' --with-nth='3,8,9..' \
-        --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &)"
+        --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &),alt-V:execute-silent(mpv {2})"
 }
 
 _print(){
