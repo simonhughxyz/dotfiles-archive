@@ -66,9 +66,10 @@ _ts_menu(){
 _history_menu(){
     tac "${history}" \
     | awk -F'\t\0' '{$8 = substr($8,1,20); \
-    printf "%s\t\0%s\t\0%-15s\t\0%s\t\0%s\t\0%s\t\0%s\t\0%-15s\t\0%s\n", $1, $2, $3, $4, $5, $6, $7, $8, $9}' \
-     | fzf --reverse -d'\t\0' --with-nth='3,8,9..' \
-        --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &),alt-V:execute-silent(mpv {2})"
+        printf "%s\t\0%s\t\0%-15s\t\0%s\t\0%s\t\0%s\t\0%s\t\0%-15s\t\0%s\n", $1, $2, $3, $4, $5, $6, $7, $8, $9}' \
+    | fzf --reverse -d'\t\0' --with-nth='3,8,9..' \
+        --bind="alt-o:execute-silent($BROWSER {2} &),alt-D:execute-silent(${cmdname} {2} &),alt-V:execute-silent(mpv {2})" \
+    | awk -F'\t\0' '{printf "Title: %s\nDate: %s\nURI: %s\nDomain: %s\nPlaylist_id: %s\nVideo length: %s\nSize: %s Kb\nFile: %s\nChannel/Creator: %s\n", $9, $1, $2, $3, $4, $5, $6, $7, $8}'
 }
 
 _print(){
