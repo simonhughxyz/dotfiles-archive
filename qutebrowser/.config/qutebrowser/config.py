@@ -79,6 +79,8 @@ c.aliases = {
 # ==================== Bindings ==========================================
 
 # Javascript
+config.bind("ess", "set -p -t content.javascript.enabled true ;; reload")
+config.bind("eSs", "set -p content.javascript.enabled true ;; reload")
 config.bind("esh", "set -p -t -u *://{url:host}/* content.javascript.enabled true ;; reload")
 config.bind("eSh", "set -p -u *://{url:host}/* content.javascript.enabled true ;; reload")
 config.bind("esH", "set -p -t -u *://*.{url:host}/* content.javascript.enabled true ;; reload")
@@ -87,6 +89,8 @@ config.bind("esu", "set -p -t -u {url} content.javascript.enabled true ;; reload
 config.bind("eSu", "set -p -u {url} content.javascript.enabled true ;; reload")
 
 config.unbind("d")
+config.bind("dss", "set -p -t content.javascript.enabled false ;; reload")
+config.bind("dSs", "set -p content.javascript.enabled false ;; reload")
 config.bind("dsh", "set -p -t -u *://{url:host}/* content.javascript.enabled false ;; reload")
 config.bind("dSh", "set -p -u *://{url:host}/* content.javascript.enabled false ;; reload")
 config.bind("dsH", "set -p -t -u *://*.{url:host}/* content.javascript.enabled false ;; reload")
