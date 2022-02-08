@@ -98,6 +98,9 @@ config.bind("dSH", "set -p -u *://*.{url:host}/* content.javascript.enabled fals
 config.bind("dsu", "set -p -t -u {url} content.javascript.enabled false ;; reload")
 config.bind("dSu", "set -p -u {url} content.javascript.enabled false ;; reload")
 
+config.bind("tss", "config-cycle -p -t content.javascript.enabled ;; reload")
+config.bind("tSs", "config-cycle -p content.javascript.enabled ;; reload")
+
 # Cookies
 config.bind("ecc", "set -p -t content.cookies.accept no-3rdparty ;; reload")
 config.bind("eCc", "set -p content.cookies.accept no-3rdparty ;; reload")
