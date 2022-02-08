@@ -145,6 +145,8 @@ config.bind("tcau", "config-cycle -p -t -u {url} content.cookies.accept all neve
 config.bind("tCau", "config-cycle -p -u {url} content.cookies.accept all never ;; reload")
 
 # AdBlocker
+config.bind("ebb", "set -p -t content.blocking.enabled true ;; reload")
+config.bind("eBb", "set -p content.blocking.enabled true ;; reload")
 config.bind("ebh", "set -p -t -u *://{url:host}/* content.blocking.enabled true ;; reload")
 config.bind("eBh", "set -p -u *://{url:host}/* content.blocking.enabled true ;; reload")
 config.bind("ebH", "set -p -t -u *://*.{url:host}/* content.blocking.enabled true ;; reload")
@@ -152,6 +154,8 @@ config.bind("eBH", "set -p -u *://*.{url:host}/* content.blocking.enabled true ;
 config.bind("ebu", "set -p -t -u {url} content.blocking.enabled true ;; reload")
 config.bind("eBu", "set -p -u {url} content.blocking.enabled true ;; reload")
 
+config.bind("dbb", "set -p -t content.blocking.enabled false ;; reload")
+config.bind("dBb", "set -p content.blocking.enabled false ;; reload")
 config.bind("dbh", "set -p -t -u *://{url:host}/* content.blocking.enabled false ;; reload")
 config.bind("dBh", "set -p -u *://{url:host}/* content.blocking.enabled false ;; reload")
 config.bind("dbH", "set -p -t -u *://*.{url:host}/* content.blocking.enabled false ;; reload")
@@ -159,6 +163,8 @@ config.bind("dBH", "set -p -u *://*.{url:host}/* content.blocking.enabled false 
 config.bind("dbu", "set -p -t -u {url} content.blocking.enabled false ;; reload")
 config.bind("dBu", "set -p -u {url} content.blocking.enabled false ;; reload")
 
+config.bind("tbb", "config-cycle -p -t content.blocking.enabled ;; reload")
+config.bind("tBb", "config-cycle -p content.blocking.enabled ;; reload")
 config.bind("tbh", "config-cycle -p -t -u *://{url:host}/* content.blocking.enabled ;; reload")
 config.bind("tBh", "config-cycle -p -u *://{url:host}/* content.blocking.enabled ;; reload")
 config.bind("tbH", "config-cycle -p -t -u *://*.{url:host}/* content.blocking.enabled ;; reload")
