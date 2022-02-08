@@ -99,6 +99,8 @@ config.bind("dsu", "set -p -t -u {url} content.javascript.enabled false ;; reloa
 config.bind("dSu", "set -p -u {url} content.javascript.enabled false ;; reload")
 
 # Cookies
+config.bind("ecc", "set -p -t content.cookies.accept no-3rdparty ;; reload")
+config.bind("eCc", "set -p content.cookies.accept no-3rdparty ;; reload")
 config.bind("ech", "set -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty ;; reload")
 config.bind("eCh", "set -p -u *://{url:host}/* content.cookies.accept no-3rdparty ;; reload")
 config.bind("ecH", "set -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty ;; reload")
@@ -106,6 +108,8 @@ config.bind("eCH", "set -p -u *://*.{url:host}/* content.cookies.accept no-3rdpa
 config.bind("ecu", "set -p -t -u {url} content.cookies.accept no-3rdparty ;; reload")
 config.bind("eCu", "set -p -u {url} content.cookies.accept no-3rdparty ;; reload")
 
+config.bind("ecac", "set -p -t content.cookies.accept all ;; reload")
+config.bind("eCac", "set -p content.cookies.accept all ;; reload")
 config.bind("ecah", "set -p -t -u *://{url:host}/* content.cookies.accept all ;; reload")
 config.bind("eCah", "set -p -u *://{url:host}/* content.cookies.accept all ;; reload")
 config.bind("ecaH", "set -p -t -u *://*.{url:host}/* content.cookies.accept all ;; reload")
@@ -113,6 +117,8 @@ config.bind("eCaH", "set -p -u *://*.{url:host}/* content.cookies.accept all ;; 
 config.bind("ecau", "set -p -t -u {url} content.cookies.accept all ;; reload")
 config.bind("eCau", "set -p -u {url} content.cookies.accept all ;; reload")
 
+config.bind("dcc", "set -p -t content.cookies.accept never ;; reload")
+config.bind("dCc", "set -p content.cookies.accept never ;; reload")
 config.bind("dch", "set -p -t -u *://{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dCh", "set -p -u *://{url:host}/* content.cookies.accept never ;; reload")
 config.bind("dcH", "set -p -t -u *://*.{url:host}/* content.cookies.accept never ;; reload")
@@ -120,6 +126,8 @@ config.bind("dCH", "set -p -u *://*.{url:host}/* content.cookies.accept never ;;
 config.bind("dcu", "set -p -t -u {url} content.cookies.accept never ;; reload")
 config.bind("dCu", "set -p -u {url} content.cookies.accept never ;; reload")
 
+config.bind("tcc", "config-cycle -p -t content.cookies.accept no-3rdparty never ;; reload")
+config.bind("tCc", "config-cycle -p content.cookies.accept no-3rdparty never ;; reload")
 config.bind("tch", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
 config.bind("tCh", "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
 config.bind("tcH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload")
