@@ -192,6 +192,8 @@ config.bind("diu", "set -p -t -u {url} content.images false ;; reload")
 config.bind("dIu", "set -p -u {url} content.images false ;; reload")
 
 # Plugins
+config.bind("epp", "set -p -t content.plugins true ;; reload")
+config.bind("ePp", "set -p content.plugins true ;; reload")
 config.bind("eph", "set -p -t -u *://{url:host}/* content.plugins true ;; reload")
 config.bind("ePh", "set -p -u *://{url:host}/* content.plugins true ;; reload")
 config.bind("epH", "set -p -t -u *://*.{url:host}/* content.plugins true ;; reload")
@@ -199,6 +201,8 @@ config.bind("ePH", "set -p -u *://*.{url:host}/* content.plugins true ;; reload"
 config.bind("epu", "set -p -t -u {url} content.plugins true ;; reload")
 config.bind("ePu", "set -p -u {url} content.plugins true ;; reload")
 
+config.bind("dpp", "set -p -t content.plugins false ;; reload")
+config.bind("dPp", "set -p content.plugins false ;; reload")
 config.bind("dph", "set -p -t -u *://{url:host}/* content.plugins false ;; reload")
 config.bind("dPh", "set -p -u *://{url:host}/* content.plugins false ;; reload")
 config.bind("dpH", "set -p -t -u *://*.{url:host}/* content.plugins false ;; reload")
