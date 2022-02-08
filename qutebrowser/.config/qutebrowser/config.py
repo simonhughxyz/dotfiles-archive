@@ -135,6 +135,8 @@ config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept
 config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload")
 config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload")
 
+config.bind("tcac", "config-cycle -p -t content.cookies.accept all never ;; reload")
+config.bind("tCac", "config-cycle -p content.cookies.accept all never ;; reload")
 config.bind("tcah", "config-cycle -p -t -u *://{url:host}/* content.cookies.accept all never ;; reload")
 config.bind("tCah", "config-cycle -p -u *://{url:host}/* content.cookies.accept all never ;; reload")
 config.bind("tcaH", "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept all never ;; reload")
