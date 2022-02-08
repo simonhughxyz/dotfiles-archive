@@ -173,6 +173,8 @@ config.bind("tbu", "config-cycle -p -t -u {url} content.blocking.enabled ;; relo
 config.bind("tBu", "config-cycle -p -u {url} content.blocking.enabled ;; reload")
 
 # Images
+config.bind("eii", "set -p -t content.images true ;; reload")
+config.bind("eIi", "set -p content.images true ;; reload")
 config.bind("eih", "set -p -t -u *://{url:host}/* content.images true ;; reload")
 config.bind("eIh", "set -p -u *://{url:host}/* content.images true ;; reload")
 config.bind("eiH", "set -p -t -u *://*.{url:host}/* content.images true ;; reload")
@@ -180,6 +182,8 @@ config.bind("eIH", "set -p -u *://*.{url:host}/* content.images true ;; reload")
 config.bind("eiu", "set -p -t -u {url} content.images true ;; reload")
 config.bind("eIu", "set -p -u {url} content.images true ;; reload")
 
+config.bind("dii", "set -p -t content.images false ;; reload")
+config.bind("dIi", "set -p content.images false ;; reload")
 config.bind("dih", "set -p -t -u *://{url:host}/* content.images false ;; reload")
 config.bind("dIh", "set -p -u *://{url:host}/* content.images false ;; reload")
 config.bind("diH", "set -p -t -u *://*.{url:host}/* content.images false ;; reload")
