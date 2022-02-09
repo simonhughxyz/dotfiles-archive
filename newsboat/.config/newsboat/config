@@ -58,7 +58,8 @@ bind-key x pb-delete
 bind-key ^t next-unread
 bind-key s sort
 bind-key S save
-bind-key r toggle-show-read-feeds
+bind-key r reload-all
+bind-key R toggle-show-read-feeds
 bind-key ESC quit
 unbind-key SPACE
 bind-key SPACE macro-prefix
