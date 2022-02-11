@@ -320,5 +320,8 @@ c.url.searchengines = {
     'a' : 'https://www.amazon.co.uk/s?k={}',
 }
 
+# redirect urls
+config.source('redirect.py')
+
 # load autoconfig.yml
 config.load_autoconfig(True)
