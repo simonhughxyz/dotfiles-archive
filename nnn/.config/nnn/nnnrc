@@ -56,4 +56,4 @@ export NNN_RUNTIME="$XDG_RUNTIME_DIR/nnn"
 mkdir -p $NNN_RUNTIME
 export NNN_FIFO="$NNN_RUNTIME/pipe"
 # absolute path to custom selection file
-export NNN_SEL="$NNN_RUNTIME/nnn/selection"
+export NNN_SEL="$NNN_RUNTIME/selection"
