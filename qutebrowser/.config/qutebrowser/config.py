@@ -74,6 +74,7 @@ c.aliases = {
     'wq': 'quit --save',
     'cs': 'config-source',
     'au': 'adblock-update',
+    'qr': 'spawn --userscript qr',
 }
 
 # ==================== Bindings ==========================================
