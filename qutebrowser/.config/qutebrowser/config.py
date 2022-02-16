@@ -306,6 +306,9 @@ config.bind(leader + 'fu', 'spawn --detach firefox "{url}"')
 config.bind(leader + 'tt', 'hint links spawn --detach tm -a "{hint-url}"')
 config.bind(leader + 'tr', 'hint -r links spawn --detach tm -a "{hint-url}"')
 config.bind(leader + 'tu', 'spawn --detach tm -a "{url}"')
+config.bind(leader + 'qq', 'hint links userscript qr')
+config.bind(leader + 'qu', 'spawn --userscript qr')
+config.bind(leader + 'qr', 'hint -r links userscript qr')
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
