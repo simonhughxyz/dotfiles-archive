@@ -1,0 +1,10 @@
+#!/bin/sh
+
+printf "%s" "$1" > "${QUTE_DATA_DIR}/cconfig/redirect"
+
+case "$1" in
+    True) state="Enabled" ;;
+    *) state="Disabled" ;;
+esac
+
+printf "message-info '%s %s'" "$state" "Redirect" > $QUTE_FIFO
