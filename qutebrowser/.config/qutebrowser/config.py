@@ -1,6 +1,11 @@
 # 
 # Qutebrowser Config
 # 
+from cconfig import CConfig
+
+# Custom state full config options
+cc = CConfig(config)
+cc.redirect = True
 
 # ==================== General Settings ==================================
 c.confirm_quit              = ['downloads']

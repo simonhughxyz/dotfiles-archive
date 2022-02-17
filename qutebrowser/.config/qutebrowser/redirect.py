@@ -1,5 +1,6 @@
 from qutebrowser.api import interceptor, message
 from PyQt5.QtCore import QUrl
+from cconfig import CConfig
 
 def redir(r: interceptor.Request, target, dst):
     url = r.request_url
@@ -22,12 +23,13 @@ def redirect(r: interceptor.Request):
             r.request_url.scheme() in {"data", "blob"}):
         return
 
-    redir(r, 'youtube.com', 'yewtu.be')
-    redir(r, 'www.youtube.com', 'yewtu.be')
-    redir(r, 'twitter.com', 'nitter.net')
-    redir(r, 'www.twitter.com', 'nitter.net')
-    redir(r, 'reddit.com', 'libreddit.silkky.cloud')
-    redir(r, 'www.reddit.com', 'libreddit.silkky.cloud')
+    if CConfig(config).redirect :
+        redir(r, 'youtube.com', 'yewtu.be')
+        redir(r, 'www.youtube.com', 'yewtu.be')
+        redir(r, 'twitter.com', 'nitter.net')
+        redir(r, 'www.twitter.com', 'nitter.net')
+        redir(r, 'reddit.com', 'libreddit.silkky.cloud')
+        redir(r, 'www.reddit.com', 'libreddit.silkky.cloud')
 
 
 interceptor.register(redirect)

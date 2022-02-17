@@ -24,3 +24,10 @@ class CConfig():
             return True
         else:
             return False
+
+    @property
+    def redirect(self):
+        return self.get_bool('redirect')
+    @redirect.setter
+    def redirect(self, val):
+        self.set('redirect', val)
