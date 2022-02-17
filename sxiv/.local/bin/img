@@ -24,7 +24,7 @@ Options:
 mkdir -p "$runtime_dir"
 
 _img(){
-    DISPLAY=:0 sxiv -a "$@"
+    DISPLAY=:0 nsxiv -a "$@"
 }
 
 _uri(){
