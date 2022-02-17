@@ -280,6 +280,10 @@ config.bind('tLH', 'config-cycle -p -u *://*.{url:host}/* content.local_storage 
 config.bind('tlu', 'config-cycle -p -t -u {url} content.local_storage ;; reload')
 config.bind('tLu', 'config-cycle -p -u {url} content.local_storage ;; reload')
 
+# redirect
+config.bind('er', 'spawn --userscript redirect True')
+config.bind('dr', 'spawn --userscript redirect False')
+
 # rebinds
 config.bind('q', 'close')
 config.bind('O', 'set-cmd-text -s :open -w')
