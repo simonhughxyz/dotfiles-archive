@@ -79,6 +79,7 @@ c.downloads.location.directory = '~/Downloads'
 c.downloads.location.prompt = True
 c.downloads.location.remember = True
 c.downloads.location.suggestion = 'both'
+c.downloads.open_dispatcher = "xdg-open '{}'"
 
 # ==================== Aliases ===========================================
 c.aliases = {
