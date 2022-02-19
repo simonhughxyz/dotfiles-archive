@@ -82,6 +82,7 @@ c.downloads.location.suggestion = 'both'
 c.downloads.open_dispatcher = "xdg-open '{}'"
 c.downloads.position = 'bottom'
 c.downloads.prevent_mixed_content = True
+c.downloads.remove_finished = -1
 
 # ==================== Aliases ===========================================
 c.aliases = {
