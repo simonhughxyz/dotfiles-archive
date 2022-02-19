@@ -74,6 +74,9 @@ c.colors.webpage.darkmode.threshold.text  =  120
 c.colors.webpage.bg  =  '#000000'
 c.content.user_stylesheets = ['~/.config/qutebrowser/css/custom-dark.css'] 
 
+# ==================== Downloads =========================================
+c.downloads.location.directory = '~/Downloads'
+
 # ==================== Aliases ===========================================
 c.aliases = {
     'w': 'session-save',
