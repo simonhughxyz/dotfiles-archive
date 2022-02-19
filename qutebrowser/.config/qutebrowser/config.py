@@ -78,6 +78,7 @@ c.content.user_stylesheets = ['~/.config/qutebrowser/css/custom-dark.css']
 c.downloads.location.directory = '~/Downloads'
 c.downloads.location.prompt = True
 c.downloads.location.remember = True
+c.downloads.location.suggestion = 'both'
 
 # ==================== Aliases ===========================================
 c.aliases = {
