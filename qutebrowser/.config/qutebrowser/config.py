@@ -80,6 +80,7 @@ c.downloads.location.prompt = True
 c.downloads.location.remember = True
 c.downloads.location.suggestion = 'both'
 c.downloads.open_dispatcher = "xdg-open '{}'"
+c.downloads.position = 'bottom'
 
 # ==================== Aliases ===========================================
 c.aliases = {
