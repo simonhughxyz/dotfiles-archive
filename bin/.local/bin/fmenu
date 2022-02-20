@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# FMENU
+# Simon Hugh Moore
+#
+# ue fzf as a dmeu replacement
+
+# check for dependencies
+command -v fzf > /dev/null || { echo "fzf not found"; exit 1; }
+export pipe=/tmp/fmenu.pipe
+
+export FZF_DEFAULT_OPTS="$* $FZF_DEFAULT_OPTS"
+
+
+_cleanup() {
+	rm -f "$pipe"
+}
+trap _cleanup EXIT
+# 1. if a named pipe for term-dmenu doesn't exist, create it
+[ -p "$pipe" ] || mkfifo "$pipe" &
+
+# 2. export stdin, separated by newlines, so the terminal process can
+#    access it
+IFS=$(printf '\n')
+input=$(cat)
+export input
+
+# 3. open a floating terminal with supressed stderr, running a shell
+#    command that does the following:.
+# 	3a. filter $input in fzf
+# 	3b. send the result to the named pipe in a detached abduco session
+# I chose to do do step 3b in a detached abduco session because the
+# session needs to stay alive after the terminal closes
+# shellcheck disable=SC2016 # I don't want expressions to expand
+setsid -f st -e sh -c \
+	'output=$(echo "$input" | fzf); echo "$output" >$pipe 2>/dev/null' 2>/dev/null
+wait
+
+# 4. send the value from the named pipe to stdout
+cat <"$pipe"

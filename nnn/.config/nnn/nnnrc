@@ -13,6 +13,7 @@
 export NNN_BMS="\
 n:~/Documents/notes;\
 f:~/Videos/film;\
+t:~/Videos/tv;\
 y:~/Videos/youtube.com;\
 m:/mnt;\
 w:/mnt/wh;\
