@@ -49,7 +49,7 @@ c.content.blocking.adblock.lists    = [
         "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
         "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
         "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
-        "https://curben.gitlab.io/malware-filter/urlhaus-filter.txt",
+        "https://curben.gitlab.io/malware-filter/urlhaus-filter-online.txt",
         "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0",
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt",
         "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt",
