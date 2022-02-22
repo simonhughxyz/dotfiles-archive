@@ -302,6 +302,7 @@ config.bind('O', 'set-cmd-text -s :open -w')
 config.bind('F', 'hint all window ')
 config.bind('I', 'hint -f inputs normal ')
 config.bind('m', 'tab-mute')
+config.bind('gc', 'tab-clone')
 # config.bind('<Escape>', 'mode-leave ;; jseval -q document.activeElement.blur()', mode='insert')
 config.bind('<Ctrl+Escape>', 'fake-key <Escape>')
 
