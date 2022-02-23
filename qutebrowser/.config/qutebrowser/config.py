@@ -8,6 +8,7 @@ cc = CConfig(config)
 cc.redirect = True
 
 # ==================== General Settings ==================================
+c.hints.chars               = 'asdfghjklcvbnm'
 c.confirm_quit              = ['downloads']
 c.content.fullscreen.window = True
 c.spellcheck.languages      = ["de-DE", "en-GB", "en-US"]
