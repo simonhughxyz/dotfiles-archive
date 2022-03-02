@@ -9,6 +9,7 @@ cc.redirect = True
 
 # ==================== General Settings ==================================
 c.hints.chars               = 'dfghjklcvbnm'
+c.hints.uppercase           = True
 c.confirm_quit              = ['downloads']
 c.content.fullscreen.window = True
 c.spellcheck.languages      = ["de-DE", "en-GB", "en-US"]
