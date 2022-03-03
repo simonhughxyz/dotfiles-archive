@@ -257,7 +257,7 @@ function process_video()
 			rnd_str = rnd_str .. alphabet:sub(rnd_index, rnd_index)
 		end
 
-		local output_file = string.format("%s/%s_%s_cut.%s",
+		local output_file = string.format("%s/%s.cut.%s.%s",
 			splice_options.output_location,
 			mp.get_property("filename/no-ext"),
 			rnd_str, ext)
