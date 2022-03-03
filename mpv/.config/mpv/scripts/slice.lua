@@ -246,19 +246,6 @@ function delete_slice()
 	end
 end
 
-function prevent_quit(name)
-	if start_time then
-		if os.time() - exit_time <= 2 then
-			mp.command(name)
-		else
-			exit_time = os.time()
-		end
-		notify(3000, "Slice has been marked. Press again to quit")
-	else
-		mp.command(name)
-	end
-end
-
 function process_video()
 	local alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local rnd_size = 10
@@ -315,13 +302,6 @@ function process_video()
 		msg.info("Temporary directory removed!")
 	end
 end
-
-mp.add_key_binding('q', "quit", function()
-	prevent_quit("quit")
-end)
-mp.add_key_binding('Shift+q', "quit-watch-later", function()
-	prevent_quit("quit-watch-later")
-end)
 
 mp.add_key_binding('Alt+t', "put_time", put_time)
 mp.add_key_binding('Alt+p', "show_times", show_times)
