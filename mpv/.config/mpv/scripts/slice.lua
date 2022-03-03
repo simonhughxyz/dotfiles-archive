@@ -313,7 +313,6 @@ function process_video()
 	end
 end
 
-mp.set_property("keep-open", "yes") -- Prevent mpv from exiting when the video ends
 mp.set_property("quiet", "yes") -- Silence terminal.
 
 mp.add_key_binding('q', "quit", function()
