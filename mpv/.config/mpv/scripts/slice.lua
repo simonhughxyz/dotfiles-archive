@@ -1,6 +1,6 @@
 -- -----------------------------------------------------------------------------
 --
--- MPV Splice
+-- Slice
 -- URL: https://github.com/pvpscript/mpv-video-splice
 --
 -- Requires: ffmpeg
@@ -121,7 +121,7 @@ local opt = require 'mp.options'
 --------------------------------------------------------------------------------
 -- Default variables
 
-local SCRIPT_NAME = "mpv-splice"
+local SCRIPT_NAME = "slice"
 local default_tmp_location = "~/.cache/mpv-slice.tmpXXX"
 local default_output_location = mp.get_property("working-directory")
 
