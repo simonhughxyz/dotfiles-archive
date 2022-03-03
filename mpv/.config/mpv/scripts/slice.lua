@@ -195,12 +195,15 @@ end
 function show_times()
 	notify(2000, "Total cuts: ", #times)
 
+    message=""
 	for i, obj in ipairs(times) do
-		msg.info("Slice", i, ": ", obj.t_start, " -> ", obj.t_end)
+        message = message.."Slice "..i..": "..obj.t_start.." -> "..obj.t_end.."\n"
 	end
 	if start_time then
-		notify(2000, "Slice ", #times+1, " in progress.")
+        message = message.."Slice "..(#times+1).." in progress..."
 	end
+		msg.info(message)
+        mp.command(string.format("show-text \"%s\"", message))
 end
 
 function reset_current_slice()
