@@ -122,7 +122,7 @@ local opt = require 'mp.options'
 -- Default variables
 
 local SCRIPT_NAME = "mpv-splice"
-local default_tmp_location = "~/tmpXXX"
+local default_tmp_location = "~/.cache/mpv-slice.tmpXXX"
 local default_output_location = mp.get_property("working-directory")
 
 --------------------------------------------------------------------------------
