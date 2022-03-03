@@ -237,7 +237,7 @@ end
 
 function process_video()
 	local alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
-	local rnd_size = 10
+	local rnd_size = 5
 
 	local pieces = {}
 
