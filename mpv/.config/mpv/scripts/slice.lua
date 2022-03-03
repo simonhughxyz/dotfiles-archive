@@ -313,8 +313,6 @@ function process_video()
 	end
 end
 
-mp.set_property("quiet", "yes") -- Silence terminal.
-
 mp.add_key_binding('q', "quit", function()
 	prevent_quit("quit")
 end)
