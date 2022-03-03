@@ -236,7 +236,7 @@ function delete_all_slices()
 end
 
 function process_video()
-	local alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	local alphabet = "abcdefghijklmnopqrstuvwxyz0123456789"
 	local rnd_size = 10
 
 	local pieces = {}
