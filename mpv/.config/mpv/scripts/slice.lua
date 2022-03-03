@@ -215,35 +215,14 @@ function reset_current_slice()
 end
 
 function delete_slice()
-	if remove_val == "" then
-		notify(2000, "Entered slice deletion mode.")
-
-		-- Add shortcut keys to the interval {0..9}.
-		for i=0,9,1 do
-			mp.add_key_binding("Alt+" .. i, "num_key_" .. i,
-				function()
-					remove_val = remove_val .. i
-					notify(1000, "Slice to remove: "
-						.. remove_val)
-				end
-			)
-		end
-	else
-		-- Remove previously added shortcut keys.
-		for i=0,9,1 do
-			mp.remove_key_binding("num_key_" .. i)
-		end
-
-		remove_num = tonumber(remove_val)
-		if #times >= remove_num and remove_num > 0 then
-			table.remove(times, remove_num)
-			notify(2000, "Removed slice ", remove_num)
-		end
-
-		remove_val = ""
-
-		msg.info("Exited slice deletion mode.")
-	end
+    if #times > 0 then
+        local time= times[#times]
+        table.remove(times, (#times))
+        message = "Removed slice "..(#times+1)..": "..time.t_start.." -> "..time.t_end.."\n"
+        notify(2000, message)
+    else
+        notify(2000, "No slices left")
+    end
 end
 
 function process_video()
