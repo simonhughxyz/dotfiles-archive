@@ -225,6 +225,16 @@ function delete_slice()
     end
 end
 
+function delete_all_slices()
+    if #times > 0 then
+        local count = #times
+        times = {}
+        notify(2000, "Removed "..count.." slices")
+    else
+        notify(2000, "No slices left")
+    end
+end
+
 function process_video()
 	local alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local rnd_size = 10
@@ -287,3 +297,4 @@ mp.add_key_binding('Alt+p', "show_times", show_times)
 mp.add_key_binding('Alt+c', "process_video", process_video)
 mp.add_key_binding('Alt+r', "reset_current_slice", reset_current_slice)
 mp.add_key_binding('Alt+d', "delete_slice", delete_slice)
+mp.add_key_binding('Alt+D', "delete_all_slices", delete_all_slices)
