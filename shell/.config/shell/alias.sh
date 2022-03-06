@@ -22,6 +22,9 @@ alias clip='xclip -selection clipboard'
 alias paste='xclip -o'
 alias bt='bluetoothctl'
 alias o='xdg-open '
+alias nftl='sudo nft list ruleset'
+alias nftf='sudo nft flush ruleset'
+alias nfts='sudo nft -f /etc/nftables.conf'
 
 # program options
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc'
