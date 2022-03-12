@@ -294,6 +294,34 @@ config.bind('tLH', 'config-cycle -p -u *://*.{url:host}/* content.local_storage 
 config.bind('tlu', 'config-cycle -p -t -u {url} content.local_storage ;; reload')
 config.bind('tLu', 'config-cycle -p -u {url} content.local_storage ;; reload')
 
+# clipboard
+config.bind('eyy', 'set -p -t content.javascript.can_access_clipboard true ;; reload')
+config.bind('eYy', 'set -p content.javascript.can_access_clipboard true ;; reload')
+config.bind('eyh', 'set -p -t -u *://{url:host}/* content.javascript.can_access_clipboard true ;; reload')
+config.bind('eYh', 'set -p -u *://{url:host}/* content.javascript.can_access_clipboard true ;; reload')
+config.bind('eyH', 'set -p -t -u *://*.{url:host}/* content.javascript.can_access_clipboard true ;; reload')
+config.bind('eYH', 'set -p -u *://*.{url:host}/* content.javascript.can_access_clipboard true ;; reload')
+config.bind('eyu', 'set -p -t -u {url} content.javascript.can_access_clipboard true ;; reload')
+config.bind('eYu', 'set -p -u {url} content.javascript.can_access_clipboard true ;; reload')
+
+config.bind('dyy', 'set -p -t content.javascript.can_access_clipboard false ;; reload')
+config.bind('dYy', 'set -p content.javascript.can_access_clipboard false ;; reload')
+config.bind('dyh', 'set -p -t -u *://{url:host}/* content.javascript.can_access_clipboard false ;; reload')
+config.bind('dYh', 'set -p -u *://{url:host}/* content.javascript.can_access_clipboard false ;; reload')
+config.bind('dyH', 'set -p -t -u *://*.{url:host}/ content.javascript.can_access_clipboard false ;; reload')
+config.bind('dYH', 'set -p -u *://*.{url:host}/* content.javascript.can_access_clipboard false ;; reload')
+config.bind('dyu', 'set -p -t -u {url} content.javascript.can_access_clipboard false ;; reload')
+config.bind('dYu', 'set -p -u {url} content.javascript.can_access_clipboard false ;; reload')
+
+config.bind('tyy', 'config-cycle -p -t content.javascript.can_access_clipboard ;; reload')
+config.bind('tYy', 'config-cycle -p content.javascript.can_access_clipboard ;; reload')
+config.bind('tyh', 'config-cycle -p -t -u *://{url:host}/* content.javascript.can_access_clipboard ;; reload')
+config.bind('tYh', 'config-cycle -p -u *://{url:host}/* content.javascript.can_access_clipboard ;; reload')
+config.bind('tyH', 'config-cycle -p -t -u *://*.{url:host}/* content.javascript.can_access_clipboard ;; reload')
+config.bind('tYH', 'config-cycle -p -u *://*.{url:host}/* content.javascript.can_access_clipboard ;; reload')
+config.bind('tyu', 'config-cycle -p -t -u {url} content.javascript.can_access_clipboard ;; reload')
+config.bind('tYu', 'config-cycle -p -u {url} content.javascript.can_access_clipboard ;; reload')
+
 # redirect
 config.bind('er', 'spawn --userscript redirect True')
 config.bind('dr', 'spawn --userscript redirect False')
