@@ -24,6 +24,7 @@ c.content.mute              = True
 c.fonts.web.size.minimum    = 14
 c.editor.command            = ['st', '-e', 'nvim', '-f', '{file}', '-c', 
     'normal{line}G{column0}l']
+c.content.default_encoding  = 'utf-8'
 
 # ==================== Privacy & Security ================================
 c.content.javascript.enabled = False
