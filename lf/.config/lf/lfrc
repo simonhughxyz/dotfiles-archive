@@ -1,3 +1,6 @@
 # Basic Settings
 set hiddenfiles ".*"
 set ratios '2:2'
+
+# Bindings
+map . :set hidden!
