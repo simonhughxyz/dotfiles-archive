@@ -1,6 +1,7 @@
 # Basic Settings
 set hiddenfiles ".*"
 set ratios '2:2'
+set scrolloff 8
 
 # Bindings
 map . :set hidden!
