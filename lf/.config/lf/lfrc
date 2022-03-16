@@ -4,3 +4,4 @@ set ratios '2:2'
 
 # Bindings
 map . :set hidden!
+map ~ cd ~/
