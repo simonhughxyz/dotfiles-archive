@@ -3,6 +3,7 @@ set hiddenfiles ".*"
 set ratios      '2:2'
 set scrolloff   8
 set findlen     2
+set incsearch
 
 # Bindings
 map . :set hidden!
