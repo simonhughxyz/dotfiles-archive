@@ -5,6 +5,7 @@ set scrolloff   8
 set findlen     2
 set incsearch
 set tabstop     4
+set wrapscroll
 
 # Bindings
 map . :set hidden!
