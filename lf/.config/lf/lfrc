@@ -4,6 +4,7 @@ set ratios      '2:2'
 set scrolloff   8
 set findlen     2
 set incsearch
+set tabstop     4
 
 # Bindings
 map . :set hidden!
