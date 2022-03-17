@@ -22,6 +22,7 @@ cmap <down> cmd-history-next
 map . :set hidden!
 map ~ cd ~/
 map gr cd /
+map X trash
 # explicit sort bindings
 map sa :set sortby atime; set reverse; set info atime
 map sA :set sortby atime; set noreverse; set info atime
