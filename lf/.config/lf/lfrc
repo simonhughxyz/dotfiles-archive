@@ -1,4 +1,5 @@
 # ==================== Basic Settings ====================================
+set ifs         "\n"
 set hiddenfiles ".*"
 set ratios      '2:2'
 set scrolloff   8
