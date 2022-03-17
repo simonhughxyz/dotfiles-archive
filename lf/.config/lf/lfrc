@@ -7,6 +7,10 @@ set incsearch
 set tabstop     4
 set wrapscroll
 
+# ==================== Command Bindings ==================================
+cmap <up> cmd-history-prev
+cmap <down> cmd-history-next
+
 # ==================== Normal Bindings ===================================
 map . :set hidden!
 map ~ cd ~/
