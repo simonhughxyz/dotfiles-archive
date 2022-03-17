@@ -10,3 +10,4 @@ set wrapscroll
 # Bindings
 map . :set hidden!
 map ~ cd ~/
+map gr cd /
