@@ -1,4 +1,4 @@
-# Basic Settings
+# ==================== Basic Settings ====================================
 set hiddenfiles ".*"
 set ratios      '2:2'
 set scrolloff   8
@@ -7,7 +7,7 @@ set incsearch
 set tabstop     4
 set wrapscroll
 
-# Bindings
+# ==================== Normal Bindings ===================================
 map . :set hidden!
 map ~ cd ~/
 map gr cd /
