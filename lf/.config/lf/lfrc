@@ -7,6 +7,9 @@ set incsearch
 set tabstop     4
 set wrapscroll
 
+# ==================== Commands ==========================================
+cmd q   quit    # quality of life cmd
+
 # ==================== Command Bindings ==================================
 cmap <up> cmd-history-prev
 cmap <down> cmd-history-next
