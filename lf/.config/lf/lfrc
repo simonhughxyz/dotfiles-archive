@@ -24,6 +24,7 @@ map ~ cd ~/
 map gr cd /
 map X trash
 map gd push :mkdir<space>
+map gf push :touch<space>
 # explicit sort bindings
 map sa :set sortby atime; set reverse; set info atime
 map sA :set sortby atime; set noreverse; set info atime
