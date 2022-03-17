@@ -11,6 +11,7 @@ set wrapscroll
 # ==================== Commands ==========================================
 cmd q   quit    # quality of life cmd
 cmd trash $trash-put $fx
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 # ==================== Command Bindings ==================================
 cmap <up> cmd-history-prev
