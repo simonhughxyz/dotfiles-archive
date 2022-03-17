@@ -12,6 +12,7 @@ set wrapscroll
 cmd q   quit    # quality of life cmd
 cmd trash $trash-put $fx
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd touch $touch "$(echo $* | tr ' ' '\ ')"
 
 # ==================== Command Bindings ==================================
 cmap <up> cmd-history-prev
