@@ -11,3 +11,16 @@ set wrapscroll
 map . :set hidden!
 map ~ cd ~/
 map gr cd /
+# explicit sort bindings
+map sa :set sortby atime; set reverse; set info atime
+map sA :set sortby atime; set noreverse; set info atime
+map sc :set sortby ctime; set reverse; set info ctime
+map sC :set sortby ctime; set noreverse; set info ctime
+map se :set sortby ext; set reverse; set info
+map sE :set sortby ext; set noreverse; set info
+map sn :set sortby natural; set reverse; set info
+map sN :set sortby natural; set noreverse; set info
+map ss :set sortby size; set reverse; set info size
+map sS :set sortby size; set noreverse; set info size
+map st :set sortby time; set reverse; set info time
+map sT :set sortby time; set noreverse; set info time
