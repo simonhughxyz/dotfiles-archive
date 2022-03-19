@@ -7,6 +7,8 @@ set findlen     2
 set incsearch
 set tabstop     4
 set wrapscroll
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/previewer'
 
 # ==================== Commands ==========================================
 cmd q   quit    # quality of life cmd
