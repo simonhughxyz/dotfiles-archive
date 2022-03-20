@@ -1,7 +1,7 @@
 # ==================== Basic Settings ====================================
 set ifs         "\n"
 set hiddenfiles ".*"
-set ratios      '2:2'
+set ratios      '2:1'
 set scrolloff   8
 set findlen     2
 set incsearch
