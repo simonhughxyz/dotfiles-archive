@@ -9,6 +9,7 @@ set tabstop     4
 set wrapscroll
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/previewer'
+set period      5
 
 # ==================== Commands ==========================================
 cmd q   quit    # quality of life cmd
