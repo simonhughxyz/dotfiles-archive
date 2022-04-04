@@ -18,6 +18,7 @@ cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd touch $touch "$(echo $* | tr ' ' '\ ')"
 cmd setbg $xwallpaper --zoom $f
 cmd all :unselect; invert
+cmd batch-rename $printf '%s\n' $fx | vidir -
 cmd trash-restore $trash-restore
 
 # ==================== Command Bindings ==================================
