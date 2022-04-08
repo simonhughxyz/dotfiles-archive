@@ -35,6 +35,7 @@ map gd push :mkdir<space>
 map gt push :touch<space>
 map gf filter
 map gF setfilter
+map a :select-all
 # explicit sort bindings
 map sa :set sortby atime; set reverse; set info atime
 map sA :set sortby atime; set noreverse; set info atime
