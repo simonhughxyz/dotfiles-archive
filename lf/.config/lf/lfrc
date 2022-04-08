@@ -18,7 +18,7 @@ cmd trash $trash-put $fx
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd touch $touch "$(echo $* | tr ' ' '\ ')"
 cmd setbg $xwallpaper --zoom $f
-cmd all :unselect; invert
+cmd select-all :unselect; invert
 cmd batch-rename $printf '%s\n' $fs | vidir
 cmd trash-restore $trash-restore
 
