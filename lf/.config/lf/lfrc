@@ -21,6 +21,17 @@ cmd setbg $xwallpaper --zoom $f
 cmd select-all :unselect; invert
 cmd batch-rename $printf '%s\n' $fs | vidir
 cmd trash-restore $trash-restore
+cmd toggle-preview ${{
+    if $lf_preview; then
+        lf -remote "send $id set nopreview"
+        lf -remote "send $id set ratios '1'"
+        lf -remote "send $id \$echo"    # to fix ueberzug image not being removed
+    else
+        lf -remote "send $id set ratios '2:1'"
+        lf -remote "send $id set preview"
+        lf -remote "send $id redraw"
+    fi
+}}
 
 # ==================== Command Bindings ==================================
 cmap <up> cmd-history-prev
