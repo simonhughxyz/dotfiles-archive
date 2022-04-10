@@ -47,6 +47,7 @@ map gt push :touch<space>
 map gf filter
 map gF setfilter
 map a :select-all
+map P :toggle-preview
 map C :select-all; calcdirsize; unselect
 # explicit sort bindings
 map sa :set sortby atime; set reverse; set info atime
