@@ -50,6 +50,12 @@ map a :select-all
 map P :toggle-preview
 map C :select-all; calcdirsize; unselect
 map R :batch-rename
+# set info bindings
+map i
+map ia :set info atime
+map ic :set info ctime
+map it :set info time
+map is :set info size
 # explicit sort bindings
 map sa :set sortby atime; set reverse; set info atime
 map sA :set sortby atime; set noreverse; set info atime
