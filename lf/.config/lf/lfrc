@@ -52,6 +52,7 @@ map C :select-all; calcdirsize; unselect
 map R :batch-rename
 # set info bindings
 map i
+map ii :set info
 map ia :set info atime
 map ic :set info ctime
 map it :set info time
