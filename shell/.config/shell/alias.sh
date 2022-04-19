@@ -25,6 +25,7 @@ alias o='xdg-open '
 alias nftl='sudo nft list ruleset'
 alias nftf='sudo nft flush ruleset'
 alias nfts='sudo nft -f /etc/nftables.conf'
+alias lf='lfub'
 
 # program options
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/mbsync/mbsyncrc'
