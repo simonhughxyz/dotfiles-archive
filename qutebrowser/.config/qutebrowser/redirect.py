@@ -14,8 +14,10 @@ def redir(r: interceptor.Request, target, dst):
 
     if url.host() == target:
         url.setHost(dst)
-        message.info("Redirecting to " + url.toString())
-        r.redirect(url)
+        try:
+            r.redirect(url)
+        except interceptor.interceptors.RedirectException:
+            pass
 
 def redirect(r: interceptor.Request):
     """Block the given request if necessary."""
