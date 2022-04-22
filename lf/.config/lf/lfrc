@@ -50,6 +50,7 @@ map a :select-all
 map P :toggle-preview
 map C :select-all; calcdirsize; unselect
 map R :batch-rename
+map T :trash-restore
 # set info bindings
 map i
 map ii :set info
