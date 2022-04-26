@@ -50,6 +50,13 @@ map a :select-all
 map P :toggle-preview
 map c :select-all; calcdirsize; unselect
 map T :trash-restore
+# renaming files
+map C push A<c-u> # new rename
+map A rename # at the very end
+map I push A<c-a> # at the very beginning
+map gi push A<a-b><a-b><a-f> # before extention
+map ga push A<a-b> # after extention
+map R :batch-rename
 # set info bindings
 map i
 map ii :set info
