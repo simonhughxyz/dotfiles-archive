@@ -1,2 +1,3 @@
 calendar = /home/simon/.local/share/when/calendar
 editor = nvim
+monday_first = 1
