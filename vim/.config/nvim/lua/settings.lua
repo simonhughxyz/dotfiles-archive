@@ -32,7 +32,7 @@ o.scrolloff = 12
 
 -- window-local options
 o.number = false
-o.wrap = false
+o.wrap = true
 o.conceallevel = 2
 o.concealcursor = 'c'
 
