@@ -31,7 +31,9 @@ def redirect(r: interceptor.Request):
         redir(r, 'twitter.com', 'nitter.net')
         redir(r, 'www.twitter.com', 'nitter.net')
         redir(r, 'reddit.com', 'libreddit.silkky.cloud')
+        redir(r, 'old.reddit.com', 'libreddit.silkky.cloud')
         redir(r, 'www.reddit.com', 'libreddit.silkky.cloud')
+        redir(r, 'www.old.reddit.com', 'libreddit.silkky.cloud')
 
 
 interceptor.register(redirect)
