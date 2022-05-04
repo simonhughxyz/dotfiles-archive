@@ -74,4 +74,5 @@ fi
 # start up with screen locked
 ~/.local/bin/lock > "$( _log "lock" )" 2>&1
 
-exec dwm > "$( _log "dwm" )" 2>&1
+exec dwmstatus run > "$( _log "dwm" "status" )" 2>&1 &
+exec dwm> "$( _log "dwm" )" 2>&1
