@@ -550,6 +550,11 @@
 #  quit
 #
 
+def_key "space"
+  pause
+def_key "p"
+  add_item_to_playlist
+
 # Navigation
 def_key "j"
     scroll_down
