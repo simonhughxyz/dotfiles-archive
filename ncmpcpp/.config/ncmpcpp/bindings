@@ -554,6 +554,10 @@ def_key "space"
   pause
 def_key "p"
   add_item_to_playlist
+def_key "ctrl-right"
+  seek_forward
+def_key "ctrl-left"
+  seek_backward
 
 # Navigation
 def_key "j"
