@@ -98,6 +98,7 @@ c.aliases = {
 }
 
 # ==================== Bindings ==========================================
+config.bind('%', 'scroll-to-perc')
 
 # Javascript
 config.bind('ess', 'set -p -t content.javascript.enabled true ;; reload')
