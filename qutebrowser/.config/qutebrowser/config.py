@@ -98,6 +98,8 @@ c.aliases = {
 }
 
 # ==================== Bindings ==========================================
+config.bind('}', 'scroll-page 0 0.2')
+config.bind('{', 'scroll-page 0 -0.2')
 config.bind('%', 'scroll-to-perc')
 
 # Javascript
