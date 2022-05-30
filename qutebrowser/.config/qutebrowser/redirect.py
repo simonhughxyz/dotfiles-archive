@@ -26,14 +26,17 @@ def redirect(r: interceptor.Request):
         return
 
     if CConfig(config).redirect :
+        # youtube
         redir(r, 'youtube.com', 'yewtu.be')
         redir(r, 'www.youtube.com', 'yewtu.be')
+        # twitter
         redir(r, 'twitter.com', 'nitter.net')
         redir(r, 'www.twitter.com', 'nitter.net')
-        redir(r, 'reddit.com', 'libreddit.silkky.cloud')
-        redir(r, 'old.reddit.com', 'libreddit.silkky.cloud')
-        redir(r, 'www.reddit.com', 'libreddit.silkky.cloud')
-        redir(r, 'www.old.reddit.com', 'libreddit.silkky.cloud')
+        # reddit
+        redir(r, 'reddit.com', 'libreddit.some-things.org')
+        redir(r, 'www.reddit.com', 'libreddit.some-things.org')
+        redir(r, 'old.reddit.com', 'libreddit.some-things.org')
+        redir(r, 'www.old.reddit.com', 'libreddit.some-things.org')
 
 
 interceptor.register(redirect)
