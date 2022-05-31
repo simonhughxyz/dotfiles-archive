@@ -170,6 +170,12 @@ _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 #gpg
 export GPG_TTY=$(tty)
 
+# zoxide
+if command -v zoxide 2> /dev/null; then
+    eval "$( zoxide init zsh --cmd cd )"
+    eval "$( zoxide init zsh --cmd c )"
+fi
+
 # Run tmux if:
 # - tmux is installed.
 # - not already running.
