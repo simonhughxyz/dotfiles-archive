@@ -48,7 +48,7 @@ map gf filter
 map gF setfilter
 map a :select-all
 map P :toggle-preview
-map c :select-all; calcdirsize; unselect
+map C :select-all; calcdirsize; unselect
 map T :trash-restore
 # renaming files
 map gn push A<c-u> # new rename
