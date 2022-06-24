@@ -99,12 +99,6 @@ augroup END
 ]])
 
 
--- Fix for delay in color change for visual modes
-vim.api.nvim_set_keymap('v', '<SID>v:lua.change_mode_color()', 'v:lua.change_mode_color()', {expr = true})
-vim.api.nvim_set_keymap('n', 'v', 'v<SID>v:lua.change_mode_color()', {script = true})
-vim.api.nvim_set_keymap('n', 'V', 'V<SID>v:lua.change_mode_color()', {script = true})
-vim.api.nvim_set_keymap('n', '<C-V>', '<C-V><SID>v:lua.change_mode_color()', {script = true})
-
 -- main statusline color
 hl('statusline', colors['white'], colors['background'], '0', '15', true)
 
