@@ -77,3 +77,6 @@ map ss :set sortby size; set reverse; set info size
 map sS :set sortby size; set noreverse; set info size
 map st :set sortby time; set reverse; set info time
 map sT :set sortby time; set noreverse; set info time
+
+# Shortcuts
+map S :select-all; calcdirsize; unselect; set sortby size; set reverse; set info size
