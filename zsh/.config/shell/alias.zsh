@@ -28,6 +28,7 @@ alias -g L='| less'
 alias -g H='| head'
 alias -g T='| tail'
 alias -g V='| vim -'
+alias -g F='| fzf'
 
 # print selected command from history.
 fh() {
