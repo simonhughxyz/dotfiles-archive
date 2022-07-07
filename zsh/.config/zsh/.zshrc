@@ -171,7 +171,7 @@ _source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 export GPG_TTY=$(tty)
 
 # zoxide
-if command -v zoxide 2> /dev/null; then
+if command -v zoxide > /dev/null; then
     eval "$( zoxide init zsh --cmd cd )"
     eval "$( zoxide init zsh --cmd c )"
 fi
