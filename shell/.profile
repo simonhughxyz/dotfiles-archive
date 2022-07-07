@@ -27,6 +27,7 @@ export TERMCMD="${TERMINAL} -e "
 export BROWSER="www"
 export READER="zathura"
 export FILE="nnn"
+export MANPAGER="nvim +Man!"
 
 # default options
 export LANG="en_GB.UTF-8"
