@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# MULLVAD
+# Simon Hugh Moore
+#
+# A helper script for mullvad vpn
+
+export DISPLAY=:0
+
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "curl"
+_dependency "jq"
+
+__usage="usage: $(basename "$0") [OPTIONS]"
+__help="$__usage
+
+MULLVAD
+Turn on/off vpn and get vpn status
+
+Options:
+  -h, --help                         Print this help message
+  get [OPTIONS]                      get status information (-h for help)
+"
+
+__get_help="usage $(basename "$0") get [OPTIONS]
+
+VPN GET
+Get status information from mullvad
+
+Options:
+  -h, --help                         Print this help message
+  -d <delim>                         Deliminator used to separate values
+  up                                 True if vpn is active
+  ip                                 Print public IP
+  country                            Print exit country
+  city                               Print exit city
+  location                           Print exit country and city
+  lat                                Print exit latitude
+  long                               Print exit longitude
+  gps                                Print latitude and longitude
+  all                                Print all
+  json                               Print full json
+"
+_get() {
+    status="$( curl -s 'https://am.i.mullvad.net/json' )"
+
+    delim=", "
+    [ "$1" = "-d" ] && shift && delim="$1" && shift
+
+    case "$1" in
+        -h|--help) printf "%s\n" "$__get_help"; exit ;;
+        ip) printf "%s" "$status" | jq -r .ip; exit ;;
+        up) printf "%s" "$status" | jq -r .mullvad_exit_ip; exit ;;
+        country) printf "%s" "$status" | jq -r .country; exit ;;
+        city) printf "%s" "$status" | jq -r .city; exit ;;
+        location) printf "%s" "$status" | jq -j '[.country, .city] | @tsv' | sed "s/\t/$delim/;s/$/\n/"; exit ;;
+        long) printf "%s" "$status" | jq -r .longitude; exit ;;
+        lat) printf "%s" "$status" | jq -r .latitude; exit ;;
+        gps) printf "%s" "$status" | jq -j '[.latitude, .longitude] | @tsv' | sed "s/\t/$delim/;s/$/\n/"; exit ;;
+        json) printf "%s\n" "$status"; exit ;;
+        *|all) printf "%s" "$status" | jq -j '[.mullvad_exit_ip, .ip, .country, .city, .latitude, .longitude] | @tsv' | sed "s/\t/$delim/g;s/$/\n/"; exit ;;
+    esac
+}
+
+case "$1" in
+    -h|--help) echo "$__help"; exit ;;
+    get) shift; _get "$@" ;;
+    *) _window "$@" ;;
+esac
