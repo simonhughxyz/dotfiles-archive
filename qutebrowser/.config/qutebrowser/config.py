@@ -368,7 +368,7 @@ config.bind(leader + 'qr', 'hint -r links userscript qr')
 
 # ==================== Search Engines ====================================
 c.url.searchengines = {
-    'DEFAULT': 'https://search.simonhugh.xyz/searx/search?q={}',
+    'DEFAULT': 'https://searx.tiekoetter.com/search?q={}',
     # DuckDuckGO
     'd': 'https://duckduckgo.com/?q={}',
     # Google
