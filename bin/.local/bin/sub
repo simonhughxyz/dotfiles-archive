@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Sub
+# Simon Hugh Moore
+#
+# A wrapper script for subliminal
+
+_dependency(){ command -v "$1" > /dev/null || { echo "error: "$1" not found"; exit 1; }; }
+_dependency "pass"
+_dependency "subliminal"
+
+file="$1"
+language="${2:-en}"
+
+passfile="opensubtitles.org/movielover2001"
+
+login="$( pass get login "$passfile" )"
+pass="$( pass get pass "$passfile" )"
+
+subliminal --opensubtitles "$login" "$pass" download -l "$language" "$file"
