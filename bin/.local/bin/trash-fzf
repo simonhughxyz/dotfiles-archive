@@ -23,13 +23,18 @@ Keys:
     return, alt-r                    Restore trashed file
     alt-p                            Print trashinfo
     alt-X                            Permanently remove file from trash
-"
+    ctrl-s, ctrl-space               Select file
+
+overittable FZF_DEFAULT_OPTS = --no-sort --tac -i -m --bind='ctrl-s:toggle,ctrl-space:toggle'
+see 'man fzf'"
 
 _main(){
     path="${1:-$PWD}/"
 
+    # some options should remain hard coded
+    FZF_DEFAULT_OPTS="--no-sort --tac -i -m --bind='ctrl-s:toggle,ctrl-space:toggle' ${FZF_DEFAULT_OPTS} --expect='return,alt-r,alt-p,alt-X' -q '${path}'"
     # list trashed files in fzf
-    output="$( trash-list | sed 's| /|\t/|' | fzf -q "${path}" --no-sort --tac -i -m --expect='return,alt-r,alt-X,alt-p' )"
+    output="$( trash-list | sed 's| /|\t/|' | fzf )"
 
     # parse output
     key="$( printf "%s" "$output" | sed -n '1p' )"
