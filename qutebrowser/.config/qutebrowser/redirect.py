@@ -33,10 +33,10 @@ def redirect(r: interceptor.Request):
         redir(r, 'twitter.com', 'nitter.net')
         redir(r, 'www.twitter.com', 'nitter.net')
         # reddit
-        redir(r, 'reddit.com', 'libreddit.some-things.org')
-        redir(r, 'www.reddit.com', 'libreddit.some-things.org')
-        redir(r, 'old.reddit.com', 'libreddit.some-things.org')
-        redir(r, 'www.old.reddit.com', 'libreddit.some-things.org')
+        redir(r, 'reddit.com', 'reddit.artemislena.eu')
+        redir(r, 'www.reddit.com', 'reddit.artemislena.eu')
+        redir(r, 'old.reddit.com', 'reddit.artemislena.eu')
+        redir(r, 'www.old.reddit.com', 'reddit.artemislena.eu')
 
 
 interceptor.register(redirect)
