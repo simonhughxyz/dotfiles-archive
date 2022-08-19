@@ -25,18 +25,22 @@ def redirect(r: interceptor.Request):
             r.request_url.scheme() in {"data", "blob"}):
         return
 
+    youtube = 'yewtu.be'
+    twitter = 'nitter.net'
+    reddit  = 'reddit.artemislena.eu'
+
     if CConfig(config).redirect :
         # youtube
-        redir(r, 'youtube.com', 'yewtu.be')
-        redir(r, 'www.youtube.com', 'yewtu.be')
+        redir(r, 'youtube.com', youtube)
+        redir(r, 'www.youtube.com', youtube)
         # twitter
-        redir(r, 'twitter.com', 'nitter.net')
-        redir(r, 'www.twitter.com', 'nitter.net')
+        redir(r, 'twitter.com', twitter)
+        redir(r, 'www.twitter.com', twitter)
         # reddit
-        redir(r, 'reddit.com', 'reddit.artemislena.eu')
-        redir(r, 'www.reddit.com', 'reddit.artemislena.eu')
-        redir(r, 'old.reddit.com', 'reddit.artemislena.eu')
-        redir(r, 'www.old.reddit.com', 'reddit.artemislena.eu')
+        redir(r, 'reddit.com', reddit)
+        redir(r, 'www.reddit.com', reddit)
+        redir(r, 'old.reddit.com', reddit)
+        redir(r, 'www.old.reddit.com', reddit)
 
 
 interceptor.register(redirect)
