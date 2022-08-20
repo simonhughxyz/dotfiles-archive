@@ -28,6 +28,10 @@ Keys:
 overittable FZF_DEFAULT_OPTS = --no-sort --tac -i -m --bind='ctrl-s:toggle,ctrl-space:toggle'
 see 'man fzf'"
 
+trash_path=$HOME/.local/share/Trash
+files_path=$trash_path/files
+info_path=$trash_path/info
+
 _main(){
     path="${1:-$PWD}/"
 
@@ -44,8 +48,8 @@ _main(){
     # iterate over all selected files
     printf "%s\n" "$files" | while read file; do
         filename="$( basename "$file" )"
-        trashinfo="${HOME}/.local/share/Trash/info/${filename}.trashinfo"
-        filelocation="${HOME}/.local/share/Trash/files/${filename}"
+        trashinfo="${trash_path}/${filename}.trashinfo"
+        filelocation="${files_path}/${filename}"
 
         case "$key" in
             # Recover File
