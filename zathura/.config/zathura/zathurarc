@@ -17,6 +17,9 @@ map u scroll half-up
 map d scroll half-down
 map { scroll half-up
 map } scroll half-down
+map m mark_add
+map \' mark_evaluate
+map \` mark_evaluate
 
 map D toggle_page_mode
 map r reload
