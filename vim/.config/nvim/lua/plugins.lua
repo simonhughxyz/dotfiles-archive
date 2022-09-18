@@ -45,6 +45,13 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+    use {
         'nvim-telescope/telescope.nvim',
         requires = {
             {'nvim-lua/popup.nvim'},
@@ -58,7 +65,7 @@ return require('packer').startup(function(use)
 
     use 'tpope/vim-surround'   -- Add, delete, change surroundings such as brackets.
     use 'tpope/vim-repeat'     -- Allows repeating '.' for many plugins.
-    use 'tpope/vim-commentary' -- Easily un/comment text.
+    -- use 'tpope/vim-commentary' -- Easily un/comment text.
     use 'tpope/vim-fugitive'   -- Useful git commands.
     use 'tpope/vim-unimpaired'     -- Adds common bracket mappings.
     -- use {
