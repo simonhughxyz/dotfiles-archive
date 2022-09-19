@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
     --     run = './autogen.sh;./configure --prefix=$HOME/.local;make install'
     -- }
     use 'junegunn/vim-easy-align'  -- Align text.
-    use 'junegunn/vim-peekaboo'    -- Show register contents in sidebar.
+    -- use 'junegunn/vim-peekaboo'    -- Show register contents in sidebar.
     use { -- Highlights unique letters to help with 'f'
         'unblevable/quick-scope',
         config = function()
