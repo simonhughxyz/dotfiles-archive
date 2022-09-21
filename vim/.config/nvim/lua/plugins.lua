@@ -154,6 +154,10 @@ return require('packer').startup(function(use)
         },
         config = function() require('plugins.nvim-cmp') end
     }
+    use {
+        "rafamadriz/friendly-snippets",
+        requires = {"L3MON4D3/LuaSnip"},
+    }
 
 
 

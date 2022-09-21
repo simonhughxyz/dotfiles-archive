@@ -6,7 +6,10 @@ local r = function(snippet)
     require(base .. '.snippets.' .. snippet )
 end
 
--- load snippet files from ./snippets
+-- load vs_code snippets (used for friendly-snippet plugin)
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-- load custom snippet files from ./snippets
 r('all')
 r('sh')
 
