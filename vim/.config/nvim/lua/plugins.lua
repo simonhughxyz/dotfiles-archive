@@ -159,15 +159,14 @@ return require('packer').startup(function(use)
         requires = {"L3MON4D3/LuaSnip"},
     }
 
-
-
     use {
-        'vimwiki/vimwiki',
-        setup = function()
-            require('plugins.vimwiki-config')
-            require('plugins.vimwiki-config.mappings')
-            require('plugins.vimwiki-config.highlights')
-        end
+        "nvim-neorg/neorg",
+        ft = "norg",
+        after = "nvim-treesitter",
+        config = function() require('plugins.neorg-config') end,
+        requires = {
+            "nvim-lua/plenary.nvim",
+        }
     }
     -- use {
     --     'autozimu/LanguageClient-neovim',
