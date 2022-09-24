@@ -7,8 +7,14 @@ require('neorg').setup {
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
-                    home = "~/Documents/notes/home"
+                    home = "~/Documents/notes/home",
+                    gtd = "~/Documents/notes/gtd",
                 },
+            }
+        },
+        ["core.gtd.base"] = {
+            config = {
+                workspace = "gtd",
             }
         },
         ["core.norg.completion"] = {
