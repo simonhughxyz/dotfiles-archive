@@ -167,6 +167,7 @@ return require('packer').startup(function(use)
         config = function() require('plugins.neorg-config') end,
         requires = {
             "nvim-lua/plenary.nvim",
+            "nvim-neorg/neorg-telescope"
         }
     }
     -- use {

@@ -34,5 +34,6 @@ require('neorg').setup {
                 extensions = "all",
             }
         },
+        ["core.integrations.telescope"] = {},
     }
 }
