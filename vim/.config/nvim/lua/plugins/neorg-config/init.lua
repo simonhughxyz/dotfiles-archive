@@ -12,9 +12,15 @@ require('neorg').setup {
             }
         },
         ["core.norg.completion"] = {
-           config = { -- Note that this table is optional and doesn't need to be provided
+           config = {
                 engine = 'nvim-cmp',
            }
+        },
+        ["core.norg.qol.toc"] = {
+            config = {
+                close_split_on_jump = true,
+                toc_split_placement = "right",
+            }
         },
     }
 }
