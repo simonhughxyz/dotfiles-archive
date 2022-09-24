@@ -23,5 +23,10 @@ require('neorg').setup {
             }
         },
         ["core.export"] = {},
+        ["core.export.markdown"] = {
+            config = {
+                extensions = "all",
+            }
+        },
     }
 }
