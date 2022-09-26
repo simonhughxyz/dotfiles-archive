@@ -158,6 +158,10 @@ return require('packer').startup(function(use)
         "rafamadriz/friendly-snippets",
         requires = {"L3MON4D3/LuaSnip"},
     }
+    use {
+        "folke/twilight.nvim",
+        config = function() require("plugins.twilight-config") end
+    }
     use{
         "Pocco81/true-zen.nvim",
         config = function() require('plugins.true-zen-config') end,
