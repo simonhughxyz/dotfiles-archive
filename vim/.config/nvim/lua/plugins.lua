@@ -158,7 +158,10 @@ return require('packer').startup(function(use)
         "rafamadriz/friendly-snippets",
         requires = {"L3MON4D3/LuaSnip"},
     }
-
+    use{
+        "Pocco81/true-zen.nvim",
+        config = function() require('plugins.true-zen-config') end,
+    }
     use {
         "nvim-neorg/neorg",
         ft = "norg",
