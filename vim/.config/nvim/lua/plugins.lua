@@ -168,7 +168,6 @@ return require('packer').startup(function(use)
     }
     use {
         "nvim-neorg/neorg",
-        ft = "norg",
         after = "nvim-treesitter",
         requires = { "hrsh7th/nvim-cmp" },
         config = function() require('plugins.neorg-config') end,
