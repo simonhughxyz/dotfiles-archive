@@ -27,7 +27,7 @@ def redirect(r: interceptor.Request):
 
     youtube = 'yewtu.be'
     twitter = 'nitter.net'
-    reddit  = 'reddit.artemislena.eu'
+    reddit  = 'reddit.invak.id'
 
     if CConfig(config).redirect :
         # youtube
