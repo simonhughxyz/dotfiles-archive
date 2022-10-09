@@ -12,6 +12,7 @@ set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/previewer'
 set period      3
 set promptfmt "\033[33;1m%F>\033[0m \033[34;1m%d\033[0m\033[1m%f\033[0m"
+set mouse
 
 # ==================== Commands ==========================================
 cmd q   quit    # quality of life cmd
@@ -37,6 +38,13 @@ cmd toggle-preview ${{
 # ==================== Command Bindings ==================================
 cmap <up> cmd-history-prev
 cmap <down> cmd-history-next
+
+# ==================== Mouse Bindings ====================================
+map <m-1> open
+map <m-2> updir
+map <m-3> updir
+map <m-up> up
+map <m-down> down
 
 # ==================== Normal Bindings ===================================
 map . :set hidden!
