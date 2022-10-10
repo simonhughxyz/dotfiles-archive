@@ -46,10 +46,20 @@ map <m-3> updir
 map <m-up> up
 map <m-down> down
 
+# ==================== Navigation ========================================
+map ~ cd ~/
+map bh :cd ~/
+map br :cd /
+map bd :cd ~/Documents/
+map bD :cd ~/Downloads/
+map bv :cd ~/Videos/
+map bm :cd ~/Music/
+map bp :cd ~/Pictures/
+map bn :cd ~/Documents/notes/
+map bP :cd ~/Projects/
+
 # ==================== Normal Bindings ===================================
 map . :set hidden!
-map ~ cd ~/
-map gr cd /
 map X trash
 map gd push :mkdir<space>
 map gt push :touch<space>
