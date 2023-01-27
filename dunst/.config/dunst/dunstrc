@@ -448,3 +448,7 @@
     set_stack_tag = "volume"
     format = "<b>%s</b> %b"
     timeout=1
+
+[long-timeout]
+    category = "long"
+    timeout=12
