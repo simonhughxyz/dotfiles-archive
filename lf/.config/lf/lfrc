@@ -47,16 +47,20 @@ map <m-up> up
 map <m-down> down
 
 # ==================== Navigation ========================================
+
+# Shortcuts
 map ~ cd ~/
-map bh :cd ~/
-map br :cd /
-map bd :cd ~/Documents/
-map bD :cd ~/Downloads/
-map bv :cd ~/Videos/
-map bm :cd ~/Music/
-map bp :cd ~/Pictures/
-map bn :cd ~/Documents/notes/
-map bP :cd ~/Projects/
+map \#h :cd ~/
+map \#r :cd /
+map \#D :cd ~/Documents/
+map \#d :cd ~/Downloads/
+map \#v :cd ~/Videos/
+map \#m :cd ~/Music/
+map \#p :cd ~/Pictures/
+map \#n :cd ~/Documents/notes/
+map \#P :cd ~/Projects/
+map \#f :cd ~/Videos/film
+map \#t :cd ~/Videos/tv
 
 # ==================== Normal Bindings ===================================
 map . :set hidden!
