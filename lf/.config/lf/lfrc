@@ -3,7 +3,7 @@ set ifs         "\n"
 set hiddenfiles ".*"
 set ratios      '2:1'
 set scrolloff   8
-set findlen     2
+set findlen     1
 set incsearch
 set incfilter
 set tabstop     4
