@@ -28,6 +28,7 @@ def redirect(r: interceptor.Request):
     youtube = 'yewtu.be'
     twitter = 'nitter.net'
     reddit  = 'reddit.invak.id'
+    tiktok  = 'proxitok.pabloferreiro.es'
 
     if CConfig(config).redirect :
         # youtube
@@ -41,6 +42,9 @@ def redirect(r: interceptor.Request):
         redir(r, 'www.reddit.com', reddit)
         redir(r, 'old.reddit.com', reddit)
         redir(r, 'www.old.reddit.com', reddit)
+        # tiktok
+        redir(r, 'tiktok.com', tiktok)
+        redir(r, 'www.tiktok.com', tiktok)
 
 
 interceptor.register(redirect)
