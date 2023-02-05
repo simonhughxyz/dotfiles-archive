@@ -7,7 +7,7 @@ max-items 0                   # Keep all articles.
 external-url-viewer "urlscan" # Use 'urlscan'.
 save-path "~/Documents/notes/articles"        # Path to save articles to.
 text-width 80                 # Max text width.
-browser "$BROWSER %u"         # Set default browser.
+browser "$BROWSER %u >/dev/null 2>&1 &"         # Set default browser.
 scrolloff 5                   # Number of lines to keep at edge when scrolling
 prepopulate-query-feeds yes   # Prepopulate query feeds on startup
 confirm-exit yes              # Confirm exit before quitting newsboat
